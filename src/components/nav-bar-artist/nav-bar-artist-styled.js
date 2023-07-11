@@ -1,26 +1,23 @@
 import { styled } from "styled-components";
 
-export const NavBarStyled = styled.div`
+export const NavBarArtistStyled = styled.div`
   .nav-container {
     width: 100%;
     color: white;
-    padding: 20px;
-    background: #333333;
+    padding: 15px;
+    /* background-color: #edf0ee; */
     position: static;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-left: 20px;
     border-bottom: 1px solid gainsboro;
+    background-color: black;
   }
 
   .nav-container h1,
   p {
     margin: 0;
-  }
-
-  .nav-container h1 {
-    font-size: 34px;
   }
 
   .sub-nav p {
@@ -35,29 +32,6 @@ export const NavBarStyled = styled.div`
     gap: 40px;
     margin-right: 50px;
 
-    color: gainsboro;
-  }
-
-  .menu {
-    display: none;
-  }
-
-  @media (max-width: 912px) {
-    .sub-nav {
-      display: none;
-
-      z-index: 1;
-      transition: 0.5s;
-    }
-    .nav-container h1 {
-      font-size: 20px;
-    }
-
-    .nav-container {
-      padding-left: 10px;
-    }
-    .menu {
-      display: block;
-    }
+    color: gray;
   }
 `;

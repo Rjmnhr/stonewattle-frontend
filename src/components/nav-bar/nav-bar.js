@@ -1,18 +1,22 @@
 import React from "react";
 import { NavBarStyled } from "./nav-bar-style";
-import { SearchOutlined } from "@ant-design/icons";
 
 const NavBar = () => {
   return (
     <>
       <NavBarStyled>
         <nav className="nav-container">
-          <h1 style={{ fontSize: "34px" }}>StoneWattle</h1>
-          <div className="sub-nav">
-            <SearchOutlined />
-            <p>About</p>
-            <p>Products</p>
-            <p>Contact</p>
+          <h1>StoneWattle</h1>
+
+          <div className="dropdown">
+            <div className="sub-nav">
+              <p>About</p>
+              <p>Products</p>
+              <p>Contact</p>
+            </div>
+          </div>
+          <div class="menu" id="togglebutton">
+            &#9776;
           </div>
         </nav>
       </NavBarStyled>

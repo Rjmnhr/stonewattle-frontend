@@ -3,6 +3,9 @@ import ArtistPage from "./pages/artist-page";
 import LoginPage from "./pages/login-page";
 import HomePage from "./pages/home-page";
 import Suburb from "./pages/suburbs";
+import OtpVerification from "./pages/otp-verification";
+import SuburbId from "./pages/suburb-id";
+import CreateProfile from "./components/create-profile/profile";
 
 const AppRoute = () => {
   return (
@@ -37,6 +40,30 @@ const AppRoute = () => {
           element={
             <>
               <Suburb />
+            </>
+          }
+        />
+        <Route
+          path="/otp-validation"
+          element={
+            <>
+              <OtpVerification />
+            </>
+          }
+        />
+        <Route
+          path="/suburb/:id"
+          element={
+            <>
+              <SuburbId />
+            </>
+          }
+        />
+        <Route
+          path="/create-profile"
+          element={
+            <>
+              <CreateProfile />
             </>
           }
         />

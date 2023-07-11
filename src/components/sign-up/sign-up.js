@@ -1,133 +1,83 @@
-import axios from "axios";
 import React, { useState } from "react";
+import InfoModal from "../modals/info-modal";
+import axios from "axios";
+import { LoadingOutlined } from "@ant-design/icons";
+import { useApplicationContext } from "../../context/app-context";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [postCode1, setPostCode1] = useState(null);
-  const [postCode2, setPostCode2] = useState(null);
-  const [postCode3, setPostCode3] = useState(null);
-  const [postCode4, setPostCode4] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const { setIsSignIn } = useApplicationContext();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const postCode =
-      postCode1 + "" + postCode2 + "" + postCode3 + "" + postCode4;
-    console.log(postCode);
+  const navigate = useNavigate();
 
-    const formData = new FormData();
-    formData.append("first_name", firstName);
-    formData.append("last_name", lastName);
-    formData.append("email", email);
-    formData.append("password", password);
-    formData.append("post_code", postCode);
+  const handleSwitch = () => {
+    setIsSignIn(true);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsLoading(true);
 
     axios
-      .post("http://localhost:8002/api/user/signup", formData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      .post("http://localhost:8002/api/otp/send-otp", { email })
       .then(async (response) => {
         const data = await response.data;
         console.log(data);
+
+        localStorage.setItem("email", email);
+        setIsLoading(false);
+        navigate("/otp-validation");
       })
       .catch((err) => console.log(err));
+    // Handle successful OTP request
   };
-
   return (
-    <div>
-      <form on onSubmit={handleSubmit}>
-        <label>First Name :</label>
-        <input
-          type="text"
-          onChange={(e) => setFirstName(e.target.value)}
-          placeholder=" First Name"
-          required
-        />
-        <label>Last Name :</label>
-        <input
-          type="text"
-          onChange={(e) => setLastName(e.target.value)}
-          placeholder="Last Name"
-          required
-        />
-        <label>Email :</label>
-        <input
-          type="email"
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-          required
-        />
-        <label>Password :</label>
-        <input
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-          required
-        />
+    <>
+      <div className="form-container">
+        <form
+          className="signup-form"
+          style={{ justifyContent: "center", height: "40vh" }}
+          onSubmit={handleSubmit}
+        >
+          <div className="detail-input">
+            <input
+              type="email"
+              placeholder="Email address"
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
 
-        <div style={{ display: "flex", gap: "3px" }}>
-          <label>Post Code :</label>
-          <input
-            style={{
-              border: "none",
-              outline: "none",
-              borderBottom: "1px solid",
-              background: "none",
-              width: "10px",
-            }}
-            type="number"
-            maxLength={4}
-            onChange={(e) => setPostCode1(e.target.value)}
-            required
-          />
-          <input
-            style={{
-              border: "none",
-              outline: "none",
-              borderBottom: "1px solid",
-              background: "none",
-              width: "10px",
-            }}
-            type="number"
-            maxLength={4}
-            onChange={(e) => setPostCode2(e.target.value)}
-            required
-          />
-          <input
-            style={{
-              border: "none",
-              outline: "none",
-              borderBottom: "1px solid",
-              background: "none",
-              width: "10px",
-            }}
-            type="number"
-            maxLength={4}
-            onChange={(e) => setPostCode3(e.target.value)}
-            required
-          />
-          <input
-            style={{
-              border: "none",
-              outline: "none",
-              borderBottom: "1px solid",
-              background: "none",
-              width: "10px",
-            }}
-            type="number"
-            maxLength={4}
-            onChange={(e) => setPostCode4(e.target.value)}
-            required
-          />
-        </div>
+          <div style={{ display: "grid", placeItems: "center", width: "100%" }}>
+            <button type="submit">
+              {isLoading ? <LoadingOutlined /> : "VERIFY"}{" "}
+            </button>
+          </div>
+          <div className="info">
+            <p>
+              🔐 Your identity is protected
+              <InfoModal
+                title=" 🔐 Safety"
+                content="Your work email is immediately one-way hashed and held separately from the account that you are about to create.
 
-        <button type="submit">Sign Up</button>
-      </form>
-    </div>
+This means that there is no way for your organization to trace your username or activity back to your work email.
+
+Our secure system provides the true psychological safety required for colleagues to speak openly and honestly."
+              />
+            </p>
+          </div>
+        </form>
+        <p>
+          Already have an account?
+          <span onClick={handleSwitch} style={{ color: "gray" }}>
+            {" "}
+            Log in
+          </span>
+        </p>
+      </div>
+    </>
   );
 };
 

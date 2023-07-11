@@ -1,10 +1,14 @@
 export const statesOfAus = [
-  { id: 1, state: "New South Wales" },
-  { id: 2, state: "Queensland" },
-  { id: 3, state: "South Australia" },
-  { id: 4, state: "Tasmania" },
-  { id: 5, state: "Victoria" },
-  { id: 6, state: "Western Australia" },
-  { id: 7, state: "Australian Capital Territory" },
-  { id: 8, state: "Northern Territory" },
+  { value: "New South Wales", label: "New South Wales" },
+  { value: "Queensland", label: "Queensland" },
+  { value: "South Australia", label: "South Australia" },
+  { value: "Tasmania", label: "Tasmania" },
+  { value: "Victoria", label: "Victoria" },
+  { value: "Western Australia", label: "Western Australia" },
+  {
+    value: "Australian Capital Territory",
+    label: "Australian Capital Territory",
+  },
+  { value: "Northern Territory", label: "Northern Territory" },
+  { value: "unsure", label: "Unsure", isDisabled: false },
 ];

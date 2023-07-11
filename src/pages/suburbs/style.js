@@ -74,4 +74,11 @@ export const SuburbsPageStyled = styled.div`
     font-weight: 600;
     color: black;
   }
+  a {
+    text-decoration: none;
+  }
+
+  a:hover {
+    opacity: 0.7;
+  }
 `;

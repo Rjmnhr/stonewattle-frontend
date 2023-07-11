@@ -1,31 +1,23 @@
 import { Col, Row, Slider } from "antd";
 import { useState } from "react";
-export const IntegerStep = () => {
+export const IntegerStep = ({ onSliderChange }) => {
   const [inputValue, setInputValue] = useState(1);
   const onChange = (newValue) => {
     setInputValue(newValue);
+    if (typeof onSliderChange === "function") {
+      onSliderChange(newValue);
+    }
   };
   return (
     <Row>
       <Col span={12}>
         <Slider
-          min={1}
-          max={100}
+          min={0}
+          max={5}
           onChange={onChange}
           value={typeof inputValue === "number" ? inputValue : 0}
         />
       </Col>
-      {/* <Col span={14}>
-        <InputNumber
-          min={1}
-          max={100}
-          style={{
-            margin: "0 16px",
-          }}
-          value={inputValue}
-          onChange={onChange}
-        />
-      </Col> */}
     </Row>
   );
 };
