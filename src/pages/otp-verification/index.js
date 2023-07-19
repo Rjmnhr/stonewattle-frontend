@@ -4,24 +4,31 @@ import { useApplicationContext } from "../../context/app-context";
 
 import { useNavigate } from "react-router-dom";
 import { OtpVerificationPageStyled } from "./style";
-import axios from "axios";
+
+import AxiosInstance from "../../components/axios";
 
 const OtpVerification = () => {
   const [userInput, setUserInput] = useState(null);
   const [warning, setWarning] = useState("");
-
-  const { setIsEmailVerified, otpReader } = useApplicationContext();
+  const { setIsEmailVerified } = useApplicationContext();
   const navigate = useNavigate();
+
+  const email = localStorage.getItem("email");
+
+  console.log("email", email);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios
-      .post("http://localhost:8002/api/otp/verify-otp", { otp: userInput })
+    AxiosInstance.post("/api/otp/verify-otp", {
+      email: email,
+      otp: userInput,
+    })
       .then(async (response) => {
         const data = await response.data;
         console.log(data);
         setIsEmailVerified(true);
+        navigate("/create-profile");
       })
       .catch((err) => {
         setWarning("Invalid OTP");

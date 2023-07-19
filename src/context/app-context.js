@@ -4,14 +4,16 @@ const MyContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
   const [isEmailVerified, setIsEmailVerified] = useState(false);
-  const [otpReader, setOtpReader] = useState("");
+  const [isUserValid, setIsUserValid] = useState(false);
+
   const [isSignIn, setIsSignIn] = useState(true);
 
   const value = {
     isEmailVerified,
     setIsEmailVerified,
-    otpReader,
-    setOtpReader,
+    isUserValid,
+    setIsUserValid,
+
     isSignIn,
     setIsSignIn,
   };

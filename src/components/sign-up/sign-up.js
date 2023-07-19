@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import InfoModal from "../modals/info-modal";
-import axios from "axios";
+// import InfoModal from "../modals/info-modal";
+
 import { LoadingOutlined } from "@ant-design/icons";
 import { useApplicationContext } from "../../context/app-context";
 import { useNavigate } from "react-router-dom";
+import AxiosInstance from "../axios";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -20,13 +21,17 @@ const SignUp = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    axios
-      .post("http://localhost:8002/api/otp/send-otp", { email })
+    const lowerCasedEmail = email.toLowerCase();
+    console.log(lowerCasedEmail);
+
+    AxiosInstance.post("/api/otp/send-otp", {
+      email: lowerCasedEmail,
+    })
       .then(async (response) => {
         const data = await response.data;
         console.log(data);
 
-        localStorage.setItem("email", email);
+        localStorage.setItem("email", lowerCasedEmail);
         setIsLoading(false);
         navigate("/otp-validation");
       })
@@ -55,7 +60,7 @@ const SignUp = () => {
               {isLoading ? <LoadingOutlined /> : "VERIFY"}{" "}
             </button>
           </div>
-          <div className="info">
+          {/* <div className="info">
             <p>
               🔐 Your identity is protected
               <InfoModal
@@ -67,7 +72,7 @@ This means that there is no way for your organization to trace your username or 
 Our secure system provides the true psychological safety required for colleagues to speak openly and honestly."
               />
             </p>
-          </div>
+          </div> */}
         </form>
         <p>
           Already have an account?

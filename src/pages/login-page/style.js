@@ -13,7 +13,7 @@ export const LoginPagestyled = styled.div`
     place-items: center;
   }
   .left-container h1 {
-    font-size: 80px;
+    font-size: 100px;
     padding: 0;
     margin: 0;
   }
@@ -28,7 +28,7 @@ export const LoginPagestyled = styled.div`
   form {
     display: flex;
     flex-direction: column;
-    height: 40vh;
+    height: 30vh;
     justify-content: space-evenly;
   }
   .login-container {
@@ -137,6 +137,9 @@ export const LoginPagestyled = styled.div`
     }
     .login-box {
       width: 90%;
+    }
+    .form {
+      height: 20vh;
     }
   }
   @media (min-width: 540px) {

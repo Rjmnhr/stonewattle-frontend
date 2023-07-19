@@ -12,7 +12,7 @@ const LoginPage = () => {
       <LoginPagestyled>
         <div className="main-container">
           <div className="left-container">
-            <h1>STONE WATTLE</h1>
+            <h1>2ndStorey</h1>
           </div>
           <div className="login-container">
             <div className="login-box">

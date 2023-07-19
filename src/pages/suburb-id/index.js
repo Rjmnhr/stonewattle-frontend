@@ -7,7 +7,7 @@ const SuburbId = () => {
   const { id } = useParams();
   useEffect(() => {
     console.log(id);
-    fetch(`http://localhost:8002/api/suburbs/${id}`)
+    fetch(`http://2ndstorey.com:8002/api/suburbs/${id}`)
       .then(async (response) => {
         const data = await response.json();
         console.log(data);

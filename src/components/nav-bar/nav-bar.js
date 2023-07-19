@@ -6,7 +6,7 @@ const NavBar = () => {
     <>
       <NavBarStyled>
         <nav className="nav-container">
-          <h1>StoneWattle</h1>
+          <h1>2ndStorey</h1>
 
           <div className="dropdown">
             <div className="sub-nav">

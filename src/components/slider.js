@@ -1,7 +1,7 @@
 import { Col, Row, Slider } from "antd";
 import { useState } from "react";
 export const IntegerStep = ({ onSliderChange }) => {
-  const [inputValue, setInputValue] = useState(1);
+  const [inputValue, setInputValue] = useState(0);
   const onChange = (newValue) => {
     setInputValue(newValue);
     if (typeof onSliderChange === "function") {

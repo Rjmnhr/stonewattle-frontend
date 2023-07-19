@@ -1,41 +1,79 @@
 import React from "react";
-import { useState } from "react";
-import axios from "axios";
+import { useState, useRef } from "react";
+
 import { CreateProfileStyled } from "./profile-style";
 import { useNavigate } from "react-router-dom";
+import AxiosInstance from "../axios";
 
 const CreateProfile = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
-  const [postCode1, setPostCode1] = useState(null);
-  const [postCode2, setPostCode2] = useState(null);
-  const [postCode3, setPostCode3] = useState(null);
-  const [postCode4, setPostCode4] = useState(null);
+  const [postcodes, setPostcodes] = useState(Array(4).fill(""));
+  const inputRefs = useRef([]);
 
   const navigate = useNavigate();
 
   const email = localStorage.getItem("email");
 
+  const handleInputChange = (index, event) => {
+    const input = event.target.value;
+
+    //updating the postcodes as an array
+    const updatedPostcodes = [...postcodes];
+    updatedPostcodes[index] = input;
+
+    if (input && index < 5 && inputRefs.current[index + 1]) {
+      inputRefs.current[index + 1].focus();
+    }
+
+    setPostcodes(updatedPostcodes);
+  };
+
+  const handleKeyDown = (index, event) => {
+    if (event.key === "Backspace" && postcodes[index] === "") {
+      const updatedPostcodes = [...postcodes];
+      updatedPostcodes[index - 1] = "";
+
+      setPostcodes(updatedPostcodes);
+
+      if (index > 0 && inputRefs.current[index - 1]) {
+        inputRefs.current[index - 1].focus();
+      }
+    } else if (
+      event.key === "ArrowRight" &&
+      index < 5 &&
+      postcodes[index] !== ""
+    ) {
+      if (inputRefs.current[index + 1]) {
+        inputRefs.current[index + 1].focus();
+      }
+    } else if (event.key === "ArrowLeft" && index > 0) {
+      if (inputRefs.current[index - 1]) {
+        inputRefs.current[index - 1].focus();
+      }
+    }
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const postCode =
-      postCode1 + "" + postCode2 + "" + postCode3 + "" + postCode4;
-    console.log(postCode);
+
+    const joinedPostcode = postcodes.join("");
+
+    console.log(joinedPostcode);
 
     const formData = new FormData();
     formData.append("first_name", firstName);
     formData.append("last_name", lastName);
     formData.append("email", email);
     formData.append("password", password);
-    formData.append("post_code", postCode);
+    formData.append("post_code", joinedPostcode);
 
-    axios
-      .post("http://localhost:8002/api/user/signup", formData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+    AxiosInstance.post("/api/user/signup", formData, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then(async (response) => {
         const data = await response.data;
         console.log(data);
@@ -83,58 +121,23 @@ const CreateProfile = () => {
                 style={{ display: "flex", gap: "3px", alignItems: "center" }}
               >
                 <label>Post Code :</label>
-                <input
-                  style={{
-                    border: "none",
-                    outline: "none",
-                    borderBottom: "1px solid",
-                    background: "none",
-                    width: "10px",
-                  }}
-                  type="number"
-                  maxLength={4}
-                  onChange={(e) => setPostCode1(e.target.value)}
-                  required
-                />
-                <input
-                  style={{
-                    border: "none",
-                    outline: "none",
-                    borderBottom: "1px solid",
-                    background: "none",
-                    width: "10px",
-                  }}
-                  type="number"
-                  maxLength={4}
-                  onChange={(e) => setPostCode2(e.target.value)}
-                  required
-                />
-                <input
-                  style={{
-                    border: "none",
-                    outline: "none",
-                    borderBottom: "1px solid",
-                    background: "none",
-                    width: "10px",
-                  }}
-                  type="number"
-                  maxLength={4}
-                  onChange={(e) => setPostCode3(e.target.value)}
-                  required
-                />
-                <input
-                  style={{
-                    border: "none",
-                    outline: "none",
-                    borderBottom: "1px solid",
-                    background: "none",
-                    width: "10px",
-                  }}
-                  type="number"
-                  maxLength={4}
-                  onChange={(e) => setPostCode4(e.target.value)}
-                  required
-                />
+                {postcodes.map((postcode, index) => (
+                  <input
+                    style={{
+                      width: "8px",
+                      background: "none",
+                      borderBottom: "1px solid black",
+                    }}
+                    key={index}
+                    type="number"
+                    id={`postcode-${index}`}
+                    ref={(ref) => (inputRefs.current[index] = ref)}
+                    value={postcode}
+                    onChange={(event) => handleInputChange(index, event)}
+                    onKeyDown={(event) => handleKeyDown(index, event)}
+                    maxLength={1}
+                  />
+                ))}
               </div>
             </div>
 

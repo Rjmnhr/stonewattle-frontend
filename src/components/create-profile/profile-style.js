@@ -9,7 +9,8 @@ export const CreateProfileStyled = styled.div`
     box-shadow: 0px 3px 3px 0px gray;
     padding: 10px;
     margin: 10px;
-    width: 300px;
+    width: 400px;
+
     background-color: #f8f8f8;
     text-align: start;
   }

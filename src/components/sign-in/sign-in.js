@@ -2,16 +2,26 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useApplicationContext } from "../../context/app-context";
 import { message } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
+import {
+  EyeInvisibleOutlined,
+  EyeOutlined,
+  LoadingOutlined,
+} from "@ant-design/icons";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
   const [warning, setWarning] = useState("");
   const navigate = useNavigate();
   const { setIsSignIn } = useApplicationContext();
   const [messageApi, contextHolder] = message.useMessage();
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible((prevVisible) => !prevVisible);
+  };
 
   const handleSwitch = () => {
     setIsSignIn(false);
@@ -25,7 +35,7 @@ const SignIn = () => {
     formData.append("email", email);
     formData.append("password", password);
 
-    fetch("http://localhost:8002/api/user/login", {
+    fetch("http://2ndstorey.com:8002/api/user/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
@@ -34,6 +44,7 @@ const SignIn = () => {
         const data = await response.json();
         console.log("result", data);
         setIsLoading(false);
+
         if (typeof data === "string") {
           error(data);
           document.querySelector(".input1").style.border = "1px solid red";
@@ -51,10 +62,10 @@ const SignIn = () => {
         const userType = data.user_type;
         const UserId = data.id;
 
-        localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("UserID", UserId);
         localStorage.setItem("userData", JSON.stringify(data));
-        localStorage.setItem("iuserType", userType);
+        localStorage.setItem("userType", userType);
+        localStorage.setItem("accessToken", accessToken);
 
         console.log("userType", data.user_type);
         if (userType === "admin") {
@@ -115,21 +126,50 @@ const SignIn = () => {
             />
           </div>
           <div className="detail-input">
-            <input
+            <div
               className="input2"
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
-              required
-            />
+              style={{
+                color: "gray",
+                fontWeight: "normal",
+                background: "white",
+                display: "flex",
+                alignItems: "center",
+                width: "96%",
+                margin: "5px",
+              }}
+            >
+              <input
+                style={{ margin: "0", borderBottom: "none" }}
+                type={passwordVisible ? "text" : "password"}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+                required
+              />
+              <label
+                style={{ paddingRight: "8px" }}
+                onClick={togglePasswordVisibility}
+              >
+                {" "}
+                {passwordVisible ? <EyeInvisibleOutlined /> : <EyeOutlined />}
+              </label>
+            </div>
           </div>
 
-          <div style={{ display: "grid", placeItems: "center", width: "100%" }}>
+          <div
+            style={{
+              display: "grid",
+              placeItems: "center",
+              width: "100%",
+            }}
+          >
             <button type="submit">
               {isLoading ? <LoadingOutlined /> : "Log In"}
             </button>
           </div>
-          <div
+
+          {/*This features haven't implemented yet */}
+
+          {/* <div
             style={{
               display: "flex",
               justifyContent: "space-between",
@@ -146,7 +186,7 @@ const SignIn = () => {
             <label style={{ fontWeight: "bold", color: "#a8a7a7" }}>
               Forgot your password?
             </label>
-          </div>
+          </div> */}
         </form>
         <p>
           Don't have an account?
