@@ -1,27 +1,38 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { SuburbsPageStyled } from "./style";
 import HorizontalBarRentVsOwner from "../../components/rent-vs-owner";
 import { Dropdown, Space, Skeleton } from "antd";
 import { DownOutlined } from "@ant-design/icons";
+import { useApplicationContext } from "../../context/app-context";
+import { useNavigate } from "react-router-dom";
+import AxiosInstance from "../../components/axios";
 
 const Suburb = () => {
   const [resultData, setResultData] = useState(null);
   const [sortOrder, setSortOrder] = useState(null);
   const [originalData, setOriginalData] = useState(null);
+  const { isUserValid } = useApplicationContext();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("fetching");
-    axios
-      .get("http://localhost:8002/api/suburbs/data")
-      .then(async (response) => {
-        const result = await response.data;
-        console.log(result);
-        setResultData(result);
-        setOriginalData(result);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+    const fetchData = () => {
+      AxiosInstance.get("/api/suburbs/data")
+        .then(async (response) => {
+          const result = await response.data;
+          console.log(result);
+          setResultData(result);
+          setOriginalData(result);
+        })
+        .catch((err) => console.log(err));
+    };
+
+    if (isUserValid) {
+      fetchData();
+    } else {
+      navigate("/");
+    }
+  }, [isUserValid, navigate]);
 
   useEffect(() => {
     if (resultData && sortOrder) {
