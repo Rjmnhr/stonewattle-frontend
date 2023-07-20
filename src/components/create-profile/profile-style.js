@@ -9,14 +9,13 @@ export const CreateProfileStyled = styled.div`
     box-shadow: 0px 3px 3px 0px gray;
     padding: 10px;
     margin: 10px;
-    width: 400px;
-
+    width: 30%;
     background-color: #f8f8f8;
     text-align: start;
   }
 
   .form-container {
-    width: 90%;
+    width: 100%;
     /* border: 1px solid white; */
     display: grid;
     place-items: center;
@@ -53,5 +52,11 @@ export const CreateProfileStyled = styled.div`
     outline: none;
 
     width: 90%;
+  }
+
+  @media (max-width: 912px) {
+    form {
+      width: 80%;
+    }
   }
 `;

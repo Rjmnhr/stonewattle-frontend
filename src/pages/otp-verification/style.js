@@ -31,4 +31,27 @@ export const OtpVerificationPageStyled = styled.div`
   .right-sub-container {
     text-align: start;
   }
+
+  [id^="otp"] {
+    margin: 5px;
+  }
+
+  button {
+    padding: 12px;
+    background: #333333;
+    color: white;
+
+    border: none;
+
+    width: 150px;
+  }
+
+  @media (max-width: 912px) {
+    .left-container {
+      display: none;
+    }
+    .right-container {
+      width: 100%;
+    }
+  }
 `;

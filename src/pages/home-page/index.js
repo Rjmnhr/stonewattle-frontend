@@ -3,41 +3,16 @@ import NavBar from "../../components/nav-bar/nav-bar";
 // import MainFilter from "../../components/home-filter/main-filter";
 import { useApplicationContext } from "../../context/app-context";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Space } from "antd";
 import { IntegerStep } from "../../components/slider";
 import { statesOfAus } from "../../components/states-in-aus/states";
 import Select, { components } from "react-select";
 import CurrencyInput from "react-currency-input-field";
 import AxiosInstance from "../../components/axios";
+import { FilterOutlined } from "@ant-design/icons";
 // import FilterResults from "./filter-results";
 const HomePage = () => {
-  const { setIsUserValid } = useApplicationContext();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
-
-    fetch("http://2ndstorey.com:8002/api/token/verify", {
-      headers: {
-        token: `Bearer ${accessToken}`,
-      },
-    })
-      .then(async (response) => {
-        console.log(response.status);
-        if (response.status === 200) {
-          console.log("user is valid");
-          setIsUserValid(true);
-        } else {
-          navigate("/");
-        }
-      })
-
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [setIsUserValid, navigate]);
-
   const [dwellingType, setDwellingType] = useState("");
   const [minBedrooms, setMinBedrooms] = useState(null);
   const [selectedStates, setSelectedStates] = useState([]);
@@ -46,6 +21,7 @@ const HomePage = () => {
   const [results, setResults] = useState(null);
   const [isDataNotFound, setIsDataNotFound] = useState(null);
   const [isBedroomsUnsure, setBedRoomsUnsure] = useState(null);
+  const [isResultsFiltered, setIsResultsFiltered] = useState(false);
   const [rentalYield, setRentalYield] = useState("");
   const [growthInProperty, SetGrowthInProperty] = useState("");
   const [availabilityOfSupply, setAvailabilityOfSupply] = useState("");
@@ -69,7 +45,35 @@ const HomePage = () => {
   const [greatForHospitals, setGreatForHospitals] = useState(false);
   const [greatForTransport, setGreatForTransport] = useState(false);
 
+  const resultsContainerRef = useRef();
+
+  const { setIsUserValid } = useApplicationContext();
+  const navigate = useNavigate();
+
   const isAdmin = localStorage.getItem("isAdmin");
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+
+    fetch("http://2ndstorey.com:8002/api/token/verify", {
+      headers: {
+        token: `Bearer ${accessToken}`,
+      },
+    })
+      .then(async (response) => {
+        console.log(response.status);
+        if (response.status === 200) {
+          console.log("user is valid");
+          setIsUserValid(true);
+        } else {
+          navigate("/");
+        }
+      })
+
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [setIsUserValid, navigate]);
 
   const handleGreatForSchools = (e) => {
     if (e.target.checked) {
@@ -139,6 +143,8 @@ const HomePage = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    setIsResultsFiltered(false);
+
     if (minBedrooms === "unsure") {
       setBedRoomsUnsure(true);
     } else {
@@ -177,6 +183,10 @@ const HomePage = () => {
         const data = await response.data;
         console.log("results", JSON.stringify(data));
         console.log(data.length);
+        
+    if (window.innerWidth < 912) {
+      resultsContainerRef.current.scrollIntoView({ behavior: "smooth" });
+    }
         if (data.length < 1) {
           setIsDataNotFound(true);
         } else {
@@ -185,9 +195,11 @@ const HomePage = () => {
         setResults(data);
       })
       .catch((err) => console.log(err));
+
   };
 
   const handleFilterFurther = (
+    event,
     vacancyWeightage,
     familyWeightage,
     rentalYieldWeightage,
@@ -201,6 +213,7 @@ const HomePage = () => {
     unemployedPeopleWeightage,
     weeklyIncomeWeightage
   ) => {
+    event.preventDefault();
     console.log("great_for_schools", greatForSchools);
     console.log("great_for_hospitals", greatForHospitals);
     console.log("great_for_Transport", greatForTransport);
@@ -307,11 +320,28 @@ const HomePage = () => {
         (greatForTransport ? suburb.great_for_public_transport_int : 0),
     }));
 
+    const maxRanking = Math.max(
+      ...rankedSuburbs.map((suburb) => suburb.ranking)
+    );
+
+    const updatedRankedSuburbs = rankedSuburbs.map((suburb) => {
+      const rankingPercentage = (suburb.ranking / maxRanking) * 100;
+      return {
+        ...suburb,
+        rankingPercentage,
+      };
+    });
+
     // Sort the suburbs based on their ranking in descending order
-    let temp = rankedSuburbs.sort((a, b) => b.ranking - a.ranking);
+    let temp = updatedRankedSuburbs.sort((a, b) => b.ranking - a.ranking);
+
+    setIsResultsFiltered(true);
 
     setResults(temp);
-    console.log("ranked", JSON.stringify(rankedSuburbs));
+    console.log("ranked", JSON.stringify(updatedRankedSuburbs));
+    if (window.innerWidth < 912) {
+      resultsContainerRef.current.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   useEffect(() => {
@@ -535,7 +565,7 @@ const HomePage = () => {
                   </Space>
                 </div>
                 <div className="slider">
-                  <label>Low Availability of Suply</label>
+                  <label>Low Availability of Supply</label>
                   <Space
                     style={{
                       width: "30%",
@@ -607,59 +637,57 @@ const HomePage = () => {
                     <IntegerStep onSliderChange={setWeeklyIncomeWeightage} />
                   </Space>
                 </div>
-                <div
-                  style={{
-                    display: "flex",
-                    gap: "10px",
-                    alignItems: "center",
-                  }}
-                >
-                  <p style={{ minWidth: "200px" }}>Should Great For :</p>
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: "5px",
-                      alignItems: "center",
-                    }}
+                <div className="checkbox-filter">
+                  <label
+                    style={{ textAlign: "start" }}
+                    className="great-for-label"
                   >
-                    <input
-                      type="checkbox"
-                      style={{ width: "15px", height: "15px" }}
-                      onChange={handleGreatForSchools}
-                    />
-                    <label>Schools</label>
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: "5px",
-                      alignItems: "center",
-                    }}
-                  >
-                    <input
-                      type="checkbox"
-                      style={{ width: "15px", height: "15px" }}
-                      onChange={handleGreatForHospital}
-                    />
-                    <label>Hospitals</label>
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: "5px",
-                      alignItems: "center",
-                    }}
-                  >
-                    <input
-                      type="checkbox"
-                      style={{ width: "15px", height: "15px" }}
-                      onChange={handleGreatForTransport}
-                    />
-                    <label>Public Transports</label>
+                    Should Great For :
+                  </label>
+                  <div className="checkbox-sub-filter">
+                    <div className="checkbox-sub">
+                      <input type="checkbox" onChange={handleGreatForSchools} />
+                      <label>Schools</label>
+                    </div>
+                    <div className="checkbox-sub">
+                      <input
+                        type="checkbox"
+                        onChange={handleGreatForHospital}
+                      />
+                      <label>Hospitals</label>
+                    </div>
+                    <div className="checkbox-sub">
+                      <input
+                        type="checkbox"
+                        onChange={handleGreatForTransport}
+                      />
+                      <label>Public Transports</label>
+                    </div>
                   </div>
                 </div>
               </div>
               <button type="submit">Search Suburbs</button>
+              <button
+                onClick={(e) =>
+                  handleFilterFurther(
+                    e,
+                    vacancyRateWeightage,
+                    familyWeightage,
+                    rentalYieldWeightage,
+                    growthInPropertyWeightage,
+                    rentVsOwnerRatioWeightage,
+                    availabilityOfSupplyWeightage,
+                    ratingsWeightage,
+                    demandPrevMonthWeightage,
+                    populationGrowthWeightage,
+                    australianBornWeightage,
+                    unemployedPeopleWeightage,
+                    weeklyIncomeWeightage
+                  )
+                }
+              >
+                <FilterOutlined /> Filter
+              </button>
               {isAdmin === "true" ? (
                 <button className="dash-btn" onClick={handleDashBoard}>
                   Dashboard
@@ -668,28 +696,8 @@ const HomePage = () => {
                 ""
               )}
             </form>
-            <button
-              onClick={() =>
-                handleFilterFurther(
-                  vacancyRateWeightage,
-                  familyWeightage,
-                  rentalYieldWeightage,
-                  growthInPropertyWeightage,
-                  rentVsOwnerRatioWeightage,
-                  availabilityOfSupplyWeightage,
-                  ratingsWeightage,
-                  demandPrevMonthWeightage,
-                  populationGrowthWeightage,
-                  australianBornWeightage,
-                  unemployedPeopleWeightage,
-                  weeklyIncomeWeightage
-                )
-              }
-            >
-              Filter
-            </button>
           </div>
-          <div className="results-main-container">
+          <div className="results-main-container" ref={resultsContainerRef}>
             <center>
               {results ? (
                 <>
@@ -707,8 +715,11 @@ const HomePage = () => {
                           ) : (
                             ""
                           )}
-                          <th>Vacancy rate</th>
-                          <th>family</th>
+                          {isResultsFiltered ? (
+                            <th style={{ textAlign: "center" }}>Score</th>
+                          ) : (
+                            ""
+                          )}
                         </tr>
                       </thead>
                       <tbody>
@@ -742,8 +753,31 @@ const HomePage = () => {
                                       ) : (
                                         ""
                                       )}
-                                      <td>{data.current_vacancy_rate}</td>
-                                      <td>{data.family}</td>
+                                      {isResultsFiltered ? (
+                                        <td>
+                                          <center>
+                                            {isAdmin === "true" ? (
+                                              data.ranking.toFixed(2)
+                                            ) : (
+                                              <div
+                                                className={
+                                                  data.rankingPercentage > 80
+                                                    ? "green-circle"
+                                                    : data.rankingPercentage >
+                                                      60
+                                                    ? "yellow-circle"
+                                                    : data.rankingPercentage >
+                                                      40
+                                                    ? "blue-circle"
+                                                    : "red-circle"
+                                                }
+                                              ></div>
+                                            )}
+                                          </center>
+                                        </td>
+                                      ) : (
+                                        ""
+                                      )}
                                     </tr>
                                   );
                                 })

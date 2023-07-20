@@ -18,17 +18,18 @@ const CreateProfile = () => {
 
   const handleInputChange = (index, event) => {
     const input = event.target.value;
+    if (/^\d?$/.test(input)) {
+      const updatedPostcodes = [...postcodes];
+      updatedPostcodes[index] = input;
 
-    //updating the postcodes as an array
-    const updatedPostcodes = [...postcodes];
-    updatedPostcodes[index] = input;
+      if (input && index < 5 && inputRefs.current[index + 1]) {
+        inputRefs.current[index + 1].focus();
+      }
 
-    if (input && index < 5 && inputRefs.current[index + 1]) {
-      inputRefs.current[index + 1].focus();
+      setPostcodes(updatedPostcodes);
     }
-
-    setPostcodes(updatedPostcodes);
   };
+  //updating the postcodes as an array
 
   const handleKeyDown = (index, event) => {
     if (event.key === "Backspace" && postcodes[index] === "") {

@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useApplicationContext } from "../../context/app-context";
 
 import { useNavigate } from "react-router-dom";
@@ -8,21 +8,64 @@ import { OtpVerificationPageStyled } from "./style";
 import AxiosInstance from "../../components/axios";
 
 const OtpVerification = () => {
-  const [userInput, setUserInput] = useState(null);
   const [warning, setWarning] = useState("");
   const { setIsEmailVerified } = useApplicationContext();
+  const [otpPin, setOtpPin] = useState(Array(6).fill(""));
   const navigate = useNavigate();
+  const inputRefs = useRef([]);
 
   const email = localStorage.getItem("email");
 
   console.log("email", email);
 
+  const handleInputChange = (index, event) => {
+    const input = event.target.value;
+
+    if (/^\d?$/.test(input)) {
+      const updatedOtpPin = [...otpPin];
+      updatedOtpPin[index] = input;
+
+      if (input && index < 5 && inputRefs.current[index + 1]) {
+        inputRefs.current[index + 1].focus();
+      }
+      setOtpPin(updatedOtpPin);
+    }
+
+    //updating the postcodes as an array
+  };
+
+  const handleKeyDown = (index, event) => {
+    if (event.key === "Backspace" && otpPin[index] === "") {
+      const updatedOtpPin = [...otpPin];
+      updatedOtpPin[index - 1] = "";
+
+      setOtpPin(updatedOtpPin);
+
+      if (index > 0 && inputRefs.current[index - 1]) {
+        inputRefs.current[index - 1].focus();
+      }
+    } else if (
+      event.key === "ArrowRight" &&
+      index < 5 &&
+      otpPin[index] !== ""
+    ) {
+      if (inputRefs.current[index + 1]) {
+        inputRefs.current[index + 1].focus();
+      }
+    } else if (event.key === "ArrowLeft" && index > 0) {
+      if (inputRefs.current[index - 1]) {
+        inputRefs.current[index - 1].focus();
+      }
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    const joinedOtpPin = otpPin.join("");
 
     AxiosInstance.post("/api/otp/verify-otp", {
       email: email,
-      otp: userInput,
+      otp: joinedOtpPin,
     })
       .then(async (response) => {
         const data = await response.data;
@@ -58,10 +101,26 @@ const OtpVerification = () => {
                 </p>
               </div>
               <form onSubmit={handleSubmit}>
-                <input
-                  onChange={(e) => setUserInput(e.target.value)}
-                  type="number"
-                />
+                {otpPin.map((otp, index) => (
+                  <input
+                    style={{
+                      width: "12px",
+                      background: "none",
+                      border: "none",
+                      borderBottom: "1px solid black",
+                      outline: "none",
+                    }}
+                    key={index}
+                    type="number"
+                    id={`otp-${index}`}
+                    ref={(ref) => (inputRefs.current[index] = ref)}
+                    value={otp}
+                    onChange={(event) => handleInputChange(index, event)}
+                    onKeyDown={(event) => handleKeyDown(index, event)}
+                    maxLength={1}
+                  />
+                ))}
+
                 <p style={{ color: "red" }}>{warning}</p>
                 <br />
                 <button type="submit">Next</button>

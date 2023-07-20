@@ -98,6 +98,7 @@ export const HomePageStyled = styled.div`
     margin: 10px;
     border: none;
     margin-top: 20px;
+    min-width: 100px;
   }
 
   table {
@@ -127,17 +128,77 @@ export const HomePageStyled = styled.div`
     color: black;
   }
   .table-container {
-    height: 85vh;
+    height: 150vh;
     overflow-y: scroll;
+    margin-top: 50px;
+    /* Hide the standard scrollbar for WebKit browsers */
+    scrollbar-width: none;
+    /* Hide the scrollbar for Firefox */
+    -ms-overflow-style: none;
+  }
+
+  /* Hide the scrollbar for WebKit browsers */
+  .table-container::-webkit-scrollbar {
+    display: none;
   }
   .state-select {
     min-width: 200px;
     max-width: 500px;
   }
 
-  .slider label {
+  .slider label,
+  .great-for-label {
     width: 200px;
   }
+
+  .checkbox-filter {
+    display: flex;
+    gap: 10px;
+    align-items: start;
+    justify-content: start;
+    flex-wrap: wrap;
+  }
+
+  .checkbox-sub-filter {
+    display: flex;
+  }
+  .checkbox-sub {
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    text-align: left;
+  }
+  input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+  }
+
+  .green-circle,
+  .yellow-circle,
+  .red-circle,
+  .blue-circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+  }
+
+  .yellow-circle {
+    background-color: yellow;
+  }
+
+  .green-circle {
+    background-color: green;
+  }
+  .red-circle {
+    background-color: red;
+  }
+
+  .blue-circle {
+    background-color: blue;
+  }
+
   .ant-row .css-dev-only-do-not-override-1wazalj {
     width: 150%;
   }
@@ -188,6 +249,15 @@ export const HomePageStyled = styled.div`
 
     .slider {
       text-align: left;
+    }
+    .checkbox-sub-filter {
+      flex-direction: column;
+      gap: 8px;
+    }
+    input[type="checkbox"] {
+      width: 15px;
+      height: 15px;
+      margin-right: 5px;
     }
   }
 `;
