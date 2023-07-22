@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   LineChart,
   Line,
@@ -16,6 +16,9 @@ const GrowthChart = ({
   growthRate_2022,
   growthRate_2023,
 }) => {
+  const [chartWidth, setChartWidth] = useState(500);
+  const [chartHeight, setChartHeight] = useState(300);
+
   const growthRateData = [
     { year: "2019", growthRate: growthRate_2019 },
     { year: "2020", growthRate: growthRate_2020 },
@@ -24,10 +27,38 @@ const GrowthChart = ({
     { year: "2023", growthRate: growthRate_2023 },
   ];
 
+  useEffect(() => {
+    const updateChartSize = () => {
+      const screenWidth = window.innerWidth;
+
+      if (screenWidth < 912) {
+        setChartWidth(300);
+        setChartHeight(200);
+      } else if (screenWidth < 600) {
+        setChartWidth(250);
+        setChartHeight(150);
+      } else {
+        setChartWidth(500);
+        setChartHeight(300);
+      }
+    };
+
+    // Call the function to set initial size
+    updateChartSize();
+
+    // Add an event listener to check for window size changes
+    window.addEventListener("resize", updateChartSize);
+
+    // Clean up the event listener when the component is unmounted
+    return () => {
+      window.removeEventListener("resize", updateChartSize);
+    };
+  }, []);
+
   return (
     <div style={{ textAlign: "start", paddingLeft: "20px" }}>
-      <h2 style={{ textAlign: "start", paddingLeft: "70px" }}>Growth Chart</h2>
-      <LineChart width={500} height={300} data={growthRateData}>
+      <h2>Growth Chart</h2>
+      <LineChart width={chartWidth} height={chartHeight} data={growthRateData}>
         <XAxis dataKey="year" />
         <YAxis />
         <CartesianGrid stroke="#eee" strokeDasharray="5 5" />

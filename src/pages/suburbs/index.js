@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { SuburbsPageStyled } from "./style";
-import HorizontalBarRentVsOwner from "../../components/rent-vs-owner";
+import HorizontalBarRentVsOwner from "../../components/rent-vs-owner-bar/rent-vs-owner";
 import { Dropdown, Space, Skeleton } from "antd";
 import { DownOutlined } from "@ant-design/icons";
-import { useApplicationContext } from "../../context/app-context";
 import { useNavigate } from "react-router-dom";
 import AxiosInstance from "../../components/axios";
 
@@ -11,7 +10,7 @@ const Suburb = () => {
   const [resultData, setResultData] = useState(null);
   const [sortOrder, setSortOrder] = useState(null);
   const [originalData, setOriginalData] = useState(null);
-  const { isUserValid } = useApplicationContext();
+  const isAdmin = localStorage.getItem("isAdmin");
 
   const navigate = useNavigate();
 
@@ -27,12 +26,16 @@ const Suburb = () => {
         .catch((err) => console.log(err));
     };
 
-    if (isUserValid) {
+    if (isAdmin === "true") {
       fetchData();
     } else {
       navigate("/");
     }
-  }, [isUserValid, navigate]);
+  }, [isAdmin, navigate]);
+
+  const handleNavigate = (id) => {
+    navigate(`/suburb/${id}`);
+  };
 
   useEffect(() => {
     if (resultData && sortOrder) {
@@ -47,7 +50,8 @@ const Suburb = () => {
     } else if (originalData) {
       setResultData(originalData);
     }
-  }, [resultData, sortOrder, originalData]);
+    // eslint-disable-next-line
+  }, [sortOrder]);
 
   const handleSortOrderChange = (key) => {
     setSortOrder(key);
@@ -75,13 +79,81 @@ const Suburb = () => {
   return (
     <>
       <SuburbsPageStyled>
-        <div style={{ padding: "20px" }} className="suburbs-main-container">
+        <div className="suburbs-main-container">
           {resultData ? (
             <>
               <center>
                 <h1>SUBURBS</h1>
+                <div className="table-container">
+                  <table>
+                    <thead className="table-header">
+                      <tr>
+                        <th style={{ textAlign: "center" }}>Postcode</th>
+                        <th>Suburb Name</th>
+                        <th style={{ textAlign: "center" }}>State</th>
+                        <th style={{ textAlign: "center" }}>Rating</th>
+                        <th style={{ textAlign: "center" }}>Rent vs Owner</th>
+                        <th>
+                          {" "}
+                          <Dropdown
+                            menu={{
+                              items,
+                            }}
+                            trigger={["click"]}
+                          >
+                            <div>
+                              <Space>
+                                Rental Yield
+                                <DownOutlined />
+                              </Space>
+                            </div>
+                          </Dropdown>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {resultData
+                        ? resultData.map((data) => {
+                            return (
+                              <tr
+                                key={data.domain_string}
+                                onClick={() => handleNavigate(data.suburb_id)}
+                              >
+                                <td style={{ textAlign: "center" }}>
+                                  {data.postcode}
+                                </td>
+                                <td>{data.suburb_name}</td>
+                                <td style={{ textAlign: "center" }}>
+                                  {data.state}
+                                </td>
+                                <td style={{ textAlign: "center" }}>
+                                  {data.ratings}/5
+                                </td>
+
+                                <td
+                                  style={{
+                                    display: "grid",
+                                    placeItems: "center",
+                                  }}
+                                >
+                                  <HorizontalBarRentVsOwner
+                                    rent={data.renter}
+                                    owner={data.owner}
+                                  />
+                                </td>
+
+                                <td style={{ textAlign: "center" }}>
+                                  {data.rental_yield}
+                                </td>
+                              </tr>
+                            );
+                          })
+                        : ""}
+                    </tbody>
+                  </table>
+                </div>
               </center>
-              <div className="filter-bar">
+              {/* <div className="filter-bar">
                 <div className="filter-sub-list">
                   <p onClick={() => handleSortOrderChange(null)}>All</p>
                 </div>
@@ -149,7 +221,7 @@ const Suburb = () => {
                     })}
                   </ul>
                 </div>
-              </div>
+              </div> */}
             </>
           ) : (
             <div>

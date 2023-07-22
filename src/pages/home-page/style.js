@@ -45,7 +45,7 @@ export const HomePageStyled = styled.div`
 
   .currency-input {
     height: 38px;
-
+    outline: none;
     width: 190px;
     border-radius: 4px;
 
@@ -175,6 +175,13 @@ export const HomePageStyled = styled.div`
     margin-right: 5px;
   }
 
+  .disabled-button {
+    opacity: 0.7; /* You can adjust the opacity to make it visually disabled */
+    cursor: not-allowed;
+  }
+
+  /* Styles for the icon */
+
   .green-circle,
   .yellow-circle,
   .red-circle,
@@ -258,6 +265,9 @@ export const HomePageStyled = styled.div`
       width: 15px;
       height: 15px;
       margin-right: 5px;
+    }
+    .ant-row .css-dev-only-do-not-override-1wazalj {
+      width: 230%;
     }
   }
 `;

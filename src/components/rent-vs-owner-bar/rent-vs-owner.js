@@ -1,4 +1,5 @@
 import React from "react";
+import { RentVsOwnerStyled } from "./rent-vs-owner-style";
 
 const HorizontalBarRentVsOwner = ({ rent, owner }) => {
   const total = rent + owner;
@@ -19,7 +20,6 @@ const HorizontalBarRentVsOwner = ({ rent, owner }) => {
     textAlign: "center",
     padding: "5px",
     color: "white",
-    fontSize: "10px",
   };
 
   const ownerBarStyle = {
@@ -28,16 +28,25 @@ const HorizontalBarRentVsOwner = ({ rent, owner }) => {
     textAlign: "center",
     padding: "5px",
     color: "white",
-    fontSize: "10px",
   };
 
   return (
-    <div style={{ width: "100px" }}>
-      <div style={barStyle}>
-        <div style={rentBarStyle}>{` ${rentPercentage}%`}</div>
-        <div style={ownerBarStyle}>{`${ownerPercentage}%`}</div>
-      </div>
-    </div>
+    <>
+      <RentVsOwnerStyled>
+        <div className="main-container">
+          <div className="bar-style" style={barStyle}>
+            <div
+              className="rent-bar-style"
+              style={rentBarStyle}
+            >{` ${rentPercentage}%`}</div>
+            <div
+              className="owner-bar-style"
+              style={ownerBarStyle}
+            >{`${ownerPercentage}%`}</div>
+          </div>
+        </div>
+      </RentVsOwnerStyled>
+    </>
   );
 };
 

@@ -3,8 +3,9 @@ import { styled } from "styled-components";
 export const SuburbsPageStyled = styled.div`
   .suburbs-main-container {
     margin: 0;
-    padding: 0;
+    padding: 20px;
     background-color: white;
+    width: 100%;
   }
 
   .suburbs-details {
@@ -80,5 +81,66 @@ export const SuburbsPageStyled = styled.div`
 
   a:hover {
     opacity: 0.7;
+  }
+  table {
+    border-collapse: collapse;
+    width: 90%;
+    table-layout: fixed;
+
+    overflow-y: auto;
+  }
+
+  th {
+    text-align: left;
+    /* border: 1px solid red; */
+    padding: 20px;
+    position: sticky;
+    top: 0;
+    left: 0;
+    background: #f8f8f8;
+    color: black;
+  }
+  td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid gainsboro;
+    font-weight: 500;
+    color: gray;
+  }
+
+  .table-header {
+    background: #f8f8f8;
+    border-radius: 10px 10px 0px 0px;
+    color: black;
+  }
+  .table-container {
+    height: 150vh;
+    overflow-y: scroll;
+    margin-top: 50px;
+    /* Hide the standard scrollbar for WebKit browsers */
+    /* scrollbar-width: none; */
+    /* Hide the scrollbar for Firefox */
+    /* -ms-overflow-style: none; */
+  }
+
+  /* Hide the scrollbar for WebKit browsers */
+  .table-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media (max-width: 912px) {
+    .suburbs-main-container {
+      padding: 10px;
+    }
+    table {
+      width: 100%;
+    }
+    th {
+      font-size: 10px;
+      padding: 10px;
+    }
+    td {
+      font-size: 10px;
+    }
   }
 `;

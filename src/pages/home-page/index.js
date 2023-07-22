@@ -10,9 +10,10 @@ import { statesOfAus } from "../../components/states-in-aus/states";
 import Select, { components } from "react-select";
 import CurrencyInput from "react-currency-input-field";
 import AxiosInstance from "../../components/axios";
-import { FilterOutlined } from "@ant-design/icons";
+import { FilterOutlined, LoadingOutlined } from "@ant-design/icons";
 // import FilterResults from "./filter-results";
 const HomePage = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [dwellingType, setDwellingType] = useState("");
   const [minBedrooms, setMinBedrooms] = useState(null);
   const [selectedStates, setSelectedStates] = useState([]);
@@ -142,6 +143,7 @@ const HomePage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setIsLoading(true);
 
     setIsResultsFiltered(false);
 
@@ -181,12 +183,12 @@ const HomePage = () => {
     })
       .then(async (response) => {
         const data = await response.data;
+        if (window.innerWidth < 912) {
+          resultsContainerRef.current.scrollIntoView({ behavior: "smooth" });
+        }
         console.log("results", JSON.stringify(data));
         console.log(data.length);
-        
-    if (window.innerWidth < 912) {
-      resultsContainerRef.current.scrollIntoView({ behavior: "smooth" });
-    }
+        setIsLoading(false);
         if (data.length < 1) {
           setIsDataNotFound(true);
         } else {
@@ -195,7 +197,6 @@ const HomePage = () => {
         setResults(data);
       })
       .catch((err) => console.log(err));
-
   };
 
   const handleFilterFurther = (
@@ -386,6 +387,7 @@ const HomePage = () => {
                   <label>Dwelling Type</label>
                   <select
                     onChange={(e) => setDwellingType(e.target.value)}
+                    className="basic-filter"
                     required
                   >
                     <option value="">Select</option>
@@ -666,7 +668,9 @@ const HomePage = () => {
                   </div>
                 </div>
               </div>
-              <button type="submit">Search Suburbs</button>
+              <button type="submit">
+                {isLoading ? <LoadingOutlined /> : "Search Suburbs"}
+              </button>
               <button
                 onClick={(e) =>
                   handleFilterFurther(
@@ -685,6 +689,8 @@ const HomePage = () => {
                     weeklyIncomeWeightage
                   )
                 }
+                disabled={results === null}
+                className={results === null ? "disabled-button" : ""}
               >
                 <FilterOutlined /> Filter
               </button>
