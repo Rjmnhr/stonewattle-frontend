@@ -48,33 +48,33 @@ const HomePage = () => {
 
   const resultsContainerRef = useRef();
 
-  const { setIsUserValid } = useApplicationContext();
+  // const { setIsUserValid } = useApplicationContext();
   const navigate = useNavigate();
 
   const isAdmin = localStorage.getItem("isAdmin");
 
-  useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
+  // useEffect(() => {
+  //   const accessToken = localStorage.getItem("accessToken");
 
-    fetch("http://2ndstorey.com:8002/api/token/verify", {
-      headers: {
-        token: `Bearer ${accessToken}`,
-      },
-    })
-      .then(async (response) => {
-        console.log(response.status);
-        if (response.status === 200) {
-          console.log("user is valid");
-          setIsUserValid(true);
-        } else {
-          navigate("/");
-        }
-      })
+  //   fetch("http://2ndstorey.com:8002/api/token/verify", {
+  //     headers: {
+  //       token: `Bearer ${accessToken}`,
+  //     },
+  //   })
+  //     .then(async (response) => {
+  //       console.log(response.status);
+  //       if (response.status === 200) {
+  //         console.log("user is valid");
+  //         setIsUserValid(true);
+  //       } else {
+  //         navigate("/");
+  //       }
+  //     })
 
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [setIsUserValid, navigate]);
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }, [setIsUserValid, navigate]);
 
   const handleGreatForSchools = (e) => {
     if (e.target.checked) {
