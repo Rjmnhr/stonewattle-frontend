@@ -32,7 +32,7 @@ const HomePage = () => {
   const {
     setResults,
     results,
-    setIsUserValid,
+
     filteredResults,
     isResultsFiltered,
   } = useApplicationContext();
