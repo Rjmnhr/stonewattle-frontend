@@ -5,15 +5,18 @@ export const HomePageStyled = styled.div`
     padding: 10px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
     width: 100%;
   }
   .filter-main-container {
-    text-align: start;
-    width: 50%;
+    /* text-align: start; */
+    width: 100%;
+    min-height: 70vh;
   }
 
   .results-main-container {
-    width: 50%;
+    width: 100%;
     padding: 5px;
   }
 
@@ -39,6 +42,7 @@ export const HomePageStyled = styled.div`
     width: 200px;
     height: 38px;
     color: hsl(0, 0%, 50%);
+    padding-right: 20px;
 
     /* outline-color: #1677ff; */
   }
@@ -57,6 +61,7 @@ export const HomePageStyled = styled.div`
 
   .state-select {
     color: black;
+    text-align: start;
   }
   select:focus {
     outline-color: #1677ff;
@@ -83,7 +88,7 @@ export const HomePageStyled = styled.div`
   .search-filter {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 40%;
     align-items: center;
     gap: 30px;
   }
@@ -210,6 +215,14 @@ export const HomePageStyled = styled.div`
     width: 150%;
   }
 
+  /* Hide the default drop-down arrow */
+
+  /* Style the options (optional) */
+  select#customSelect option {
+    background-color: #fff;
+    color: #333;
+  }
+
   @media (max-width: 912px) {
     .home-page-container {
       flex-direction: column;
@@ -225,10 +238,21 @@ export const HomePageStyled = styled.div`
     .search-box label {
       font-size: 14px;
     }
-    .search-box input,
+
     select {
       width: 150px;
       padding: 5px;
+    }
+    .currency-input {
+      height: 38px;
+      outline: none;
+      width: 140px;
+      border-radius: 4px;
+
+      padding: 0;
+      padding-left: 10px;
+
+      border: 1px solid hsl(0, 0%, 80%);
     }
 
     .filter-main-container {
@@ -268,6 +292,14 @@ export const HomePageStyled = styled.div`
     }
     .ant-row .css-dev-only-do-not-override-1wazalj {
       width: 230%;
+    }
+    .search-filter {
+      width: 100%;
+    }
+
+    .filter-info {
+      width: 100%;
+      text-align: center;
     }
   }
 `;

@@ -5,6 +5,8 @@ import Suburb from "./pages/suburbs";
 import OtpVerification from "./pages/otp-verification";
 import SuburbId from "./pages/suburb-id";
 import CreateProfile from "./components/create-profile/profile";
+import FilterPage from "./pages/filter-page/filter-page";
+import MapComponent from "./components/GIS-mapping/leaflet";
 
 const AppRoute = () => {
   return (
@@ -55,6 +57,14 @@ const AppRoute = () => {
           element={
             <>
               <CreateProfile />
+            </>
+          }
+        />
+        <Route
+          path="/filter"
+          element={
+            <>
+              <MapComponent />
             </>
           }
         />

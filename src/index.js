@@ -1,13 +1,32 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { DndProvider } from "react-dnd";
+import { MultiBackend } from "react-dnd-multi-backend";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { TouchBackend } from "react-dnd-touch-backend";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const HTML5toTouch = {
+  backends: [
+    {
+      backend: HTML5Backend,
+    },
+    {
+      backend: TouchBackend,
+      options: { enableMouseEvents: true, enableTouchEvents: true },
+      preview: true,
+    },
+  ],
+};
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <DndProvider backend={MultiBackend} options={HTML5toTouch}>
+      <App />
+    </DndProvider>
   </React.StrictMode>
 );
 

@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 
 export const NavBarStyled = styled.div`
   .nav-container {
-    width: 100%;
+    width: 99%;
     color: white;
     padding: 20px;
     background: #333333;
