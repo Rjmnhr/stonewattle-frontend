@@ -9,7 +9,7 @@ import { statesOfAus } from "../../components/states-in-aus/states";
 import Select, { components } from "react-select";
 import CurrencyInput from "react-currency-input-field";
 import AxiosInstance from "../../components/axios";
-import FilterPage from "../filter-page/filter-page";
+// import FilterPage from "../filter-page/filter-page";
 
 const HomePage = () => {
   const [dwellingType, setDwellingType] = useState("");
@@ -376,12 +376,12 @@ const HomePage = () => {
                   >
                     Investment strategy
                   </h3>
-                  <FilterPage
+                  {/* <FilterPage
                     demandPrevMonth={demandPrevMonth}
                     availabilityOfSupply={availabilityOfSupply}
                     growthInProperty={growthInProperty}
                     rentalYield={rentalYield}
-                  />
+                  /> */}
                 </div>
 
                 {/* <h3
