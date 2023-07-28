@@ -1,14 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDrop } from "react-dnd";
 import FilterItem from "./filter-item";
+import { useApplicationContext } from "../context/app-context";
 
 const FilterContainer = ({ category, filters, onFilterMove, style }) => {
+  const { setAvailableFiltersCount } = useApplicationContext();
   const [, dropRef] = useDrop({
     accept: "FILTER",
     drop: (item) => {
       onFilterMove(item.filter, item.category, category);
     },
   });
+  const handleRemoveFilter = (filter, fromCategory) => {
+    onFilterMove(filter, fromCategory, "available");
+  };
+
+  useEffect(() => {
+    // Update the availableFiltersCount whenever the filters array changes
+    if (category === "available") {
+      setAvailableFiltersCount(filters.length);
+    }
+    // eslint-disable-next-line
+  }, [category, filters]);
 
   return (
     <>
@@ -23,6 +36,7 @@ const FilterContainer = ({ category, filters, onFilterMove, style }) => {
       >
         {category === "available" && filters.length === 0 ? (
           <div
+            className=" available-container"
             style={{
               display: "flex",
               justifyContent: "center",
@@ -37,13 +51,18 @@ const FilterContainer = ({ category, filters, onFilterMove, style }) => {
             style={{
               padding: "8px",
               margin: "8px",
-
+              justifyContent: "center",
               display: "flex",
               flexWrap: "wrap",
             }}
           >
             {filters.map((filter) => (
-              <FilterItem key={filter} filter={filter} category={category} />
+              <FilterItem
+                key={filter}
+                filter={filter}
+                category={category}
+                onRemoveFilter={handleRemoveFilter}
+              />
             ))}
           </div>
         )}

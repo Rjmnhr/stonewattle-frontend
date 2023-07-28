@@ -2,15 +2,18 @@ import { styled } from "styled-components";
 
 export const FilterPageStyled = styled.div`
   .category-container {
-    width: 500px;
+    width: 950px;
   }
 
   .filter-main-container {
+    margin: 0;
     display: flex;
     justify-content: center;
     width: 100%;
     align-items: center;
     min-height: 60vh;
+    flex-direction: column-reverse;
+
     /* border: 1px solid blue; */
   }
 
@@ -22,10 +25,22 @@ export const FilterPageStyled = styled.div`
   .filter-item-container p {
     color: white;
   }
+  .bucket-main-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    /* width: 100%; */
+    height: 100%;
+  }
+
+  @media (max-width: 1050px) {
+    .category-container {
+      width: 600px;
+    }
+  }
 
   @media (max-width: 912px) {
     .filter-main-container {
-      flex-direction: column;
       justify-content: center;
       align-items: center;
     }
@@ -33,8 +48,31 @@ export const FilterPageStyled = styled.div`
     .filter-item-container p {
       font-size: 14px;
     }
+
+    .bucket-main-container {
+      flex-direction: column;
+    }
+
     .category-container {
-      width: 90%;
+      width: 700px;
     }
   }
+
+  @media (max-width: 850px) {
+    .category-container {
+      width: 100%;
+    }
+  }
+
+  /* @media (max-width: 500px) {
+    .category-container {
+      width: 350px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .category-container {
+      width: 255px;
+    }
+  } */
 `;

@@ -1,6 +1,11 @@
 import { styled } from "styled-components";
 
 export const HomePageStyled = styled.div`
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
   .home-page-container {
     padding: 10px;
     display: flex;
@@ -9,17 +14,15 @@ export const HomePageStyled = styled.div`
     flex-direction: column;
     width: 100%;
   }
-  .filter-main-container {
-    /* text-align: start; */
-    width: 100%;
-    min-height: 70vh;
-  }
 
   .results-main-container {
     width: 100%;
     padding: 5px;
   }
 
+  .filter-main-page-container {
+    width: 1200px;
+  }
   .search-box {
     display: flex;
     flex-direction: column;
@@ -35,11 +38,20 @@ export const HomePageStyled = styled.div`
     box-shadow: 0px 3px 3px 0px gray;
   }
 
+  .search-sub-box {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-top: 20px;
+    gap: 200px;
+  }
+
   select {
     padding: 5px;
     border-radius: 4px;
     border: 1px solid hsl(0, 0%, 80%);
-    width: 200px;
+    width: 400px;
     height: 38px;
     color: hsl(0, 0%, 50%);
     padding-right: 20px;
@@ -47,10 +59,18 @@ export const HomePageStyled = styled.div`
     /* outline-color: #1677ff; */
   }
 
+  .state-select,
+  .basic-filter {
+    min-width: 200px;
+    max-width: 500px;
+    color: black;
+    text-align: start;
+  }
+
   .currency-input {
     height: 38px;
     outline: none;
-    width: 190px;
+    width: 200px;
     border-radius: 4px;
 
     padding: 0;
@@ -59,10 +79,6 @@ export const HomePageStyled = styled.div`
     border: 1px solid hsl(0, 0%, 80%);
   }
 
-  .state-select {
-    color: black;
-    text-align: start;
-  }
   select:focus {
     outline-color: #1677ff;
   }
@@ -88,7 +104,7 @@ export const HomePageStyled = styled.div`
   .search-filter {
     display: flex;
     justify-content: space-between;
-    width: 40%;
+    width: 36%;
     align-items: center;
     gap: 30px;
   }
@@ -137,19 +153,14 @@ export const HomePageStyled = styled.div`
     overflow-y: scroll;
     margin-top: 50px;
     /* Hide the standard scrollbar for WebKit browsers */
-    scrollbar-width: none;
+    /* scrollbar-width: 10px; */
     /* Hide the scrollbar for Firefox */
-    -ms-overflow-style: none;
   }
 
   /* Hide the scrollbar for WebKit browsers */
-  .table-container::-webkit-scrollbar {
+  /* .table-container::-webkit-scrollbar {
     display: none;
-  }
-  .state-select {
-    min-width: 200px;
-    max-width: 500px;
-  }
+  } */
 
   .slider label,
   .great-for-label {
@@ -223,12 +234,60 @@ export const HomePageStyled = styled.div`
     color: #333;
   }
 
+  p {
+    margin: 20px;
+  }
+  .ant-collapse {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: rgba(0, 0, 0, 0.88);
+    font-size: 14px;
+    line-height: 1.5714285714285714;
+    list-style: none;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    background-color: transparent;
+    /* border: 1px solid #d9d9d9; */
+    /* border-bottom: 0; */
+    border-style: none;
+    /* border-radius: 8px; */
+  }
+
+  .ant-collapse > .ant-collapse-item {
+    border-style: none;
+  }
+  .ant-collapse > .ant-collapse-item > .ant-collapse-header {
+    align-items: center;
+    padding-bottom: 10px;
+  }
+
+  .ant-collapse
+    > .ant-collapse-item
+    > .ant-collapse-header
+    > .ant-collapse-header-text {
+    text-align: start;
+  }
+
+  /* @media (max-width: 1250px) {
+    .filter-main-page-container {
+      width: 1022px;
+    }
+  } */
+
+  @media (max-width: 1050px) {
+    .filter-main-page-container {
+      width: 1040px;
+    }
+  }
+
   @media (max-width: 912px) {
     .home-page-container {
       flex-direction: column;
     }
-    .filter-main-container {
-      width: 100%;
+    .filter-main-page-container {
+      width: 900px;
     }
 
     .results-main-container {
@@ -246,7 +305,7 @@ export const HomePageStyled = styled.div`
     .currency-input {
       height: 38px;
       outline: none;
-      width: 140px;
+      width: 150px;
       border-radius: 4px;
 
       padding: 0;
@@ -266,7 +325,8 @@ export const HomePageStyled = styled.div`
       max-width: 150px;
     } */
 
-    .state-select {
+    .state-select,
+    .basic-filter {
       min-width: 150px;
       max-width: 250px;
 
@@ -300,6 +360,29 @@ export const HomePageStyled = styled.div`
     .filter-info {
       width: 100%;
       text-align: center;
+    }
+    .search-sub-box {
+      flex-direction: column;
+      margin-top: 0;
+      gap: 15px;
+    }
+  }
+
+  @media (max-width: 850px) {
+    .filter-main-page-container {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .filter-main-page-container {
+      width: 412px;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .filter-main-page-container {
+      width: 360px;
     }
   }
 `;

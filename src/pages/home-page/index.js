@@ -4,14 +4,25 @@ import NavBar from "../../components/nav-bar/nav-bar";
 import { useApplicationContext } from "../../context/app-context";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
-
+import { Collapse } from "antd";
 import { statesOfAus } from "../../components/states-in-aus/states";
 import Select, { components } from "react-select";
 import CurrencyInput from "react-currency-input-field";
 import AxiosInstance from "../../components/axios";
 import FilterPage from "../filter-page/filter-page";
+import { MdArrowDropDown } from "react-icons/md";
+
+// import HighChartsMap from "../../components/GIS-mapping/high-charts";
 
 const HomePage = () => {
+  const {
+    setResults,
+    results,
+
+    filteredResults,
+    isResultsFiltered,
+  } = useApplicationContext();
+
   const [dwellingType, setDwellingType] = useState("");
   const [minBedrooms, setMinBedrooms] = useState(null);
   const [selectedStates, setSelectedStates] = useState([]);
@@ -24,18 +35,16 @@ const HomePage = () => {
   const [growthInProperty, SetGrowthInProperty] = useState("");
   const [availabilityOfSupply, setAvailabilityOfSupply] = useState("");
   const [demandPrevMonth, setDemandPrevMonth] = useState("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  // const [selectedStateCode, setSelectedStateCod] = useState("");
+  // const [stateCodesArr, setStateCodesArr] = useState(null);
+  const [displayResults, setDisplayResults] = useState(null);
+
   // const [demandLastYear, setDemandLastYear] = useState("");
+
   // const [greatForSchools, setGreatForSchools] = useState(false);
   // const [greatForHospitals, setGreatForHospitals] = useState(false);
   // const [greatForTransport, setGreatForTransport] = useState(false);
-
-  const {
-    setResults,
-    results,
-
-    filteredResults,
-    isResultsFiltered,
-  } = useApplicationContext();
 
   const resultsContainerRef = useRef();
 
@@ -90,6 +99,29 @@ const HomePage = () => {
   //   }
   // };
 
+  useEffect(() => {
+    setDisplayResults(filteredResults);
+  }, [filteredResults]);
+
+  const handleStateCodeChange = (stateCode) => {
+    if (stateCode === "reset") {
+      // If "reset" option is selected, show the original results
+      setDisplayResults(filteredResults);
+    } else {
+      // Filter the items based on the selected state code
+      const filteredItems = filteredResults.filter(
+        (item) => item.state_code === stateCode
+      );
+      setDisplayResults(filteredItems);
+    }
+    // setSelectedStateCode(stateCode);
+    setIsDropdownOpen(false);
+  };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen((prevState) => !prevState);
+  };
+
   const handleSelectedStates = (selectedOptions) => {
     const selectedValues = selectedOptions.map((option) => option.value);
     const unsureOption = statesOfAus.find(
@@ -132,17 +164,23 @@ const HomePage = () => {
   };
 
   const handleSubmit = () => {
-    if (minBedrooms === "unsure") {
+    const type = dwellingType.value;
+    const bedrooms = minBedrooms.value;
+    const areaType = area.value;
+
+    // console.log("dwelling", type);
+    // console.log("rental", rentalYield);
+    if (bedrooms === "unsure") {
       setBedRoomsUnsure(true);
     } else {
       setBedRoomsUnsure(false);
     }
 
-    console.log("type", dwellingType);
-    console.log("yield", rentalYield);
-    console.log("growth", growthInProperty);
-    console.log("availability_of_supply", availabilityOfSupply);
-    console.log("demand_prev_month", demandPrevMonth);
+    // console.log("type", dwellingType);
+    // console.log("yield", rentalYield);
+    // console.log("growth", growthInProperty);
+    // console.log("availability_of_supply", availabilityOfSupply);
+    // console.log("demand_prev_month", demandPrevMonth);
     // console.log("demand_last_year", demandLastYear);
 
     const formData = new FormData();
@@ -150,10 +188,11 @@ const HomePage = () => {
     for (let i = 0; i < selectedStates.length; i++) {
       formData.append("states[]", selectedStates[i].value);
     }
-    console.log(rentalYield);
-    formData.append("type", dwellingType);
-    formData.append("bedrooms", minBedrooms);
-    formData.append("area", area);
+
+    console.log(type);
+    formData.append("type", type);
+    formData.append("bedrooms", bedrooms);
+    formData.append("area", areaType);
     formData.append("budget", budget);
     formData.append("rentalYield", rentalYield);
     formData.append("growth_in_property", growthInProperty);
@@ -184,7 +223,9 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    switch (dwellingType) {
+    const type = dwellingType.value;
+    // console.log("type", type);
+    switch (type) {
       case "Unit":
         setRentalYield("median_yield_units");
         SetGrowthInProperty("median_price_change_last_quarter_units");
@@ -207,9 +248,9 @@ const HomePage = () => {
 
       default:
     }
-  }, [dwellingType, rentalYield, growthInProperty]);
 
-  useEffect(() => {
+    console.log("useEffect ", rentalYield);
+
     if (budget) {
       if (
         dwellingType &&
@@ -221,9 +262,43 @@ const HomePage = () => {
         handleSubmit();
       }
     }
-
     // eslint-disable-next-line
-  }, [dwellingType, minBedrooms, selectedStates, area, budget]);
+  }, [
+    dwellingType,
+    rentalYield,
+    growthInProperty,
+    minBedrooms,
+    selectedStates,
+    area,
+    budget,
+  ]);
+
+  if (filteredResults) {
+    if (filteredResults.length > 0) {
+      var counts = filteredResults.reduce(
+        (acc, item) => {
+          if (item.rankingPercentage > 80) {
+            acc.moreThan80++;
+          } else if (item.rankingPercentage > 60) {
+            acc.moreThan60++;
+          } else if (item.rankingPercentage > 40) {
+            acc.moreThan40++;
+          } else {
+            acc.lessThan40++;
+          }
+          return acc;
+        },
+        { moreThan80: 0, moreThan60: 0, moreThan40: 0, lessThan40: 0 }
+      );
+    }
+    const stateCodeSet = new Set();
+
+    filteredResults.forEach((item) => stateCodeSet.add(item.state_code));
+
+    // Convert the Set back to an array
+    var stateCodes = Array.from(stateCodeSet);
+  }
+
   return (
     <>
       <NavBar />
@@ -236,151 +311,145 @@ const HomePage = () => {
           <center>
             <div className="filter-main-page-container">
               <form>
-                <h3 style={{ paddingLeft: "15px" }}>
-                  Property Characteristics
-                </h3>
                 <div className="search-box">
-                  <div className="search-filter">
-                    <label>Dwelling type</label>
-                    <select
-                      onChange={(e) => setDwellingType(e.target.value)}
-                      className="basic-filter"
-                      required
-                    >
-                      <option value="">Select</option>
-                      <option value={"Unit"}>Unit </option>
-                      <option value={"House"}>House</option>
-                      <option value={"Townhouse"}>Town House</option>
-                    </select>
+                  <h3 style={{ paddingLeft: "15px" }}>
+                    Property Characteristics
+                  </h3>
+                  <div className="search-sub-box">
+                    <div className="search-filter">
+                      <label>Dwelling type</label>
+                      <Select
+                        className="basic-filter"
+                        options={[
+                          { value: "Unit", label: "Unit" },
+                          { value: "House", label: "House" },
+                          { value: "Townhouse", label: "Town House" },
+                        ]}
+                        value={dwellingType}
+                        onChange={setDwellingType}
+                      />
+                    </div>
+
+                    <div className="search-filter">
+                      <label>Minimum bedrooms</label>
+
+                      <Select
+                        required
+                        className="basic-filter"
+                        options={[
+                          { value: "1", label: "1" },
+                          { value: "2", label: "2" },
+                          { value: "3", label: "3" },
+                          { value: "4", label: "4" },
+                          { value: "5", label: "5" },
+                          { value: "6", label: "6" },
+                          { value: "7", label: "7" },
+                          { value: "unsure", label: "unsure" },
+                        ]}
+                        value={minBedrooms}
+                        onChange={setMinBedrooms}
+                      />
+                    </div>
                   </div>
-
-                  <div className="search-filter">
-                    <label>Minimum bedrooms</label>
-
-                    <select
-                      onChange={(e) => setMinBedrooms(e.target.value)}
-                      required
-                      id="customSelect"
-                    >
+                  <div className="search-sub-box">
+                    <div className="search-filter">
                       {" "}
-                      <option style={{ color: "gray" }} value="">
-                        Select
-                      </option>
-                      <option value={"1"}>1 </option>
-                      <option value={"2"}>2</option>
-                      <option value={"3"}>3 </option>
-                      <option value={"4"}>4</option>
-                      <option value={"5"}>5</option>
-                      <option value={"6"}>6</option>
-                      <option value={"7"}>7</option>
-                      <option value={"unsure"}>unsure</option>
-                    </select>
-                  </div>
+                      <label>State</label>
+                      <Select
+                        className="state-select"
+                        isMulti
+                        options={statesOfAus}
+                        components={{ Option }}
+                        onChange={handleSelectedStates}
+                        required
+                      />
+                    </div>
 
-                  <div className="search-filter">
-                    {" "}
-                    <label>State</label>
-                    <Select
-                      className="state-select"
-                      isMulti
-                      options={statesOfAus}
-                      components={{ Option }}
-                      onChange={handleSelectedStates}
-                      required
-                    />
-                  </div>
-                  <div className="search-filter">
-                    <label>Area classification</label>
+                    <div className="search-filter">
+                      <label>Area classification</label>
 
-                    <select onChange={(e) => setArea(e.target.value)} required>
-                      {" "}
-                      <option style={{ color: "gray" }} value="">
-                        Select
-                      </option>
-                      <option value={"metropolitan"}>Metropolitan</option>
-                      <option value={"rural"}>Rural</option>
-                      <option value={"remote"}>Remote</option>
-                      <option value={"unsure"}>Unsure</option>
-                    </select>
+                      <Select
+                        className="basic-filter"
+                        options={[
+                          { value: "metropolitan", label: "Metropolitan" },
+                          { value: "rural", label: "Rural" },
+                          { value: "remote", label: "Remote" },
+                          { value: "unsure", label: "Unsure" },
+                        ]}
+                        value={area}
+                        onChange={setArea}
+                      />
+                    </div>
                   </div>
-                  <div className="search-filter">
-                    <label>Budget</label>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        gap: "5px",
-                      }}
-                    >
-                      <div>
-                        <CurrencyInput
-                          className="currency-input"
-                          placeholder="Enter budget"
-                          prefix="$"
-                          decimalsLimit={0}
-                          value={budget}
-                          onValueChange={handleBudget}
-                          required
-                        />{" "}
-                        {budget ? (
-                          budget.length < 6 ? (
-                            <p
-                              style={{
-                                color: "red",
-                                margin: "0",
-                                fontSize: "14px",
-                                marginTop: "5px",
-                              }}
-                            >
-                              should be minimum of 6 digits
-                            </p>
+                  <div className="search-sub-box">
+                    <div className="search-filter">
+                      <label>Budget</label>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          gap: "5px",
+                        }}
+                      >
+                        <div>
+                          <CurrencyInput
+                            className="currency-input"
+                            placeholder="Enter budget"
+                            prefix="$"
+                            decimalsLimit={0}
+                            value={budget}
+                            onValueChange={handleBudget}
+                            required
+                          />{" "}
+                          {budget ? (
+                            budget.length < 6 ? (
+                              <p
+                                style={{
+                                  color: "red",
+                                  margin: "0",
+                                  fontSize: "14px",
+                                  marginTop: "5px",
+                                }}
+                              >
+                                should be minimum of 6 digits
+                              </p>
+                            ) : (
+                              ""
+                            )
                           ) : (
                             ""
-                          )
-                        ) : (
-                          ""
-                        )}
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
-                  {results ? (
-                    results.length > 0 ? (
-                      <p
-                        className="filter-info"
-                        style={{
-                          fontStyle: "italic",
-                        }}
-                      >
-                        {results.length} suburbs meet your criteria, try minimum
-                        four filters given below to see the results
-                      </p>
-                    ) : (
-                      <p
-                        className="filter-info"
-                        style={{
-                          color: "red",
-                        }}
-                      >
-                        No data found try changing the filters
-                      </p>
-                    )
-                  ) : (
-                    ""
-                  )}
 
-                  <h3
-                    style={{
-                      textAlign: "center",
-                    }}
-                  >
-                    Investment strategy
-                  </h3>
-                  <FilterPage
-                    demandPrevMonth={demandPrevMonth}
-                    availabilityOfSupply={availabilityOfSupply}
-                    growthInProperty={growthInProperty}
-                    rentalYield={rentalYield}
+                  <Collapse
+                    style={{ marginTop: "20px" }}
+                    defaultActiveKey={["1"]}
+                    items={[
+                      {
+                        key: "1",
+                        label: (
+                          <h3
+                            style={{
+                              fontSize: "18.72px",
+                            }}
+                          >
+                            Investment strategy
+                          </h3>
+                        ),
+                        children: (
+                          <FilterPage
+                            demandPrevMonth={demandPrevMonth}
+                            availabilityOfSupply={availabilityOfSupply}
+                            growthInProperty={growthInProperty}
+                            rentalYield={rentalYield}
+                          />
+                        ),
+                      },
+                    ]}
                   />
                 </div>
 
@@ -436,10 +505,95 @@ const HomePage = () => {
                 )}
               </form>
             </div>
+            {results ? (
+              results.length > 0 && !filteredResults ? (
+                <p
+                  className="filter-info"
+                  style={{
+                    fontStyle: "italic",
+                  }}
+                >
+                  {results.length} suburbs meet your criteria, try minimum four
+                  filters given in investment strategy to see the results
+                </p>
+              ) : results.length === 0 ? (
+                <p
+                  className="filter-info"
+                  style={{
+                    color: "red",
+                  }}
+                >
+                  No data found try changing the filters
+                </p>
+              ) : (
+                ""
+              )
+            ) : (
+              ""
+            )}
           </center>
+
           <div className="results-main-container" ref={resultsContainerRef}>
+            {filteredResults ? (
+              <>
+                {filteredResults.length > 0 ? (
+                  <div
+                    style={{
+                      display: "flex",
+                      width: "90%",
+                      justifyContent: "end",
+                      gap: "10px",
+                      marginTop: "30px",
+                    }}
+                    className="filter-info"
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "5px",
+                      }}
+                    >
+                      <div className="green-circle"></div> {counts.moreThan80}
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "5px",
+                      }}
+                    >
+                      <div className="yellow-circle"></div> {counts.moreThan60}
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "5px",
+                      }}
+                    >
+                      <div className="blue-circle"></div> {counts.moreThan40}
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "5px",
+                      }}
+                    >
+                      <div className="red-circle"></div>
+                      {counts.lessThan40}
+                    </div>
+                  </div>
+                ) : (
+                  ""
+                )}{" "}
+              </>
+            ) : (
+              ""
+            )}
             <center>
-              {filteredResults ? (
+              {displayResults ? (
                 <>
                   <div className="table-container">
                     <table>
@@ -447,7 +601,66 @@ const HomePage = () => {
                         <tr>
                           <th>Suburb Name</th>
                           <th>Postcode</th>
-                          <th>State</th>
+                          <th>
+                            <div style={{ position: "relative" }}>
+                              <label
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                }}
+                                onClick={toggleDropdown}
+                              >
+                                State
+                                <MdArrowDropDown
+                                  style={{ fontSize: "20px" }}
+                                />{" "}
+                              </label>
+                              {isDropdownOpen && (
+                                <ul
+                                  style={{
+                                    position: "absolute",
+                                    top: "100%",
+                                    left: 0,
+                                    zIndex: 1,
+                                    background: "#fff",
+                                    padding: 0,
+                                    margin: 0,
+                                    listStyle: "none",
+                                    border: "1px solid #ccc",
+                                    borderRadius: "4px",
+                                    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                                  }}
+                                >
+                                  <li
+                                    onClick={() =>
+                                      handleStateCodeChange("reset")
+                                    }
+                                    style={{
+                                      padding: "8px 12px",
+                                      cursor: "pointer",
+                                      userSelect: "none",
+                                    }}
+                                  >
+                                    Reset
+                                  </li>
+                                  {stateCodes.map((item) => (
+                                    <li
+                                      onClick={() =>
+                                        handleStateCodeChange(item)
+                                      }
+                                      style={{
+                                        padding: "8px 12px",
+                                        cursor: "pointer",
+                                        userSelect: "none",
+                                      }}
+                                    >
+                                      {item}
+                                    </li>
+                                  ))}
+                                </ul>
+                              )}
+                            </div>
+                          </th>
                           {isBedroomsUnsure ? (
                             <th style={{ textAlign: "center" }}>
                               Max Bedrooms
@@ -480,7 +693,7 @@ const HomePage = () => {
                         ) : (
                           <>
                             {filteredResults
-                              ? filteredResults.map((data) => {
+                              ? displayResults.map((data) => {
                                   return (
                                     <tr key={data.suburb_id}>
                                       <td>{data.suburb_name}</td>

@@ -26,22 +26,25 @@ const FilterPage = ({
   const [weeklyIncomeWeightage, setWeeklyIncomeWeightage] = useState(0);
 
   const [movedFiltersCount, setMovedFiltersCount] = useState(0);
+  const { availableFiltersCount } = useApplicationContext();
 
   const { results, setFilteredResults, setIsResultsFiltered } =
     useApplicationContext();
 
+  // console.log("rental_yield", rentalYield);
+
   const [filters, setFilters] = useState([
     "Low vacancy rate",
-    "Family",
+    "Family friendly",
     "High rental yield",
-    "Growth in property value",
+    "Growth in property ",
     "Ratio of renters to owners",
-    "High demand for property",
-    "Ratings",
-    "Low availability of supply",
+    "High demand ",
+    "High ratings",
+    "Low supply",
     "Growth of population",
-    "Lower unemployed people",
-    "Weekly income",
+    "Low unemployment",
+    "Higher weekly income",
     "Australian born",
     // Add your other filters here
   ]);
@@ -54,16 +57,16 @@ const FilterPage = ({
 
   const filterWeightages = {
     "Low vacancy rate": setVacancyRateWeightage,
-    Family: setFamilyWeightage,
+    "Family friendly": setFamilyWeightage,
     "High rental yield": setRentalYieldWeightage,
-    "Growth in property value": SetGrowthInPropertyWeightage,
+    "Growth in property ": SetGrowthInPropertyWeightage,
     "Ratio of renters to owners": setRentVsOwnerRatioWeightage,
-    "High demand for property": setAvailabilityOfSupplyWeightage,
-    Ratings: setRatingsWeightage,
-    "Low svailability of supply": setDemandPrevMonthWeightage,
+    "High demand ": setAvailabilityOfSupplyWeightage,
+    "High ratings": setRatingsWeightage,
+    "Low supply": setDemandPrevMonthWeightage,
     "Growth of population": setPopulationGrowthWeightage,
-    "Lower unemployed people": setUnemployedPeopleWeightage,
-    "Weekly income": setWeeklyIncomeWeightage,
+    "Low unemployment": setUnemployedPeopleWeightage,
+    "Higher weekly income": setWeeklyIncomeWeightage,
     "Australian born": setAustralianBornWeightage,
   };
 
@@ -72,7 +75,7 @@ const FilterPage = ({
     const fromCategoryFilters = updatedCategories[fromCategory];
     const toCategoryFilters = updatedCategories[toCategory];
 
-    console.log("totoCategoryFilters", toCategoryFilters);
+    // console.log("totoCategoryFilters", toCategoryFilters);
 
     // Remove the filter from the source container
     if (fromCategoryFilters) {
@@ -103,10 +106,10 @@ const FilterPage = ({
       toCategoryFilters.push(filter);
     }
 
-    console.log("Moving filter:", filter);
-    console.log("From Category:", fromCategory);
-    console.log("To Category:", toCategory);
-    console.log("filterWeightages:", filterWeightages);
+    // console.log("Moving filter:", filter);
+    // console.log("From Category:", fromCategory);
+    // console.log("To Category:", toCategory);
+    // console.log("filterWeightages:", filterWeightages);
 
     // Update the filter's weightage based on the target category
     let weightage;
@@ -147,18 +150,18 @@ const FilterPage = ({
     // console.log("great_for_hospitals", greatForHospitals);
     // console.log("great_for_Transport", greatForTransport);
 
-    console.log("vacancy", vacancyRateWeightage);
-    console.log("family", familyWeightage);
-    console.log("rental yield", rentalYieldWeightage);
-    console.log("growth", growthInPropertyWeightage);
-    console.log("rent_vs_owner", rentVsOwnerRatioWeightage);
-    console.log("availability of supply", availabilityOfSupplyWeightage);
-    console.log("ratings", ratingsWeightage);
-    console.log("demand_prev_month", demandPrevMonthWeightage);
-    console.log("population_growth", populationGrowthWeightage);
-    console.log("Australian_born", australianBornWeightage);
-    console.log("Unemployed_people", unemployedPeopleWeightage);
-    console.log("weekly_income", weeklyIncomeWeightage);
+    // console.log("vacancy", vacancyRateWeightage);
+    // console.log("family", familyWeightage);
+    // console.log("rental yield", rentalYieldWeightage);
+    // console.log("growth", growthInPropertyWeightage);
+    // console.log("rent_vs_owner", rentVsOwnerRatioWeightage);
+    // console.log("availability of supply", availabilityOfSupplyWeightage);
+    // console.log("ratings", ratingsWeightage);
+    // console.log("demand_prev_month", demandPrevMonthWeightage);
+    // console.log("population_growth", populationGrowthWeightage);
+    // console.log("Australian_born", australianBornWeightage);
+    // console.log("Unemployed_people", unemployedPeopleWeightage);
+    // console.log("weekly_income", weeklyIncomeWeightage);
 
     const maxVacancyRate = Math.max(
       ...results.map((suburb) => suburb.current_vacancy_rate)
@@ -265,16 +268,29 @@ const FilterPage = ({
     let temp = updatedRankedSuburbs.sort((a, b) => b.ranking - a.ranking);
     setIsResultsFiltered(true);
     setFilteredResults(temp);
+    // console.log("executing filter 2");
     console.log("ranked", JSON.stringify(updatedRankedSuburbs));
   };
 
   //Whenever movedFiltersCount changes, call handleFilterFurther if count is greater than or equal to 4
   useEffect(() => {
-    if (movedFiltersCount >= 4) {
-      handleFilterFurther();
+    // console.log(movedFiltersCount);
+    if (results) {
+      if (movedFiltersCount >= 4) {
+        // console.log("executing filter");
+        handleFilterFurther();
+      }
     }
+
+    // console.log("count", availableFiltersCount, filters.length);
+
+    if (availableFiltersCount === 12) {
+      setFilteredResults(null);
+      return;
+    }
+
     // eslint-disable-next-line
-  }, [movedFiltersCount]);
+  }, [movedFiltersCount, availableFiltersCount, results]);
 
   return (
     <>
@@ -293,21 +309,10 @@ const FilterPage = ({
               onFilterMove={handleFilterMove}
               style={{
                 minHeight: "200px",
-                border: "1px solid gray",
               }}
-              className="available-container"
             />
           </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              flexWrap: "wrap",
-              gap: "10px",
-
-              height: "100%",
-            }}
-          >
+          <div className="bucket-main-container">
             <div className="bucket-container">
               <p>Very important</p>
               <FilterContainer

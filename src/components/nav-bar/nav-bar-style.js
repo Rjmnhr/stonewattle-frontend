@@ -1,8 +1,13 @@
 import { styled } from "styled-components";
 
 export const NavBarStyled = styled.div`
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
   .nav-container {
-    width: 99%;
+    width: 100%;
     color: white;
     padding: 20px;
     background: #333333;

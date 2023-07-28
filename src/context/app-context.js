@@ -9,6 +9,7 @@ export const AppContextProvider = ({ children }) => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [filteredResults, setFilteredResults] = useState(null);
   const [isResultsFiltered, setIsResultsFiltered] = useState(false);
+  const [availableFiltersCount, setAvailableFiltersCount] = useState(0);
 
   const value = {
     isEmailVerified,
@@ -23,6 +24,8 @@ export const AppContextProvider = ({ children }) => {
     setFilteredResults,
     isResultsFiltered,
     setIsResultsFiltered,
+    availableFiltersCount,
+    setAvailableFiltersCount,
   };
 
   return <MyContext.Provider value={value}>{children}</MyContext.Provider>;
