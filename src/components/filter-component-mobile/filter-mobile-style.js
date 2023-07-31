@@ -37,7 +37,7 @@ export const FilterMobileStyled = styled.div`
 
   @media (max-width: 550px) {
     .filter-mobile-container {
-      width: 300px;
+      width: 255px;
     }
   }
 

@@ -277,6 +277,22 @@ export const HomePageStyled = styled.div`
     margin-top: 5px;
   }
 
+  .infilter-dropdown-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+    background: "#fff";
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    max-height: "30vh";
+  }
+
   /* @media (max-width: 1250px) {
     .filter-main-page-container {
       width: 1022px;
@@ -303,6 +319,7 @@ export const HomePageStyled = styled.div`
 
     .search-box label {
       font-size: 14px;
+      text-align: start;
     }
 
     select {
@@ -392,7 +409,13 @@ export const HomePageStyled = styled.div`
     }
   }
 
-  @media (max-width: 360px) {
+  @media (max-width: 412px) {
+    .filter-main-page-container {
+      width: 380px;
+    }
+  }
+
+  @media (max-width: 380px) {
     .filter-main-page-container {
       width: 360px;
     }

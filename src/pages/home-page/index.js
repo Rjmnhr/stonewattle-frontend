@@ -4,14 +4,15 @@ import NavBar from "../../components/nav-bar/nav-bar";
 import { useApplicationContext } from "../../context/app-context";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
-import { Collapse } from "antd";
+import { Collapse, Menu, Dropdown } from "antd";
 import { statesOfAus } from "../../components/states-in-aus/states";
 import Select, { components } from "react-select";
 import CurrencyInput from "react-currency-input-field";
 import AxiosInstance from "../../components/axios";
 import FilterPage from "../../components/filter-component/filter-page";
-import { MdArrowDropDown } from "react-icons/md";
+
 import FilterMobile from "../../components/filter-component-mobile/filter-mobile";
+import { MdArrowDropDown } from "react-icons/md";
 
 // import HighChartsMap from "../../components/GIS-mapping/high-charts";
 
@@ -37,8 +38,7 @@ const HomePage = () => {
   const [growthInProperty, SetGrowthInProperty] = useState("");
   const [availabilityOfSupply, setAvailabilityOfSupply] = useState("");
   const [demandPrevMonth, setDemandPrevMonth] = useState("");
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  // const [selectedStateCode, setSelectedStateCod] = useState("");
+
   // const [stateCodesArr, setStateCodesArr] = useState(null);
   const [displayResults, setDisplayResults] = useState(null);
 
@@ -118,25 +118,6 @@ const HomePage = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  const handleStateCodeChange = (stateCode) => {
-    if (stateCode === "reset") {
-      // If "reset" option is selected, show the original results
-      setDisplayResults(filteredResults);
-    } else {
-      // Filter the items based on the selected state code
-      const filteredItems = filteredResults.filter(
-        (item) => item.state_code === stateCode
-      );
-      setDisplayResults(filteredItems);
-    }
-    // setSelectedStateCode(stateCode);
-    setIsDropdownOpen(false);
-  };
-
-  const toggleDropdown = () => {
-    setIsDropdownOpen((prevState) => !prevState);
-  };
 
   const handleSelectedStates = (selectedOptions) => {
     const selectedValues = selectedOptions.map((option) => option.value);
@@ -308,13 +289,77 @@ const HomePage = () => {
       );
     }
     const stateCodeSet = new Set();
+    const postCodeSet = new Set();
 
-    filteredResults.forEach((item) => stateCodeSet.add(item.state_code));
+    filteredResults.forEach((item) => {
+      stateCodeSet.add(item.state_code);
+      postCodeSet.add(item.postcode);
+    });
 
     // Convert the Set back to an array
     var stateCodes = Array.from(stateCodeSet);
+    var postCodes = Array.from(postCodeSet);
+
+    var stateCodeMenu = (
+      <Menu style={{ maxHeight: "200px", width: "100px", overflowY: "auto" }}>
+        <Menu.Item onClick={() => handleStateCodeChange("reset")}>
+          Reset
+        </Menu.Item>
+        {stateCodes.map((stateCode) => (
+          <Menu.Item
+            key={stateCode}
+            onClick={() => handleStateCodeChange(stateCode)}
+          >
+            {stateCode}
+          </Menu.Item>
+        ))}
+      </Menu>
+    );
+
+    var postcodeMenu = (
+      <Menu style={{ maxHeight: "200px", width: "100px", overflowY: "auto" }}>
+        <Menu.Item onClick={() => handlePostcodeChange("reset")}>
+          Reset
+        </Menu.Item>
+        {postCodes.map((postcode) => (
+          <Menu.Item
+            key={postcode}
+            onClick={() => handlePostcodeChange(postcode)}
+          >
+            {postcode}
+          </Menu.Item>
+        ))}
+      </Menu>
+    );
   }
-  console.log(screenWidth);
+
+  const handleStateCodeChange = (stateCode) => {
+    if (stateCode === "reset") {
+      // If "reset" option is selected, show the original results
+
+      setDisplayResults(filteredResults);
+    } else {
+      // Filter the items based on the selected state code
+      const filteredItems = filteredResults.filter(
+        (item) => item.state_code === stateCode
+      );
+      setDisplayResults(filteredItems);
+    }
+  };
+
+  const handlePostcodeChange = (postcode) => {
+    if (postcode === "reset") {
+      // If "reset" option is selected, show the original results
+
+      setDisplayResults(filteredResults);
+    } else {
+      // Filter the items based on the selected postcode
+      const filteredItems = filteredResults.filter(
+        (item) => item.postcode === postcode
+      );
+      setDisplayResults(filteredItems);
+    }
+  };
 
   useEffect(() => {
     if (screenWidth < 912) {
@@ -623,67 +668,39 @@ const HomePage = () => {
                       <thead className="table-header">
                         <tr>
                           <th>Suburb Name</th>
-                          <th>Postcode</th>
                           <th>
-                            <div style={{ position: "relative" }}>
+                            <Dropdown overlay={postcodeMenu}>
                               <label
                                 style={{
                                   display: "flex",
                                   alignItems: "center",
+                                  cursor: "pointer",
                                 }}
-                                onClick={toggleDropdown}
+                              >
+                                Postcode
+                                <MdArrowDropDown
+                                  style={{ fontSize: "20px" }}
+                                />{" "}
+                              </label>
+                            </Dropdown>
+                          </th>
+                          <th>
+                            <Dropdown overlay={stateCodeMenu}>
+                              <label
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  cursor: "pointer",
+                                }}
                               >
                                 State
                                 <MdArrowDropDown
                                   style={{ fontSize: "20px" }}
                                 />{" "}
                               </label>
-                              {isDropdownOpen && (
-                                <ul
-                                  style={{
-                                    position: "absolute",
-                                    top: "100%",
-                                    left: 0,
-                                    zIndex: 1,
-                                    background: "#fff",
-                                    padding: 0,
-                                    margin: 0,
-                                    listStyle: "none",
-                                    border: "1px solid #ccc",
-                                    borderRadius: "4px",
-                                    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-                                  }}
-                                >
-                                  <li
-                                    onClick={() =>
-                                      handleStateCodeChange("reset")
-                                    }
-                                    style={{
-                                      padding: "8px 12px",
-                                      cursor: "pointer",
-                                      userSelect: "none",
-                                    }}
-                                  >
-                                    Reset
-                                  </li>
-                                  {stateCodes.map((item) => (
-                                    <li
-                                      onClick={() =>
-                                        handleStateCodeChange(item)
-                                      }
-                                      style={{
-                                        padding: "8px 12px",
-                                        cursor: "pointer",
-                                        userSelect: "none",
-                                      }}
-                                    >
-                                      {item}
-                                    </li>
-                                  ))}
-                                </ul>
-                              )}
-                            </div>
+                            </Dropdown>
                           </th>
+
                           {isBedroomsUnsure ? (
                             <th style={{ textAlign: "center" }}>
                               Max Bedrooms
