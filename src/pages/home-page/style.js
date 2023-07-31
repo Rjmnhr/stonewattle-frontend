@@ -270,6 +270,13 @@ export const HomePageStyled = styled.div`
     text-align: start;
   }
 
+  .budget-alert {
+    color: red;
+    margin: 0;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+
   /* @media (max-width: 1250px) {
     .filter-main-page-container {
       width: 1022px;
@@ -358,13 +365,18 @@ export const HomePageStyled = styled.div`
     }
 
     .filter-info {
-      width: 100%;
+      width: 80%;
       text-align: center;
+      font-size: 14px;
     }
     .search-sub-box {
       flex-direction: column;
       margin-top: 0;
       gap: 15px;
+    }
+
+    .budget-alert {
+      font-size: 9px;
     }
   }
 

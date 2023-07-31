@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDrop } from "react-dnd";
 import FilterItem from "./filter-item";
-import { useApplicationContext } from "../context/app-context";
+import { useApplicationContext } from "../../context/app-context";
 
 const FilterContainer = ({ category, filters, onFilterMove, style }) => {
   const { setAvailableFiltersCount } = useApplicationContext();

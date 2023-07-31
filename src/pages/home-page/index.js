@@ -9,8 +9,9 @@ import { statesOfAus } from "../../components/states-in-aus/states";
 import Select, { components } from "react-select";
 import CurrencyInput from "react-currency-input-field";
 import AxiosInstance from "../../components/axios";
-import FilterPage from "../filter-page/filter-page";
+import FilterPage from "../../components/filter-component/filter-page";
 import { MdArrowDropDown } from "react-icons/md";
+import FilterMobile from "../../components/filter-component-mobile/filter-mobile";
 
 // import HighChartsMap from "../../components/GIS-mapping/high-charts";
 
@@ -30,7 +31,8 @@ const HomePage = () => {
   const [budget, setBudget] = useState(null);
   const [isDataNotFound, setIsDataNotFound] = useState(null);
   const [isBedroomsUnsure, setBedRoomsUnsure] = useState(null);
-
+  const [isMobile, setIsMobile] = useState(false);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [rentalYield, setRentalYield] = useState("");
   const [growthInProperty, SetGrowthInProperty] = useState("");
   const [availabilityOfSupply, setAvailabilityOfSupply] = useState("");
@@ -102,6 +104,20 @@ const HomePage = () => {
   useEffect(() => {
     setDisplayResults(filteredResults);
   }, [filteredResults]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    // Add event listener to track changes in the window size
+    window.addEventListener("resize", handleResize);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const handleStateCodeChange = (stateCode) => {
     if (stateCode === "reset") {
@@ -298,6 +314,15 @@ const HomePage = () => {
     // Convert the Set back to an array
     var stateCodes = Array.from(stateCodeSet);
   }
+  console.log(screenWidth);
+
+  useEffect(() => {
+    if (screenWidth < 912) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  }, [screenWidth]);
 
   return (
     <>
@@ -310,150 +335,149 @@ const HomePage = () => {
         <div className="home-page-container">
           <center>
             <div className="filter-main-page-container">
-              <form>
-                <div className="search-box">
-                  <h3 style={{ paddingLeft: "15px" }}>
-                    Property Characteristics
-                  </h3>
-                  <div className="search-sub-box">
-                    <div className="search-filter">
-                      <label>Dwelling type</label>
-                      <Select
-                        className="basic-filter"
-                        options={[
-                          { value: "Unit", label: "Unit" },
-                          { value: "House", label: "House" },
-                          { value: "Townhouse", label: "Town House" },
-                        ]}
-                        value={dwellingType}
-                        onChange={setDwellingType}
-                      />
-                    </div>
-
-                    <div className="search-filter">
-                      <label>Minimum bedrooms</label>
-
-                      <Select
-                        required
-                        className="basic-filter"
-                        options={[
-                          { value: "1", label: "1" },
-                          { value: "2", label: "2" },
-                          { value: "3", label: "3" },
-                          { value: "4", label: "4" },
-                          { value: "5", label: "5" },
-                          { value: "6", label: "6" },
-                          { value: "7", label: "7" },
-                          { value: "unsure", label: "unsure" },
-                        ]}
-                        value={minBedrooms}
-                        onChange={setMinBedrooms}
-                      />
-                    </div>
+              <div className="search-box">
+                <h3 style={{ paddingLeft: "15px" }}>
+                  Property Characteristics
+                </h3>
+                <div className="search-sub-box">
+                  <div className="search-filter">
+                    <label>Dwelling type</label>
+                    <Select
+                      className="basic-filter"
+                      options={[
+                        { value: "Unit", label: "Unit" },
+                        { value: "House", label: "House" },
+                        { value: "Townhouse", label: "Town House" },
+                      ]}
+                      value={dwellingType}
+                      onChange={setDwellingType}
+                    />
                   </div>
-                  <div className="search-sub-box">
-                    <div className="search-filter">
-                      {" "}
-                      <label>State</label>
-                      <Select
-                        className="state-select"
-                        isMulti
-                        options={statesOfAus}
-                        components={{ Option }}
-                        onChange={handleSelectedStates}
-                        required
-                      />
-                    </div>
 
-                    <div className="search-filter">
-                      <label>Area classification</label>
+                  <div className="search-filter">
+                    <label>Minimum bedrooms</label>
 
-                      <Select
-                        className="basic-filter"
-                        options={[
-                          { value: "metropolitan", label: "Metropolitan" },
-                          { value: "rural", label: "Rural" },
-                          { value: "remote", label: "Remote" },
-                          { value: "unsure", label: "Unsure" },
-                        ]}
-                        value={area}
-                        onChange={setArea}
-                      />
-                    </div>
+                    <Select
+                      required
+                      className="basic-filter"
+                      options={[
+                        { value: "1", label: "1" },
+                        { value: "2", label: "2" },
+                        { value: "3", label: "3" },
+                        { value: "4", label: "4" },
+                        { value: "5", label: "5" },
+                        { value: "6", label: "6" },
+                        { value: "7", label: "7" },
+                        { value: "unsure", label: "unsure" },
+                      ]}
+                      value={minBedrooms}
+                      onChange={setMinBedrooms}
+                    />
                   </div>
-                  <div className="search-sub-box">
-                    <div className="search-filter">
-                      <label>Budget</label>
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          gap: "5px",
-                        }}
-                      >
-                        <div>
-                          <CurrencyInput
-                            className="currency-input"
-                            placeholder="Enter budget"
-                            prefix="$"
-                            decimalsLimit={0}
-                            value={budget}
-                            onValueChange={handleBudget}
-                            required
-                          />{" "}
-                          {budget ? (
-                            budget.length < 6 ? (
-                              <p
-                                style={{
-                                  color: "red",
-                                  margin: "0",
-                                  fontSize: "14px",
-                                  marginTop: "5px",
-                                }}
-                              >
-                                should be minimum of 6 digits
-                              </p>
-                            ) : (
-                              ""
-                            )
+                </div>
+                <div className="search-sub-box">
+                  <div className="search-filter">
+                    {" "}
+                    <label>State</label>
+                    <Select
+                      className="state-select"
+                      isMulti
+                      options={statesOfAus}
+                      components={{ Option }}
+                      onChange={handleSelectedStates}
+                      required
+                    />
+                  </div>
+
+                  <div className="search-filter">
+                    <label>Area classification</label>
+
+                    <Select
+                      className="basic-filter"
+                      options={[
+                        { value: "metropolitan", label: "Metropolitan" },
+                        { value: "rural", label: "Rural" },
+                        { value: "remote", label: "Remote" },
+                        { value: "unsure", label: "Unsure" },
+                      ]}
+                      value={area}
+                      onChange={setArea}
+                    />
+                  </div>
+                </div>
+                <div className="search-sub-box">
+                  <div className="search-filter">
+                    <label>Budget</label>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "5px",
+                      }}
+                    >
+                      <div>
+                        <CurrencyInput
+                          className="currency-input"
+                          placeholder="Enter budget"
+                          prefix="$"
+                          decimalsLimit={0}
+                          value={budget}
+                          onValueChange={handleBudget}
+                          required
+                        />{" "}
+                        {budget ? (
+                          budget.length < 6 ? (
+                            <p className="budget-alert">
+                              should be minimum of 6 digits
+                            </p>
                           ) : (
                             ""
-                          )}
-                        </div>
+                          )
+                        ) : (
+                          ""
+                        )}
                       </div>
                     </div>
                   </div>
-
-                  <Collapse
-                    style={{ marginTop: "20px" }}
-                    defaultActiveKey={["1"]}
-                    items={[
-                      {
-                        key: "1",
-                        label: (
-                          <h3
-                            style={{
-                              fontSize: "18.72px",
-                            }}
-                          >
-                            Investment strategy
-                          </h3>
-                        ),
-                        children: (
-                          <FilterPage
-                            demandPrevMonth={demandPrevMonth}
-                            availabilityOfSupply={availabilityOfSupply}
-                            growthInProperty={growthInProperty}
-                            rentalYield={rentalYield}
-                          />
-                        ),
-                      },
-                    ]}
-                  />
                 </div>
 
-                {/* <h3
+                <Collapse
+                  style={{ marginTop: "20px" }}
+                  defaultActiveKey={["1"]}
+                  items={[
+                    {
+                      key: "1",
+                      label: (
+                        <h3
+                          style={{
+                            fontSize: "18.72px",
+                          }}
+                        >
+                          Investment strategy
+                        </h3>
+                      ),
+                      children: isMobile ? (
+                        <FilterMobile
+                          demandPrevMonth={demandPrevMonth}
+                          availabilityOfSupply={availabilityOfSupply}
+                          growthInProperty={growthInProperty}
+                          rentalYield={rentalYield}
+                        />
+                      ) : (
+                        <FilterPage
+                          demandPrevMonth={demandPrevMonth}
+                          availabilityOfSupply={availabilityOfSupply}
+                          growthInProperty={growthInProperty}
+                          rentalYield={rentalYield}
+                        />
+                      ),
+                    },
+                  ]}
+                />
+              </div>
+
+              {/* <h3
                 style={{
                   paddingLeft: "15px",
                   marginTop: "40px",
@@ -462,7 +486,7 @@ const HomePage = () => {
                 Financial and Growth Characteristics{" "}
               </h3>  */}
 
-                {/* <div className="search-box">
+              {/* <div className="search-box">
                 
 
 
@@ -496,14 +520,13 @@ const HomePage = () => {
                 </div>
               </div> */}
 
-                {isAdmin === "true" ? (
-                  <button className="dash-btn" onClick={handleDashBoard}>
-                    Dashboard
-                  </button>
-                ) : (
-                  ""
-                )}
-              </form>
+              {isAdmin === "true" ? (
+                <button className="dash-btn" onClick={handleDashBoard}>
+                  Dashboard
+                </button>
+              ) : (
+                ""
+              )}
             </div>
             {results ? (
               results.length > 0 && !filteredResults ? (

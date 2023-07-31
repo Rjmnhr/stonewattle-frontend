@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 // import FilterItem from "../../components/filter-item";
-import FilterContainer from "../../components/filter-container";
+import FilterContainer from "./filter-container";
 import { useApplicationContext } from "../../context/app-context";
 import { FilterPageStyled } from "./filter-page-style";
 
@@ -150,18 +150,18 @@ const FilterPage = ({
     // console.log("great_for_hospitals", greatForHospitals);
     // console.log("great_for_Transport", greatForTransport);
 
-    // console.log("vacancy", vacancyRateWeightage);
-    // console.log("family", familyWeightage);
-    // console.log("rental yield", rentalYieldWeightage);
-    // console.log("growth", growthInPropertyWeightage);
-    // console.log("rent_vs_owner", rentVsOwnerRatioWeightage);
-    // console.log("availability of supply", availabilityOfSupplyWeightage);
-    // console.log("ratings", ratingsWeightage);
-    // console.log("demand_prev_month", demandPrevMonthWeightage);
-    // console.log("population_growth", populationGrowthWeightage);
-    // console.log("Australian_born", australianBornWeightage);
-    // console.log("Unemployed_people", unemployedPeopleWeightage);
-    // console.log("weekly_income", weeklyIncomeWeightage);
+    console.log("vacancy", vacancyRateWeightage);
+    console.log("family", familyWeightage);
+    console.log("rental yield", rentalYieldWeightage);
+    console.log("growth", growthInPropertyWeightage);
+    console.log("rent_vs_owner", rentVsOwnerRatioWeightage);
+    console.log("availability of supply", availabilityOfSupplyWeightage);
+    console.log("ratings", ratingsWeightage);
+    console.log("demand_prev_month", demandPrevMonthWeightage);
+    console.log("population_growth", populationGrowthWeightage);
+    console.log("Australian_born", australianBornWeightage);
+    console.log("Unemployed_people", unemployedPeopleWeightage);
+    console.log("weekly_income", weeklyIncomeWeightage);
 
     const maxVacancyRate = Math.max(
       ...results.map((suburb) => suburb.current_vacancy_rate)

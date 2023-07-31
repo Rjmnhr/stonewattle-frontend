@@ -6,6 +6,8 @@ import OtpVerification from "./pages/otp-verification";
 import SuburbId from "./pages/suburb-id";
 import CreateProfile from "./components/create-profile/profile";
 
+import FilterMobile from "./components/filter-component-mobile/filter-mobile";
+
 // import FilterPage from "./pages/filter-page/filter-page";
 
 const AppRoute = () => {
@@ -60,14 +62,14 @@ const AppRoute = () => {
             </>
           }
         />
-        {/* <Route
+        <Route
           path="/filter"
           element={
             <>
-              <FilterPage />
+              <FilterMobile />
             </>
           }
-        /> */}
+        />
       </Routes>
     </BrowserRouter>
   );
