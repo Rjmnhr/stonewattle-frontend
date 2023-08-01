@@ -38,6 +38,10 @@ export const HomePageStyled = styled.div`
     box-shadow: 0px 3px 3px 0px gray;
   }
 
+  .search-sub-main-box {
+    width: 100%;
+  }
+
   .search-sub-box {
     width: 100%;
     display: flex;
@@ -104,9 +108,10 @@ export const HomePageStyled = styled.div`
   .search-filter {
     display: flex;
     justify-content: space-between;
-    width: 36%;
+    width: 38%;
     align-items: center;
     gap: 30px;
+    text-align: left;
   }
   input {
     width: 100px;
@@ -254,6 +259,9 @@ export const HomePageStyled = styled.div`
     border-style: none;
     /* border-radius: 8px; */
   }
+  .ant-collapse .ant-collapse-content > .ant-collapse-content-box {
+    background-color: #f8f8f8;
+  }
 
   .ant-collapse > .ant-collapse-item {
     border-style: none;
@@ -391,7 +399,10 @@ export const HomePageStyled = styled.div`
       margin-top: 0;
       gap: 15px;
     }
-
+    .search-sub-main-box {
+      display: grid;
+      grid-gap: 15px;
+    }
     .budget-alert {
       font-size: 9px;
     }

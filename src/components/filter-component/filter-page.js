@@ -227,14 +227,16 @@ const FilterPage = ({
     const rankedSuburbs = results.map((suburb) => ({
       ...suburb,
       ranking:
-        (maxVacancyRate - suburb.current_vacancy_rate) * vacancyRateWeightage +
+        ((maxVacancyRate - suburb.current_vacancy_rate) / maxVacancyRate) *
+          vacancyRateWeightage +
         (suburb.family / maxFamily) * familyWeightage +
         (suburb[rentalYield] / maxRentalYield) * rentalYieldWeightage +
         (suburb[growthInProperty] / maxGrowthInProperty) *
           growthInPropertyWeightage +
         (suburb.rental_population / maxRentVsOwnerRatio) *
           rentVsOwnerRatioWeightage +
-        (maxAvailabilityOfSupply - suburb[availabilityOfSupply]) *
+        ((maxAvailabilityOfSupply - suburb[availabilityOfSupply]) /
+          maxAvailabilityOfSupply) *
           availabilityOfSupplyWeightage +
         (suburb.ratings / maxRatings) * ratingsWeightage +
         (suburb[demandPrevMonth] / maxDemandPrevMonth) *
@@ -243,7 +245,8 @@ const FilterPage = ({
           populationGrowthWeightage +
         (suburb.country_of_birth_australia / maxAustralianBorn) *
           australianBornWeightage +
-        (maxUnemployedPeople - suburb.employment_worked_unemployed) *
+        ((maxUnemployedPeople - suburb.employment_worked_unemployed) /
+          maxUnemployedPeople) *
           unemployedPeopleWeightage +
         (suburb.median_weekly_income_family / maxWeeklyIncome) *
           weeklyIncomeWeightage,

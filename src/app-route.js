@@ -6,7 +6,7 @@ import OtpVerification from "./pages/otp-verification";
 import SuburbId from "./pages/suburb-id";
 import CreateProfile from "./components/create-profile/profile";
 
-import FilterMobile from "./components/filter-component-mobile/filter-mobile";
+// import GoogleMapComponent from "./components/GIS-mapping/google-map-container";
 
 // import FilterPage from "./pages/filter-page/filter-page";
 
@@ -62,14 +62,14 @@ const AppRoute = () => {
             </>
           }
         />
-        <Route
+        {/* <Route
           path="/filter"
           element={
             <>
-              <FilterMobile />
+              <GoogleMapComponent />
             </>
           }
-        />
+        /> */}
       </Routes>
     </BrowserRouter>
   );
