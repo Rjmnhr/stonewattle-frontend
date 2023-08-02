@@ -18,10 +18,32 @@ export const HomePageStyled = styled.div`
   .results-main-container {
     width: 100%;
     padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+  }
+
+  .result-left-container,
+  .result-right-container {
+    width: 50%;
+    padding: 10px;
+  }
+
+  .result-right-container {
+    padding-top: 110px;
+  }
+
+  .map-container {
+    width: 100%;
+    height: 80vh;
   }
 
   .filter-main-page-container {
     width: 1200px;
+  }
+  .ant-collapse-header {
+    width: 1010px;
+    margin: 0;
   }
   .search-box {
     display: flex;
@@ -154,7 +176,7 @@ export const HomePageStyled = styled.div`
     color: black;
   }
   .table-container {
-    height: 150vh;
+    max-height: 100vh;
     overflow-y: scroll;
     margin-top: 50px;
     /* Hide the standard scrollbar for WebKit browsers */
@@ -265,10 +287,13 @@ export const HomePageStyled = styled.div`
 
   .ant-collapse > .ant-collapse-item {
     border-style: none;
+    text-align: left;
   }
   .ant-collapse > .ant-collapse-item > .ant-collapse-header {
     align-items: center;
     padding-bottom: 10px;
+    flex-direction: row-reverse;
+    text-align: left;
   }
 
   .ant-collapse
@@ -276,6 +301,15 @@ export const HomePageStyled = styled.div`
     > .ant-collapse-header
     > .ant-collapse-header-text {
     text-align: start;
+  }
+
+  .ant-collapse
+    > .ant-collapse-item
+    > .ant-collapse-header
+    .ant-collapse-arrow
+    svg {
+    transition: transform 0.3s;
+    transform: rotate(180deg);
   }
 
   .budget-alert {
@@ -311,6 +345,9 @@ export const HomePageStyled = styled.div`
     .filter-main-page-container {
       width: 1040px;
     }
+    .ant-collapse-header {
+      width: 870px;
+    }
   }
 
   @media (max-width: 912px) {
@@ -320,9 +357,22 @@ export const HomePageStyled = styled.div`
     .filter-main-page-container {
       width: 900px;
     }
+    .ant-collapse-header {
+      width: 740px;
+    }
 
     .results-main-container {
       width: 100%;
+      flex-direction: column;
+    }
+
+    .result-left-container,
+    .result-right-container {
+      width: 100%;
+    }
+
+    .result-right-container {
+      padding-top: 30px;
     }
 
     .search-box label {
@@ -410,7 +460,10 @@ export const HomePageStyled = styled.div`
 
   @media (max-width: 850px) {
     .filter-main-page-container {
-      width: 100%;
+      width: 800px;
+    }
+    .ant-collapse-header {
+      width: 600px;
     }
   }
 
@@ -418,17 +471,27 @@ export const HomePageStyled = styled.div`
     .filter-main-page-container {
       width: 412px;
     }
+    .ant-collapse-header {
+      width: 310px;
+    }
   }
 
   @media (max-width: 412px) {
     .filter-main-page-container {
       width: 380px;
     }
+
+    .ant-collapse-header {
+      width: 290px;
+    }
   }
 
   @media (max-width: 380px) {
     .filter-main-page-container {
-      width: 360px;
+      width: 380px;
+    }
+    .ant-collapse-header {
+      width: 100%;
     }
   }
 `;

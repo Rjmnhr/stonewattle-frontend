@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 export const FilterPageStyled = styled.div`
   .category-container {
     width: 950px;
+    transition: transform 0.3s ease-in-out; /* Add the transition property */
   }
 
   .filter-main-container {
@@ -31,6 +32,10 @@ export const FilterPageStyled = styled.div`
     gap: 10px;
     /* width: 100%; */
     height: 100%;
+  }
+
+  .filter-item-container {
+    transition: all 0.3s, visibility 0s;
   }
 
   @media (max-width: 1050px) {

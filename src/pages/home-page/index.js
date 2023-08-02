@@ -612,192 +612,202 @@ const HomePage = () => {
           </center>
 
           <div className="results-main-container" ref={resultsContainerRef}>
-            {filteredResults ? (
-              <>
-                {filteredResults.length > 0 ? (
-                  <div
-                    style={{
-                      display: "flex",
-                      width: "90%",
-                      justifyContent: "end",
-                      gap: "10px",
-                      marginTop: "30px",
-                    }}
-                    className="filter-info"
-                  >
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "5px",
-                      }}
-                    >
-                      <div className="green-circle"></div> {counts.moreThan80}
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "5px",
-                      }}
-                    >
-                      <div className="yellow-circle"></div> {counts.moreThan60}
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "5px",
-                      }}
-                    >
-                      <div className="blue-circle"></div> {counts.moreThan40}
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "5px",
-                      }}
-                    >
-                      <div className="red-circle"></div>
-                      {counts.lessThan40}
-                    </div>
-                  </div>
-                ) : (
-                  ""
-                )}{" "}
-              </>
-            ) : (
-              ""
-            )}
-            <center>
-              {displayResults ? (
+            <div
+              style={{ display: filteredResults ? "block" : "none" }}
+              className="result-left-container"
+            >
+              {filteredResults ? (
                 <>
-                  <div className="table-container">
-                    <table>
-                      <thead className="table-header">
-                        <tr>
-                          <th>Suburb Name</th>
-                          <th>
-                            <Dropdown overlay={postcodeMenu}>
-                              <label
-                                style={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  cursor: "pointer",
-                                }}
-                              >
-                                Postcode
-                                <MdArrowDropDown
-                                  style={{ fontSize: "20px" }}
-                                />{" "}
-                              </label>
-                            </Dropdown>
-                          </th>
-                          <th>
-                            <Dropdown overlay={stateCodeMenu}>
-                              <label
-                                style={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  cursor: "pointer",
-                                }}
-                              >
-                                State
-                                <MdArrowDropDown
-                                  style={{ fontSize: "20px" }}
-                                />{" "}
-                              </label>
-                            </Dropdown>
-                          </th>
-
-                          {isBedroomsUnsure ? (
-                            <th style={{ textAlign: "center" }}>
-                              Max Bedrooms
-                            </th>
-                          ) : (
-                            ""
-                          )}
-                          {isResultsFiltered ? (
-                            <th style={{ textAlign: "center" }}>Score</th>
-                          ) : (
-                            ""
-                          )}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {isDataNotFound ? (
-                          <>
-                            <div
-                              style={{
-                                width: "200%",
-                                height: "50vh",
-
-                                display: "grid",
-                                placeItems: "center",
-                              }}
-                            >
-                              <h3>Data not found</h3>
-                            </div>
-                          </>
-                        ) : (
-                          <>
-                            {filteredResults
-                              ? displayResults.map((data) => {
-                                  return (
-                                    <tr key={data.suburb_id}>
-                                      <td>{data.suburb_name}</td>
-                                      <td>{data.postcode}</td>
-                                      <td>{data.state_code}</td>
-                                      {isBedroomsUnsure ? (
-                                        <td style={{ textAlign: "center" }}>
-                                          {data.max_bedrooms}
-                                        </td>
-                                      ) : (
-                                        ""
-                                      )}
-                                      {isResultsFiltered ? (
-                                        <td>
-                                          <center>
-                                            {isAdmin === "true" ? (
-                                              data.ranking.toFixed(2)
-                                            ) : (
-                                              <div
-                                                className={
-                                                  data.rankingPercentage > 80
-                                                    ? "green-circle"
-                                                    : data.rankingPercentage >
-                                                      60
-                                                    ? "yellow-circle"
-                                                    : data.rankingPercentage >
-                                                      40
-                                                    ? "blue-circle"
-                                                    : "red-circle"
-                                                }
-                                              ></div>
-                                            )}
-                                          </center>
-                                        </td>
-                                      ) : (
-                                        ""
-                                      )}
-                                    </tr>
-                                  );
-                                })
-                              : ""}
-                          </>
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
+                  {filteredResults.length > 0 ? (
+                    <div
+                      style={{
+                        display: "flex",
+                        width: "90%",
+                        justifyContent: "end",
+                        gap: "10px",
+                        marginTop: "30px",
+                      }}
+                      className="filter-info"
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "5px",
+                        }}
+                      >
+                        <div className="green-circle"></div> {counts.moreThan80}
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "5px",
+                        }}
+                      >
+                        <div className="yellow-circle"></div>{" "}
+                        {counts.moreThan60}
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "5px",
+                        }}
+                      >
+                        <div className="blue-circle"></div> {counts.moreThan40}
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "5px",
+                        }}
+                      >
+                        <div className="red-circle"></div>
+                        {counts.lessThan40}
+                      </div>
+                    </div>
+                  ) : (
+                    ""
+                  )}{" "}
                 </>
               ) : (
                 ""
               )}
-            </center>
-          </div>
+              <center>
+                {displayResults ? (
+                  <>
+                    <div className="table-container">
+                      <table>
+                        <thead className="table-header">
+                          <tr>
+                            <th>Suburb Name</th>
+                            <th>
+                              <Dropdown overlay={postcodeMenu}>
+                                <label
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    cursor: "pointer",
+                                  }}
+                                >
+                                  Postcode
+                                  <MdArrowDropDown
+                                    style={{ fontSize: "20px" }}
+                                  />{" "}
+                                </label>
+                              </Dropdown>
+                            </th>
+                            <th>
+                              <Dropdown overlay={stateCodeMenu}>
+                                <label
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    cursor: "pointer",
+                                  }}
+                                >
+                                  State
+                                  <MdArrowDropDown
+                                    style={{ fontSize: "20px" }}
+                                  />{" "}
+                                </label>
+                              </Dropdown>
+                            </th>
 
-          <GoogleMapComponent />
+                            {isBedroomsUnsure ? (
+                              <th style={{ textAlign: "center" }}>
+                                Max Bedrooms
+                              </th>
+                            ) : (
+                              ""
+                            )}
+                            {isResultsFiltered ? (
+                              <th style={{ textAlign: "center" }}>Score</th>
+                            ) : (
+                              ""
+                            )}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {isDataNotFound ? (
+                            <>
+                              <div
+                                style={{
+                                  width: "200%",
+                                  height: "50vh",
+
+                                  display: "grid",
+                                  placeItems: "center",
+                                }}
+                              >
+                                <h3>Data not found</h3>
+                              </div>
+                            </>
+                          ) : (
+                            <>
+                              {filteredResults
+                                ? displayResults.map((data) => {
+                                    return (
+                                      <tr key={data.suburb_id}>
+                                        <td>{data.suburb_name}</td>
+                                        <td>{data.postcode}</td>
+                                        <td>{data.state_code}</td>
+                                        {isBedroomsUnsure ? (
+                                          <td style={{ textAlign: "center" }}>
+                                            {data.max_bedrooms}
+                                          </td>
+                                        ) : (
+                                          ""
+                                        )}
+                                        {isResultsFiltered ? (
+                                          <td>
+                                            <center>
+                                              {isAdmin === "true" ? (
+                                                data.ranking.toFixed(2)
+                                              ) : (
+                                                <div
+                                                  className={
+                                                    data.rankingPercentage > 80
+                                                      ? "green-circle"
+                                                      : data.rankingPercentage >
+                                                        60
+                                                      ? "yellow-circle"
+                                                      : data.rankingPercentage >
+                                                        40
+                                                      ? "blue-circle"
+                                                      : "red-circle"
+                                                  }
+                                                ></div>
+                                              )}
+                                            </center>
+                                          </td>
+                                        ) : (
+                                          ""
+                                        )}
+                                      </tr>
+                                    );
+                                  })
+                                : ""}
+                            </>
+                          )}
+                        </tbody>
+                      </table>
+                    </div>
+                  </>
+                ) : (
+                  ""
+                )}
+              </center>
+            </div>
+            <div
+              style={{ width: filteredResults ? "" : "100%" }}
+              className="result-right-container"
+            >
+              <GoogleMapComponent />
+            </div>
+          </div>
         </div>
       </HomePageStyled>
     </>

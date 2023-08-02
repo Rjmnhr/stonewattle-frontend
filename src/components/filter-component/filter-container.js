@@ -29,6 +29,7 @@ const FilterContainer = ({ category, filters, onFilterMove, style }) => {
         style={{
           padding: "8px",
           margin: "8px",
+          transition: "all 0.3s ease",
           ...style,
         }}
         ref={dropRef}
@@ -54,6 +55,7 @@ const FilterContainer = ({ category, filters, onFilterMove, style }) => {
               justifyContent: "center",
               display: "flex",
               flexWrap: "wrap",
+              transition: "all 0.3s, visibility ",
             }}
           >
             {filters.map((filter) => (

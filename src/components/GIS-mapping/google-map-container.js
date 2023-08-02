@@ -1,47 +1,25 @@
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
-
-const suburbData = [
-  {
-    name: "Sydney",
-    latitude: -33.8688,
-    longitude: 151.2093,
-  },
-  {
-    name: "Melbourne",
-    latitude: -37.8136,
-    longitude: 144.9631,
-  },
-  {
-    name: "Brisbane",
-    latitude: -27.4698,
-    longitude: 153.0251,
-  },
-  {
-    name: "Perth",
-    latitude: -31.9505,
-    longitude: 115.8605,
-  },
-  // Add more suburb data as needed
-];
+import { useApplicationContext } from "../../context/app-context";
 
 const Map = () => {
-  console.log(suburbData);
+  const { results } = useApplicationContext();
+
   return (
     <GoogleMap
       zoom={5}
       center={{ lat: -25.2744, lng: 133.7751 }}
       mapContainerClassName="map-container"
-      mapContainerStyle={{
-        width: "80vw",
-        height: "70vh",
-      }}
     >
-      {suburbData.map((suburb) => {
-        console.log(suburb);
-        return (
-          <Marker position={{ lat: suburb.latitude, lng: suburb.longitude }} />
-        );
-      })}
+      {results
+        ? results.map((suburb) => {
+            console.log(suburb);
+            const latitude = parseInt(suburb.latitude);
+            const longitude = parseInt(suburb.longitude);
+
+            return <Marker position={{ lat: latitude, lng: longitude }} />;
+          })
+        : ""}
+      <Marker position={{ lat: -38.3380167, lng: 141.6041331 }} />
     </GoogleMap>
   );
 };

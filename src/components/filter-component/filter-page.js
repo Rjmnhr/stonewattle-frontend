@@ -48,6 +48,21 @@ const FilterPage = ({
     "Australian born",
     // Add your other filters here
   ]);
+  // eslint-disable-next-line
+  const [initialFilters, setInitialFilters] = useState([
+    "Low vacancy rate",
+    "Family friendly",
+    "High rental yield",
+    "Growth in property ",
+    "Ratio of renters to owners",
+    "High demand ",
+    "High ratings",
+    "Low supply",
+    "Growth of population",
+    "Low unemployment",
+    "Higher weekly income",
+    "Australian born",
+  ]);
 
   const [categories, setCategories] = useState({
     veryImportant: [],
@@ -85,11 +100,6 @@ const FilterPage = ({
       }
     }
 
-    // Reset the filter's weightage to 0 when moving back to "Available Filters" container
-    // if (toCategory === "available") {
-    //   filterWeightages[filter](0);
-    // }
-
     // Remove the filter from the "Available Filters" container
     if (fromCategory === "available") {
       setFilters((prev) => prev.filter((f) => f !== filter));
@@ -98,18 +108,19 @@ const FilterPage = ({
     if (!toCategoryFilters) {
       updatedCategories[toCategory] = [];
     }
-
     // Add the filter to the target container or 'Available Filters'
     if (toCategory === "available") {
-      setFilters((prev) => [...prev, filter]);
+      // Find the index of the filter in the initial order
+      const filterIndex = initialFilters.indexOf(filter);
+      // Insert the filter at the same position in the available container
+      setFilters((prev) => [
+        ...prev.slice(0, filterIndex),
+        filter,
+        ...prev.slice(filterIndex),
+      ]);
     } else {
       toCategoryFilters.push(filter);
     }
-
-    // console.log("Moving filter:", filter);
-    // console.log("From Category:", fromCategory);
-    // console.log("To Category:", toCategory);
-    // console.log("filterWeightages:", filterWeightages);
 
     // Update the filter's weightage based on the target category
     let weightage;
@@ -330,9 +341,6 @@ const FilterPage = ({
 
                   background: "white",
                   boxShadow: "0px 3px 3px 0px  gray",
-                  "@media (max-width:912px)": {
-                    background: "red",
-                  },
                 }}
               />
             </div>
