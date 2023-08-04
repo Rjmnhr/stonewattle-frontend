@@ -19,7 +19,6 @@ const Map = () => {
             return <Marker position={{ lat: latitude, lng: longitude }} />;
           })
         : ""}
-      <Marker position={{ lat: -38.3380167, lng: 141.6041331 }} />
     </GoogleMap>
   );
 };

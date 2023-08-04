@@ -236,18 +236,18 @@ export const HomePageStyled = styled.div`
   }
 
   .yellow-circle {
-    background-color: yellow;
+    background-color: #ffd700;
   }
 
   .green-circle {
-    background-color: green;
+    background-color: #32cd32;
   }
   .red-circle {
-    background-color: red;
+    background-color: #ff7f50;
   }
 
   .blue-circle {
-    background-color: blue;
+    background-color: #87ceeb;
   }
 
   .filter-info,

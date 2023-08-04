@@ -188,38 +188,38 @@ const FilterPage = ({
     // console.log("Unemployed_people", unemployedPeopleWeightage);
     // console.log("weekly_income", weeklyIncomeWeightage);
 
-    const maxVacancyRate = Math.max(
+    let maxVacancyRate = Math.max(
       ...results.map((suburb) => suburb.current_vacancy_rate)
     );
-    console.log("max_vacancy", maxVacancyRate);
+    if (maxVacancyRate === 0) console.log("max_vacancy", maxVacancyRate);
 
-    const maxFamily = Math.max(...results.map((suburb) => suburb.family));
+    let maxFamily = Math.max(...results.map((suburb) => suburb.family));
     console.log("max_family", maxFamily);
 
-    const maxRentalYield = Math.max(
+    let maxRentalYield = Math.max(
       ...results.map((suburb) => suburb[rentalYield])
     );
     console.log("max_yeild", maxRentalYield);
 
-    const maxGrowthInProperty = Math.max(
+    let maxGrowthInProperty = Math.max(
       ...results.map((suburb) => suburb[growthInProperty])
     );
     console.log("max_Growth", maxGrowthInProperty);
 
-    const maxRentVsOwnerRatio = Math.max(
+    let maxRentVsOwnerRatio = Math.max(
       ...results.map((suburb) => suburb.rental_population)
     );
     console.log("max_rent_vs_owner", maxRentVsOwnerRatio);
 
-    const maxAvailabilityOfSupply = Math.max(
+    let maxAvailabilityOfSupply = Math.max(
       ...results.map((suburb) => suburb[availabilityOfSupply])
     );
     console.log("max_availability_of_supply", maxAvailabilityOfSupply);
 
-    const maxRatings = Math.max(...results.map((suburb) => suburb.ratings));
+    let maxRatings = Math.max(...results.map((suburb) => suburb.ratings));
     console.log("max_ratings", maxRatings);
 
-    const maxDemandPrevMonth = Math.max(
+    let maxDemandPrevMonth = Math.max(
       ...results.map((suburb) => suburb[demandPrevMonth])
     );
     console.log("max_demand_prev_month", maxDemandPrevMonth);
@@ -229,25 +229,39 @@ const FilterPage = ({
     // );
     // console.log("max_demand_last_year", maxDemandLastYear);
 
-    const maxPopulationGrowth = Math.max(
+    let maxPopulationGrowth = Math.max(
       ...results.map((suburb) => suburb.growth_population)
     );
     console.log("max_population_growth", maxPopulationGrowth);
 
-    const maxAustralianBorn = Math.max(
+    let maxAustralianBorn = Math.max(
       ...results.map((suburb) => suburb.country_of_birth_australia)
     );
     console.log("max_australian_born", maxAustralianBorn);
 
-    const maxUnemployedPeople = Math.max(
+    let maxUnemployedPeople = Math.max(
       ...results.map((suburb) => suburb.employment_worked_unemployed)
     );
     console.log("max_unemployed_people", maxUnemployedPeople);
 
-    const maxWeeklyIncome = Math.max(
+    let maxWeeklyIncome = Math.max(
       ...results.map((suburb) => suburb.median_weekly_income_family)
     );
     console.log("max_weekly_income", maxWeeklyIncome);
+
+    maxVacancyRate = maxVacancyRate === 0 ? 1 : maxVacancyRate;
+    maxFamily = maxFamily === 0 ? 1 : maxFamily;
+    maxRentalYield = maxRentalYield === 0 ? 1 : maxRentalYield;
+    maxGrowthInProperty = maxGrowthInProperty === 0 ? 1 : maxGrowthInProperty;
+    maxRentVsOwnerRatio = maxRentVsOwnerRatio === 0 ? 1 : maxRentVsOwnerRatio;
+    maxAvailabilityOfSupply =
+      maxAvailabilityOfSupply === 0 ? 1 : maxAvailabilityOfSupply;
+    maxRatings = maxRatings === 0 ? 1 : maxRatings;
+    maxDemandPrevMonth = maxDemandPrevMonth === 0 ? 1 : maxDemandPrevMonth;
+    maxPopulationGrowth = maxPopulationGrowth === 0 ? 1 : maxPopulationGrowth;
+    maxAustralianBorn = maxAustralianBorn === 0 ? 1 : maxAustralianBorn;
+    maxUnemployedPeople = maxUnemployedPeople === 0 ? 1 : maxUnemployedPeople;
+    maxWeeklyIncome = maxWeeklyIncome === 0 ? 1 : maxWeeklyIncome;
 
     const rankedSuburbs = results.map((suburb) => ({
       ...suburb,
