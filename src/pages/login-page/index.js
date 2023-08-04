@@ -13,6 +13,7 @@ const LoginPage = () => {
         <div className="main-container">
           <div className="left-container">
             <h1>2ndStorey</h1>
+            <p>Your one-stop property suburb search</p>
           </div>
           <div className="login-container">
             <div className="login-box">

@@ -5,6 +5,9 @@ import Suburb from "./pages/suburbs";
 import OtpVerification from "./pages/otp-verification";
 import SuburbId from "./pages/suburb-id";
 import CreateProfile from "./components/create-profile/profile";
+import AboutPage from "./pages/about-page";
+import PricingPage from "./pages/pricing-page";
+import ContactPage from "./pages/contact-page";
 
 // import GoogleMapComponent from "./components/GIS-mapping/google-map-container";
 
@@ -54,11 +57,35 @@ const AppRoute = () => {
             </>
           }
         />
-        <Route
+        {/* <Route
           path="/create-profile"
           element={
             <>
               <CreateProfile />
+            </>
+          }
+        /> */}
+        <Route
+          path="/about"
+          element={
+            <>
+              <AboutPage />
+            </>
+          }
+        />
+        <Route
+          path="/pricing"
+          element={
+            <>
+              <PricingPage />
+            </>
+          }
+        />
+        <Route
+          path="/contact"
+          element={
+            <>
+              <ContactPage />
             </>
           }
         />

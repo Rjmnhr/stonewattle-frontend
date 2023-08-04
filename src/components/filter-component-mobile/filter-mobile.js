@@ -77,6 +77,11 @@ const FilterMobile = ({
   const [australianBornWeightage, setAustralianBornWeightage] = useState(0);
   const [unemployedPeopleWeightage, setUnemployedPeopleWeightage] = useState(0);
   const [weeklyIncomeWeightage, setWeeklyIncomeWeightage] = useState(0);
+  const [greatForSchoolsWeightage, setGreatForSchoolsWeightage] = useState(0);
+  const [greatForTransportWeightage, setGreatForTransportWeightage] =
+    useState(0);
+  const [greatForHospitalsWeightage, setGreatForHospitalsWeightage] =
+    useState(0);
 
   const { results, setFilteredResults, setIsResultsFiltered } =
     useApplicationContext();
@@ -94,6 +99,9 @@ const FilterMobile = ({
     "Low unemployment": setUnemployedPeopleWeightage,
     "Higher weekly income": setWeeklyIncomeWeightage,
     "Australian born": setAustralianBornWeightage,
+    "Great for schools": setGreatForSchoolsWeightage,
+    "Great for transport": setGreatForTransportWeightage,
+    "Great for hospitals": setGreatForHospitalsWeightage,
     // Add your other filters here
   };
 
@@ -127,6 +135,9 @@ const FilterMobile = ({
     "Low unemployment",
     "Higher weekly income",
     "Australian born",
+    "Great for schools",
+    "Great for transport",
+    "Great for hospitals",
     // Add your other filters here
   ];
 
@@ -135,18 +146,18 @@ const FilterMobile = ({
     // console.log("great_for_hospitals", greatForHospitals);
     // console.log("great_for_Transport", greatForTransport);
 
-    console.log("vacancy", vacancyRateWeightage);
-    console.log("family", familyWeightage);
-    console.log("rental yield", rentalYieldWeightage);
-    console.log("growth", growthInPropertyWeightage);
-    console.log("rent_vs_owner", rentVsOwnerRatioWeightage);
-    console.log("availability of supply", availabilityOfSupplyWeightage);
-    console.log("ratings", ratingsWeightage);
-    console.log("demand_prev_month", demandPrevMonthWeightage);
-    console.log("population_growth", populationGrowthWeightage);
-    console.log("Australian_born", australianBornWeightage);
-    console.log("Unemployed_people", unemployedPeopleWeightage);
-    console.log("weekly_income", weeklyIncomeWeightage);
+    // console.log("vacancy", vacancyRateWeightage);
+    // console.log("family", familyWeightage);
+    // console.log("rental yield", rentalYieldWeightage);
+    // console.log("growth", growthInPropertyWeightage);
+    // console.log("rent_vs_owner", rentVsOwnerRatioWeightage);
+    // console.log("availability of supply", availabilityOfSupplyWeightage);
+    // console.log("ratings", ratingsWeightage);
+    // console.log("demand_prev_month", demandPrevMonthWeightage);
+    // console.log("population_growth", populationGrowthWeightage);
+    // console.log("Australian_born", australianBornWeightage);
+    // console.log("Unemployed_people", unemployedPeopleWeightage);
+    // console.log("weekly_income", weeklyIncomeWeightage);
 
     const maxVacancyRate = Math.max(
       ...results.map((suburb) => suburb.current_vacancy_rate)
@@ -234,10 +245,10 @@ const FilterMobile = ({
           maxUnemployedPeople) *
           unemployedPeopleWeightage +
         (suburb.median_weekly_income_family / maxWeeklyIncome) *
-          weeklyIncomeWeightage,
-      // (greatForSchools ? suburb.great_for_schools_int : 0) +
-      // (greatForHospitals ? suburb.great_for_medical_facilities_int : 0) +
-      // (greatForTransport ? suburb.great_for_public_transport_int : 0),
+          weeklyIncomeWeightage +
+        suburb.great_for_schools_int * greatForSchoolsWeightage +
+        suburb.great_for_medical_facilities_int * greatForHospitalsWeightage +
+        suburb.great_for_public_transport_int * greatForTransportWeightage,
     }));
 
     const maxRanking = Math.max(

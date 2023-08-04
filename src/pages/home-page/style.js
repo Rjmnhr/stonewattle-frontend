@@ -57,7 +57,8 @@ export const HomePageStyled = styled.div`
     background-color: #f8f8f8;
     color: black;
     border-radius: 8px;
-    box-shadow: 0px 3px 3px 0px gray;
+    /* box-shadow: 0px 3px 3px 0px gray; */
+    border: 1px solid;
   }
 
   .search-sub-main-box {
@@ -247,6 +248,15 @@ export const HomePageStyled = styled.div`
 
   .blue-circle {
     background-color: blue;
+  }
+
+  .filter-info,
+  .color-circles-legend {
+    display: flex;
+    width: 90%;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
   }
 
   .ant-row .css-dev-only-do-not-override-1wazalj {
@@ -440,9 +450,15 @@ export const HomePageStyled = styled.div`
     }
 
     .filter-info {
-      width: 80%;
-      text-align: center;
-      font-size: 14px;
+      width: 90%;
+      gap: 10px;
+      font-size: 12px;
+    }
+
+    .color-circles-legend {
+      width: 100%;
+      gap: 10px;
+      font-size: 12px;
     }
     .search-sub-box {
       flex-direction: column;

@@ -13,32 +13,27 @@ const FilterItem = ({ filter, category, onRemoveFilter }) => {
   };
   return (
     <>
-      <div
-        className="filter-item-container"
+      <p
         ref={dragRef}
         style={{
+          background: "#333333",
+          display: "flex",
+          alignItems: "center",
+          padding: "8px",
+          margin: "10px",
+          borderRadius: "8px",
           cursor: "grab",
+          color: "white",
         }}
       >
-        <p
-          style={{
-            background: "#333333",
-            display: "flex",
-            alignItems: "center",
-            padding: "8px",
-            margin: "10px",
-            borderRadius: "8px",
-          }}
-        >
-          {filter}
-          {category !== "available" && (
-            <MdClose
-              style={{ color: "gainsboro", background: "gray", margin: "5px" }}
-              onClick={handleRemoveFilter}
-            />
-          )}
-        </p>
-      </div>
+        {filter}
+        {category !== "available" && (
+          <MdClose
+            style={{ color: "gainsboro", background: "gray", margin: "5px" }}
+            onClick={handleRemoveFilter}
+          />
+        )}
+      </p>
     </>
   );
 };

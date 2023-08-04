@@ -10,7 +10,9 @@ export const LoginPagestyled = styled.div`
   .left-container {
     width: 50%;
     display: grid;
-    place-items: center;
+    align-content: center;
+    justify-content: end;
+    justify-items: center;
   }
   .left-container h1 {
     font-size: 100px;
@@ -129,6 +131,7 @@ export const LoginPagestyled = styled.div`
     .left-container {
       height: 40vh;
       align-content: center;
+      justify-content: center;
     }
     .login-container {
       height: 60vh;

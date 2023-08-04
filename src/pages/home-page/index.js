@@ -13,6 +13,7 @@ import FilterPage from "../../components/filter-component/filter-page";
 
 import FilterMobile from "../../components/filter-component-mobile/filter-mobile";
 import { MdArrowDropDown } from "react-icons/md";
+import { ArrowUpOutlined, ArrowDownOutlined } from "@ant-design/icons";
 
 import GoogleMapComponent from "../../components/GIS-mapping/google-map-container";
 
@@ -45,10 +46,6 @@ const HomePage = () => {
   const [displayResults, setDisplayResults] = useState(null);
 
   // const [demandLastYear, setDemandLastYear] = useState("");
-
-  // const [greatForSchools, setGreatForSchools] = useState(false);
-  // const [greatForHospitals, setGreatForHospitals] = useState(false);
-  // const [greatForTransport, setGreatForTransport] = useState(false);
 
   const resultsContainerRef = useRef();
 
@@ -388,7 +385,7 @@ const HomePage = () => {
                   items={[
                     {
                       key: "1",
-                      label: <h3>Property Characteristics</h3>,
+                      label: <h3>Property characteristics</h3>,
                       children: (
                         <div
                           className="search-sub-main-box"
@@ -499,81 +496,49 @@ const HomePage = () => {
                               </div>
                             </div>
                           </div>
-
-                          <Collapse
-                            style={{ marginTop: "20px" }}
-                            defaultActiveKey={["1"]}
-                            items={[
-                              {
-                                key: "1",
-                                label: <h3>Investment strategy</h3>,
-                                children: isMobile ? (
-                                  <FilterMobile
-                                    demandPrevMonth={demandPrevMonth}
-                                    availabilityOfSupply={availabilityOfSupply}
-                                    growthInProperty={growthInProperty}
-                                    rentalYield={rentalYield}
-                                  />
-                                ) : (
-                                  <FilterPage
-                                    demandPrevMonth={demandPrevMonth}
-                                    availabilityOfSupply={availabilityOfSupply}
-                                    growthInProperty={growthInProperty}
-                                    rentalYield={rentalYield}
-                                  />
-                                ),
-                              },
-                            ]}
-                          />
                         </div>
                       ),
                     },
                   ]}
                 />
+                <Collapse
+                  style={{ marginTop: "20px" }}
+                  defaultActiveKey={["1"]}
+                  items={[
+                    {
+                      key: "1",
+                      label: (
+                        <h3 style={{ marginRight: "30px" }}>
+                          Investment strategy
+                        </h3>
+                      ),
+                      children: isMobile ? (
+                        <FilterMobile
+                          demandPrevMonth={demandPrevMonth}
+                          availabilityOfSupply={availabilityOfSupply}
+                          growthInProperty={growthInProperty}
+                          rentalYield={rentalYield}
+                        />
+                      ) : (
+                        <>
+                          <center>
+                            <p style={{ marginBottom: "30px" }}>
+                              Please move the relevant factors in the
+                              appropriate container based on your preference
+                            </p>
+                          </center>
+                          <FilterPage
+                            demandPrevMonth={demandPrevMonth}
+                            availabilityOfSupply={availabilityOfSupply}
+                            growthInProperty={growthInProperty}
+                            rentalYield={rentalYield}
+                          />
+                        </>
+                      ),
+                    },
+                  ]}
+                />
               </div>
-
-              {/* <h3
-                style={{
-                  paddingLeft: "15px",
-                  marginTop: "40px",
-                }}
-              >
-                Financial and Growth Characteristics{" "}
-              </h3>  */}
-
-              {/* <div className="search-box">
-                
-
-
-                <div className="checkbox-filter">
-                  <label
-                    style={{ textAlign: "start" }}
-                    className="great-for-label"
-                  >
-                    Should Great For :
-                  </label>
-                  <div className="checkbox-sub-filter">
-                    <div className="checkbox-sub">
-                      <input type="checkbox" onChange={handleGreatForSchools} />
-                      <label>Schools</label>
-                    </div>
-                    <div className="checkbox-sub">
-                      <input
-                        type="checkbox"
-                        onChange={handleGreatForHospital}
-                      />
-                      <label>Hospitals</label>
-                    </div>
-                    <div className="checkbox-sub">
-                      <input
-                        type="checkbox"
-                        onChange={handleGreatForTransport}
-                      />
-                      <label>Public Transports</label>
-                    </div>
-                  </div>
-                </div>
-              </div> */}
 
               {isAdmin === "true" ? (
                 <button className="dash-btn" onClick={handleDashBoard}>
@@ -592,7 +557,7 @@ const HomePage = () => {
                   }}
                 >
                   {results.length} suburbs meet your criteria, try minimum four
-                  filters given in investment strategy to see the results
+                  factors given in investment strategy to see the results
                 </p>
               ) : results.length === 0 ? (
                 <p
@@ -619,23 +584,17 @@ const HomePage = () => {
               {filteredResults ? (
                 <>
                   {filteredResults.length > 0 ? (
-                    <div
-                      style={{
-                        display: "flex",
-                        width: "90%",
-                        justifyContent: "end",
-                        gap: "10px",
-                        marginTop: "30px",
-                      }}
-                      className="filter-info"
-                    >
+                    <div className="color-circles-legend">
                       <div
                         style={{
                           display: "flex",
                           alignItems: "center",
                           gap: "5px",
+
+                          paddingRight: "5px",
                         }}
                       >
+                        80% <ArrowUpOutlined />
                         <div className="green-circle"></div> {counts.moreThan80}
                       </div>
                       <div
@@ -643,8 +602,11 @@ const HomePage = () => {
                           display: "flex",
                           alignItems: "center",
                           gap: "5px",
+
+                          paddingRight: "5px",
                         }}
                       >
+                        60% <ArrowUpOutlined />
                         <div className="yellow-circle"></div>{" "}
                         {counts.moreThan60}
                       </div>
@@ -653,8 +615,11 @@ const HomePage = () => {
                           display: "flex",
                           alignItems: "center",
                           gap: "5px",
+
+                          paddingRight: "5px",
                         }}
                       >
+                        40% <ArrowUpOutlined />
                         <div className="blue-circle"></div> {counts.moreThan40}
                       </div>
                       <div
@@ -664,6 +629,7 @@ const HomePage = () => {
                           gap: "5px",
                         }}
                       >
+                        40% <ArrowDownOutlined />
                         <div className="red-circle"></div>
                         {counts.lessThan40}
                       </div>
@@ -805,6 +771,15 @@ const HomePage = () => {
               style={{ width: filteredResults ? "" : "100%" }}
               className="result-right-container"
             >
+              {results ? (
+                ""
+              ) : (
+                <p>
+                  Please select property characteristics to see where the
+                  suburbs are located
+                </p>
+              )}
+
               <GoogleMapComponent />
             </div>
           </div>

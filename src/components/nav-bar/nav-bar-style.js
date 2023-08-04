@@ -28,11 +28,24 @@ export const NavBarStyled = styled.div`
     font-size: 34px;
   }
 
-  .sub-nav p {
+  .ant-menu-light,
+  :where(.css-dev-only-do-not-override-txh9fw).ant-menu-light > .ant-menu {
+    color: gainsboro;
+    background: inherit;
     font-weight: bold;
-    cursor: pointer;
+    width: 400px;
   }
 
+  .ant-menu-light
+    .ant-menu-item:not(.ant-menu-item-selected):not(
+      .ant-menu-submenu-selected
+    ):hover {
+    color: gainsboro;
+  }
+
+  .ant-menu-horizontal {
+    line-height: 34px;
+  }
   .sub-nav {
     display: flex;
     justify-content: center;
@@ -43,10 +56,28 @@ export const NavBarStyled = styled.div`
     color: gainsboro;
   }
 
-  .menu {
-    display: none;
+  .menu-overlay {
+    position: fixed;
+    top: 0;
+    right: -50%;
+    width: 40%;
+    height: 100%;
+    background-color: #fff;
+    z-index: 999;
+    transition: right 0.3s ease-in-out;
+    background-color: black;
+    border: none;
+    text-align: left;
   }
 
+  .menu-overlay.show {
+    right: 0;
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
   @media (max-width: 912px) {
     .sub-nav {
       display: none;
@@ -63,6 +94,11 @@ export const NavBarStyled = styled.div`
     }
     .menu {
       display: block;
+    }
+
+    .ant-menu-light,
+    :where(.css-dev-only-do-not-override-txh9fw).ant-menu-light > .ant-menu {
+      width: 50px;
     }
   }
 `;
