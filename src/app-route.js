@@ -57,14 +57,14 @@ const AppRoute = () => {
             </>
           }
         />
-        {/* <Route
+        <Route
           path="/create-profile"
           element={
             <>
               <CreateProfile />
             </>
           }
-        /> */}
+        />
         <Route
           path="/about"
           element={

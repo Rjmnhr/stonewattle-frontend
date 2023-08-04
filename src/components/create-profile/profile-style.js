@@ -3,55 +3,55 @@ import { styled } from "styled-components";
 export const CreateProfileStyled = styled.div`
   form {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     gap: 15px;
     flex-direction: column;
-    box-shadow: 0px 3px 3px 0px gray;
-    padding: 10px;
+    align-items: start;
+    padding: 20px;
     margin: 10px;
-    width: 30%;
-    background-color: #f8f8f8;
     text-align: start;
+    border: 1px solid gray;
   }
 
   .form-container {
     width: 100%;
     /* border: 1px solid white; */
     display: grid;
-    place-items: center;
     padding: 15px;
     height: 100vh;
+    place-items: center;
   }
-  button[type="submit"] {
-    padding: 10px;
-    background: #a8a7a7;
-    color: black;
+  button {
+    padding: 12px;
+    background: #333333;
+    color: white;
+    margin: 10px;
     border: none;
-    outline: none;
-    font-weight: bolder;
-    width: 95%;
     margin-top: 20px;
+    min-width: 100px;
   }
-
   .detail-input {
     display: grid;
     grid-gap: 10px;
     text-align: start;
-    font-weight: bold;
-    font-size: 18px;
   }
   .detail-input label {
     padding-left: 5px;
   }
 
-  .form-container input {
+  input,
+  select {
     padding: 10px;
     margin: 5px;
-    border-style: none;
-
+    border: 1px solid gray;
     outline: none;
+    border-radius: 8px;
+    width: 200px;
+  }
 
-    width: 90%;
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 
   @media (max-width: 912px) {

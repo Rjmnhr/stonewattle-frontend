@@ -85,7 +85,7 @@ const OtpVerification = () => {
       <OtpVerificationPageStyled>
         <div className="main-container">
           <div className="left-container">
-            <h1>Stone Wattle</h1>
+            <h1>2ndStorey</h1>
           </div>
           <div className="right-container">
             <div className="right-sub-container">
