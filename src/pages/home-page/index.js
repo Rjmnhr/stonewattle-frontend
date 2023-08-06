@@ -23,7 +23,7 @@ const HomePage = () => {
   const {
     setResults,
     results,
-
+    setIsUserValid,
     filteredResults,
     isResultsFiltered,
   } = useApplicationContext();
@@ -53,52 +53,28 @@ const HomePage = () => {
 
   const isAdmin = localStorage.getItem("isAdmin");
 
-  // useEffect(() => {
-  //   const accessToken = localStorage.getItem("accessToken");
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
 
-  //   fetch("http://2ndstorey.com:8002/api/token/verify", {
-  //     headers: {
-  //       token: `Bearer ${accessToken}`,
-  //     },
-  //   })
-  //     .then(async (response) => {
-  //       console.log(response.status);
-  //       if (response.status === 200) {
-  //         console.log("user is valid");
-  //         setIsUserValid(true);
-  //       } else {
-  //         navigate("/");
-  //       }
-  //     })
+    fetch("http://2ndstorey.com:8002/api/token/verify", {
+      headers: {
+        token: `Bearer ${accessToken}`,
+      },
+    })
+      .then(async (response) => {
+        console.log(response.status);
+        if (response.status === 200) {
+          console.log("user is valid");
+          setIsUserValid(true);
+        } else {
+          navigate("/");
+        }
+      })
 
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }, [setIsUserValid, navigate]);
-
-  // const handleGreatForSchools = (e) => {
-  //   if (e.target.checked) {
-  //     setGreatForSchools(true);
-  //   } else {
-  //     setGreatForSchools(false);
-  //   }
-  // };
-
-  // const handleGreatForHospital = (e) => {
-  //   if (e.target.checked) {
-  //     setGreatForHospitals(true);
-  //   } else {
-  //     setGreatForHospitals(false);
-  //   }
-  // };
-
-  // const handleGreatForTransport = (e) => {
-  //   if (e.target.checked) {
-  //     setGreatForTransport(true);
-  //   } else {
-  //     setGreatForTransport(false);
-  //   }
-  // };
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [setIsUserValid, navigate]);
 
   useEffect(() => {
     setDisplayResults(filteredResults);

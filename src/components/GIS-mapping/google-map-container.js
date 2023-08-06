@@ -12,7 +12,6 @@ const Map = () => {
     >
       {results
         ? results.map((suburb) => {
-            console.log(suburb);
             const latitude = parseInt(suburb.latitude);
             const longitude = parseInt(suburb.longitude);
 
