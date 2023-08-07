@@ -72,7 +72,7 @@ export const LoginPagestyled = styled.div`
 
     outline: none;
     border-bottom: 1px solid;
-    width: 90%;
+    width: 97%;
   }
 
   button[type="submit"] {

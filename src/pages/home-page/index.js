@@ -354,8 +354,8 @@ const HomePage = () => {
         </p>
         <div className="home-page-container">
           <center>
-            <div className="filter-main-page-container">
-              <div className="search-box">
+            <div className="container max-width .col-12 .col-sm-6 .col-lg-8 filter-main-page-container ">
+              <div className="container col-12 search-box">
                 <Collapse
                   defaultActiveKey={["1"]}
                   items={[
@@ -363,10 +363,7 @@ const HomePage = () => {
                       key: "1",
                       label: <h3>Property characteristics</h3>,
                       children: (
-                        <div
-                          className="search-sub-main-box"
-                          style={{ background: "#f8f8f8" }}
-                        >
+                        <div className="search-sub-main-box">
                           <div className="search-sub-box">
                             <div className="search-filter">
                               <label>Dwelling type</label>

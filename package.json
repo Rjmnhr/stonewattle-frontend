@@ -16,6 +16,8 @@
     "antd": "^5.7.3",
     "arcgis-js-api": "^4.27.6",
     "axios": "^1.4.0",
+    "bootstrap": "^5.2.0",
+    "bootstrap-icons": "^1.10.5",
     "chart.js": "^4.3.1",
     "esri-loader": "^3.7.0",
     "google-map-react": "^2.2.1",

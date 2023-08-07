@@ -6,14 +6,14 @@ export const HomePageStyled = styled.div`
     margin: 0;
     padding: 0;
   }
-  .home-page-container {
+  /* .home-page-container {
     padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     width: 100%;
-  }
+  } */
 
   .results-main-container {
     width: 100%;
@@ -51,14 +51,12 @@ export const HomePageStyled = styled.div`
     gap: 10px;
     justify-content: center;
     align-items: start;
-    width: 90%;
+
     padding: 20px;
-    /* background: linear-gradient(270deg, #494278 0, #2c2650 99.61%); */
-    background-color: #f8f8f8;
+
     color: black;
     border-radius: 8px;
     /* box-shadow: 0px 3px 3px 0px gray; */
-    border: 1px solid;
   }
 
   .search-sub-main-box {
@@ -285,7 +283,7 @@ export const HomePageStyled = styled.div`
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    background-color: transparent;
+
     /* border: 1px solid #d9d9d9; */
     /* border-bottom: 0; */
     border-style: none;
@@ -299,6 +297,7 @@ export const HomePageStyled = styled.div`
     border-style: none;
     text-align: left;
   }
+
   .ant-collapse > .ant-collapse-item > .ant-collapse-header {
     align-items: center;
     padding-bottom: 10px;
