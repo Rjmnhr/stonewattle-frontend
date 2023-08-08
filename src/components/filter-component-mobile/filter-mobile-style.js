@@ -5,11 +5,11 @@ export const FilterMobileStyled = styled.div`
 
   /* Filter container styles */
   /* FilterMobile.css */
-  .filter-mobile-container {
+  /* .filter-mobile-container {
     display: grid;
     place-items: center;
     width: 400px;
-  }
+  } */
 
   .filter-dropdown {
     display: flex;

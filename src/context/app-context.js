@@ -10,6 +10,7 @@ export const AppContextProvider = ({ children }) => {
   const [filteredResults, setFilteredResults] = useState(null);
   const [isResultsFiltered, setIsResultsFiltered] = useState(false);
   const [availableFiltersCount, setAvailableFiltersCount] = useState(0);
+  const [dropdownHeight, setDropdownHeight] = useState(null);
 
   const value = {
     isEmailVerified,
@@ -26,6 +27,8 @@ export const AppContextProvider = ({ children }) => {
     setIsResultsFiltered,
     availableFiltersCount,
     setAvailableFiltersCount,
+    dropdownHeight,
+    setDropdownHeight,
   };
 
   return <MyContext.Provider value={value}>{children}</MyContext.Provider>;

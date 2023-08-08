@@ -368,7 +368,7 @@ const FilterPage = ({
                   borderRadius: "10px",
                   overflowY: "auto",
                   background: "white",
-                  border: "1px solid black",
+                  border: "1px solid gray",
                 }}
               />
             </div>
@@ -385,7 +385,7 @@ const FilterPage = ({
                   borderRadius: "10px",
                   overflowY: "auto",
                   background: "white",
-                  border: "1px solid black",
+                  border: "1px solid gray",
                 }}
               />
             </div>
@@ -402,20 +402,13 @@ const FilterPage = ({
                   borderRadius: "10px",
                   overflowY: "auto",
                   background: "white",
-                  border: "1px solid black",
+                  border: "1px solid gray",
                 }}
               />
             </div>
           </div>
         </div>
       </FilterPageStyled>
-      <center>
-        {movedFiltersCount >= 4 ? (
-          ""
-        ) : (
-          <p>Select at least 4 factors to view ranked suburbs</p>
-        )}
-      </center>
     </>
   );
 };

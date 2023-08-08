@@ -1,5 +1,6 @@
 // import React, { useState } from "react";
 import NavBar from "../../components/nav-bar/nav-bar";
+import { useApplicationContext } from "../../context/app-context";
 // import useMediaQuery from "@mui/material/useMediaQuery";
 // import { ArrowLeftOutlined } from "@ant-design/icons";
 // import { message } from "antd";
@@ -92,14 +93,21 @@ import NavBar from "../../components/nav-bar/nav-bar";
 // };
 
 const ContactPage = () => {
+  const { dropdownHeight } = useApplicationContext();
   return (
     <>
       <head>
         <link rel="stylesheet" href="./assets/css/theme.min.css" />
       </head>
       <NavBar />
-      <div class="container content-space-t-1">
-        <div class="text-center mb-7">
+      <div
+        style={{
+          marginTop: `${dropdownHeight ? `${dropdownHeight}px` : "0px"}`,
+          transition: "all 0.3s ease",
+        }}
+        class="container content-space-t-1 "
+      >
+        <div class="text-center mb-7 mt-5 mt-lg-10">
           <h1>How can we help?</h1>
         </div>
 

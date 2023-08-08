@@ -33,7 +33,7 @@ const FilterContainer = ({ category, filters, onFilterMove, style }) => {
           ...style,
         }}
         ref={dropRef}
-        className="category-container"
+        className="category-container container"
       >
         {category === "available" && filters.length === 0 ? (
           <div

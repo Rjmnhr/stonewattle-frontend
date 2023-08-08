@@ -1,7 +1,20 @@
 import { styled } from "styled-components";
 
 export const LoginPagestyled = styled.div`
-  .main-container {
+  /* .transition-slide {
+    transform: translateX(0);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .transition-slide.from-left {
+    transform: translateX(-100%);
+  }
+
+  .transition-slide.from-right {
+    transform: translateX(100%);
+  } */
+
+  /* .main-container {
     display: flex;
     align-items: center;
     background: black;
@@ -22,7 +35,7 @@ export const LoginPagestyled = styled.div`
 
   .form-container {
     width: 90%;
-    /* border: 1px solid white; */
+  border: 1px solid white; 
 
     padding: 15px;
   }
@@ -149,5 +162,5 @@ export const LoginPagestyled = styled.div`
     .login-box {
       width: 50%;
     }
-  }
+  } */
 `;

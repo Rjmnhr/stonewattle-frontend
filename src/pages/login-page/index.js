@@ -10,18 +10,8 @@ const LoginPage = () => {
   return (
     <>
       <LoginPagestyled>
-        <div className="main-container">
-          <div className="left-container">
-            <h1 style={{ color: "white" }}>2ndStorey</h1>
-            <p style={{ color: "white" }}>
-              Your one-stop property suburb search
-            </p>
-          </div>
-          <div className="login-container">
-            <div className="login-box">
-              {isSignIn ? <SignIn /> : <SignUp />}
-            </div>
-          </div>
+        <div style={{ height: "100vh" }} className={`main-container `}>
+          {isSignIn ? <SignIn /> : <SignUp />}
         </div>
       </LoginPagestyled>
     </>

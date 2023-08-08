@@ -4,7 +4,7 @@ import NavBar from "../../components/nav-bar/nav-bar";
 import { useApplicationContext } from "../../context/app-context";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
-import { Collapse, Menu, Dropdown } from "antd";
+import { Collapse, Menu, Dropdown, message } from "antd";
 import { statesOfAus } from "../../components/states-in-aus/states";
 import Select, { components } from "react-select";
 import CurrencyInput from "react-currency-input-field";
@@ -26,6 +26,7 @@ const HomePage = () => {
     setIsUserValid,
     filteredResults,
     isResultsFiltered,
+    dropdownHeight,
   } = useApplicationContext();
 
   const [dwellingType, setDwellingType] = useState("");
@@ -52,6 +53,14 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   const isAdmin = localStorage.getItem("isAdmin");
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const warning = () => {
+    messageApi.open({
+      type: "warning",
+      content: " Select at least 4 factors to view ranked suburbs",
+    });
+  };
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
@@ -129,10 +138,6 @@ const HomePage = () => {
     } else {
       setBudget(null);
     }
-  };
-
-  const handleDashBoard = () => {
-    navigate("/suburbs");
   };
 
   const handleSubmit = () => {
@@ -344,215 +349,286 @@ const HomePage = () => {
     }
   }, [screenWidth]);
 
+  useEffect(() => {
+    if (
+      results &&
+      !filteredResults &&
+      dwellingType &&
+      minBedrooms &&
+      selectedStates &&
+      area &&
+      budget
+    ) {
+      warning();
+    }
+  }, [results, filteredResults]);
+
   return (
     <>
       <NavBar />
-      <HomePageStyled>
-        <p className="header-caption">
-          Welcome to the one-stop property search. Simply fill out the details
-          below and let's get started on your property journey{" "}
-        </p>
-        <div className="home-page-container">
-          <center>
-            <div className="container max-width .col-12 .col-sm-6 .col-lg-8 filter-main-page-container ">
-              <div className="container col-12 search-box">
-                <Collapse
-                  defaultActiveKey={["1"]}
-                  items={[
-                    {
-                      key: "1",
-                      label: <h3>Property characteristics</h3>,
-                      children: (
-                        <div className="search-sub-main-box">
-                          <div className="search-sub-box">
-                            <div className="search-filter">
-                              <label>Dwelling type</label>
-                              <Select
-                                className="basic-filter"
-                                options={[
-                                  { value: "Unit", label: "Unit" },
-                                  { value: "House", label: "House" },
-                                  { value: "Townhouse", label: "Town House" },
-                                ]}
-                                value={dwellingType}
-                                onChange={setDwellingType}
-                              />
-                            </div>
-
-                            <div className="search-filter">
-                              <label>Minimum bedrooms</label>
-
-                              <Select
-                                required
-                                className="basic-filter"
-                                options={[
-                                  { value: "1", label: "1" },
-                                  { value: "2", label: "2" },
-                                  { value: "3", label: "3" },
-                                  { value: "4", label: "4" },
-                                  { value: "5", label: "5" },
-                                  { value: "6", label: "6" },
-                                  { value: "7", label: "7" },
-                                  { value: "unsure", label: "unsure" },
-                                ]}
-                                value={minBedrooms}
-                                onChange={setMinBedrooms}
-                              />
-                            </div>
+      {contextHolder}
+      <p
+        style={{
+          marginTop: `${dropdownHeight ? `${dropdownHeight + 70}px` : "100px"}`,
+          transition: "all 0.3s ease",
+        }}
+        className="header-caption "
+      >
+        Welcome to the one-stop property search. Simply fill out the details
+        below and let's get started on your property journey{" "}
+      </p>
+      <div className="container bg-red col-12  home-page-container ">
+        <HomePageStyled>
+          <div className="container max-width .col-12 .col-sm-6 .col-lg-8 filter-main-page-container ">
+            <div className="container col-12 search-box">
+              <Collapse
+                defaultActiveKey={["1"]}
+                items={[
+                  {
+                    key: "1",
+                    label: <h4>Property characteristics</h4>,
+                    children: (
+                      <div className="search-sub-main-box col-12">
+                        <div className="search-sub-box d-lg-flex d-flex-column col-12">
+                          <div className="search-filter d-flex gap-3  mb-lg-0  mb-3 align-items-center">
+                            <label
+                              className="search-label"
+                              style={{ width: "150px", textAlign: "left" }}
+                            >
+                              Dwelling type
+                            </label>
+                            <Select
+                              className="basic-filter"
+                              options={[
+                                { value: "Unit", label: "Unit" },
+                                { value: "House", label: "House" },
+                                { value: "Townhouse", label: "Town House" },
+                              ]}
+                              value={dwellingType}
+                              onChange={setDwellingType}
+                            />
                           </div>
-                          <div className="search-sub-box">
-                            <div className="search-filter">
-                              {" "}
-                              <label>State</label>
-                              <Select
-                                className="state-select"
-                                isMulti
-                                options={statesOfAus}
-                                components={{ Option }}
-                                onChange={handleSelectedStates}
-                                required
-                              />
-                            </div>
 
-                            <div className="search-filter">
-                              <label>Area classification</label>
+                          <div className="search-filter  d-flex  gap-3  align-items-center">
+                            <label
+                              className="search-label"
+                              style={{ width: "150px", textAlign: "left" }}
+                            >
+                              Minimum bedrooms
+                            </label>
 
-                              <Select
-                                className="basic-filter"
-                                options={[
-                                  {
-                                    value: "metropolitan",
-                                    label: "Metropolitan",
-                                  },
-                                  { value: "rural", label: "Rural" },
-                                  { value: "remote", label: "Remote" },
-                                  { value: "unsure", label: "Unsure" },
-                                ]}
-                                value={area}
-                                onChange={setArea}
-                              />
-                            </div>
+                            <Select
+                              required
+                              className="basic-filter"
+                              options={[
+                                { value: "1", label: "1" },
+                                { value: "2", label: "2" },
+                                { value: "3", label: "3" },
+                                { value: "4", label: "4" },
+                                { value: "5", label: "5" },
+                                { value: "6", label: "6" },
+                                { value: "7", label: "7" },
+                                { value: "unsure", label: "unsure" },
+                              ]}
+                              value={minBedrooms}
+                              onChange={setMinBedrooms}
+                            />
                           </div>
-                          <div className="search-sub-box">
-                            <div className="search-filter">
-                              <label>Budget</label>
-                              <div
-                                style={{
-                                  display: "flex",
-                                  justifyContent: "center",
-                                  alignItems: "center",
-                                  gap: "5px",
-                                }}
-                              >
-                                <div>
-                                  <CurrencyInput
-                                    className="currency-input"
-                                    placeholder="Enter budget"
-                                    prefix="$"
-                                    decimalsLimit={0}
-                                    value={budget}
-                                    onValueChange={handleBudget}
-                                    required
-                                  />{" "}
-                                  {budget ? (
-                                    budget.length < 6 ? (
-                                      <p className="budget-alert">
-                                        should be minimum of 6 digits
-                                      </p>
-                                    ) : (
-                                      ""
-                                    )
+                        </div>
+                        <div className="search-sub-box d-lg-flex   col-12">
+                          <div className="search-filter  d-flex  gap-3 mb-lg-0  mb-3 align-items-center">
+                            {" "}
+                            <label
+                              className="search-label"
+                              style={{ width: "150px", textAlign: "left" }}
+                            >
+                              State
+                            </label>
+                            <Select
+                              className="state-select"
+                              isMulti
+                              options={statesOfAus}
+                              components={{ Option }}
+                              onChange={handleSelectedStates}
+                              required
+                            />
+                          </div>
+
+                          <div className=" d-flex align-items-center  gap-3   search-filter">
+                            <label
+                              className="search-label"
+                              style={{ width: "150px", textAlign: "left" }}
+                            >
+                              Area classification
+                            </label>
+
+                            <Select
+                              className="basic-filter"
+                              options={[
+                                {
+                                  value: "metropolitan",
+                                  label: "Metropolitan",
+                                },
+                                { value: "rural", label: "Rural" },
+                                { value: "remote", label: "Remote" },
+                                { value: "unsure", label: "Unsure" },
+                              ]}
+                              value={area}
+                              onChange={setArea}
+                            />
+                          </div>
+                        </div>
+                        <div className="search-sub-box d-lg-flex justify-content-around   col-12 ">
+                          <div className="search-filter  d-flex align-items-center  gap-3 ">
+                            <label
+                              className="search-label"
+                              style={{ width: "150px", textAlign: "left" }}
+                            >
+                              Budget
+                            </label>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                gap: "5px",
+                              }}
+                            >
+                              <div>
+                                <CurrencyInput
+                                  className="currency-input"
+                                  placeholder="Enter budget"
+                                  prefix="$"
+                                  decimalsLimit={0}
+                                  value={budget}
+                                  onValueChange={handleBudget}
+                                  required
+                                />{" "}
+                                {budget ? (
+                                  budget.length < 6 ? (
+                                    <p className="budget-alert">
+                                      should be minimum of 6 digits
+                                    </p>
                                   ) : (
                                     ""
-                                  )}
-                                </div>
+                                  )
+                                ) : (
+                                  ""
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="search-filter invisible   d-flex align-items-center  gap-3 ">
+                            <label
+                              className="search-label"
+                              style={{ width: "150px", textAlign: "left" }}
+                            >
+                              Budget
+                            </label>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                gap: "5px",
+                              }}
+                            >
+                              <div>
+                                <CurrencyInput
+                                  className="currency-input"
+                                  placeholder="Enter budget"
+                                  prefix="$"
+                                  decimalsLimit={0}
+                                  value={budget}
+                                  onValueChange={handleBudget}
+                                  required
+                                />{" "}
                               </div>
                             </div>
                           </div>
                         </div>
-                      ),
-                    },
-                  ]}
-                />
-                <Collapse
-                  style={{ marginTop: "20px" }}
-                  defaultActiveKey={["1"]}
-                  items={[
-                    {
-                      key: "1",
-                      label: (
-                        <h3 style={{ marginRight: "30px" }}>
-                          Investment strategy
-                        </h3>
-                      ),
-                      children: isMobile ? (
+                      </div>
+                    ),
+                  },
+                ]}
+              />
+
+              <Collapse
+                style={{ marginTop: "20px" }}
+                defaultActiveKey={["1"]}
+                items={[
+                  {
+                    key: "1",
+                    label: (
+                      <h4 style={{ marginRight: "30px" }}>
+                        Investment strategy
+                      </h4>
+                    ),
+                    children: isMobile ? (
+                      <>
+                        <p style={{ marginBottom: "30px" }}>
+                          Please select the relevant factors based on your
+                          preference
+                        </p>
+
                         <FilterMobile
                           demandPrevMonth={demandPrevMonth}
                           availabilityOfSupply={availabilityOfSupply}
                           growthInProperty={growthInProperty}
                           rentalYield={rentalYield}
                         />
-                      ) : (
-                        <>
-                          <center>
-                            <p style={{ marginBottom: "30px" }}>
-                              Please move the relevant factors in the
-                              appropriate container based on your preference
-                            </p>
-                          </center>
-                          <FilterPage
-                            demandPrevMonth={demandPrevMonth}
-                            availabilityOfSupply={availabilityOfSupply}
-                            growthInProperty={growthInProperty}
-                            rentalYield={rentalYield}
-                          />
-                        </>
-                      ),
-                    },
-                  ]}
-                />
-              </div>
-
-              {isAdmin === "true" ? (
-                <button className="dash-btn" onClick={handleDashBoard}>
-                  Dashboard
-                </button>
-              ) : (
-                ""
-              )}
+                      </>
+                    ) : (
+                      <>
+                        <center>
+                          <p style={{ marginBottom: "30px" }}>
+                            Please move the relevant factors in the appropriate
+                            container based on your preference
+                          </p>
+                        </center>
+                        <FilterPage
+                          demandPrevMonth={demandPrevMonth}
+                          availabilityOfSupply={availabilityOfSupply}
+                          growthInProperty={growthInProperty}
+                          rentalYield={rentalYield}
+                        />
+                      </>
+                    ),
+                  },
+                ]}
+              />
             </div>
-            {results ? (
-              results.length > 0 && !filteredResults ? (
-                <p
-                  className="filter-info"
-                  style={{
-                    fontStyle: "italic",
-                  }}
-                >
-                  {results.length} suburbs meet your criteria, try minimum four
-                  factors given in investment strategy to see the results
-                </p>
-              ) : results.length === 0 ? (
-                <p
-                  className="filter-info"
-                  style={{
-                    color: "red",
-                  }}
-                >
-                  No data found try changing the filters
-                </p>
-              ) : (
-                ""
-              )
+          </div>
+          {results ? (
+            results.length > 0 && !filteredResults ? (
+              <p className="filter-info" style={{}}>
+                {results.length} suburbs meet your criteria, try minimum four
+                factors given in investment strategy to see the results
+              </p>
+            ) : results.length === 0 ? (
+              <p
+                className="filter-info"
+                style={{
+                  color: "red",
+                }}
+              >
+                No data found try changing the filters
+              </p>
             ) : (
               ""
-            )}
-          </center>
+            )
+          ) : (
+            ""
+          )}
 
-          <div className="results-main-container" ref={resultsContainerRef}>
+          <div
+            className="results-main-container col-12 d-lg-flex"
+            ref={resultsContainerRef}
+            style={{ transition: "all 0.3s ease" }}
+          >
             <div
               style={{ display: filteredResults ? "block" : "none" }}
-              className="result-left-container"
+              className="result-left-container col-lg-6 col-12"
             >
               {filteredResults ? (
                 <>
@@ -617,8 +693,11 @@ const HomePage = () => {
               <center>
                 {displayResults ? (
                   <>
-                    <div className="table-container">
-                      <table>
+                    <div
+                      className="table-container"
+                      style={{ transition: "all 0.3s ease" }}
+                    >
+                      <table style={{ transition: "all 0.3s ease" }}>
                         <thead className="table-header">
                           <tr>
                             <th>Suburb Name</th>
@@ -741,23 +820,18 @@ const HomePage = () => {
               </center>
             </div>
             <div
-              style={{ width: filteredResults ? "" : "100%" }}
-              className="result-right-container"
+              style={{
+                width: filteredResults ? "" : "100%",
+                paddingTop: `${filteredResults ? "100px" : "15px"}`,
+                transition: "all 0.3s ease",
+              }}
+              className="result-right-container mb-5 col-lg-6 col-12"
             >
-              {results ? (
-                ""
-              ) : (
-                <p>
-                  Please select property characteristics to see where the
-                  suburbs are located
-                </p>
-              )}
-
-              <GoogleMapComponent />
+              {results ? <GoogleMapComponent /> : ""}
             </div>
           </div>
-        </div>
-      </HomePageStyled>
+        </HomePageStyled>
+      </div>
     </>
   );
 };

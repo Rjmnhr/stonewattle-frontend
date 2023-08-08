@@ -1,9 +1,11 @@
 import React from "react";
 // import { PricingPageStyled } from "./style";
 import NavBar from "../../components/nav-bar/nav-bar";
+import { useApplicationContext } from "../../context/app-context";
 // import { Carousel } from "antd";
 
 const PricingPage = () => {
+  const { dropdownHeight } = useApplicationContext();
   return (
     <>
       <head>
@@ -11,7 +13,13 @@ const PricingPage = () => {
       </head>
       <NavBar />
 
-      <div class="overflow-hidden">
+      <div
+        style={{
+          marginTop: `${dropdownHeight ? `${dropdownHeight}px` : "0px"}`,
+          transition: "all 0.3s ease",
+        }}
+        class="overflow-hidden"
+      >
         <div class="container content-space-1">
           <div class="w-lg-65 text-center mx-lg-auto mb-5 mb-sm-7 mb-lg-10"></div>
 

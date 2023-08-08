@@ -17,22 +17,34 @@ const FilterDropdown = ({
 
   const renderOptionCircle = (option) => {
     const colors = {
-      "very important": "green",
-      important: "yellow",
-      "not important": "red",
+      "very important": {
+        color: "green",
+        label: "V-IMP",
+      },
+      important: {
+        color: "orange",
+        label: "IMP",
+      },
+      "not important": {
+        color: "red",
+        label: "NOT-IMP",
+      },
     };
 
     return (
       <div
         className="option-circle"
         style={{
-          width: "10px",
-          height: "10px",
-          borderRadius: "50%",
-          backgroundColor: colors[option],
-          marginLeft: "5px",
+          // color: colors[option].color,
+          color: "gray",
+
+          width: "80px",
+          textAlign: "center",
+          paddingRight: "5px",
         }}
-      />
+      >
+        <label s>{colors[option].label}</label>
+      </div>
     );
   };
 
@@ -48,7 +60,7 @@ const FilterDropdown = ({
 
   return (
     <Dropdown overlay={menu} trigger={["click"]} placement="bottom">
-      <div className="filter-dropdown">
+      <div className="filter-dropdown p-1 text-align-left d-flex align-items-center border col-12 m-1 justify-content-between  ">
         {filter}
         {selectedOption && renderOptionCircle(selectedOption)}
       </div>
@@ -301,19 +313,17 @@ const FilterMobile = ({
 
   return (
     <>
-      <FilterMobileStyled>
-        <div className="filter-mobile-container">
-          {filters.map((filter, index) => (
-            <FilterDropdown
-              key={index}
-              filter={filter}
-              handleFilterChange={handleFilterChange}
-              filterWeightages={filterWeightages}
-              selectedOption={selectedFilters[filter]}
-            />
-          ))}
-        </div>
-      </FilterMobileStyled>
+      <div className="filter-mobile-container  container text-align-center  ">
+        {filters.map((filter, index) => (
+          <FilterDropdown
+            key={index}
+            filter={filter}
+            handleFilterChange={handleFilterChange}
+            filterWeightages={filterWeightages}
+            selectedOption={selectedFilters[filter]}
+          />
+        ))}
+      </div>
     </>
   );
 };
