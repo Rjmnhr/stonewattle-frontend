@@ -71,7 +71,7 @@ const OtpVerification = () => {
         const data = await response.data;
         console.log(data);
         setIsEmailVerified(true);
-        navigate("/create-profile");
+        navigate("/");
       })
       .catch((err) => {
         setWarning("Invalid OTP");
@@ -89,13 +89,12 @@ const OtpVerification = () => {
           </div>
           <div className="right-container">
             <div className="right-sub-container">
-              <div className="carousel-inner">
-                <div className="active carousel-item">
+              <div>
+                <div>
                   <h3>Enter Verification Code</h3>
                 </div>
                 <p style={{ width: "80%" }}>
-                  Please type in the{" "}
-                  <span className="highlight">4-digit code</span>
+                  Please type in the <span>4-digit code</span>
                   sent to your email. If it does not appear in your Inbox,
                   please check your Updates, Quarantined or Spam folders.
                 </p>

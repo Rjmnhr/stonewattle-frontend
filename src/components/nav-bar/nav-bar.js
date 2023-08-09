@@ -1,127 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
-// import { NavBarStyled } from "./nav-bar-style";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useApplicationContext } from "../../context/app-context";
-// import useMediaQuery from "@mui/material/useMediaQuery";
-// import { Menu } from "antd";
-// import { MenuOutlined } from "@ant-design/icons";
-
-// const NavBar = () => {
-//   const [current, setCurrent] = useState("home");
-//   const isSmallScreen = useMediaQuery("(max-width: 768px)");
-//   const [showMenu, setShowMenu] = useState(false);
-//   const navigate = useNavigate();
-//   const Location = useLocation();
-
-//   useEffect(() => {
-//     if (Location.pathname === "/home") {
-//       setCurrent("home");
-//     } else if (Location.pathname === "/about") {
-//       setCurrent("about");
-//     } else if (Location.pathname === "/pricing") {
-//       setCurrent("pricing");
-//     } else if (Location.pathname === "/contact") {
-//       setCurrent("contact");
-//     }
-//   }, [Location.pathname, current]);
-
-//   const handleSwitch = (e) => {
-//     setCurrent(e.key);
-//   };
-
-// const handleClick = () => {
-//   navigate("/");
-//   localStorage.setItem("accessToken", "");
-// };
-
-//   const items = [
-//     {
-//       label: <a href="/home">Home</a>,
-//       key: "home",
-//     },
-//     {
-//       label: <a href="/about">About</a>,
-//       key: "about",
-//     },
-//     {
-//       label: <a href="/pricing">Pricing</a>,
-//       key: "pricing",
-//     },
-//     {
-//       label: <a href="/contact">Contact</a>,
-//       key: "contact",
-//     },
-//     {
-//       label: (
-//         <p style={{ color: "white" }} onClick={handleClick}>
-//           Log out
-//         </p>
-//       ),
-//       key: "log-out",
-//     },
-//   ];
-
-//   const menu = (
-//     <Menu
-//       onClick={handleSwitch}
-//       selectedKeys={[current]}
-//       mode="horizontal"
-//       items={items}
-//     />
-//   );
-
-//   // const dropdown = (
-//   //   <Dropdown overlay={menu}>
-//   //     <div className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-//   //       Menu
-//   //     </div>
-//   //   </Dropdown>
-//   // );
-
-//   const toggleMenu = () => {
-//     setShowMenu(!showMenu);
-//   };
-
-//   return (
-//     <>
-//       <NavBarStyled>
-//         <nav className="nav-container">
-//           <h1 style={{ paddingLeft: "20px", color: "white" }}>2ndStorey</h1>
-//           {isSmallScreen ? (
-//             <>
-//               <MenuOutlined className="menu-icon" onClick={toggleMenu} />
-//               <div className={`menu-overlay ${showMenu ? "show" : ""}`}>
-//                 <div style={{ background: " #333333", padding: "22px" }}>
-//                   <MenuOutlined className="menu-icon" onClick={toggleMenu} />
-//                 </div>
-
-//                 <div className="nav-options">
-//                   {items.map((option) => {
-//                     return (
-//                       <p
-//                         style={{
-//                           color: "white",
-//                           padding: "12px",
-//                           fontWeight: "bold",
-//                           borderBottom: "1px solid gray",
-//                         }}
-//                       >
-//                         {option.label}
-//                       </p>
-//                     );
-//                   })}
-//                 </div>
-//               </div>
-//             </>
-//           ) : (
-//             menu
-//           )}
-//         </nav>
-//       </NavBarStyled>
-//     </>
-//   );
-// };
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -138,15 +18,25 @@ const NavBar = () => {
     setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
     setPrevScrollPos(currentScrollPos);
   };
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
 
   const handleLogOut = () => {
     navigate("/");
     localStorage.setItem("accessToken", "");
+    localStorage.setItem("isLoggedIn", false);
   };
 
   const navbarStyles = {
     transition: "top 0.3s",
     top: visible ? "0" : "-100px", // Adjust the value as needed
+  };
+
+  const handleApplication = () => {
+    if (isLoggedIn === "true") {
+      navigate("/application");
+    } else {
+      navigate("/login");
+    }
   };
 
   useEffect(() => {
@@ -166,6 +56,7 @@ const NavBar = () => {
     } else {
       setDropdownHeight(null);
     }
+    // eslint-disable-next-line
   }, [dropdownActive]);
 
   return (
@@ -184,9 +75,9 @@ const NavBar = () => {
             <a
               style={{ fontSize: "25px" }}
               className="navbar-brand fw-bold "
-              href="/home"
+              href="/"
             >
-              2ndStorey
+              2nd Storey
             </a>
 
             <button
@@ -217,11 +108,29 @@ const NavBar = () => {
                   }
                 }'
                   ></li>
+                  <li
+                    className="hs-has-mega-menu nav-item"
+                    data-hs-mega-menu-item-options='{
+                  "desktop": {
+                    "maxWidth": "20rem"
+                  }
+                }'
+                  >
+                    <p
+                      id="docsMegaMenu"
+                      className="hs-mega-menu-invoker nav-link d-lg-block d-flex justify-content-start m-0  "
+                      onClick={handleApplication}
+                      role="button"
+                      aria-expanded="false"
+                    >
+                      Application
+                    </p>
+                  </li>
 
                   <li className="hs-has-mega-menu nav-item">
                     <a
                       id="pagesMegaMenu"
-                      className="hs-mega-menu-invoker nav-link dropdown-toggle "
+                      className="hs-mega-menu-invoker nav-link  d-lg-block d-flex justify-content-start  "
                       href="/pricing"
                       role="button"
                       aria-expanded="false"
@@ -235,24 +144,7 @@ const NavBar = () => {
                       style={{ minWidth: "42rem" }}
                     ></div>
                   </li>
-                  <li
-                    className="hs-has-mega-menu nav-item"
-                    data-hs-mega-menu-item-options='{
-                  "desktop": {
-                    "maxWidth": "50rem"
-                  }
-                }'
-                  >
-                    <a
-                      id="blogMegaMenu"
-                      className="hs-mega-menu-invoker nav-link dropdown-toggle "
-                      href="/about"
-                      role="button"
-                      aria-expanded="false"
-                    >
-                      About us
-                    </a>
-                  </li>
+
                   <li
                     className="hs-has-mega-menu nav-item"
                     data-hs-mega-menu-item-options='{
@@ -263,7 +155,7 @@ const NavBar = () => {
                   >
                     <a
                       id="docsMegaMenu"
-                      className="hs-mega-menu-invoker nav-link dropdown-toggle "
+                      className="hs-mega-menu-invoker nav-link  d-lg-block d-flex justify-content-start  "
                       href="/contact"
                       role="button"
                       aria-expanded="false"
@@ -271,16 +163,26 @@ const NavBar = () => {
                       Contact us
                     </a>
                   </li>
+
                   <li className="nav-item ms-lg-auto">
-                    <p
-                      onClick={handleLogOut}
-                      className="btn btn-ghost-dark me-2 me-lg-0 p-0 m-0"
-                      href="../page-login.html"
-                    >
-                      Log out
-                    </p>
+                    {isLoggedIn === "true" ? (
+                      <p
+                        onClick={handleLogOut}
+                        className="btn btn-ghost-dark p-2 me-2 border me-lg-0  m-0"
+                      >
+                        Log out
+                      </p>
+                    ) : (
+                      <a
+                        className="btn btn-ghost-dark p-2 me-2 border me-lg-0  m-0"
+                        href="/login"
+                      >
+                        Log in
+                      </a>
+                    )}
+
                     {isAdmin === "true" ? (
-                      <a className="btn btn-dark d-lg-none" href="/suburbs">
+                      <a className="btn  p-2  d-lg-none" href="/suburbs">
                         Dashboard
                       </a>
                     ) : (

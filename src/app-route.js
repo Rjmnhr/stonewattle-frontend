@@ -1,13 +1,15 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginPage from "./pages/login-page";
-import HomePage from "./pages/home-page";
+
 import Suburb from "./pages/suburbs";
 import OtpVerification from "./pages/otp-verification";
 import SuburbId from "./pages/suburb-id";
 import CreateProfile from "./components/create-profile/profile";
-import AboutPage from "./pages/about-page";
+
 import PricingPage from "./pages/pricing-page";
 import ContactPage from "./pages/contact-page";
+import ApplicationPage from "./pages/Application-page";
+import HomePage from "./pages/home-page";
 
 // import GoogleMapComponent from "./components/GIS-mapping/google-map-container";
 
@@ -21,15 +23,15 @@ const AppRoute = () => {
           path="/"
           element={
             <>
-              <LoginPage />
+              <HomePage />
             </>
           }
         />
         <Route
-          path="/home"
+          path="/application"
           element={
             <>
-              <HomePage />
+              <ApplicationPage />
             </>
           }
         />
@@ -66,10 +68,10 @@ const AppRoute = () => {
           }
         />
         <Route
-          path="/about"
+          path="/login"
           element={
             <>
-              <AboutPage />
+              <LoginPage />
             </>
           }
         />
