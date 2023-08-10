@@ -6,11 +6,11 @@ import {
 } from "@react-google-maps/api";
 import { useApplicationContext } from "../../context/app-context";
 import { useRef, useState } from "react";
+import { Room } from "@mui/icons-material";
 
 const Map = () => {
   const { results } = useApplicationContext();
   const [selectedMarker, setSelectedMarker] = useState(null);
-  const markerRef = useRef(null);
 
   // const handleMarkerHover = (suburb) => {
   //   setSelectedMarker(suburb);
@@ -40,6 +40,8 @@ const Map = () => {
                 <Marker
                   position={{ lat: latitude, lng: longitude }}
                   onClick={() => setSelectedMarker(suburb)}
+                  onMouseOver={() => setSelectedMarker(suburb)}
+                  onMouseOut={() => setSelectedMarker(null)}
                 />
               </>
             );
@@ -52,11 +54,11 @@ const Map = () => {
             lat: selectedMarker.latitude,
             lng: selectedMarker.longitude,
           }}
-          onCloseClick={setSelectedMarker(null)}
+          onCloseClick={() => setSelectedMarker(null)}
         >
           <div>
-            <h3>{selectedMarker.suburb_name}</h3>
-            <p>A beautiful city by the bay.</p>
+            <p>{selectedMarker.suburb_name}</p>
+            <p>{selectedMarker.postcode}</p>
           </div>
         </InfoWindow>
       )}
