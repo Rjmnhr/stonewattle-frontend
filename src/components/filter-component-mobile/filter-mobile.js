@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Dropdown, Menu } from "antd";
-import { FilterMobileStyled } from "./filter-mobile-style";
 import { useApplicationContext } from "../../context/app-context";
 
 const FilterDropdown = ({
@@ -10,42 +9,26 @@ const FilterDropdown = ({
   selectedOption,
 }) => {
   const options = ["very important", "important", "not important"];
+  const [currentLabel, setCurrentLabel] = useState("NOT-IMP"); // Initialize with "select"
 
-  const handleOptionClick = (option) => {
-    handleFilterChange(filter, option);
+  const colors = {
+    "very important": {
+      color: "green",
+      label: "V-IMP",
+    },
+    important: {
+      color: "orange",
+      label: "IMP",
+    },
+    "not important": {
+      color: "red",
+      label: "NOT-IMP",
+    },
   };
 
-  const renderOptionCircle = (option) => {
-    const colors = {
-      "very important": {
-        color: "green",
-        label: "V-IMP",
-      },
-      important: {
-        color: "orange",
-        label: "IMP",
-      },
-      "not important": {
-        color: "red",
-        label: "NOT-IMP",
-      },
-    };
-
-    return (
-      <div
-        className="option-circle"
-        style={{
-          // color: colors[option].color,
-          color: "gray",
-
-          width: "80px",
-          textAlign: "center",
-          paddingRight: "5px",
-        }}
-      >
-        <label s>{colors[option].label}</label>
-      </div>
-    );
+  const handleOptionClick = (option) => {
+    setCurrentLabel(colors[option]?.label || "select");
+    handleFilterChange(filter, option);
   };
 
   const menu = (
@@ -60,9 +43,24 @@ const FilterDropdown = ({
 
   return (
     <Dropdown overlay={menu} trigger={["click"]} placement="bottom">
-      <div className="filter-dropdown p-1 text-align-left d-flex align-items-center border col-12 m-1 justify-content-between  ">
+      <div
+        className="filter-dropdown  p-1 p-lg-2  text-align-left d-flex align-items-center border col-12  col-lg-3 m-1 justify-content-between  "
+        style={{ cursor: "pointer" }}
+      >
         {filter}
-        {selectedOption && renderOptionCircle(selectedOption)}
+        <div
+          className="option-circle"
+          style={{
+            // color: colors[option].color,
+            color: "gray",
+
+            width: "80px",
+            textAlign: "center",
+            paddingRight: "5px",
+          }}
+        >
+          <label>{currentLabel}</label>
+        </div>
       </div>
     </Dropdown>
   );
@@ -103,7 +101,7 @@ const FilterMobile = ({
     "Family friendly": setFamilyWeightage,
     "High rental yield": setRentalYieldWeightage,
     "Growth in property": SetGrowthInPropertyWeightage,
-    "Ratio of renters to owners": setRentVsOwnerRatioWeightage,
+    "Renters to owners ratio ": setRentVsOwnerRatioWeightage,
     "High demand": setAvailabilityOfSupplyWeightage,
     "High ratings": setRatingsWeightage,
     "Low supply": setDemandPrevMonthWeightage,
@@ -139,7 +137,7 @@ const FilterMobile = ({
     "Family friendly",
     "High rental yield",
     "Growth in property",
-    "Ratio of renters to owners",
+    "Renters to owners ratio ",
     "High demand",
     "High ratings",
     "Low supply",
@@ -313,14 +311,14 @@ const FilterMobile = ({
 
   return (
     <>
-      <div className="filter-mobile-container  container text-align-center  ">
+      <div className="filter-mobile-container d-lg-flex flex-wrap justify-content-around container   ">
         {filters.map((filter, index) => (
           <FilterDropdown
             key={index}
             filter={filter}
             handleFilterChange={handleFilterChange}
             filterWeightages={filterWeightages}
-            selectedOption={selectedFilters[filter]}
+            selectedOption={selectedFilters[filter]} // Pass the selected option from state
           />
         ))}
       </div>

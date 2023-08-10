@@ -1,73 +1,93 @@
-import React from "react";
-import GoogleMapReact from "google-map-react";
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  InfoWindow,
+} from "@react-google-maps/api";
+import { useApplicationContext } from "../../context/app-context";
+import { useMemo, useState } from "react";
 
-const AnyReactComponent = ({ children }) => (
-  <div style={{ width: "200px", height: "100px", background: "red" }}>
-    {children}
-  </div>
-);
+const Map = () => {
+  const { results } = useApplicationContext();
+  const [selectedMarker, setSelectedMarker] = useState(null);
+  const [map, setMap] = useState(null);
+  const initialMapCenter = useMemo(
+    () => ({ lat: -25.2744, lng: 133.7751 }),
+    []
+  );
 
-const MapComponent = () => {
-  const defaultProps = {
-    center: {
-      lat: -25.2744,
-      lng: 133.7751,
-    },
-    zoom: 5,
+  const handleMapLoad = (mapInstance) => {
+    setMap(mapInstance);
   };
 
-  const sydneyCoords = [
-    // Replace with the coordinates of the Sydney area
-    { lat: -33.8688, lng: 151.2093 },
-    // Add more coordinates to form a polygon that covers the Sydney area
-    // For example, add points for the corners of the Sydney area or its boundary
-  ];
-
-  // const customMapStyle = [
-  //   // Replace with your custom style JSON from the Google Maps Styling Wizard
-  //   {
-  //     elementType: "geometry",
-  //     stylers: [
-  //       {
-  //         color: "#f8f8f8", // Red color for the whole area
-  //       },
-  //     ],
-  //   },
-  //   // Add more styles here if needed
-  // ];
-
-  const onGoogleMapLoaded = (map, maps) => {
-    const path = sydneyCoords.map(
-      (point) => new maps.LatLng(point.lat, point.lng)
-    );
-
-    const polygon = new maps.Polygon({
-      paths: path,
-      fillColor: "#ff0000",
-      fillOpacity: 0.2,
-      strokeWeight: 0,
-    });
-
-    polygon.setMap(map);
-  };
+  // const handleInfoWindowClick = (suburb, zoom) => {
+  //   if (map) {
+  //     map.panTo({ lat: suburb.latitude, lng: suburb.longitude });
+  //     map.setZoom(zoom);
+  //   }
+  // };
 
   return (
-    <div style={{ height: "100vh", width: "100%" }}>
-      <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyAmi5mJgION_Zh5w4HhNr3_0Sc0fANMIqg" }}
-        defaultCenter={defaultProps.center}
-        defaultZoom={defaultProps.zoom}
-        // options={{ styles: customMapStyle }}
-        onGoogleApiLoaded={({ map, maps }) => onGoogleMapLoaded(map, maps)}
-      >
-        <AnyReactComponent
-          lat={-33.865143}
-          lng={151.2099}
-          children={"MArker"}
-        />
-      </GoogleMapReact>
-    </div>
+    <GoogleMap
+      zoom={5}
+      center={initialMapCenter}
+      mapContainerClassName="map-container"
+      onLoad={handleMapLoad}
+    >
+      {results
+        ? results.map((suburb) => {
+            // const latitude = parseInt(suburb.latitude);
+            // const longitude = parseInt(suburb.longitude);
+
+            return (
+              <>
+                <Marker
+                  key={suburb.suburb_id} // Add a unique key to each marker
+                  position={{ lat: suburb.latitude, lng: suburb.longitude }}
+                  onClick={() => {
+                    setSelectedMarker(suburb);
+                  }}
+                  // onMouseOver={() => setSelectedMarker(suburb)}
+                  // onMouseOut={() => setSelectedMarker(null)}
+                />
+              </>
+            );
+          })
+        : ""}
+
+      {selectedMarker && (
+        <InfoWindow
+          position={{
+            lat: selectedMarker.latitude,
+            lng: selectedMarker.longitude,
+          }}
+          onCloseClick={() => {
+            setSelectedMarker(null);
+          }}
+        >
+          <div className="container text-start pt-2">
+            <p className="fw-bold">Suburb: {selectedMarker.suburb_name}</p>
+            <p>Postcode: {selectedMarker.postcode}</p>
+            <p>
+              Ratings:{" "}
+              <span style={{ color: "green" }}>{selectedMarker.ratings}</span>
+            </p>
+          </div>
+        </InfoWindow>
+      )}
+    </GoogleMap>
   );
 };
 
-export default MapComponent;
+const GoogleMapComponent = () => {
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: "AIzaSyAmi5mJgION_Zh5w4HhNr3_0Sc0fANMIqg",
+  });
+
+  console.log(isLoaded);
+
+  if (!isLoaded) return <div>Loading....</div>;
+  return <Map />;
+};
+
+export default GoogleMapComponent;

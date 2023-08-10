@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useApplicationContext } from "../../context/app-context";
 import { message } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import GoogleLoginComponent from "../google-login/google-login";
+import AxiosInstance from "../axios";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -10,7 +12,6 @@ const SignIn = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const [warning, setWarning] = useState("");
   const navigate = useNavigate();
   const { setIsSignIn, setIsLoggedIn } = useApplicationContext();
   const [messageApi, contextHolder] = message.useMessage();
@@ -31,44 +32,36 @@ const SignIn = () => {
     formData.append("email", email);
     formData.append("password", password);
 
-    fetch("http://2ndstorey.com:8002/api/user/login", {
-      method: "POST",
+    AxiosInstance.post("/api/user/login", formData, {
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
     })
       .then(async (response) => {
-        const data = await response.json();
-        console.log("result", data);
+        const data = await response.data;
         setIsLoading(false);
 
-        if (typeof data === "string") {
-          error(data);
+        if (!response.status === 200) {
+          error("wrong password or username");
           document.querySelector("#signupSrPassword").style.border =
             "1px solid red";
           document.querySelector("#signinSrEmail").style.border =
             "1px solid red";
-          setWarning("wrong username or password");
           return;
         }
+
         success();
 
         const accessToken = data.accessToken;
-        console.log(accessToken);
 
         if (!accessToken) return error(data);
 
         const userType = data.user_type;
-        const UserId = data.id;
 
-        localStorage.setItem("UserID", UserId);
-        localStorage.setItem("userData", JSON.stringify(data));
         localStorage.setItem("userType", userType);
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("isLoggedIn", true);
 
         setIsLoggedIn(true);
 
-        console.log("userType", data.user_type);
         if (userType === "admin") {
           localStorage.setItem("isAdmin", "true");
         } else {
@@ -122,17 +115,6 @@ const SignIn = () => {
           <div className="container mt-3 mt-lg-0 mb-5 ">
             <div className="mx-lg-auto" style={{ maxWidth: "55rem" }}>
               <div className="d-flex justify-content-center align-items-center flex-column min-vh-lg-100">
-                {/* <header
-                  id="header"
-                  className="navbar navbar-height navbar-light mb-3"
-                >
-                   <div className="container">
-                    <a className="navbar-brand mx-auto" href="/" aria-label="Unify">
-                      <h3>2ndstorey</h3>
-                    </a>
-                  </div> 
-                </header> */}
-
                 <div className="position-relative">
                   <div className="card card-shadow card-login">
                     <div className="row">
@@ -150,19 +132,9 @@ const SignIn = () => {
                                 </h3>
                               </div>
 
-                              <a
-                                className="btn btn-white btn-lg d-grid mb-4"
-                                href="/"
-                              >
-                                <span className="d-flex justify-content-center align-items-center">
-                                  <img
-                                    className="avatar avatar-xss me-2"
-                                    src="./assets/svg/brands/google-icon.svg"
-                                    alt="IDescription"
-                                  />
-                                  Log in with Google
-                                </span>
-                              </a>
+                              <GoogleLoginComponent
+                                element={"Log in with Google"}
+                              />
 
                               <span className="divider-center text-muted mb-4">
                                 OR
@@ -170,12 +142,6 @@ const SignIn = () => {
                             </div>
 
                             <div className="mb-4">
-                              {/* <label
-                                className="form-label"
-                                htmlFor="signinSrEmail"
-                              >
-                                Your email
-                              </label> */}
                               <input
                                 type="email"
                                 className="form-control form-control-lg"
@@ -192,14 +158,6 @@ const SignIn = () => {
                             </div>
 
                             <div className="mb-4">
-                              {/* <label
-                                className="form-label"
-                                htmlFor="signupSrPassword"
-                                tabindex="0"
-                              >
-                                Password
-                              </label> */}
-
                               <div className="input-group-merge">
                                 <input
                                   type={passwordVisible ? "text" : "password"}

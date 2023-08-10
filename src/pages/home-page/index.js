@@ -15,10 +15,10 @@ const HomePage = () => {
           display: "grid",
           placeItems: "center",
         }}
-        class="container content-space w-100  "
+        className="container content-space w-100  "
       >
-        <div class="w-lg-100 text-center mx-lg-auto mb-5 mb-sm-7 mb-lg-10">
-          <p style={{ textAlign: "left" }} class="lead ">
+        <div className="w-lg-100 p-lg-1 p-3 mt-lg-0 mt-1 text-center mx-lg-auto mb-5 mb-sm-7 mb-lg-10">
+          <p style={{ textAlign: "left" }}>
             We are a technology AI company using property data to bring to you a
             one-stop platform for all your needs. We have been investing in the
             Australian property market over the last 10 years and have more than

@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import AxiosInstance from "../axios";
 import { useEffect } from "react";
 import { message } from "antd";
+import GoogleLoginComponent from "../google-login/google-login";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -50,6 +51,7 @@ const SignUp = () => {
     })
       .then(async (response) => {
         const data = await response.data;
+        // Handle successful OTP request
         console.log(data);
 
         localStorage.setItem("email", lowerCasedEmail);
@@ -61,7 +63,6 @@ const SignUp = () => {
         navigate("/otp-validation");
       })
       .catch((err) => console.log(err));
-    // Handle successful OTP request
   };
 
   const togglePasswordVisibility = () => {
@@ -104,16 +105,9 @@ const SignUp = () => {
                             <h3 class="card-title">Create your account</h3>
                           </div>
 
-                          <a class="btn btn-white btn-lg d-grid mb-4" href="/">
-                            <span class="d-flex justify-content-center align-items-center">
-                              <img
-                                class="avatar avatar-xss me-2"
-                                src="./assets/svg/brands/google-icon.svg"
-                                alt=" Description"
-                              />
-                              Sign up with Google
-                            </span>
-                          </a>
+                          <GoogleLoginComponent
+                            element={"Sign up with Google"}
+                          />
 
                           <span class="divider-center text-muted mb-4">OR</span>
                         </div>
@@ -155,9 +149,6 @@ const SignUp = () => {
                         </div>
 
                         <div class="mb-4">
-                          {/* <label class="form-label" for="signupSrEmail">
-                                Your email
-                              </label> */}
                           <input
                             type="email"
                             class="form-control form-control-lg"
@@ -174,10 +165,6 @@ const SignUp = () => {
                         </div>
 
                         <div class="mb-4">
-                          {/* <label class="form-label" for="signupSrPassword">
-                                Password
-                              </label> */}
-
                           <div class="input-group-merge">
                             <input
                               type={passwordVisible ? "text" : "password"}
@@ -188,7 +175,6 @@ const SignUp = () => {
                               aria-label="8+ characters required"
                               required
                               onChange={(e) => setPassword(e.target.value)}
-                              minlength="8"
                               data-hs-toggle-password-options='{
                                    "target": [".js-toggle-password-target-1", ".js-toggle-password-target-2"],
                                    "defaultClass": "bi-eye-slash",
@@ -211,13 +197,6 @@ const SignUp = () => {
                         </div>
 
                         <div class="mb-4">
-                          {/* <label
-                                class="form-label"
-                                for="signupSrConfirmPassword"
-                              >
-                                Confirm password
-                              </label> */}
-
                           <div class="input-group-merge">
                             <input
                               type={passwordVisible ? "text" : "password"}
@@ -227,7 +206,6 @@ const SignUp = () => {
                               placeholder="Confirm password"
                               aria-label="8+ characters required"
                               required
-                              minlength="8"
                               onChange={(e) =>
                                 setConfirmPassword(e.target.value)
                               }

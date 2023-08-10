@@ -7,6 +7,13 @@ export const HomePageStyled = styled.div`
     padding: 0;
     transition: "all 0.3s ease";
   }
+
+  .filter-dropdown:hover,
+  .state-select:hover,
+  .basic-filter:hover,
+  .currency-input:hover {
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  }
   //   /* .home-page-container {
   //     padding: 10px;
   //     display: flex;

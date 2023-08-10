@@ -5,8 +5,11 @@
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
+
+    <meta property="og:title" content="2nd Storey" />
+    <meta property="og:type" content="website" />
     <meta
-      name="description"
+      property="og:description"
       content="We are a technology AI company using property data to bring to you a one-stop platform for all your needs. We have been investing in the Australian property market over the last 10 years and have more than $4m worth of property portfolio."
     />
     <title>2nd Storey</title>
@@ -47,21 +50,7 @@
     <!-- JS Unify -->
     <script src="./assets/js/theme.min.js"></script>
 
-    <!-- JS Plugins Init. -->
-    <script>
-      (function () {
-        // INITIALIZATION OF MEGA MENU
-        // =======================================================
-        const megaMenu = new HSMegaMenu(".js-mega-menu", {
-          desktop: {
-            position: "left",
-          },
-        });
-
-        // INITIALIZATION OF HEADER
-        // =======================================================
-        new HSHeader("#header").init();
-      })();
-    </script>
+    <!-- Google Cors Policy  -->
+    <script src="accounts.google.com/gsi/client" async defer></script>
   </body>
 </html>

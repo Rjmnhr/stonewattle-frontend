@@ -12,6 +12,7 @@ export const AppContextProvider = ({ children }) => {
   const [availableFiltersCount, setAvailableFiltersCount] = useState(0);
   const [dropdownHeight, setDropdownHeight] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userInfo, setUserInfo] = useState(null);
 
   const value = {
     isEmailVerified,
@@ -32,6 +33,8 @@ export const AppContextProvider = ({ children }) => {
     setDropdownHeight,
     isLoggedIn,
     setIsLoggedIn,
+    userInfo,
+    setUserInfo,
   };
 
   return <MyContext.Provider value={value}>{children}</MyContext.Provider>;

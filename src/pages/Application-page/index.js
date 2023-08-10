@@ -1,6 +1,5 @@
 import { HomePageStyled } from "./style";
 import NavBar from "../../components/nav-bar/nav-bar";
-// import MainFilter from "../../components/home-filter/main-filter";
 import { useApplicationContext } from "../../context/app-context";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
@@ -9,15 +8,10 @@ import { statesOfAus } from "../../components/states-in-aus/states";
 import Select, { components } from "react-select";
 import CurrencyInput from "react-currency-input-field";
 import AxiosInstance from "../../components/axios";
-import FilterPage from "../../components/filter-component/filter-page";
-
 import FilterMobile from "../../components/filter-component-mobile/filter-mobile";
 import { MdArrowDropDown } from "react-icons/md";
 import { ArrowUpOutlined, ArrowDownOutlined } from "@ant-design/icons";
-
-import GoogleMapComponent from "../../components/GIS-mapping/google-map-container";
-
-// import HighChartsMap from "../../components/GIS-mapping/high-charts";
+import GoogleMapComponent from "../../components/GIS-mapping/google-maps";
 
 const ApplicationPage = () => {
   const {
@@ -36,8 +30,6 @@ const ApplicationPage = () => {
   const [budget, setBudget] = useState(null);
   const [isDataNotFound, setIsDataNotFound] = useState(null);
   const [isBedroomsUnsure, setBedRoomsUnsure] = useState(null);
-  const [isMobile, setIsMobile] = useState(false);
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [rentalYield, setRentalYield] = useState("");
   const [growthInProperty, SetGrowthInProperty] = useState("");
   const [availabilityOfSupply, setAvailabilityOfSupply] = useState("");
@@ -89,20 +81,6 @@ const ApplicationPage = () => {
     setDisplayResults(filteredResults);
   }, [filteredResults]);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setScreenWidth(window.innerWidth);
-    };
-
-    // Add event listener to track changes in the window size
-    window.addEventListener("resize", handleResize);
-
-    // Clean up the event listener when the component unmounts
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   const handleSelectedStates = (selectedOptions) => {
     const selectedValues = selectedOptions.map((option) => option.value);
     const unsureOption = statesOfAus.find(
@@ -145,20 +123,11 @@ const ApplicationPage = () => {
     const bedrooms = minBedrooms.value;
     const areaType = area.value;
 
-    // console.log("dwelling", type);
-    // console.log("rental", rentalYield);
     if (bedrooms === "unsure") {
       setBedRoomsUnsure(true);
     } else {
       setBedRoomsUnsure(false);
     }
-
-    // console.log("type", dwellingType);
-    // console.log("yield", rentalYield);
-    // console.log("growth", growthInProperty);
-    // console.log("availability_of_supply", availabilityOfSupply);
-    // console.log("demand_prev_month", demandPrevMonth);
-    // console.log("demand_last_year", demandLastYear);
 
     const formData = new FormData();
 
@@ -340,14 +309,6 @@ const ApplicationPage = () => {
       setDisplayResults(filteredItems);
     }
   };
-
-  useEffect(() => {
-    if (screenWidth < 912) {
-      setIsMobile(true);
-    } else {
-      setIsMobile(false);
-    }
-  }, [screenWidth]);
 
   useEffect(() => {
     if (
@@ -566,29 +527,17 @@ const ApplicationPage = () => {
                         Investment strategy
                       </h4>
                     ),
-                    children: isMobile ? (
+                    children: (
                       <>
-                        <p style={{ marginBottom: "30px", textAlign: "left" }}>
+                        <p
+                          className="text-start text-lg-center"
+                          style={{ marginBottom: "30px" }}
+                        >
                           Please select the relevant factors based on your
                           preference
                         </p>
 
                         <FilterMobile
-                          demandPrevMonth={demandPrevMonth}
-                          availabilityOfSupply={availabilityOfSupply}
-                          growthInProperty={growthInProperty}
-                          rentalYield={rentalYield}
-                        />
-                      </>
-                    ) : (
-                      <>
-                        <center>
-                          <p style={{ marginBottom: "30px" }}>
-                            Please move the relevant factors in the appropriate
-                            container based on your preference
-                          </p>
-                        </center>
-                        <FilterPage
                           demandPrevMonth={demandPrevMonth}
                           availabilityOfSupply={availabilityOfSupply}
                           growthInProperty={growthInProperty}
