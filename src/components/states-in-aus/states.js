@@ -1,5 +1,5 @@
 export const statesOfAus = [
-  { value: "unsure", label: "All States" },
+  { value: "unsure", label: "All States", isDisabled: false },
   { value: "New South Wales", label: "New South Wales" },
   { value: "Queensland", label: "Queensland" },
   { value: "South Australia", label: "South Australia" },

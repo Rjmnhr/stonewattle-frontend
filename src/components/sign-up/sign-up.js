@@ -269,7 +269,11 @@ const SignUp = () => {
                           </button>
                           <p class="card-text text-muted">
                             Remember your password?{" "}
-                            <p class="link" onClick={handleSwitch}>
+                            <p
+                              class="link"
+                              style={{ cursor: "pointer" }}
+                              onClick={handleSwitch}
+                            >
                               Log in
                             </p>
                           </p>

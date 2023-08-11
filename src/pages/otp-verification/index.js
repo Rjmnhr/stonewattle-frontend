@@ -55,6 +55,8 @@ const OtpVerification = () => {
     }
   };
 
+  const email = localStorage.getItem("email");
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const joinedOtpPin = otpPin.join("");
@@ -66,50 +68,18 @@ const OtpVerification = () => {
       .then(async (response) => {
         const data = await response.data;
         console.log(data);
+        if (!response.status === 200) {
+          alert("something wrong");
+          return;
+        }
         setIsEmailVerified(true);
-        createProfile();
+        navigate("/create-profile");
       })
       .catch((err) => {
         setWarning("Invalid OTP");
 
         console.log(err);
       });
-  };
-
-  const email = localStorage.getItem("email");
-  const first_name = localStorage.getItem("first_name");
-  const last_name = localStorage.getItem("last_name");
-  const password = localStorage.getItem("password");
-
-  const createProfile = () => {
-    const formData = new FormData();
-    formData.append("first_name", first_name);
-    formData.append("last_name", last_name);
-    formData.append("email", email);
-    formData.append("password", password);
-    formData.append("post_code", "");
-    formData.append("state", "");
-    formData.append("phone", "");
-    formData.append("property", "");
-    formData.append("portfolio", "");
-    formData.append("invest", "");
-
-    AxiosInstance.post("/api/user/signup", formData, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then(async (response) => {
-        const data = await response.data;
-        console.log(data);
-        navigate("/");
-        localStorage.setItem("isLoggedIn", true);
-        localStorage.removeItem("email");
-        localStorage.removeItem("first_name");
-        localStorage.removeItem("last_name");
-        localStorage.removeItem("password");
-      })
-      .catch((err) => console.log(err));
   };
 
   return (

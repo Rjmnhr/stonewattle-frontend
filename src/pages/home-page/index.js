@@ -1,23 +1,22 @@
 import React from "react";
 import NavBar from "../../components/nav-bar/nav-bar";
-import { useApplicationContext } from "../../context/app-context";
+// import { useApplicationContext } from "../../context/app-context";
 
 const HomePage = () => {
-  const { dropdownHeight } = useApplicationContext();
+  // const { dropdownHeight } = useApplicationContext();
   return (
     <>
       <NavBar />
       <div
         style={{
-          marginTop: `${dropdownHeight ? `${dropdownHeight}px` : "0px"}`,
+          // marginTop: `${dropdownHeight ? `${dropdownHeight}px` : "0px"}`,
           transition: "all 0.3s ease",
-          height: "100vh",
           display: "grid",
           placeItems: "center",
         }}
-        className="container content-space w-100  "
+        className="container content-space w-100 home-page-container"
       >
-        <div className="w-lg-100 p-lg-1 p-3 mt-lg-0 mt-1 text-center mx-lg-auto mb-5 mb-sm-7 mb-lg-10">
+        <div className="w-lg-100 p-lg-1 p-3 mt-lg-3 mt-1  text-center mx-lg-auto mb-5 mb-sm-7 mb-lg-10 ">
           <p style={{ textAlign: "left" }}>
             We are a technology AI company using property data to bring to you a
             one-stop platform for all your needs. We have been investing in the

@@ -10,6 +10,7 @@ import PricingPage from "./pages/pricing-page";
 import ContactPage from "./pages/contact-page";
 import ApplicationPage from "./pages/Application-page";
 import HomePage from "./pages/home-page";
+import ForgotPasswordPage from "./pages/forgot-password-page";
 
 // import GoogleMapComponent from "./components/GIS-mapping/google-map-container";
 
@@ -91,14 +92,14 @@ const AppRoute = () => {
             </>
           }
         />
-        {/* <Route
-          path="/filter"
+        <Route
+          path="/forgot-password"
           element={
             <>
-              <GoogleMapComponent />
+              <ForgotPasswordPage />
             </>
           }
-        /> */}
+        />
       </Routes>
     </BrowserRouter>
   );

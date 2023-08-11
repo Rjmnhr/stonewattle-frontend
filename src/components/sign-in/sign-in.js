@@ -192,7 +192,7 @@ const SignIn = () => {
                             <div className="d-flex justify-content-end mb-4">
                               <a
                                 className="form-label-link"
-                                href="./page-reset-password.html"
+                                href="/forgot-password"
                               >
                                 Forgot Password?
                               </a>
@@ -207,7 +207,11 @@ const SignIn = () => {
                               </button>
                               <p className="card-text text-muted">
                                 Don't have an account yet?{" "}
-                                <p className="link" onClick={handleSwitch}>
+                                <p
+                                  className="link"
+                                  style={{ cursor: "pointer" }}
+                                  onClick={handleSwitch}
+                                >
                                   Sign up here
                                 </p>
                               </p>

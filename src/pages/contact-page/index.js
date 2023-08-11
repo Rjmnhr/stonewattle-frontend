@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import NavBar from "../../components/nav-bar/nav-bar";
-import { useApplicationContext } from "../../context/app-context";
+// import { useApplicationContext } from "../../context/app-context";
 import { Modal } from "antd";
 import { ArrowLeftOutlined, LoadingOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,7 @@ import AxiosInstance from "../../components/axios";
 import { CheckCircleOutlineRounded } from "@mui/icons-material";
 
 const ContactPage = () => {
-  const { dropdownHeight } = useApplicationContext();
+  // const { dropdownHeight } = useApplicationContext();
 
   const [query, setQuery] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -69,13 +69,12 @@ const ContactPage = () => {
 
       <div
         style={{
-          marginTop: `${dropdownHeight ? `${dropdownHeight}px` : "0px"}`,
+          // marginTop: `${dropdownHeight ? `${dropdownHeight}px` : "0px"}`,
           transition: "all 0.3s ease",
           display: "grid",
           placeItems: "center",
-          height: "100vh",
         }}
-        class="container content-space-2 mt-3 "
+        class="container content-space-2 mt-1 mt-lg-3 "
       >
         {/* <div class="text-center mb-3 mt-5 mt-lg-5">
           <h1>How can we help?</h1>

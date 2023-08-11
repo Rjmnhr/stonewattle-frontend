@@ -10,15 +10,15 @@ import { useMemo, useState } from "react";
 const Map = () => {
   const { results } = useApplicationContext();
   const [selectedMarker, setSelectedMarker] = useState(null);
-  const [map, setMap] = useState(null);
+  // const [map, setMap] = useState(null);
   const initialMapCenter = useMemo(
     () => ({ lat: -25.2744, lng: 133.7751 }),
     []
   );
 
-  const handleMapLoad = (mapInstance) => {
-    setMap(mapInstance);
-  };
+  // const handleMapLoad = (mapInstance) => {
+  //   setMap(mapInstance);
+  // };
 
   // const handleInfoWindowClick = (suburb, zoom) => {
   //   if (map) {
@@ -32,7 +32,7 @@ const Map = () => {
       zoom={5}
       center={initialMapCenter}
       mapContainerClassName="map-container"
-      onLoad={handleMapLoad}
+      // onLoad={handleMapLoad}
     >
       {results
         ? results.map((suburb) => {

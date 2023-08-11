@@ -5,19 +5,19 @@ import { useApplicationContext } from "../../context/app-context";
 
 const NavBar = () => {
   const navigate = useNavigate();
-  const [prevScrollPos, setPrevScrollPos] = useState(0);
-  const [visible, setVisible] = useState(true);
+  // const [prevScrollPos, setPrevScrollPos] = useState(0);
+  // const [visible, setVisible] = useState(true);
   const [dropdownActive, setDropdownActive] = useState(false);
   const divRef = useRef(null);
   const { setDropdownHeight } = useApplicationContext();
   const isAdmin = localStorage.getItem("isAdmin");
 
-  const handleScroll = () => {
-    const currentScrollPos = window.pageYOffset;
+  // const handleScroll = () => {
+  //   const currentScrollPos = window.pageYOffset;
 
-    setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
-    setPrevScrollPos(currentScrollPos);
-  };
+  //   setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
+  //   setPrevScrollPos(currentScrollPos);
+  // };
   const isLoggedIn = localStorage.getItem("isLoggedIn");
 
   const handleLogOut = () => {
@@ -26,10 +26,10 @@ const NavBar = () => {
     localStorage.setItem("isLoggedIn", false);
   };
 
-  const navbarStyles = {
-    transition: "top 0.3s",
-    top: visible ? "0" : "-100px", // Adjust the value as needed
-  };
+  // const navbarStyles = {
+  //   transition: "top 0.3s",
+  //   top: visible ? "0" : "-100px", // Adjust the value as needed
+  // };
 
   const handleApplication = () => {
     if (isLoggedIn === "true") {
@@ -39,13 +39,14 @@ const NavBar = () => {
     }
   };
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-    // eslint-disable-next-line
-  }, [prevScrollPos, visible]);
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  //   // eslint-disable-next-line
+  // }, [prevScrollPos, visible]);
+
   useEffect(() => {
     if (dropdownActive) {
       if (divRef.current) {
@@ -63,8 +64,8 @@ const NavBar = () => {
     <>
       <header
         id="header"
-        style={navbarStyles}
-        className={`navbar navbar-expand-lg navbar-end navbar-sticky-top navbar-show-hide border-bottom bg-white  `}
+        // style={navbarStyles}
+        className={`navbar navbar-expand-lg navbar-end navbar-top navbar-show-hide border-bottom bg-white  `}
         data-hs-header-options='{
           "fixMoment": 500,
           "fixEffect": "slide"

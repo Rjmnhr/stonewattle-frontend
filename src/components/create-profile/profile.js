@@ -1,87 +1,47 @@
-import React, { useEffect } from "react";
-import { useState, useRef } from "react";
-
-import { CreateProfileStyled } from "./profile-style";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AxiosInstance from "../axios";
+import "./style.css";
 
 const CreateProfile = () => {
-  const [userName, setUserName] = useState("");
   const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState(null);
-  const [confirmPassword, setConfirmPassword] = useState(null);
-  const [isPasswordSame, setIsPasswordSame] = useState(null);
+
   const [state, setState] = useState("");
   const [noOfProperty, setNoOfProperty] = useState(0);
   const [portfolio, setPortfolio] = useState(0);
   const [invest, setInvest] = useState("");
-  const [postcodes, setPostcodes] = useState(Array(4).fill(""));
-  const inputRefs = useRef([]);
+  const [postcode, setPostcode] = useState("");
 
   const navigate = useNavigate();
 
   const email = localStorage.getItem("email");
+  const first_name = localStorage.getItem("first_name");
+  const last_name = localStorage.getItem("last_name");
+  const password = localStorage.getItem("password");
 
-  const handleInputChange = (index, event) => {
-    const input = event.target.value;
-    if (/^\d?$/.test(input)) {
-      const updatedPostcodes = [...postcodes];
-      updatedPostcodes[index] = input;
-
-      if (input && index < 5 && inputRefs.current[index + 1]) {
-        inputRefs.current[index + 1].focus();
-      }
-
-      setPostcodes(updatedPostcodes);
-    }
-  };
-  //updating the postcodes as an array
-
-  const handleKeyDown = (index, event) => {
-    if (event.key === "Backspace" && postcodes[index] === "") {
-      const updatedPostcodes = [...postcodes];
-      updatedPostcodes[index - 1] = "";
-
-      setPostcodes(updatedPostcodes);
-
-      if (index > 0 && inputRefs.current[index - 1]) {
-        inputRefs.current[index - 1].focus();
-      }
-    } else if (
-      event.key === "ArrowRight" &&
-      index < 5 &&
-      postcodes[index] !== ""
-    ) {
-      if (inputRefs.current[index + 1]) {
-        inputRefs.current[index + 1].focus();
-      }
-    } else if (event.key === "ArrowLeft" && index > 0) {
-      if (inputRefs.current[index - 1]) {
-        inputRefs.current[index - 1].focus();
-      }
-    }
+  const clearLocalStorage = () => {
+    localStorage.removeItem("email");
+    localStorage.removeItem("first_name");
+    localStorage.removeItem("last_name");
+    localStorage.removeItem("password");
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const joinedPostcode = postcodes.join("");
-
-    console.log(joinedPostcode);
-    console.log(typeof phone);
-
     const formData = new FormData();
-    formData.append("userName", userName);
+
+    formData.append("first_name", first_name);
+    formData.append("last_name", last_name);
     formData.append("email", email);
     formData.append("password", password);
-    formData.append("post_code", joinedPostcode);
+    formData.append("post_code", postcode);
     formData.append("state", state);
     formData.append("phone", phone);
     formData.append("property", noOfProperty);
     formData.append("portfolio", portfolio);
     formData.append("invest", invest);
 
-    console.log(JSON.stringify(formData));
     AxiosInstance.post("/api/user/signup", formData, {
       headers: {
         "Content-Type": "application/json",
@@ -90,50 +50,44 @@ const CreateProfile = () => {
       .then(async (response) => {
         const data = await response.data;
         console.log(data);
-        navigate("/home");
+
+        clearLocalStorage();
+        navigate("/");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        alert("something is wrong");
+        navigate("/login");
+      });
   };
 
-  useEffect(() => {
-    if (password && confirmPassword)
-      if (password === confirmPassword) {
-        setIsPasswordSame(true);
-      } else {
-        setIsPasswordSame(false);
-      }
-    // eslint-disable-next-line
-  }, [password, confirmPassword]);
   return (
     <div>
-      <CreateProfileStyled>
-        <div className="form-container">
+      <div
+        className="container content-space-1"
+        style={{ width: "100%", display: "grid", placeItems: "center" }}
+      >
+        <div className="card card-lg card-shadow card-pinned h-100 p-lg-4 p-3 text-start">
           <form on onSubmit={handleSubmit}>
-            <h2>Your personal details</h2>
-            <div className="detail-input">
-              <label>Name :</label>
-              <input
-                type="text"
-                onChange={(e) => setUserName(e.target.value)}
-                placeholder="Name"
-                required
-              />
-            </div>
+            <h4>Your personal details</h4>
 
-            <div className="detail-input">
-              <label>Phone Number :</label>
+            <div className="detail-inputmb-2 mb-2 col-10 ">
               <input
+                class="form-control form-control-lg"
                 type="number"
-                onChange={(e) => setPhone(e.target.value)}
                 placeholder="Phone Number"
+                onChange={(e) => setPhone(e.target.value)}
                 required
               />
             </div>
 
-            <div className="detail-input">
-              <label>State :</label>
-              <select onChange={(e) => setState(e.target.value)} required>
-                <option value="">select</option>
+            <div className="detail-input mb-2  col-10 ">
+              <select
+                class="form-select form-select-lg mb-3"
+                onChange={(e) => setState(e.target.value)}
+                required
+              >
+                <option value="">State</option>
                 <option value="ACT">Australian Capital Territory</option>
                 <option value="NSW">New South Wales</option>
                 <option value="NT">Northern Territory</option>
@@ -145,88 +99,44 @@ const CreateProfile = () => {
               </select>
             </div>
 
-            <div className="detail-input">
+            <div className="detail-input mb-2 col-10 ">
               <div
               // style={{ display: "flex", gap: "3px", alignItems: "center" }}
               >
-                <label>Post Code :</label>
-                {postcodes.map((postcode, index) => (
-                  <input
-                    style={{
-                      width: "8px",
-                      background: "none",
-                    }}
-                    key={index}
-                    type="number"
-                    id={`postcode-${index}`}
-                    ref={(ref) => (inputRefs.current[index] = ref)}
-                    value={postcode}
-                    onChange={(event) => handleInputChange(index, event)}
-                    onKeyDown={(event) => handleKeyDown(index, event)}
-                    maxLength={1}
-                  />
-                ))}
+                <input
+                  class="form-control form-control-lg"
+                  type="number"
+                  onChange={(e) => setPostcode(e.target.value)}
+                  placeholder="Postcode"
+                />
               </div>
             </div>
 
-            <div className="detail-input">
-              <label>Password :</label>
+            <h4 className="mt-3">Your property investing goals</h4>
+            <div className="detail-input  mb-2 col-10 ">
               <input
-                type="password"
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password"
-                required
-              />
-            </div>
-
-            <div className="detail-input">
-              <label>Confirm password :</label>
-              <input
-                type="password"
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="Password"
-                required
-              />
-
-              {isPasswordSame === false ? (
-                <p
-                  style={{
-                    color: "red",
-                    fontSize: "14px",
-                    margin: "0",
-                    paddingLeft: "15px",
-                  }}
-                >
-                  passwords are not matching
-                </p>
-              ) : (
-                ""
-              )}
-            </div>
-
-            <h2>Your property investing goals</h2>
-            <div className="detail-input">
-              <label>How many properties do you currently have</label>
-              <input
+                class="form-control form-control-lg   property-input"
                 type="number"
                 onChange={(e) => setNoOfProperty(e.target.value)}
-                placeholder="Enter"
+                placeholder="How many properties do you currently have"
               />
             </div>
-            <div className="detail-input">
-              <label>
-                What is the current value of all of your property portfolio
-              </label>
+            <div className="detail-input mb-2  col-10 ">
               <input
+                class="form-control form-control-lg property-input"
                 type="number"
                 onChange={(e) => setPortfolio(e.target.value)}
-                placeholder="Enter"
+                placeholder=" Current value of all of your property portfolio"
               />
             </div>
-            <div className="detail-input">
-              <label>How quickly are you looking to invest ?</label>
-              <select onChange={(e) => setInvest(e.target.value)}>
-                <option value="">select</option>
+            <div className="detail-input  mb-2 col-10 ">
+              <select
+                class="form-select form-select-lg mb-3"
+                onChange={(e) => setInvest(e.target.value)}
+              >
+                <option value="">
+                  <p> How quickly are you looking to invest ?</p>
+                </option>
                 <option value="1 month">1 month</option>
                 <option value="3 months">3 months</option>
                 <option value="6 months">6 months</option>
@@ -235,16 +145,12 @@ const CreateProfile = () => {
               </select>
             </div>
 
-            {password === confirmPassword ? (
-              <button type="submit"> Register</button>
-            ) : (
-              <button disabled type="submit">
-                Register
-              </button>
-            )}
+            <button className="btn  btn-primary " type="submit">
+              Register
+            </button>
           </form>
         </div>
-      </CreateProfileStyled>
+      </div>
     </div>
   );
 };

@@ -1,24 +1,21 @@
 import React from "react";
 // import { PricingPageStyled } from "./style";
 import NavBar from "../../components/nav-bar/nav-bar";
-import { useApplicationContext } from "../../context/app-context";
+// import { useApplicationContext } from "../../context/app-context";
 // import { Carousel } from "antd";
 
 const PricingPage = () => {
-  const { dropdownHeight } = useApplicationContext();
+  // const { dropdownHeight } = useApplicationContext();
   return (
     <>
-      <head>
-        <link rel="stylesheet" href="./assets/css/theme.min.css" />
-      </head>
       <NavBar />
 
       <div
         style={{
-          marginTop: `${dropdownHeight ? `${dropdownHeight}px` : "0px"}`,
+          // marginTop: `${dropdownHeight ? `${dropdownHeight}px` : "0px"}`,
           transition: "all 0.3s ease",
         }}
-        class="overflow-hidden"
+        class="overflow-hidden "
       >
         <div class="container content-space-1">
           <div class="w-lg-65 text-center mx-lg-auto mb-5 mb-sm-7 mb-lg-10"></div>
@@ -93,7 +90,7 @@ const PricingPage = () => {
                         <span class="display-4 lh-1 text-dark">
                           $300<span class="fs-4">.00</span>
                         </span>
-                        <span class="d-block mt-1">USD / year</span>
+                        <span class="d-block mt-1">USD / month</span>
                       </div>
                       {/* <div class="flex-grow-1 align-self-end ms-3"></div> */}
                     </div>

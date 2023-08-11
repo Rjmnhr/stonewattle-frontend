@@ -1,0 +1,15 @@
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+
+  @media (max-width: 400px) {
+    .home-page-container {
+      margin-top: 60px;
+      background-color: rebeccapurple;
+    }
+  }
+

@@ -20,7 +20,7 @@ const ApplicationPage = () => {
     setIsUserValid,
     filteredResults,
     isResultsFiltered,
-    dropdownHeight,
+    // dropdownHeight,
   } = useApplicationContext();
 
   const [dwellingType, setDwellingType] = useState("");
@@ -330,12 +330,14 @@ const ApplicationPage = () => {
       <NavBar />
       {contextHolder}
       <p
-        style={{
-          marginTop: `${dropdownHeight ? `${dropdownHeight + 70}px` : "90px"}`,
-          // paddingLeft: "12px",
-          // paddingRight: "12px",
-        }}
-        className="header-caption container col-12 text-start text-lg-center  "
+        style={
+          {
+            // marginTop: `${dropdownHeight ? `${dropdownHeight}px` : "0px"}`,
+            // paddingLeft: "12px",
+            // paddingRight: "12px",
+          }
+        }
+        className="header-caption container mt-1 m-lg-3 col-12 text-start text-lg-center  "
       >
         Welcome to the one-stop property search. Simply fill out the details
         below and let's get started on your property journey{" "}
@@ -365,7 +367,11 @@ const ApplicationPage = () => {
                               options={[
                                 { value: "Unit", label: "Unit" },
                                 { value: "House", label: "House" },
-                                { value: "Townhouse", label: "Town House" },
+                                {
+                                  value: "Townhouse",
+                                  label: "Town House",
+                                  isDisabled: true,
+                                },
                               ]}
                               value={dwellingType}
                               onChange={setDwellingType}
