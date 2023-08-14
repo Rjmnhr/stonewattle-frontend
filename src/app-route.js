@@ -76,14 +76,14 @@ const AppRoute = () => {
             </>
           }
         />
-        <Route
+        {/* <Route
           path="/pricing"
           element={
             <>
               <PricingPage />
             </>
           }
-        />
+        /> */}
         <Route
           path="/contact"
           element={

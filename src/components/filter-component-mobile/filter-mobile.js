@@ -87,6 +87,7 @@ const FilterMobile = ({
   const [australianBornWeightage, setAustralianBornWeightage] = useState(0);
   const [unemployedPeopleWeightage, setUnemployedPeopleWeightage] = useState(0);
   const [weeklyIncomeWeightage, setWeeklyIncomeWeightage] = useState(0);
+  const [allCrimesWeightage, setAllCrimesWeightage] = useState(0);
   const [greatForSchoolsWeightage, setGreatForSchoolsWeightage] = useState(0);
   const [greatForTransportWeightage, setGreatForTransportWeightage] =
     useState(0);
@@ -109,9 +110,11 @@ const FilterMobile = ({
     "Low unemployment": setUnemployedPeopleWeightage,
     "Higher weekly income": setWeeklyIncomeWeightage,
     "Australian born": setAustralianBornWeightage,
+    "All crimes": setAllCrimesWeightage,
     "Great for schools": setGreatForSchoolsWeightage,
     "Great for transport": setGreatForTransportWeightage,
     "Great for hospitals": setGreatForHospitalsWeightage,
+
     // Add your other filters here
   };
 
@@ -122,7 +125,7 @@ const FilterMobile = ({
     const weightageMap = {
       "very important": 3,
       important: 2,
-      "not important": 1,
+      "not important": 0,
     };
     const weightage = weightageMap[option] || 0;
     setSelectedFilters((prevSelectedFilters) => ({
@@ -145,6 +148,7 @@ const FilterMobile = ({
     "Low unemployment",
     "Higher weekly income",
     "Australian born",
+    "All crimes",
     "Great for schools",
     "Great for transport",
     "Great for hospitals",
@@ -230,6 +234,9 @@ const FilterMobile = ({
     );
     console.log("max_weekly_income", maxWeeklyIncome);
 
+    let maxAllCrimes = Math.max(...results.map((suburb) => suburb.all_crimes));
+    console.log("max_weekly_income", maxAllCrimes);
+
     maxVacancyRate = maxVacancyRate === 0 ? 1 : maxVacancyRate;
     maxFamily = maxFamily === 0 ? 1 : maxFamily;
     maxRentalYield = maxRentalYield === 0 ? 1 : maxRentalYield;
@@ -243,6 +250,7 @@ const FilterMobile = ({
     maxAustralianBorn = maxAustralianBorn === 0 ? 1 : maxAustralianBorn;
     maxUnemployedPeople = maxUnemployedPeople === 0 ? 1 : maxUnemployedPeople;
     maxWeeklyIncome = maxWeeklyIncome === 0 ? 1 : maxWeeklyIncome;
+    maxAllCrimes = maxAllCrimes === 0 ? 1 : maxAllCrimes;
 
     const rankedSuburbs = results.map((suburb) => ({
       ...suburb,
@@ -270,6 +278,8 @@ const FilterMobile = ({
           unemployedPeopleWeightage +
         (suburb.median_weekly_income_family / maxWeeklyIncome) *
           weeklyIncomeWeightage +
+        ((maxAllCrimes - suburb.all_crimes) / maxAllCrimes) *
+          allCrimesWeightage +
         suburb.great_for_schools_int * greatForSchoolsWeightage +
         suburb.great_for_medical_facilities_int * greatForHospitalsWeightage +
         suburb.great_for_public_transport_int * greatForTransportWeightage,

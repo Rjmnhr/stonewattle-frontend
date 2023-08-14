@@ -6,11 +6,24 @@ import {
 } from "@react-google-maps/api";
 import { useApplicationContext } from "../../context/app-context";
 import { useMemo, useState } from "react";
+import { useEffect } from "react";
 
 const Map = () => {
   const { results } = useApplicationContext();
   const [selectedMarker, setSelectedMarker] = useState(null);
+  // const [suburbArr, setSuburbArr] = useState(null);
+
   // const [map, setMap] = useState(null);
+
+  // const blueMarker =
+  //   "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1692033138/ozbnlfw22rksefhsd8fn.png";
+  // const greenMarker =
+  //   "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1692032795/imka2voeexu46awtdwkg.png";
+  // const orangeMarker =
+  //   "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1692032982/hogi7wlzldpzndw4hkgk.png";
+  // const redMarker =
+  //   "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1691995119/gxjfq8xhsfcmngqewkur.png";
+
   const initialMapCenter = useMemo(
     () => ({ lat: -25.2744, lng: 133.7751 }),
     []
@@ -26,6 +39,16 @@ const Map = () => {
   //     map.setZoom(zoom);
   //   }
   // };
+
+  // useEffect(() => {
+  //   if (results) {
+  //     if (results && !filteredResults) {
+  //       setSuburbArr(results);
+  //     } else {
+  //       setSuburbArr(filteredResults);
+  //     }
+  //   }
+  // }, [results, filteredResults, suburbArr]);
 
   return (
     <GoogleMap
@@ -44,6 +67,17 @@ const Map = () => {
                 <Marker
                   key={suburb.suburb_id} // Add a unique key to each marker
                   position={{ lat: suburb.latitude, lng: suburb.longitude }}
+                  // icon={{
+                  //   url: `${
+                  //     suburb.rankingPercentage > 80
+                  //       ? greenMarker
+                  //       : suburb.rankingPercentage > 60
+                  //       ? orangeMarker
+                  //       : suburb.rankingPercentage > 40
+                  //       ? blueMarker
+                  //       : redMarker
+                  //   }`,
+                  // }}
                   onClick={() => {
                     setSelectedMarker(suburb);
                   }}
@@ -68,10 +102,6 @@ const Map = () => {
           <div className="container text-start pt-2">
             <p className="fw-bold">Suburb: {selectedMarker.suburb_name}</p>
             <p>Postcode: {selectedMarker.postcode}</p>
-            <p>
-              Ratings:{" "}
-              <span style={{ color: "green" }}>{selectedMarker.ratings}</span>
-            </p>
           </div>
         </InfoWindow>
       )}

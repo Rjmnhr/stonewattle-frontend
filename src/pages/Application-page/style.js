@@ -395,9 +395,6 @@ export const HomePageStyled = styled.div`
     //       width: 150px;
     //       padding: 5px;
     //     }
-    .currency-input {
-      width: 180px;
-    }
 
     //     .filter-main-container {
     //       text-align: center;
@@ -489,10 +486,11 @@ export const HomePageStyled = styled.div`
   //     }
   //   }
 
-  //   @media (max-width: 412px) {
-  //     .filter-main-page-container {
-  //       width: 380px;
-  //     }
+  @media (max-width: 412px) {
+    .currency-input {
+      width: 190px;
+    }
+  }
 
   //     .ant-collapse-header {
   //       width: 290px;

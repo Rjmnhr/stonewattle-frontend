@@ -74,8 +74,8 @@ const NavBar = () => {
         <div className="container">
           <nav className="js-mega-menu navbar-nav-wrap">
             <a
-              style={{ fontSize: "25px" }}
-              className="navbar-brand fw-bold "
+              style={{ fontSize: "25px", paddingLeft: "10px" }}
+              className="navbar-brand fw-bold  "
               href="/"
             >
               2nd Storey
@@ -119,7 +119,7 @@ const NavBar = () => {
                   >
                     <p
                       id="docsMegaMenu"
-                      className="hs-mega-menu-invoker nav-link d-lg-block d-flex justify-content-start m-0  "
+                      className="hs-mega-menu-invoker nav-link mb-0  "
                       onClick={handleApplication}
                       role="button"
                       aria-expanded="false"
@@ -128,7 +128,7 @@ const NavBar = () => {
                     </p>
                   </li>
 
-                  <li className="hs-has-mega-menu nav-item">
+                  {/* <li className="hs-has-mega-menu nav-item">
                     <a
                       id="pagesMegaMenu"
                       className="hs-mega-menu-invoker nav-link  d-lg-block d-flex justify-content-start  "
@@ -144,10 +144,10 @@ const NavBar = () => {
                       aria-labelledby="pagesMegaMenu"
                       style={{ minWidth: "42rem" }}
                     ></div>
-                  </li>
+                  </li> */}
 
                   <li
-                    className="hs-has-mega-menu nav-item"
+                    className="hs-has-mega-menu nav-item mb-3 mb-lg-0"
                     data-hs-mega-menu-item-options='{
                   "desktop": {
                     "maxWidth": "20rem"
@@ -156,7 +156,7 @@ const NavBar = () => {
                   >
                     <a
                       id="docsMegaMenu"
-                      className="hs-mega-menu-invoker nav-link  d-lg-block d-flex justify-content-start  "
+                      className="hs-mega-menu-invoker nav-link    "
                       href="/contact"
                       role="button"
                       aria-expanded="false"

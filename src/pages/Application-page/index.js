@@ -342,6 +342,7 @@ const ApplicationPage = () => {
         Welcome to the one-stop property search. Simply fill out the details
         below and let's get started on your property journey{" "}
       </p>
+
       <div className="container bg-red col-12  home-page-container ">
         <HomePageStyled>
           <div className="container max-width .col-12 .col-sm-6 .col-lg-8 filter-main-page-container ">
@@ -690,6 +691,7 @@ const ApplicationPage = () => {
                                 </label>
                               </Dropdown>
                             </th>
+                            <th>Crimes</th>
 
                             {isBedroomsUnsure ? (
                               <th style={{ textAlign: "center" }}>
@@ -729,6 +731,7 @@ const ApplicationPage = () => {
                                         <td>{data.suburb_name}</td>
                                         <td>{data.postcode}</td>
                                         <td>{data.state_code}</td>
+                                        <td>{data.all_crimes}</td>
                                         {isBedroomsUnsure ? (
                                           <td style={{ textAlign: "center" }}>
                                             {data.max_bedrooms}
