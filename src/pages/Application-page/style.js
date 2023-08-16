@@ -148,7 +148,6 @@ export const HomePageStyled = styled.div`
     .color-circles-legend {
       width: 100%;
       gap: 10px;
-      font-size: 12px;
     }
 
     .ant-collapse > .ant-collapse-item > .ant-collapse-header {
@@ -158,7 +157,7 @@ export const HomePageStyled = styled.div`
 
   @media (max-width: 412px) {
     .currency-input {
-      width: 190px;
+      width: 180px;
     }
   }
 `;

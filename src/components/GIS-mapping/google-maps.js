@@ -6,7 +6,7 @@ import {
 } from "@react-google-maps/api";
 import { useApplicationContext } from "../../context/app-context";
 import { useMemo, useState } from "react";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
 const Map = () => {
   const { results, filteredResults } = useApplicationContext();
@@ -58,7 +58,7 @@ const Map = () => {
       center={initialMapCenter}
       mapContainerStyle={{
         width: "100%",
-        height: `${filteredResults ? "70vh" : "100vh"}`,
+        height: `${filteredResults ? "70vh" : "90vh"}`,
       }}
       // onLoad={handleMapLoad}
     >
