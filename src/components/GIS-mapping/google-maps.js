@@ -9,7 +9,7 @@ import { useMemo, useState } from "react";
 import { useEffect } from "react";
 
 const Map = () => {
-  const { results } = useApplicationContext();
+  const { results, filteredResults } = useApplicationContext();
   const [selectedMarker, setSelectedMarker] = useState(null);
   // const [suburbArr, setSuburbArr] = useState(null);
 
@@ -50,11 +50,16 @@ const Map = () => {
   //   }
   // }, [results, filteredResults, suburbArr]);
 
+  const zoomInt = filteredResults ? 4 : 5;
+
   return (
     <GoogleMap
-      zoom={5}
+      zoom={zoomInt}
       center={initialMapCenter}
-      mapContainerClassName="map-container"
+      mapContainerStyle={{
+        width: "100%",
+        height: `${filteredResults ? "70vh" : "100vh"}`,
+      }}
       // onLoad={handleMapLoad}
     >
       {results

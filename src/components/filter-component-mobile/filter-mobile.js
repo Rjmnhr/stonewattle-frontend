@@ -44,7 +44,7 @@ const FilterDropdown = ({
   return (
     <Dropdown overlay={menu} trigger={["click"]} placement="bottom">
       <div
-        className="filter-dropdown  p-1 p-lg-2  text-align-left d-flex align-items-center border col-12  col-lg-3 m-1 justify-content-between  "
+        className="filter-dropdown  p-1 p-lg-2  text-start d-flex align-items-center border col-12  col-lg-3 m-1 justify-content-between  "
         style={{ cursor: "pointer" }}
       >
         {filter}
@@ -101,19 +101,19 @@ const FilterMobile = ({
     "Low vacancy rate": setVacancyRateWeightage,
     "Family friendly": setFamilyWeightage,
     "High rental yield": setRentalYieldWeightage,
-    "Growth in property": SetGrowthInPropertyWeightage,
-    "Renters to owners ratio ": setRentVsOwnerRatioWeightage,
-    "High demand": setAvailabilityOfSupplyWeightage,
-    "High ratings": setRatingsWeightage,
+    "Average days on market": setAvailabilityOfSupplyWeightage,
+    "High rated by residents": setRatingsWeightage,
     "Low supply": setDemandPrevMonthWeightage,
-    "Growth of population": setPopulationGrowthWeightage,
+    "Population growth": setPopulationGrowthWeightage,
     "Low unemployment": setUnemployedPeopleWeightage,
-    "Higher weekly income": setWeeklyIncomeWeightage,
     "Australian born": setAustralianBornWeightage,
-    "All crimes": setAllCrimesWeightage,
+    "Crime rate": setAllCrimesWeightage,
     "Great for schools": setGreatForSchoolsWeightage,
-    "Great for transport": setGreatForTransportWeightage,
     "Great for hospitals": setGreatForHospitalsWeightage,
+    "Recent growth in properties": SetGrowthInPropertyWeightage,
+    "Higher proportion of owners ": setRentVsOwnerRatioWeightage,
+    "Relative income of residents": setWeeklyIncomeWeightage,
+    "Public transport": setGreatForTransportWeightage,
 
     // Add your other filters here
   };
@@ -139,19 +139,20 @@ const FilterMobile = ({
     "Low vacancy rate",
     "Family friendly",
     "High rental yield",
-    "Growth in property",
-    "Renters to owners ratio ",
-    "High demand",
-    "High ratings",
+    "Average days on market",
+    "High rated by residents",
     "Low supply",
-    "Growth of population",
+    "Population growth",
     "Low unemployment",
-    "Higher weekly income",
     "Australian born",
-    "All crimes",
+    "Crime rate",
     "Great for schools",
-    "Great for transport",
     "Great for hospitals",
+    "Recent growth in properties",
+    "Higher proportion of owners",
+    "Relative income of residents",
+    "Public transport",
+
     // Add your other filters here
   ];
 

@@ -45,8 +45,19 @@ const GoogleLoginComponent = ({ element }) => {
         const data = await response.data;
         console.log(data);
         if (!response.status === 200) return alert("Something ids wrong");
+
+        const userType = data.user_type;
+        localStorage.setItem("userType", userType);
         localStorage.setItem("accessToken", data.accessToken);
         localStorage.setItem("isLoggedIn", true);
+        sessionStorage.setItem("info", "");
+
+        if (userType === "admin") {
+          localStorage.setItem("isAdmin", "true");
+        } else {
+          localStorage.setItem("isAdmin", "false");
+        }
+
         navigate("/");
       })
       .catch((err) => {

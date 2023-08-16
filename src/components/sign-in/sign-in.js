@@ -59,6 +59,7 @@ const SignIn = () => {
         localStorage.setItem("userType", userType);
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("isLoggedIn", true);
+        sessionStorage.setItem("info", "");
 
         setIsLoggedIn(true);
 

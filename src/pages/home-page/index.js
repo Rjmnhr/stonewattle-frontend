@@ -175,8 +175,8 @@ const HomePage = () => {
                   <i class="bi-hdd-network fs-1 text-dark"></i>
                 </div>
                 <p>
-                  2nd Storey elevate your decision-making process with
-                  cutting-edge insights tailored for {""}
+                  It elevates your decision-making process with cutting-edge
+                  insights tailored for {""}
                   <span class="fw-bold">modern investment</span>
                 </p>
               </div>
@@ -289,7 +289,7 @@ const HomePage = () => {
       <footer class="bg-dark">
         <div class="container">
           <div class="row align-items-center pt-8 pb-4">
-            <div class="col-md mb-5 mb-md-0">
+            <div class="col-md mb-lg-5 mb-0 mb-md-0">
               <h2 class="fw-medium text-white-70 mb-0">2nd Storey</h2>
               <p></p>
             </div>
@@ -297,9 +297,9 @@ const HomePage = () => {
 
           <div class="row align-items-md-center col-12 justify-content-between py-6">
             <div class="col-md mb-3 mb-md-0">
-              <ul class="list-inline list-px-2 text-lg-start mb-0">
+              <ul class="d-lg-flex  text-center text-lg-start mb-0">
                 <li class="list-inline-item">
-                  <a class="link link-light link-light-75" href="/">
+                  <a class="link link-light link-light-75 " href="/">
                     Privacy and Policy
                   </a>
                 </li>

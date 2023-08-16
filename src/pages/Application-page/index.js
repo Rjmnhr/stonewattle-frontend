@@ -3,14 +3,14 @@ import NavBar from "../../components/nav-bar/nav-bar";
 import { useApplicationContext } from "../../context/app-context";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
-import { Collapse, Menu, Dropdown, message } from "antd";
+
+import { Collapse, Menu, Dropdown, message, Modal, Button } from "antd";
 import { statesOfAus } from "../../components/states-in-aus/states";
 import Select, { components } from "react-select";
 import CurrencyInput from "react-currency-input-field";
 import AxiosInstance from "../../components/axios";
 import FilterMobile from "../../components/filter-component-mobile/filter-mobile";
 import { MdArrowDropDown } from "react-icons/md";
-import { ArrowUpOutlined, ArrowDownOutlined } from "@ant-design/icons";
 import GoogleMapComponent from "../../components/GIS-mapping/google-maps";
 
 const ApplicationPage = () => {
@@ -34,18 +34,28 @@ const ApplicationPage = () => {
   const [growthInProperty, SetGrowthInProperty] = useState("");
   const [availabilityOfSupply, setAvailabilityOfSupply] = useState("");
   const [demandPrevMonth, setDemandPrevMonth] = useState("");
-
-  // const [stateCodesArr, setStateCodesArr] = useState(null);
   const [displayResults, setDisplayResults] = useState(null);
-
-  // const [demandLastYear, setDemandLastYear] = useState("");
-
   const resultsContainerRef = useRef();
-
   const navigate = useNavigate();
-
   const isAdmin = localStorage.getItem("isAdmin");
   const [messageApi, contextHolder] = message.useMessage();
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const handleModalClose = () => {
+    setModalVisible(false);
+    sessionStorage.setItem("info", "true");
+  };
+
+  const info = sessionStorage.getItem("info");
+
+  useEffect(() => {
+    if (!info) {
+      setTimeout(() => {
+        setModalVisible(true);
+      }, 3000); // 3 seconds in millisecondsx
+    }
+    // eslint-disable-next-line
+  }, []);
 
   const warning = () => {
     messageApi.open({
@@ -329,21 +339,22 @@ const ApplicationPage = () => {
     <>
       <NavBar />
       {contextHolder}
-      <p
-        style={
-          {
-            // marginTop: `${dropdownHeight ? `${dropdownHeight}px` : "0px"}`,
-            // paddingLeft: "12px",
-            // paddingRight: "12px",
-          }
-        }
-        className="header-caption container mt-1 m-lg-3 col-12 text-start text-lg-center  "
-      >
-        Welcome to the one-stop property search. Simply fill out the details
-        below and let's get started on your property journey{" "}
-      </p>
 
-      <div className="container bg-red col-12  home-page-container ">
+      <div className="container  col-12  home-page-container ">
+        <p
+          style={
+            {
+              // marginTop: `${dropdownHeight ? `${dropdownHeight}px` : "0px"}`,
+              // paddingLeft: "12px",
+              // paddingRight: "12px",
+            }
+          }
+          className="header-caption  container mt-2  m-lg-3  text-start text-lg-center p-0 "
+        >
+          Welcome to the suburb selector based on your search. You will still
+          need to go to domain/realestate to find what properties are available
+          now
+        </p>
         <HomePageStyled>
           <div className="container max-width .col-12 .col-sm-6 .col-lg-8 filter-main-page-container ">
             <div className="container col-12 search-box">
@@ -517,6 +528,27 @@ const ApplicationPage = () => {
                             </div>
                           </div>
                         </div>
+                        {results ? (
+                          results.length > 0 ? (
+                            <p className="filter-info">
+                              {results.length} suburbs selected based on your
+                              search criteria
+                            </p>
+                          ) : results.length === 0 ? (
+                            <p
+                              className="filter-info"
+                              style={{
+                                color: "red",
+                              }}
+                            >
+                              No data found try changing the filters
+                            </p>
+                          ) : (
+                            ""
+                          )
+                        ) : (
+                          ""
+                        )}
                       </div>
                     ),
                   },
@@ -540,8 +572,8 @@ const ApplicationPage = () => {
                           className="text-start text-lg-center"
                           style={{ marginBottom: "30px" }}
                         >
-                          Please select the relevant factors based on your
-                          preference
+                          Please rate at least four factors from below to see
+                          the list of suburbs
                         </p>
 
                         <FilterMobile
@@ -559,7 +591,7 @@ const ApplicationPage = () => {
           </div>
           {results ? (
             results.length > 0 && !filteredResults ? (
-              <p className="filter-info" style={{}}>
+              <p className="filter-info">
                 {results.length} suburbs meet your criteria, try minimum four
                 factors given in investment strategy to see the results
               </p>
@@ -592,53 +624,68 @@ const ApplicationPage = () => {
                 <>
                   {filteredResults.length > 0 ? (
                     <div className="color-circles-legend">
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "5px",
+                      <div>
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "5px",
 
-                          paddingRight: "5px",
-                        }}
-                      >
-                        80% <ArrowUpOutlined />
-                        <div className="green-circle"></div> {counts.moreThan80}
-                      </div>
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "5px",
+                            paddingRight: "5px",
+                          }}
+                        >
+                          <label style={{ width: "110px", textAlign: "start" }}>
+                            Best match :
+                          </label>
+                          <div className="green-circle"></div>{" "}
+                          {counts.moreThan80}
+                        </div>
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "5px",
 
-                          paddingRight: "5px",
-                        }}
-                      >
-                        60% <ArrowUpOutlined />
-                        <div className="yellow-circle"></div>{" "}
-                        {counts.moreThan60}
+                            paddingRight: "5px",
+                          }}
+                        >
+                          <label style={{ width: "110px", textAlign: "start" }}>
+                            Good match :
+                          </label>
+                          <div className="yellow-circle"></div>{" "}
+                          {counts.moreThan60}
+                        </div>
                       </div>
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "5px",
 
-                          paddingRight: "5px",
-                        }}
-                      >
-                        40% <ArrowUpOutlined />
-                        <div className="blue-circle"></div> {counts.moreThan40}
-                      </div>
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "5px",
-                        }}
-                      >
-                        40% <ArrowDownOutlined />
-                        <div className="red-circle"></div>
-                        {counts.lessThan40}
+                      <div>
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "5px",
+
+                            paddingRight: "5px",
+                          }}
+                        >
+                          <label style={{ width: "110px", textAlign: "start" }}>
+                            Decent match :
+                          </label>
+                          <div className="blue-circle"></div>{" "}
+                          {counts.moreThan40}
+                        </div>
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "5px",
+                          }}
+                        >
+                          <label style={{ width: "110px", textAlign: "start" }}>
+                            Poor match :
+                          </label>
+                          <div className="red-circle"></div>
+                          {counts.lessThan40}
+                        </div>
                       </div>
                     </div>
                   ) : (
@@ -691,7 +738,6 @@ const ApplicationPage = () => {
                                 </label>
                               </Dropdown>
                             </th>
-                            <th>Crimes</th>
 
                             {isBedroomsUnsure ? (
                               <th style={{ textAlign: "center" }}>
@@ -731,7 +777,7 @@ const ApplicationPage = () => {
                                         <td>{data.suburb_name}</td>
                                         <td>{data.postcode}</td>
                                         <td>{data.state_code}</td>
-                                        <td>{data.all_crimes}</td>
+
                                         {isBedroomsUnsure ? (
                                           <td style={{ textAlign: "center" }}>
                                             {data.max_bedrooms}
@@ -782,6 +828,7 @@ const ApplicationPage = () => {
             <div
               style={{
                 width: filteredResults ? "" : "100%",
+
                 paddingTop: `${filteredResults ? "100px" : "15px"}`,
                 transition: "all 0.3s ease",
               }}
@@ -792,6 +839,24 @@ const ApplicationPage = () => {
           </div>
         </HomePageStyled>
       </div>
+      <Modal
+        visible={modalVisible}
+        onCancel={handleModalClose}
+        footer={[
+          <Button key="ok" type="primary" onClick={handleModalClose}>
+            OK
+          </Button>,
+        ]}
+      >
+        <div className="container p-3 d-flex-column align-items-center">
+          <p>2nd Storey is free till middle of September!</p>
+          <p>
+            {" "}
+            We will always have a free version for users but will introduce a
+            paid version for the more sophisticated users
+          </p>
+        </div>
+      </Modal>
     </>
   );
 };

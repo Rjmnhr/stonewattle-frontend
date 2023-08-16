@@ -11,5 +11,4 @@ export const statesOfAus = [
     label: "Australian Capital Territory",
   },
   { value: "Northern Territory", label: "Northern Territory" },
-  { value: "unsure", label: "Unsure", isDisabled: false },
 ];

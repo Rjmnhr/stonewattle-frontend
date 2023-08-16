@@ -98,7 +98,11 @@ const NavBar = () => {
                 <i className="bi-x"></i>
               </span>
             </button>
-            <div className="collapse navbar-collapse" id="navbarNavDropdown">
+            <div
+              style={{ transition: "all 0.3s ease" }}
+              className="collapse navbar-collapse"
+              id="navbarNavDropdown"
+            >
               <div ref={divRef} className="navbar-sticky-top-scroller">
                 <ul className="navbar-nav nav-pills">
                   <li
