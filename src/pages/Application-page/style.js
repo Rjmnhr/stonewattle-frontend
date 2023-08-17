@@ -8,11 +8,23 @@ export const HomePageStyled = styled.div`
     transition: "all 0.3s ease";
   }
 
+  .web-legend {
+    display: flex;
+  }
+
   .filter-dropdown:hover,
   .state-select:hover,
   .basic-filter:hover,
   .currency-input:hover {
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  }
+
+  .overflow-container {
+    overflow-y: scroll;
+    height: 70vh;
+  }
+  .overflow-container::-webkit-scrollbar {
+    display: none;
   }
 
   .search-sub-box {
@@ -74,9 +86,10 @@ export const HomePageStyled = styled.div`
     top: 0;
     background: #f8f8f8;
     color: black;
+    border-radius: 10px;
   }
   .table-container {
-    max-height: 100vh;
+    max-height: 70vh;
     overflow-y: scroll;
     margin-top: 20px;
     /* Hide the standard scrollbar for WebKit browsers */
@@ -86,6 +99,10 @@ export const HomePageStyled = styled.div`
 
   /* Hide the scrollbar for WebKit browsers */
   .table-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-main-page-container::-webkit-scrollbar {
     display: none;
   }
 
@@ -115,7 +132,6 @@ export const HomePageStyled = styled.div`
 
   .filter-info,
   .color-circles-legend {
-    display: flex;
     width: 100%;
     justify-content: space-around;
     gap: 15px;
@@ -138,11 +154,31 @@ export const HomePageStyled = styled.div`
     transform: rotate(180deg);
   }
 
+  .funnel {
+    display: none;
+  }
+  .mobile-legend {
+    display: none;
+  }
+
   @media (max-width: 912px) {
+    .filter-compressed .filter-container {
+      width: 0;
+      overflow: hidden;
+    }
+
+    .filter-compressed .filter-container.open {
+      width: 300px;
+    }
+
     .filter-info {
       width: 100%;
       gap: 10px;
       font-size: 12px;
+    }
+
+    .overflow-container {
+      height: auto;
     }
 
     .color-circles-legend {
@@ -153,11 +189,62 @@ export const HomePageStyled = styled.div`
     .ant-collapse > .ant-collapse-item > .ant-collapse-header {
       text-align: left;
     }
+
+    .filter-container {
+      position: fixed;
+      top: 0;
+      right: -300px; /* Start off-screen */
+      width: 300px;
+      height: 100%;
+      background-color: white;
+      box-shadow: -5px 0px 10px rgba(0, 0, 0, 0.1);
+      transition: right 0.3s ease;
+      z-index: 99;
+    }
+
+    .funnel {
+      display: block;
+    }
+
+    /* Open state for filter container */
+    .filter-container.open {
+      right: 0;
+    }
+
+    /* Styling for the mobile filter icon */
+    .mobile-filter-icon {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 1000;
+      background: green;
+      border-radius: 100%;
+      width: 50px;
+      height: 50px;
+      color: white;
+      display: grid;
+      place-items: center;
+      transition: transform 0.3s ease;
+    }
+
+    /* Active state for mobile filter icon */
+    .mobile-filter-icon.active {
+      /* transform: translateY(-100%); */
+    }
   }
 
   @media (max-width: 412px) {
     .currency-input {
       width: 180px;
+    }
+
+    .web-legend {
+      display: none;
+    }
+    .mobile-legend {
+      display: block;
     }
   }
 `;

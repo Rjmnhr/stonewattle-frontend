@@ -76,6 +76,14 @@ const AppRoute = () => {
             </>
           }
         />
+        <Route
+          path="/login-app"
+          element={
+            <>
+              <LoginPage />
+            </>
+          }
+        />
         {/* <Route
           path="/pricing"
           element={

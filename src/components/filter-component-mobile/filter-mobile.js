@@ -10,6 +10,7 @@ const FilterDropdown = ({
 }) => {
   const options = ["very important", "important", "not important"];
   const [currentLabel, setCurrentLabel] = useState("NOT-IMP"); // Initialize with "select"
+  const { filteredResults } = useApplicationContext();
 
   const colors = {
     "very important": {
@@ -42,9 +43,13 @@ const FilterDropdown = ({
   );
 
   return (
-    <Dropdown overlay={menu} trigger={["click"]} placement="bottom">
+    <Dropdown overlay={menu} trigger={["click"]}>
       <div
-        className="filter-dropdown  p-1 p-lg-2  text-start d-flex align-items-center border col-12  col-lg-3 m-1 justify-content-between  "
+        className={`${
+          filteredResults
+            ? "filter-dropdown  p-1 p-lg-2  text-start d-flex align-items-center border col-12  col-lg-12 m-1 justify-content-between"
+            : "filter-dropdown  p-1 p-lg-2  text-start d-flex align-items-center border col-12  col-lg-3 m-1 justify-content-between "
+        }`}
         style={{ cursor: "pointer" }}
       >
         {filter}
@@ -111,7 +116,7 @@ const FilterMobile = ({
     "Great for schools": setGreatForSchoolsWeightage,
     "Great for hospitals": setGreatForHospitalsWeightage,
     "Recent growth in properties": SetGrowthInPropertyWeightage,
-    "Higher proportion of owners ": setRentVsOwnerRatioWeightage,
+    "Higher proportion of owners": setRentVsOwnerRatioWeightage,
     "Relative income of residents": setWeeklyIncomeWeightage,
     "Public transport": setGreatForTransportWeightage,
 

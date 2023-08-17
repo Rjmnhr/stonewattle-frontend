@@ -29,7 +29,7 @@ const ApplicationPage = () => {
   const [area, setArea] = useState(null);
   const [budget, setBudget] = useState(null);
   const [isDataNotFound, setIsDataNotFound] = useState(null);
-  const [isBedroomsUnsure, setBedRoomsUnsure] = useState(null);
+
   const [rentalYield, setRentalYield] = useState("");
   const [growthInProperty, SetGrowthInProperty] = useState("");
   const [availabilityOfSupply, setAvailabilityOfSupply] = useState("");
@@ -132,12 +132,6 @@ const ApplicationPage = () => {
     const type = dwellingType.value;
     const bedrooms = minBedrooms.value;
     const areaType = area.value;
-
-    if (bedrooms === "unsure") {
-      setBedRoomsUnsure(true);
-    } else {
-      setBedRoomsUnsure(false);
-    }
 
     const formData = new FormData();
 
@@ -335,12 +329,20 @@ const ApplicationPage = () => {
     // eslint-disable-next-line
   }, [results, filteredResults]);
 
+  const [filterCompressed, setFilterCompressed] = useState(false);
+
   return (
     <>
       <NavBar />
       {contextHolder}
 
-      <div className="container  col-12  home-page-container ">
+      <div
+        className={`${
+          filteredResults
+            ? "container-fluid"
+            : "container  col-12  home-page-container"
+        }`}
+      >
         <p
           style={
             {
@@ -349,282 +351,445 @@ const ApplicationPage = () => {
               // paddingRight: "12px",
             }
           }
-          className="header-caption  container mt-2  m-lg-3  text-start text-lg-center p-0 "
+          className="header-caption  container-fluid mt-2  m-md-3   text-start text-md-center p-0 "
         >
           Welcome to the suburb selector based on your search. You will still
           need to go to domain/realestate to find what properties are available
           now
         </p>
         <HomePageStyled>
-          <div className="container max-width .col-12 .col-sm-6 .col-lg-8 filter-main-page-container ">
-            <div className="container col-12 search-box">
-              <Collapse
-                defaultActiveKey={["1"]}
-                items={[
-                  {
-                    key: "1",
-                    label: <h4>Property characteristics</h4>,
-                    children: (
-                      <div className="search-sub-main-box col-12">
-                        <div className="search-sub-box d-lg-flex d-flex-column col-12">
-                          <div className="search-filter d-flex gap-3  mb-lg-0  mb-3 align-items-center">
-                            <label
-                              className="search-label"
-                              style={{ width: "150px", textAlign: "left" }}
-                            >
-                              Dwelling type
-                            </label>
-                            <Select
-                              className="basic-filter"
-                              options={[
-                                { value: "Unit", label: "Unit" },
-                                { value: "House", label: "House" },
-                                {
-                                  value: "Townhouse",
-                                  label: "Town House",
-                                  isDisabled: true,
-                                },
-                              ]}
-                              value={dwellingType}
-                              onChange={setDwellingType}
-                            />
-                          </div>
-
-                          <div className="search-filter  d-flex  gap-3  align-items-center">
-                            <label
-                              className="search-label"
-                              style={{ width: "150px", textAlign: "left" }}
-                            >
-                              Minimum bedrooms
-                            </label>
-
-                            <Select
-                              required
-                              className="basic-filter"
-                              options={[
-                                { value: "1", label: "1" },
-                                { value: "2", label: "2" },
-                                { value: "3", label: "3" },
-                                { value: "4", label: "4" },
-                                { value: "5", label: "5" },
-                                { value: "6", label: "6" },
-                                { value: "7", label: "7" },
-                                { value: "unsure", label: "unsure" },
-                              ]}
-                              value={minBedrooms}
-                              onChange={setMinBedrooms}
-                            />
-                          </div>
-                        </div>
-                        <div className="search-sub-box d-lg-flex   col-12">
-                          <div className="search-filter  d-flex  gap-3 mb-lg-0  mb-3 align-items-center">
-                            {" "}
-                            <label
-                              className="search-label"
-                              style={{ width: "150px", textAlign: "left" }}
-                            >
-                              State
-                            </label>
-                            <Select
-                              className="state-select"
-                              isMulti
-                              options={statesOfAus}
-                              components={{ Option }}
-                              onChange={handleSelectedStates}
-                              required
-                            />
-                          </div>
-
-                          <div className=" d-flex align-items-center  gap-3   search-filter">
-                            <label
-                              className="search-label"
-                              style={{ width: "150px", textAlign: "left" }}
-                            >
-                              Area classification
-                            </label>
-
-                            <Select
-                              className="basic-filter"
-                              options={[
-                                {
-                                  value: "metropolitan",
-                                  label: "Metropolitan",
-                                },
-                                { value: "rural", label: "Rural" },
-                                { value: "remote", label: "Remote" },
-                                { value: "unsure", label: "Unsure" },
-                              ]}
-                              value={area}
-                              onChange={setArea}
-                            />
-                          </div>
-                        </div>
-                        <div className="search-sub-box d-lg-flex justify-content-around   col-12 ">
-                          <div className="search-filter  d-flex align-items-center  gap-3 ">
-                            <label
-                              className="search-label"
-                              style={{ width: "150px", textAlign: "left" }}
-                            >
-                              Budget
-                            </label>
-                            <div
-                              style={{
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                gap: "5px",
-                              }}
-                            >
-                              <div>
-                                <CurrencyInput
-                                  className="currency-input"
-                                  placeholder="Enter budget"
-                                  prefix="$"
-                                  decimalsLimit={0}
-                                  value={budget}
-                                  onValueChange={handleBudget}
-                                  required
-                                />{" "}
-                                {budget ? (
-                                  budget.length < 6 ? (
-                                    <p className="budget-alert">
-                                      should be minimum of 6 digits
-                                    </p>
-                                  ) : (
-                                    ""
-                                  )
-                                ) : (
-                                  ""
-                                )}
-                              </div>
-                            </div>
-                          </div>
-                          <div className="search-filter invisible   d-flex align-items-center  gap-3 ">
-                            <label
-                              className="search-label"
-                              style={{ width: "150px", textAlign: "left" }}
-                            >
-                              Budget
-                            </label>
-                            <div
-                              style={{
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                gap: "5px",
-                              }}
-                            >
-                              <div>
-                                <CurrencyInput
-                                  className="currency-input"
-                                  placeholder="Enter budget"
-                                  prefix="$"
-                                  decimalsLimit={0}
-                                  value={budget}
-                                  onValueChange={handleBudget}
-                                  required
-                                />{" "}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        {results ? (
-                          results.length > 0 ? (
-                            <p className="filter-info">
-                              {results.length} suburbs selected based on your
-                              search criteria
-                            </p>
-                          ) : results.length === 0 ? (
-                            <p
-                              className="filter-info"
-                              style={{
-                                color: "red",
-                              }}
-                            >
-                              No data found try changing the filters
-                            </p>
-                          ) : (
-                            ""
-                          )
-                        ) : (
-                          ""
-                        )}
-                      </div>
-                    ),
-                  },
-                ]}
-              />
-
-              <Collapse
-                style={{ marginTop: "20px" }}
-                defaultActiveKey={["1"]}
-                items={[
-                  {
-                    key: "1",
-                    label: (
-                      <h4 style={{ marginRight: "30px" }}>
-                        Investment strategy
-                      </h4>
-                    ),
-                    children: (
-                      <>
-                        <p
-                          className="text-start text-lg-center"
-                          style={{ marginBottom: "30px" }}
-                        >
-                          Please rate at least four factors from below to see
-                          the list of suburbs
-                        </p>
-
-                        <FilterMobile
-                          demandPrevMonth={demandPrevMonth}
-                          availabilityOfSupply={availabilityOfSupply}
-                          growthInProperty={growthInProperty}
-                          rentalYield={rentalYield}
-                        />
-                      </>
-                    ),
-                  },
-                ]}
-              />
-            </div>
-          </div>
-          {results ? (
-            results.length > 0 && !filteredResults ? (
-              <p className="filter-info">
-                {results.length} suburbs meet your criteria, try minimum four
-                factors given in investment strategy to see the results
-              </p>
-            ) : results.length === 0 ? (
-              <p
-                className="filter-info"
-                style={{
-                  color: "red",
-                }}
-              >
-                No data found try changing the filters
-              </p>
-            ) : (
-              ""
-            )
-          ) : (
-            ""
-          )}
-
           <div
-            className="results-main-container col-12 d-lg-flex"
-            ref={resultsContainerRef}
-            style={{ transition: "all 0.3s ease" }}
+            className={`${
+              filteredResults ? "container-fluid d-md-flex" : "container"
+            }`}
           >
             <div
-              style={{ display: filteredResults ? "block" : "none" }}
-              className="result-left-container col-lg-6 col-12"
+              className={`${
+                filteredResults
+                  ? `filter-container ${
+                      filterCompressed ? "open" : ""
+                    } container-fluid mt-md-10 overflow-container col-md-3 `
+                  : "container"
+              }`}
             >
-              {filteredResults ? (
-                <>
-                  {filteredResults.length > 0 ? (
-                    <div className="color-circles-legend">
-                      <div>
+              <div className="container col-12 search-box">
+                <Collapse
+                  defaultActiveKey={["1"]}
+                  items={[
+                    {
+                      key: "1",
+                      label: <h4>Property characteristics</h4>,
+                      children: (
+                        <div className="search-sub-main-box col-12">
+                          <div
+                            className={`${
+                              filteredResults
+                                ? "container-fluid d-flex-column"
+                                : "search-sub-box d-lg-flex d-flex-column col-12"
+                            }`}
+                          >
+                            <div
+                              className={`${
+                                filteredResults
+                                  ? "search-filter d-flex gap-3  mb-3 align-items-center"
+                                  : "search-filter d-flex gap-3  mb-lg-0  mb-3 align-items-center"
+                              }`}
+                            >
+                              <label
+                                className="search-label"
+                                style={{ width: "150px", textAlign: "left" }}
+                              >
+                                Dwelling type
+                              </label>
+                              <Select
+                                className="basic-filter"
+                                options={[
+                                  { value: "Unit", label: "Unit" },
+                                  { value: "House", label: "House" },
+                                  {
+                                    value: "Townhouse",
+                                    label: "Town House",
+                                    isDisabled: true,
+                                  },
+                                ]}
+                                value={dwellingType}
+                                onChange={setDwellingType}
+                              />
+                            </div>
+
+                            <div
+                              className={`${
+                                filteredResults
+                                  ? "search-filter d-flex gap-3  mb-3 align-items-center"
+                                  : "search-filter d-flex gap-3  mb-lg-0  mb-3 align-items-center"
+                              }`}
+                            >
+                              <label
+                                className="search-label"
+                                style={{ width: "150px", textAlign: "left" }}
+                              >
+                                Minimum bedrooms
+                              </label>
+
+                              <Select
+                                required
+                                className="basic-filter"
+                                options={[
+                                  { value: "1", label: "1" },
+                                  { value: "2", label: "2" },
+                                  { value: "3", label: "3" },
+                                  { value: "4", label: "4" },
+                                  { value: "5", label: "5" },
+                                  { value: "6", label: "6" },
+                                  { value: "7", label: "7" },
+                                  { value: "unsure", label: "unsure" },
+                                ]}
+                                value={minBedrooms}
+                                onChange={setMinBedrooms}
+                              />
+                            </div>
+                          </div>
+                          <div
+                            className={`${
+                              filteredResults
+                                ? "container-fluid d-flex-column"
+                                : "search-sub-box d-lg-flex d-flex-column col-12"
+                            }`}
+                          >
+                            <div
+                              className={`${
+                                filteredResults
+                                  ? "search-filter d-flex gap-3  mb-md-3 align-items-center"
+                                  : "search-filter d-flex gap-3  mb-lg-0  align-items-center"
+                              }`}
+                            >
+                              {" "}
+                              <label
+                                className="search-label"
+                                style={{ width: "150px", textAlign: "left" }}
+                              >
+                                State
+                              </label>
+                              <Select
+                                className="state-select"
+                                isMulti
+                                options={statesOfAus}
+                                components={{ Option }}
+                                onChange={handleSelectedStates}
+                                required
+                              />
+                            </div>
+
+                            <div
+                              className={`${
+                                filteredResults
+                                  ? "search-filter d-flex gap-3  mb-3 align-items-center"
+                                  : "search-filter d-flex gap-3  mb-lg-0  mb-3 align-items-center"
+                              }`}
+                            >
+                              <label
+                                className="search-label"
+                                style={{ width: "150px", textAlign: "left" }}
+                              >
+                                Area classification
+                              </label>
+
+                              <Select
+                                className="basic-filter"
+                                options={[
+                                  {
+                                    value: "metropolitan",
+                                    label: "Metropolitan",
+                                  },
+                                  { value: "rural", label: "Rural" },
+                                  { value: "remote", label: "Remote" },
+                                  { value: "unsure", label: "Unsure" },
+                                ]}
+                                value={area}
+                                onChange={setArea}
+                              />
+                            </div>
+                          </div>
+                          <div
+                            className={`${
+                              filteredResults
+                                ? "container-fluid d-flex-column"
+                                : "search-sub-box d-lg-flex d-flex-column col-12"
+                            }`}
+                          >
+                            <div className="search-filter  d-flex align-items-center  gap-3 ">
+                              <label
+                                className="search-label"
+                                style={{ width: "150px", textAlign: "left" }}
+                              >
+                                Budget
+                              </label>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                  gap: "5px",
+                                }}
+                              >
+                                <div>
+                                  <CurrencyInput
+                                    style={{
+                                      width: `${
+                                        filteredResults ? "160px" : ""
+                                      }`,
+                                    }}
+                                    className="currency-input"
+                                    placeholder="Enter budget"
+                                    prefix="$"
+                                    decimalsLimit={0}
+                                    value={budget}
+                                    onValueChange={handleBudget}
+                                    required
+                                  />{" "}
+                                  {budget ? (
+                                    budget.length < 6 ? (
+                                      <p className="budget-alert">
+                                        should be minimum of 6 digits
+                                      </p>
+                                    ) : (
+                                      ""
+                                    )
+                                  ) : (
+                                    ""
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                            <div className="search-filter invisible   d-flex align-items-center  gap-3 ">
+                              <label
+                                className="search-label"
+                                style={{ width: "150px", textAlign: "left" }}
+                              >
+                                Budget
+                              </label>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                  gap: "5px",
+                                }}
+                              >
+                                <div>
+                                  <CurrencyInput
+                                    className="currency-input"
+                                    placeholder="Enter budget"
+                                    prefix="$"
+                                    decimalsLimit={0}
+                                    value={budget}
+                                    onValueChange={handleBudget}
+                                    required
+                                  />{" "}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          {results ? (
+                            results.length > 0 ? (
+                              <p className="filter-info p-0 pt-lg-2 m-0">
+                                {results.length} suburbs selected based on your
+                                search criteria
+                              </p>
+                            ) : results.length === 0 ? (
+                              <p
+                                className="filter-info"
+                                style={{
+                                  color: "red",
+                                }}
+                              >
+                                No data found try changing the filters
+                              </p>
+                            ) : (
+                              ""
+                            )
+                          ) : (
+                            ""
+                          )}
+                        </div>
+                      ),
+                    },
+                  ]}
+                />
+
+                <Collapse
+                  style={{ marginTop: "20px" }}
+                  defaultActiveKey={["1"]}
+                  items={[
+                    {
+                      key: "1",
+                      label: (
+                        <h4 style={{ marginRight: "30px" }}>
+                          Investment strategy
+                        </h4>
+                      ),
+                      children: (
+                        <>
+                          {filteredResults ? (
+                            ""
+                          ) : (
+                            <p
+                              className="text-start text-md-center"
+                              style={{ marginBottom: "30px" }}
+                            >
+                              Please rate at least four factors from below to
+                              see the list of suburbs
+                            </p>
+                          )}
+
+                          <FilterMobile
+                            demandPrevMonth={demandPrevMonth}
+                            availabilityOfSupply={availabilityOfSupply}
+                            growthInProperty={growthInProperty}
+                            rentalYield={rentalYield}
+                          />
+                        </>
+                      ),
+                    },
+                  ]}
+                />
+              </div>
+              <div
+                className={`${
+                  filteredResults
+                    ? `mobile-filter-icon d-grid    ${
+                        filterCompressed ? "active" : ""
+                      }
+              `
+                    : `d-none`
+                }`}
+                onClick={() => setFilterCompressed(!filterCompressed)}
+              >
+                <i className="bi bi-funnel funnel"></i>
+              </div>
+            </div>
+
+            <div
+              className={`${filteredResults ? "container-fluid col-lg-9" : ""}`}
+            >
+              {results ? (
+                results.length > 0 && !filteredResults ? (
+                  <p className="filter-info">
+                    {results.length} suburbs meet your criteria, try minimum
+                    four factors given in investment strategy to see the results
+                  </p>
+                ) : results.length === 0 ? (
+                  <p
+                    className="filter-info"
+                    style={{
+                      color: "red",
+                    }}
+                  >
+                    No data found try changing the filters
+                  </p>
+                ) : (
+                  ""
+                )
+              ) : (
+                ""
+              )}
+
+              <div
+                className={`${
+                  filteredResults
+                    ? "container-fluid  "
+                    : "results-main-container container col-12 "
+                }`}
+                ref={resultsContainerRef}
+                style={{ transition: "all 0.3s ease" }}
+              >
+                {filteredResults ? (
+                  <>
+                    {filteredResults.length > 0 ? (
+                      <div className="color-circles-legend col-12 mobile-legend">
+                        <div className="d-flex align-items-center justify-content-around">
+                          <div
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: "5px",
+
+                              paddingRight: "5px",
+                            }}
+                          >
+                            <label
+                              style={{ width: "110px", textAlign: "start" }}
+                            >
+                              Best match :
+                            </label>
+                            <div className="green-circle"></div>{" "}
+                            {counts.moreThan80}
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: "5px",
+
+                              paddingRight: "5px",
+                            }}
+                          >
+                            <label
+                              style={{ width: "110px", textAlign: "start" }}
+                            >
+                              Good match :
+                            </label>
+                            <div className="yellow-circle"></div>{" "}
+                            {counts.moreThan60}
+                          </div>
+                        </div>
+
+                        <div className="d-flex align-items-center justify-content-around">
+                          <div
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: "5px",
+
+                              paddingRight: "5px",
+                            }}
+                          >
+                            <label
+                              style={{ width: "110px", textAlign: "start" }}
+                            >
+                              Decent match :
+                            </label>
+                            <div className="blue-circle"></div>{" "}
+                            {counts.moreThan40}
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: "5px",
+                            }}
+                          >
+                            <label
+                              style={{ width: "110px", textAlign: "start" }}
+                            >
+                              Poor match :
+                            </label>
+                            <div className="red-circle"></div>
+                            {counts.lessThan40}
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      ""
+                    )}{" "}
+                  </>
+                ) : (
+                  ""
+                )}
+                {filteredResults ? (
+                  <>
+                    {filteredResults.length > 0 ? (
+                      <div className="color-circles-legend d-md-flex align-items-center web-legend ">
                         <div
                           style={{
                             display: "flex",
@@ -655,9 +820,7 @@ const ApplicationPage = () => {
                           <div className="yellow-circle"></div>{" "}
                           {counts.moreThan60}
                         </div>
-                      </div>
 
-                      <div>
                         <div
                           style={{
                             display: "flex",
@@ -687,154 +850,157 @@ const ApplicationPage = () => {
                           {counts.lessThan40}
                         </div>
                       </div>
-                    </div>
-                  ) : (
-                    ""
-                  )}{" "}
-                </>
-              ) : (
-                ""
-              )}
-              <center>
-                {displayResults ? (
-                  <>
-                    <div
-                      className="table-container"
-                      style={{ transition: "all 0.3s ease" }}
-                    >
-                      <table style={{ transition: "all 0.3s ease" }}>
-                        <thead className="table-header">
-                          <tr>
-                            <th>Suburb Name</th>
-                            <th>
-                              <Dropdown overlay={postcodeMenu}>
-                                <label
-                                  style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    cursor: "pointer",
-                                  }}
-                                >
-                                  Postcode
-                                  <MdArrowDropDown
-                                    style={{ fontSize: "20px" }}
-                                  />{" "}
-                                </label>
-                              </Dropdown>
-                            </th>
-                            <th>
-                              <Dropdown overlay={stateCodeMenu}>
-                                <label
-                                  style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    cursor: "pointer",
-                                  }}
-                                >
-                                  State
-                                  <MdArrowDropDown
-                                    style={{ fontSize: "20px" }}
-                                  />{" "}
-                                </label>
-                              </Dropdown>
-                            </th>
-
-                            {isBedroomsUnsure ? (
-                              <th style={{ textAlign: "center" }}>
-                                Max Bedrooms
-                              </th>
-                            ) : (
-                              ""
-                            )}
-                            {isResultsFiltered ? (
-                              <th style={{ textAlign: "center" }}>Score</th>
-                            ) : (
-                              ""
-                            )}
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {isDataNotFound ? (
-                            <>
-                              <div
-                                style={{
-                                  width: "200%",
-                                  height: "50vh",
-
-                                  display: "grid",
-                                  placeItems: "center",
-                                }}
-                              >
-                                <h3>Data not found</h3>
-                              </div>
-                            </>
-                          ) : (
-                            <>
-                              {filteredResults
-                                ? displayResults.map((data) => {
-                                    return (
-                                      <tr key={data.suburb_id}>
-                                        <td>{data.suburb_name}</td>
-                                        <td>{data.postcode}</td>
-                                        <td>{data.state_code}</td>
-
-                                        {isBedroomsUnsure ? (
-                                          <td style={{ textAlign: "center" }}>
-                                            {data.max_bedrooms}
-                                          </td>
-                                        ) : (
-                                          ""
-                                        )}
-                                        {isResultsFiltered ? (
-                                          <td>
-                                            <center>
-                                              {isAdmin === "true" ? (
-                                                data.ranking.toFixed(2)
-                                              ) : (
-                                                <div
-                                                  className={
-                                                    data.rankingPercentage > 80
-                                                      ? "green-circle"
-                                                      : data.rankingPercentage >
-                                                        60
-                                                      ? "yellow-circle"
-                                                      : data.rankingPercentage >
-                                                        40
-                                                      ? "blue-circle"
-                                                      : "red-circle"
-                                                  }
-                                                ></div>
-                                              )}
-                                            </center>
-                                          </td>
-                                        ) : (
-                                          ""
-                                        )}
-                                      </tr>
-                                    );
-                                  })
-                                : ""}
-                            </>
-                          )}
-                        </tbody>
-                      </table>
-                    </div>
+                    ) : (
+                      ""
+                    )}{" "}
                   </>
                 ) : (
                   ""
                 )}
-              </center>
-            </div>
-            <div
-              style={{
-                width: filteredResults ? "" : "100%",
 
-                paddingTop: `${filteredResults ? "100px" : "15px"}`,
-                transition: "all 0.3s ease",
-              }}
-              className="result-right-container mb-5 col-lg-6 col-12"
-            >
-              {results ? <GoogleMapComponent /> : ""}
+                <div
+                  className={`${
+                    filteredResults
+                      ? "container-fluid col-12 d-md-flex"
+                      : "container col-12 d-md-flex"
+                  }`}
+                >
+                  <div
+                    style={{ display: filteredResults ? "block" : "none" }}
+                    className="result-left-container col-md-6 col-12"
+                  >
+                    <center>
+                      {displayResults ? (
+                        <>
+                          <div
+                            className="table-container"
+                            style={{ transition: "all 0.3s ease" }}
+                          >
+                            <table style={{ transition: "all 0.3s ease" }}>
+                              <thead className="table-header">
+                                <tr>
+                                  <th>Suburb Name</th>
+                                  <th>
+                                    <Dropdown overlay={postcodeMenu}>
+                                      <label
+                                        style={{
+                                          display: "flex",
+                                          alignItems: "center",
+                                          cursor: "pointer",
+                                        }}
+                                      >
+                                        Postcode
+                                        <MdArrowDropDown
+                                          style={{ fontSize: "20px" }}
+                                        />{" "}
+                                      </label>
+                                    </Dropdown>
+                                  </th>
+                                  <th>
+                                    <Dropdown overlay={stateCodeMenu}>
+                                      <label
+                                        style={{
+                                          display: "flex",
+                                          alignItems: "center",
+                                          cursor: "pointer",
+                                        }}
+                                      >
+                                        State
+                                        <MdArrowDropDown
+                                          style={{ fontSize: "20px" }}
+                                        />{" "}
+                                      </label>
+                                    </Dropdown>
+                                  </th>
+
+                                  {isResultsFiltered ? (
+                                    <th style={{ textAlign: "center" }}>
+                                      Score
+                                    </th>
+                                  ) : (
+                                    ""
+                                  )}
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {isDataNotFound ? (
+                                  <>
+                                    <div
+                                      style={{
+                                        width: "200%",
+                                        height: "50vh",
+
+                                        display: "grid",
+                                        placeItems: "center",
+                                      }}
+                                    >
+                                      <h3>Data not found</h3>
+                                    </div>
+                                  </>
+                                ) : (
+                                  <>
+                                    {filteredResults
+                                      ? displayResults.map((data) => {
+                                          return (
+                                            <tr key={data.suburb_id}>
+                                              <td>{data.suburb_name}</td>
+                                              <td>{data.postcode}</td>
+                                              <td>{data.state_code}</td>
+
+                                              {isResultsFiltered ? (
+                                                <td>
+                                                  <center>
+                                                    {isAdmin === "true" ? (
+                                                      data.ranking.toFixed(2)
+                                                    ) : (
+                                                      <div
+                                                        className={
+                                                          data.rankingPercentage >
+                                                          80
+                                                            ? "green-circle"
+                                                            : data.rankingPercentage >
+                                                              60
+                                                            ? "yellow-circle"
+                                                            : data.rankingPercentage >
+                                                              40
+                                                            ? "blue-circle"
+                                                            : "red-circle"
+                                                        }
+                                                      ></div>
+                                                    )}
+                                                  </center>
+                                                </td>
+                                              ) : (
+                                                ""
+                                              )}
+                                            </tr>
+                                          );
+                                        })
+                                      : ""}
+                                  </>
+                                )}
+                              </tbody>
+                            </table>
+                          </div>
+                        </>
+                      ) : (
+                        ""
+                      )}
+                    </center>
+                  </div>
+                  <div
+                    style={{
+                      width: filteredResults ? "" : "100%",
+
+                      paddingTop: `${filteredResults ? "20px" : "15px"}`,
+                      transition: "all 0.3s ease",
+                    }}
+                    className="result-right-container mb-5 col-md-6 col-12"
+                  >
+                    {results ? <GoogleMapComponent /> : ""}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </HomePageStyled>

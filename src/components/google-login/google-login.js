@@ -3,10 +3,11 @@ import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { useApplicationContext } from "../../context/app-context";
 import AxiosInstance from "../axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 const GoogleLoginComponent = ({ element }) => {
   const { setUserInfo } = useApplicationContext();
   const navigate = useNavigate();
+  const Location = useLocation();
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       await axios
@@ -58,7 +59,11 @@ const GoogleLoginComponent = ({ element }) => {
           localStorage.setItem("isAdmin", "false");
         }
 
-        navigate("/");
+        if (Location.pathname === "/login-app") {
+          navigate("/application");
+        } else {
+          navigate("/");
+        }
       })
       .catch((err) => {
         console.log(err);

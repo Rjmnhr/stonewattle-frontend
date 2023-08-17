@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useApplicationContext } from "../../context/app-context";
 import { message } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -13,6 +13,7 @@ const SignIn = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const navigate = useNavigate();
+  const Location = useLocation();
   const { setIsSignIn, setIsLoggedIn } = useApplicationContext();
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -71,8 +72,11 @@ const SignIn = () => {
 
         setEmail("");
         setPassword("");
-
-        navigate("/");
+        if (Location.pathname === "/login-app") {
+          navigate("/application");
+        } else {
+          navigate("/");
+        }
       })
       .catch((err) => {
         error("Something wrong");

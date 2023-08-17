@@ -35,7 +35,7 @@ const NavBar = () => {
     if (isLoggedIn === "true") {
       navigate("/application");
     } else {
-      navigate("/login");
+      navigate("/login-app");
     }
   };
 
@@ -71,7 +71,7 @@ const NavBar = () => {
           "fixEffect": "slide"
         }'
       >
-        <div className="container">
+        <div className="container-fluid">
           <nav className="js-mega-menu navbar-nav-wrap">
             <a
               style={{ fontSize: "25px", paddingLeft: "10px" }}

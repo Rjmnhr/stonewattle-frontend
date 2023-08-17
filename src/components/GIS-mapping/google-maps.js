@@ -5,24 +5,24 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import { useApplicationContext } from "../../context/app-context";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 // import { useEffect } from "react";
 
 const Map = () => {
   const { results, filteredResults } = useApplicationContext();
   const [selectedMarker, setSelectedMarker] = useState(null);
-  // const [suburbArr, setSuburbArr] = useState(null);
+  const [suburbArr, setSuburbArr] = useState(null);
 
   // const [map, setMap] = useState(null);
 
-  // const blueMarker =
-  //   "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1692033138/ozbnlfw22rksefhsd8fn.png";
-  // const greenMarker =
-  //   "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1692032795/imka2voeexu46awtdwkg.png";
-  // const orangeMarker =
-  //   "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1692032982/hogi7wlzldpzndw4hkgk.png";
-  // const redMarker =
-  //   "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1691995119/gxjfq8xhsfcmngqewkur.png";
+  const blueMarker =
+    "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1692286859/yzs3vsevclgrgslxaxli.png";
+  const greenMarker =
+    "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1692286299/g4apcqcgznwt30wmnnqq.png";
+  const orangeMarker =
+    "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1692286914/jfhuede7cj911nl1wlu4.png";
+  const redMarker =
+    "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1692286947/elc11cbtr4ornbtfb8b3.png";
 
   const initialMapCenter = useMemo(
     () => ({ lat: -25.2744, lng: 133.7751 }),
@@ -40,15 +40,15 @@ const Map = () => {
   //   }
   // };
 
-  // useEffect(() => {
-  //   if (results) {
-  //     if (results && !filteredResults) {
-  //       setSuburbArr(results);
-  //     } else {
-  //       setSuburbArr(filteredResults);
-  //     }
-  //   }
-  // }, [results, filteredResults, suburbArr]);
+  useEffect(() => {
+    if (results) {
+      if (results && !filteredResults) {
+        setSuburbArr(results);
+      } else {
+        setSuburbArr(filteredResults);
+      }
+    }
+  }, [results, filteredResults, suburbArr]);
 
   const zoomInt = filteredResults ? 4 : 5;
 
@@ -62,8 +62,8 @@ const Map = () => {
       }}
       // onLoad={handleMapLoad}
     >
-      {results
-        ? results.map((suburb) => {
+      {suburbArr
+        ? suburbArr.map((suburb) => {
             // const latitude = parseInt(suburb.latitude);
             // const longitude = parseInt(suburb.longitude);
 
@@ -72,17 +72,17 @@ const Map = () => {
                 <Marker
                   key={suburb.suburb_id} // Add a unique key to each marker
                   position={{ lat: suburb.latitude, lng: suburb.longitude }}
-                  // icon={{
-                  //   url: `${
-                  //     suburb.rankingPercentage > 80
-                  //       ? greenMarker
-                  //       : suburb.rankingPercentage > 60
-                  //       ? orangeMarker
-                  //       : suburb.rankingPercentage > 40
-                  //       ? blueMarker
-                  //       : redMarker
-                  //   }`,
-                  // }}
+                  icon={{
+                    url: `${
+                      suburb.rankingPercentage > 80
+                        ? greenMarker
+                        : suburb.rankingPercentage > 60
+                        ? orangeMarker
+                        : suburb.rankingPercentage > 40
+                        ? blueMarker
+                        : redMarker
+                    }`,
+                  }}
                   onClick={() => {
                     setSelectedMarker(suburb);
                   }}
