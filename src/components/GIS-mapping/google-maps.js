@@ -50,6 +50,28 @@ const Map = () => {
     }
   }, [results, filteredResults, suburbArr]);
 
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+  useEffect(() => {
+    if (results) {
+      if (results && !filteredResults) {
+        if (isLoggedIn === "true") {
+          setSuburbArr(results);
+        } else {
+          const firstThreeObjects = results.slice(0, 3);
+          setSuburbArr(firstThreeObjects);
+        }
+      } else {
+        if (isLoggedIn === "true") {
+          setSuburbArr(filteredResults);
+        } else {
+          const firstThreeObjects = filteredResults.slice(0, 3);
+          setSuburbArr(firstThreeObjects);
+        }
+      }
+    }
+  }, [results, filteredResults, suburbArr, isLoggedIn]);
+
   const zoomInt = filteredResults ? 4 : 5;
 
   return (

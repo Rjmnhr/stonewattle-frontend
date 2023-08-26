@@ -978,13 +978,13 @@ const ApplicationPage = () => {
                               </tbody>
                             </table>
                             <div className="container p-5 mt-3">
-                              <h3>Top 3 suburbs are shown </h3>
-                              <h3 className="mt-2">
+                              <h4>Top 3 suburbs are shown </h4>
+                              <h4 className="mt-2">
                                 Login to see all the suburbs
-                              </h3>
+                              </h4>
                               <button
                                 onClick={handleNavigateLogin}
-                                className="btn btn-primary btn-lg w-50 p-3 mt-4"
+                                className="btn btn-primary btn-lg w-50 p-2 mt-4"
                               >
                                 Log in
                               </button>
