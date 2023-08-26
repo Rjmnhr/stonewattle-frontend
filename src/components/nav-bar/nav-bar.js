@@ -32,11 +32,12 @@ const NavBar = () => {
   // };
 
   const handleApplication = () => {
-    if (isLoggedIn === "true") {
-      navigate("/application");
-    } else {
-      navigate("/login-app");
-    }
+    // if (isLoggedIn === "true") {
+    //   navigate("/application");
+    // } else {
+    //   navigate("/login-app");
+    // }
+    navigate("/application");
   };
 
   // useEffect(() => {

@@ -6,7 +6,7 @@ import OtpVerification from "./pages/otp-verification";
 import SuburbId from "./pages/suburb-id";
 import CreateProfile from "./components/create-profile/profile";
 
-import PricingPage from "./pages/pricing-page";
+// import PricingPage from "./pages/pricing-page";
 import ContactPage from "./pages/contact-page";
 import ApplicationPage from "./pages/Application-page";
 import HomePage from "./pages/home-page";
@@ -100,7 +100,7 @@ const AppRoute = () => {
             </>
           }
         />
-        <Route
+        <Routes
           path="/forgot-password"
           element={
             <>

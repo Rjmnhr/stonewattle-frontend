@@ -4,7 +4,7 @@ import { useApplicationContext } from "../../context/app-context";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 
-import { Collapse, Menu, Dropdown, message, Modal, Button } from "antd";
+import { Collapse, Menu, Dropdown, message } from "antd";
 import { statesOfAus } from "../../components/states-in-aus/states";
 import Select, { components } from "react-select";
 import CurrencyInput from "react-currency-input-field";
@@ -17,7 +17,7 @@ const ApplicationPage = () => {
   const {
     setResults,
     results,
-    setIsUserValid,
+
     filteredResults,
     isResultsFiltered,
     // dropdownHeight,
@@ -39,23 +39,6 @@ const ApplicationPage = () => {
   const navigate = useNavigate();
   const isAdmin = localStorage.getItem("isAdmin");
   const [messageApi, contextHolder] = message.useMessage();
-  const [modalVisible, setModalVisible] = useState(false);
-
-  const handleModalClose = () => {
-    setModalVisible(false);
-    sessionStorage.setItem("info", "true");
-  };
-
-  const info = sessionStorage.getItem("info");
-
-  useEffect(() => {
-    if (!info) {
-      setTimeout(() => {
-        setModalVisible(true);
-      }, 3000); // 3 seconds in millisecondsx
-    }
-    // eslint-disable-next-line
-  }, []);
 
   const warning = () => {
     messageApi.open({
@@ -64,32 +47,41 @@ const ApplicationPage = () => {
     });
   };
 
+  // useEffect(() => {
+  //   const accessToken = localStorage.getItem("accessToken");
+
+  //   fetch("http://2ndstorey.com:8002/api/token/verify", {
+  //     headers: {
+  //       token: `Bearer ${accessToken}`,
+  //     },
+  //   })
+  //     .then(async (response) => {
+  //       console.log(response.status);
+  //       if (response.status === 200) {
+  //         console.log("user is valid");
+  //         setIsUserValid(true);
+  //       } else {
+  //         navigate("/");
+  //       }
+  //     })
+
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }, [setIsUserValid, navigate]);
+
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+
   useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
-
-    fetch("http://2ndstorey.com:8002/api/token/verify", {
-      headers: {
-        token: `Bearer ${accessToken}`,
-      },
-    })
-      .then(async (response) => {
-        console.log(response.status);
-        if (response.status === 200) {
-          console.log("user is valid");
-          setIsUserValid(true);
-        } else {
-          navigate("/");
-        }
-      })
-
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [setIsUserValid, navigate]);
-
-  useEffect(() => {
-    setDisplayResults(filteredResults);
-  }, [filteredResults]);
+    if (isLoggedIn === "true") {
+      setDisplayResults(filteredResults);
+    } else {
+      if (filteredResults) {
+        const firstThreeObjects = filteredResults.slice(0, 3);
+        setDisplayResults(firstThreeObjects);
+      }
+    }
+  }, [filteredResults, isLoggedIn]);
 
   const handleSelectedStates = (selectedOptions) => {
     const selectedValues = selectedOptions.map((option) => option.value);
@@ -331,6 +323,10 @@ const ApplicationPage = () => {
 
   const [filterCompressed, setFilterCompressed] = useState(false);
 
+  const handleNavigateLogin = () => {
+    navigate("/login-app");
+  };
+
   return (
     <>
       <NavBar />
@@ -460,7 +456,7 @@ const ApplicationPage = () => {
                               className={`${
                                 filteredResults
                                   ? "search-filter d-flex gap-3  mb-md-3 align-items-center"
-                                  : "search-filter d-flex gap-3  mb-lg-0  align-items-center"
+                                  : "search-filter d-flex gap-3  mb-lg-0 mb-3  align-items-center"
                               }`}
                             >
                               {" "}
@@ -981,6 +977,18 @@ const ApplicationPage = () => {
                                 )}
                               </tbody>
                             </table>
+                            <div className="container p-5 mt-3">
+                              <h3>Top 3 suburbs are shown </h3>
+                              <h3 className="mt-2">
+                                Login to see all the suburbs
+                              </h3>
+                              <button
+                                onClick={handleNavigateLogin}
+                                className="btn btn-primary btn-lg w-50 p-3 mt-4"
+                              >
+                                Log in
+                              </button>
+                            </div>
                           </div>
                         </>
                       ) : (
@@ -1005,24 +1013,6 @@ const ApplicationPage = () => {
           </div>
         </HomePageStyled>
       </div>
-      <Modal
-        visible={modalVisible}
-        onCancel={handleModalClose}
-        footer={[
-          <Button key="ok" type="primary" onClick={handleModalClose}>
-            OK
-          </Button>,
-        ]}
-      >
-        <div className="container p-3 d-flex-column align-items-center">
-          <p>2nd Storey is free till middle of September!</p>
-          <p>
-            {" "}
-            We will always have a free version for users but will introduce a
-            paid version for the more sophisticated users
-          </p>
-        </div>
-      </Modal>
     </>
   );
 };
