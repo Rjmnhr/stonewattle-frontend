@@ -1,53 +1,17 @@
 import React from "react";
 import NavBar from "../../components/nav-bar/nav-bar";
-// import { useApplicationContext } from "../../context/app-context";
+
+import OpenInNewOutlinedIcon from "@mui/icons-material/OpenInNewOutlined";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
-  // const { dropdownHeight } = useApplicationContext();
+  const navigate = useNavigate();
   return (
     <>
       <NavBar />
-      {/* <div
-        style={{
-          // marginTop: `${dropdownHeight ? `${dropdownHeight}px` : "0px"}`,
-          transition: "all 0.3s ease",
-          display: "grid",
-          placeItems: "center",
-        }}
-        className="container content-space w-100 home-page-container"
-      >
-        <div className="w-lg-100 p-lg-1 p-3 mt-lg-3 mt-1  text-center mx-lg-auto mb-5 mb-sm-7 mb-lg-10 ">
-          <p style={{ textAlign: "left" }}>
-            We are a technology AI company using property data to bring to you a
-            one-stop platform for all your needs. We have been investing in the
-            Australian property market over the last 10 years and have more than
-            $4m worth of property portfolio.
-          </p>
-          <img
-            src=""
-            alt=""
-          />
-          <p style={{ textAlign: "left" }}>
-            We have helped more than 50 investors use our platform, and who have
-            amassed more than $25m of property across the whole nation.
-          </p>
-          <p style={{ textAlign: "left" }}>
-            Over the last 5 years we have been capturing property data from
-            various sources and used all our investment strategies to provide
-            all tools you need to make an investment.
-          </p>
-          <p style={{ textAlign: "left" }}>
-            Our proprietary Machine Learning algorithm can also help predict
-            suburbs which are more likely to grow. We don’t provide specific
-            property details - we still encourage you to visit domain and real
-            estate websites to complete your research. However, our products
-            will help you shortlist which suburbs are best suited for you.
-          </p>
-          <p style={{ textAlign: "left" }}>Our data is refreshed each week.</p>
-        </div>
-      </div> */}
+
       <main id="content" role="main">
-        <div class="container  pt-3 pt-lg-10 ">
+        <div class="container-fluid px-lg-8 p-3  pt-3 pt-lg-10 ">
           <div class="row justify-content-lg-between align-items-lg-center">
             <div class="col-lg-5 mb-5 mb-lg-0">
               <div class="mb-5 text-lg-start text-center">
@@ -61,6 +25,34 @@ const HomePage = () => {
                   investing in the Australian property market over the last 10
                   years and have more than $4m worth of property portfolio.
                 </p>
+
+                <p
+                  class="fs-2 d-flex align-items-start gap-1 justify-content-center justify-content-lg-start"
+                  style={{ color: "#0ABF53", cursor: "pointer" }}
+                  onClick={() => {
+                    navigate("/service");
+                  }}
+                >
+                  Explore our property investments
+                  <OpenInNewOutlinedIcon
+                    style={{
+                      color: "black",
+                      fontSize: "14px",
+                      marginTop: "10px",
+                    }}
+                  />
+                </p>
+                <div className="col-12 d-flex justify-content-center justify-content-lg-start">
+                  <button
+                    className="btn w-50  btn-lg"
+                    style={{ background: "#F39568", cursor: "pointer" }}
+                    onClick={() => {
+                      navigate("/application");
+                    }}
+                  >
+                    Select suburb
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -122,7 +114,7 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div class="container content-space-t-2 content-space-t-lg-3 text-start ">
+        <div class="container-fluid px-lg-8 p-3 content-space-t-2 content-space-t-lg-3 text-start ">
           <div class="row justify-content-lg-between align-items-lg-center">
             <div class="col-lg-6 mb-5 mb-lg-0">
               <img
@@ -136,20 +128,26 @@ const HomePage = () => {
                 <p className="fs-2">
                   We have helped more than 50 investors use our platform, and
                   who have amassed more than $25m of property across the whole
-                  nation.
+                  nation.We offer property selection service for users who don't
+                  have as much time. We are not buyers agents but we can help
+                  you source the best properties given your budget and
+                  preference. Contact us now to discuss
                 </p>
               </div>
             </div>
           </div>
         </div>
-        <div class="container content-space-t-lg-3 ">
+        <div class="container-fluid px-lg-8 p-3 content-space-t-lg-3 ">
           <div class="row">
             <div class="col-sm-6 col-lg-4 mb-5">
               <div class="text-center px-md-5">
                 <div class="mb-3">
-                  <i class="bi-tablet-landscape fs-1 text-dark"></i>
+                  <i
+                    class="bi-tablet-landscape  text-dark"
+                    style={{ fontSize: "80px" }}
+                  ></i>
                 </div>
-                <p>
+                <p className="fs-3">
                   2nd Storey embraces your{" "}
                   <span class="fw-bold">marketing vision</span> and transforms
                   it into a captivating masterpiece.
@@ -160,9 +158,12 @@ const HomePage = () => {
             <div class="col-sm-6 col-lg-4 mb-5">
               <div class="text-center px-md-5">
                 <div class="mb-3">
-                  <i class="bi-shield-check fs-1 text-dark"></i>
+                  <i
+                    class="bi-shield-check  text-dark"
+                    style={{ fontSize: "80px" }}
+                  ></i>
                 </div>
-                <p>
+                <p className="fs-3">
                   Uncover <span class="fw-bold">future possibilities</span> with
                   our forward-looking insights.
                 </p>
@@ -172,9 +173,12 @@ const HomePage = () => {
             <div class="col-sm-6 col-lg-4 mb-5">
               <div class="text-center px-md-5">
                 <div class="mb-3">
-                  <i class="bi-hdd-network fs-1 text-dark"></i>
+                  <i
+                    class="bi-hdd-network text-dark"
+                    style={{ fontSize: "80px" }}
+                  ></i>
                 </div>
-                <p>
+                <p className="fs-3">
                   It elevates your decision-making process with cutting-edge
                   insights tailored for {""}
                   <span class="fw-bold">modern investment</span>
@@ -184,7 +188,7 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div class="container content-space-t-2 content-space-t-lg-3 ">
+        <div class="container-fluid px-lg-8 p-3 content-space-t-2 content-space-t-lg-3 ">
           <div class="row justify-content-lg-between align-items-lg-center">
             <div class="col-lg-6 mb-5 mb-lg-0">
               <img
@@ -206,14 +210,17 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div class="container content-space-t-lg-3 ">
+        <div class="container-fluid px-lg-8 p-3 content-space-t-lg-3 ">
           <div class="row">
             <div class="col-sm-6 col-lg-4 mb-5 mb-lg-0">
-              <div class="text-center px-md-5">
+              <div class="text-center  px-md-5">
                 <div class="mb-3">
-                  <i class="bi-gear fs-1 text-dark"></i>
+                  <i
+                    class="bi-gear  text-dark"
+                    style={{ fontSize: "80px" }}
+                  ></i>
                 </div>
-                <p>
+                <p className="fs-3">
                   Stay ahead of the curve as 2nd Storey's{" "}
                   <span class="fw-bold">predictive analytics</span> become your
                   compass in the ever-evolving world of marketing.
@@ -224,9 +231,12 @@ const HomePage = () => {
             <div class="col-sm-6 col-lg-4 mb-5 mb-sm-0">
               <div class="text-center px-md-5">
                 <div class="mb-3">
-                  <i class="bi-sliders fs-1 text-dark"></i>
+                  <i
+                    class="bi-sliders  text-dark"
+                    style={{ fontSize: "80px" }}
+                  ></i>
                 </div>
-                <p>
+                <p className="fs-3">
                   Navigate through 2nd Storey's intuitive interface and watch as{" "}
                   <span class="fw-bold">intricate insights</span> unfold before
                   your eyes. Experience the thrill of real-time data
@@ -238,9 +248,12 @@ const HomePage = () => {
             <div class="col-sm-6 col-lg-4">
               <div class="text-center px-md-5">
                 <div class="mb-3">
-                  <i class="bi-journal-text fs-1 text-dark"></i>
+                  <i
+                    class="bi-journal-text  text-dark"
+                    style={{ fontSize: "80px" }}
+                  ></i>
                 </div>
-                <p>
+                <p className="fs-3">
                   2nd Storey is your key to unlocking untapped potential and
                   unleashing unparalleled{" "}
                   <span class="fw-bold">marketing success</span>
@@ -250,7 +263,7 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div class="container content-space-t-2 content-space-t-lg-3">
+        <div class="container-fluid px-lg-8 p-3 content-space-t-2 content-space-t-lg-3">
           <div class="row justify-content-lg-between align-items-lg-center">
             <div class="col-lg-6 mb-5 mb-lg-0">
               <img
@@ -279,7 +292,7 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div class="container content-space-2 content-space-lg-3">
+        <div class="container-fluid px-lg-8 p-3 content-space-2 content-space-lg-3">
           <div class="w-lg-65 text-center mx-lg-auto mb-5 mb-sm-7 mb-lg-10">
             <h2>Our data is refreshed each week.</h2>
           </div>
@@ -287,7 +300,7 @@ const HomePage = () => {
       </main>
 
       <footer class="bg-dark">
-        <div class="container">
+        <div class="container-fluid px-lg-8 p-3 ">
           <div class="row align-items-center pt-8 pb-4">
             <div class="col-md mb-lg-5 mb-0 mb-md-0">
               <h2 class="fw-medium text-white-70 mb-0">2nd Storey</h2>

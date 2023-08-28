@@ -72,10 +72,10 @@ const NavBar = () => {
           "fixEffect": "slide"
         }'
       >
-        <div className="container-fluid">
+        <div className="container-fluid px-3 px-lg-8">
           <nav className="js-mega-menu navbar-nav-wrap">
             <a
-              style={{ fontSize: "25px", paddingLeft: "10px" }}
+              style={{ fontSize: "25px" }}
               className="navbar-brand fw-bold  "
               href="/"
             >
@@ -124,12 +124,12 @@ const NavBar = () => {
                   >
                     <p
                       id="docsMegaMenu"
-                      className="hs-mega-menu-invoker nav-link mb-0  "
+                      className="hs-mega-menu-invoker nav-link mb-0 fs-3 "
                       onClick={handleApplication}
                       role="button"
                       aria-expanded="false"
                     >
-                      Application
+                      Select suburb
                     </p>
                   </li>
 
@@ -161,7 +161,7 @@ const NavBar = () => {
                   >
                     <a
                       id="docsMegaMenu"
-                      className="hs-mega-menu-invoker nav-link    "
+                      className="hs-mega-menu-invoker nav-link  fs-3  "
                       href="/contact"
                       role="button"
                       aria-expanded="false"
@@ -174,13 +174,13 @@ const NavBar = () => {
                     {isLoggedIn === "true" ? (
                       <p
                         onClick={handleLogOut}
-                        className="btn btn-ghost-dark p-2 me-2 border me-lg-0  m-0"
+                        className="btn btn-primary p-2 me-2 border me-lg-0 w-100   m-0"
                       >
                         Log out
                       </p>
                     ) : (
                       <a
-                        className="btn btn-ghost-dark p-2 me-2 border me-lg-0  m-0"
+                        className="btn btn-primary p-2 me-2 border  w-100 me-lg-0  m-0"
                         href="/login"
                       >
                         Log in

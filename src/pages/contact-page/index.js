@@ -16,6 +16,7 @@ const ContactPage = () => {
   const [email, setEmail] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [phone, setPhone] = useState("");
 
   const navigate = useNavigate();
 
@@ -29,6 +30,7 @@ const ContactPage = () => {
     formData.append("last_name", lastName);
     formData.append("email", email);
     formData.append("details", query);
+    formData.append("phone", phone);
 
     AxiosInstance.post("/api/enquiry/send-enquiry", formData, {
       headers: {
@@ -60,7 +62,7 @@ const ContactPage = () => {
   };
 
   const handleNavigate = () => {
-    navigate("/home");
+    navigate("/");
   };
 
   return (
@@ -118,16 +120,32 @@ const ContactPage = () => {
                         </div>
                       </div>
 
-                      <div class="mb-4">
-                        <input
-                          type="text"
-                          class="form-control"
-                          name="contactsFormNameWorkEmail"
-                          id="contactsFormWorkEmail"
-                          placeholder="Email"
-                          aria-label="Email"
-                          onChange={(e) => setEmail(e.target.value)}
-                        />
+                      <div class="row">
+                        <div class="col-sm-6 mb-4 mb-sm-0">
+                          <div class="mb-4">
+                            <input
+                              type="text"
+                              class="form-control"
+                              name="contactsFormNameWorkEmail"
+                              id="contactsFormWorkEmail"
+                              placeholder="Email"
+                              aria-label="Email"
+                              onChange={(e) => setEmail(e.target.value)}
+                            />
+                          </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                          <div class="mb-4">
+                            <input
+                              type="text"
+                              class="form-control"
+                              placeholder="Phone (optional)"
+                              aria-label="Phone"
+                              onChange={(e) => setPhone(e.target.value)}
+                            />
+                          </div>
+                        </div>
                       </div>
 
                       <div class="mb-4">
@@ -135,7 +153,7 @@ const ContactPage = () => {
                           class="form-control"
                           name="contactsFormNameDetails"
                           id="contactsFormDetails"
-                          placeholder="Please tell us detailed"
+                          placeholder="Please tell us if you need assistance with your property search"
                           rows="4"
                           onChange={(e) => setQuery(e.target.value)}
                         ></textarea>

@@ -70,7 +70,7 @@ const Map = () => {
         }
       }
     }
-  }, [results, filteredResults, suburbArr, isLoggedIn]);
+  }, [results, filteredResults, isLoggedIn]);
 
   const zoomInt = filteredResults ? 4 : 5;
 

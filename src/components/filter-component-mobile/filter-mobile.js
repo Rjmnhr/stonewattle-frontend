@@ -2,14 +2,80 @@ import React, { useEffect, useState } from "react";
 import { Dropdown, Menu } from "antd";
 import { useApplicationContext } from "../../context/app-context";
 
-const FilterDropdown = ({
-  filter,
-  handleFilterChange,
+// const FilterDropdown = ({
+//   filter,
+//   handleFilterChange,
 
-  selectedOption,
-}) => {
+//   selectedOption,
+// }) => {
+//   const options = ["very important", "important", "not important"];
+//   const [currentLabel, setCurrentLabel] = useState("NOT-IMP"); // Initialize with "select"
+//   const { filteredResults } = useApplicationContext();
+
+//   const colors = {
+//     "very important": {
+//       color: "green",
+//       label: "V-IMP",
+//     },
+//     important: {
+//       color: "orange",
+//       label: "IMP",
+//     },
+//     "not important": {
+//       color: "red",
+//       label: "NOT-IMP",
+//     },
+//   };
+
+//   const handleOptionClick = (option) => {
+//     setCurrentLabel(colors[option]?.label || "select");
+//     handleFilterChange(filter, option);
+//   };
+
+//   const menu = (
+//     <Menu>
+//       {options.map((option) => (
+//         <Menu.Item key={option} onClick={() => handleOptionClick(option)}>
+//           {option.toUpperCase()}
+//         </Menu.Item>
+//       ))}
+//     </Menu>
+//   );
+
+//   return (
+//     <Dropdown overlay={menu} trigger={["click"]}>
+//       <div
+//         className={`${
+//           filteredResults
+//             ? "filter-dropdown  p-1 p-lg-2  text-start d-flex align-items-center border col-12  col-lg-12 m-1 justify-content-between"
+//             : "filter-dropdown  p-1 p-lg-2  text-start d-flex align-items-center border col-12  col-lg-3 m-1 justify-content-between "
+//         }`}
+//         style={{ cursor: "pointer" }}
+//       >
+//         {filter}
+//         <div
+//           className="option-circle"
+//           style={{
+//             // color: colors[option].color,
+//             color: "gray",
+
+//             width: "80px",
+//             textAlign: "center",
+//             paddingRight: "5px",
+//           }}
+//         >
+//           <label>{currentLabel}</label>
+//         </div>
+//       </div>
+//     </Dropdown>
+//   );
+// };
+
+const FilterDropdown = ({ filter, handleFilterChange, selectedOption }) => {
   const options = ["very important", "important", "not important"];
-  const [currentLabel, setCurrentLabel] = useState("NOT-IMP"); // Initialize with "select"
+  const [currentLabel, setCurrentLabel] = useState(
+    sessionStorage.getItem(filter) || "NOT-IMP"
+  ); // Initialize with stored value or "NOT-IMP"
   const { filteredResults } = useApplicationContext();
 
   const colors = {
@@ -28,8 +94,10 @@ const FilterDropdown = ({
   };
 
   const handleOptionClick = (option) => {
-    setCurrentLabel(colors[option]?.label || "select");
+    const label = colors[option]?.label || "select";
+    setCurrentLabel(label);
     handleFilterChange(filter, option);
+    sessionStorage.setItem(filter, label); // Store selected label in sessionStorage
   };
 
   const menu = (
@@ -56,9 +124,7 @@ const FilterDropdown = ({
         <div
           className="option-circle"
           style={{
-            // color: colors[option].color,
             color: "gray",
-
             width: "80px",
             textAlign: "center",
             paddingRight: "5px",
@@ -78,29 +144,44 @@ const FilterMobile = ({
   rentalYield,
 }) => {
   const [selectedFilters, setSelectedFilters] = useState({});
-  const [vacancyRateWeightage, setVacancyRateWeightage] = useState(0);
-  const [familyWeightage, setFamilyWeightage] = useState(0);
-  const [rentalYieldWeightage, setRentalYieldWeightage] = useState(0);
-  const [growthInPropertyWeightage, SetGrowthInPropertyWeightage] = useState(0);
-  const [rentVsOwnerRatioWeightage, setRentVsOwnerRatioWeightage] = useState(0);
-  const [availabilityOfSupplyWeightage, setAvailabilityOfSupplyWeightage] =
-    useState(0);
-  const [ratingsWeightage, setRatingsWeightage] = useState(0);
-  const [demandPrevMonthWeightage, setDemandPrevMonthWeightage] = useState(0);
-  // const [demandLastYearWeightage, setDemandLastYearWeightage] = useState(0);
-  const [populationGrowthWeightage, setPopulationGrowthWeightage] = useState(0);
-  const [australianBornWeightage, setAustralianBornWeightage] = useState(0);
-  const [unemployedPeopleWeightage, setUnemployedPeopleWeightage] = useState(0);
-  const [weeklyIncomeWeightage, setWeeklyIncomeWeightage] = useState(0);
-  const [allCrimesWeightage, setAllCrimesWeightage] = useState(0);
-  const [greatForSchoolsWeightage, setGreatForSchoolsWeightage] = useState(0);
-  const [greatForTransportWeightage, setGreatForTransportWeightage] =
-    useState(0);
-  const [greatForHospitalsWeightage, setGreatForHospitalsWeightage] =
-    useState(0);
 
-  const { results, setFilteredResults, setIsResultsFiltered } =
-    useApplicationContext();
+  const {
+    results,
+    setFilteredResults,
+    setIsResultsFiltered,
+    vacancyRateWeightage,
+    setVacancyRateWeightage,
+    familyWeightage,
+    setFamilyWeightage,
+    rentalYieldWeightage,
+    setRentalYieldWeightage,
+    growthInPropertyWeightage,
+    SetGrowthInPropertyWeightage,
+    rentVsOwnerRatioWeightage,
+    setRentVsOwnerRatioWeightage,
+    availabilityOfSupplyWeightage,
+    setAvailabilityOfSupplyWeightage,
+    ratingsWeightage,
+    setRatingsWeightage,
+    demandPrevMonthWeightage,
+    setDemandPrevMonthWeightage,
+    populationGrowthWeightage,
+    setPopulationGrowthWeightage,
+    australianBornWeightage,
+    setAustralianBornWeightage,
+    unemployedPeopleWeightage,
+    setUnemployedPeopleWeightage,
+    weeklyIncomeWeightage,
+    setWeeklyIncomeWeightage,
+    allCrimesWeightage,
+    setAllCrimesWeightage,
+    greatForSchoolsWeightage,
+    setGreatForSchoolsWeightage,
+    greatForTransportWeightage,
+    setGreatForTransportWeightage,
+    greatForHospitalsWeightage,
+    setGreatForHospitalsWeightage,
+  } = useApplicationContext();
 
   const filterWeightages = {
     "Low vacancy rate": setVacancyRateWeightage,
@@ -306,6 +387,7 @@ const FilterMobile = ({
     // Sort the suburbs based on their ranking in descending order
     let temp = updatedRankedSuburbs.sort((a, b) => b.ranking - a.ranking);
     setIsResultsFiltered(true);
+    sessionStorage.setItem("filteredResults", JSON.stringify(temp));
     setFilteredResults(temp);
     // console.log("executing filter 2");
     console.log("ranked", JSON.stringify(updatedRankedSuburbs));

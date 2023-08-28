@@ -3,7 +3,6 @@ import NavBar from "../../components/nav-bar/nav-bar";
 import { useApplicationContext } from "../../context/app-context";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
-
 import { Collapse, Menu, Dropdown, message } from "antd";
 import { statesOfAus } from "../../components/states-in-aus/states";
 import Select, { components } from "react-select";
@@ -26,8 +25,8 @@ const ApplicationPage = () => {
   const [dwellingType, setDwellingType] = useState("");
   const [minBedrooms, setMinBedrooms] = useState(null);
   const [selectedStates, setSelectedStates] = useState([]);
-  const [area, setArea] = useState(null);
-  const [budget, setBudget] = useState(null);
+  const [area, setArea] = useState("");
+  const [budget, setBudget] = useState("");
   const [isDataNotFound, setIsDataNotFound] = useState(null);
 
   const [rentalYield, setRentalYield] = useState("");
@@ -39,6 +38,21 @@ const ApplicationPage = () => {
   const navigate = useNavigate();
   const isAdmin = localStorage.getItem("isAdmin");
   const [messageApi, contextHolder] = message.useMessage();
+
+  useEffect(() => {
+    const storedType = JSON.parse(sessionStorage.getItem("type")) || "";
+    setDwellingType(storedType);
+    const storedBedrooms = JSON.parse(sessionStorage.getItem("bedrooms")) || "";
+    setMinBedrooms(storedBedrooms);
+
+    const storedStates = JSON.parse(sessionStorage.getItem("states")) || "";
+    setSelectedStates(storedStates);
+    const storedArea = JSON.parse(sessionStorage.getItem("area")) || "";
+    setArea(storedArea);
+
+    const storedBudget = JSON.parse(sessionStorage.getItem("budget")) || "";
+    setBudget(storedBudget);
+  }, []);
 
   const warning = () => {
     messageApi.open({
@@ -121,6 +135,12 @@ const ApplicationPage = () => {
   };
 
   const handleSubmit = () => {
+    sessionStorage.setItem("type", JSON.stringify(dwellingType));
+    sessionStorage.setItem("bedrooms", JSON.stringify(minBedrooms));
+    sessionStorage.setItem("states", JSON.stringify(selectedStates));
+    sessionStorage.setItem("area", JSON.stringify(area));
+    sessionStorage.setItem("budget", JSON.stringify(budget));
+
     const type = dwellingType.value;
     const bedrooms = minBedrooms.value;
     const areaType = area.value;
@@ -335,7 +355,7 @@ const ApplicationPage = () => {
       <div
         className={`${
           filteredResults
-            ? "container-fluid"
+            ? "container-fluid px-lg-8 px-3"
             : "container  col-12  home-page-container"
         }`}
       >
@@ -351,7 +371,9 @@ const ApplicationPage = () => {
         >
           Welcome to the suburb selector based on your search. You will still
           need to go to domain/realestate to find what properties are available
-          now
+          now" and say "You will still need to go to domain/realestate to find
+          what properties are available now or we can help you with your search.
+          Contact us to find out how.
         </p>
         <HomePageStyled>
           <div
@@ -364,7 +386,9 @@ const ApplicationPage = () => {
                 filteredResults
                   ? `filter-container ${
                       filterCompressed ? "open" : ""
-                    } container-fluid mt-md-10 overflow-container col-md-3 `
+                    } container-fluid mt-md-10 overflow-container  ${
+                      isLoggedIn === "true" ? "col-md-3" : "col-md-5"
+                    }  `
                   : "container"
               }`}
             >
@@ -402,11 +426,6 @@ const ApplicationPage = () => {
                                 options={[
                                   { value: "Unit", label: "Unit" },
                                   { value: "House", label: "House" },
-                                  {
-                                    value: "Townhouse",
-                                    label: "Town House",
-                                    isDisabled: true,
-                                  },
                                 ]}
                                 value={dwellingType}
                                 onChange={setDwellingType}
@@ -470,6 +489,7 @@ const ApplicationPage = () => {
                                 className="state-select"
                                 isMulti
                                 options={statesOfAus}
+                                value={selectedStates}
                                 components={{ Option }}
                                 onChange={handleSelectedStates}
                                 required
@@ -530,11 +550,6 @@ const ApplicationPage = () => {
                               >
                                 <div>
                                   <CurrencyInput
-                                    style={{
-                                      width: `${
-                                        filteredResults ? "160px" : ""
-                                      }`,
-                                    }}
                                     className="currency-input"
                                     placeholder="Enter budget"
                                     prefix="$"
@@ -666,7 +681,13 @@ const ApplicationPage = () => {
             </div>
 
             <div
-              className={`${filteredResults ? "container-fluid col-lg-9" : ""}`}
+              className={`${
+                filteredResults
+                  ? `container-fluid ${
+                      isLoggedIn === "true" ? "col-lg-9" : "col-lg-7"
+                    }`
+                  : ""
+              }`}
             >
               {results ? (
                 results.length > 0 && !filteredResults ? (
@@ -702,8 +723,8 @@ const ApplicationPage = () => {
                 {filteredResults ? (
                   <>
                     {filteredResults.length > 0 ? (
-                      <div className="color-circles-legend col-12 mobile-legend">
-                        <div className="d-flex align-items-center justify-content-around">
+                      <div className="color-circles-legend  col-12 mobile-legend">
+                        <div className="d-flex align-items-center flex-wrap  justify-content-around">
                           <div
                             style={{
                               display: "flex",
@@ -785,7 +806,7 @@ const ApplicationPage = () => {
                 {filteredResults ? (
                   <>
                     {filteredResults.length > 0 ? (
-                      <div className="color-circles-legend d-md-flex align-items-center web-legend ">
+                      <div className="color-circles-legend flex-wrap d-md-flex align-items-center web-legend ">
                         <div
                           style={{
                             display: "flex",
@@ -863,7 +884,9 @@ const ApplicationPage = () => {
                 >
                   <div
                     style={{ display: filteredResults ? "block" : "none" }}
-                    className="result-left-container col-md-6 col-12"
+                    className={`result-left-container ${
+                      isLoggedIn === "true" ? "col-md-6" : "col-md-12"
+                    } col-12`}
                   >
                     <center>
                       {displayResults ? (
@@ -875,7 +898,7 @@ const ApplicationPage = () => {
                             <table style={{ transition: "all 0.3s ease" }}>
                               <thead className="table-header">
                                 <tr>
-                                  <th>Suburb Name</th>
+                                  <th>Suburbs</th>
                                   <th>
                                     <Dropdown overlay={postcodeMenu}>
                                       <label
@@ -1001,6 +1024,7 @@ const ApplicationPage = () => {
                       width: filteredResults ? "" : "100%",
 
                       paddingTop: `${filteredResults ? "20px" : "15px"}`,
+                      display: `${isLoggedIn === "true" ? "block" : "none"}`,
                       transition: "all 0.3s ease",
                     }}
                     className="result-right-container mb-5 col-md-6 col-12"
