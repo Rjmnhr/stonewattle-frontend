@@ -41,7 +41,7 @@ const HomePage = () => {
                     }}
                   />
                 </p> */}
-                <div className="col-12 d-lg-flex mt-2 justify-content-between">
+                <div className="col-12 d-lg-flex mt-3 justify-content-start gap-3">
                   <button
                     className="btn btn-lg mb-3 mb-lg-0"
                     style={{
@@ -94,7 +94,31 @@ const HomePage = () => {
               </div>
             </div>
 
-            <div class="col-lg-6">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+              <img
+                class="img-fluid rounded-3"
+                src=" https://media.istockphoto.com/id/1038186890/photo/different-size-houses-vith-different-value-on-stacks-of-coins-concept-for-property-mortgage.jpg?s=612x612&w=0&k=20&c=duYcfpy5QsvJZPuyvCSHQhaW-VVQJXZjoXCkvpGt0Ek="
+                alt="Description"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="container-fluid px-lg-8 p-3 content-space-t-2 content-space-t-lg-3 text-start ">
+          <div class="row justify-content-lg-between align-items-lg-center">
+            <div class="col-lg-5">
+              <div class="mb-5 text-lg-start text-center ">
+                <p className="fs-2">
+                  We have helped more than 50 investors use our platform, and
+                  who have amassed more than $25m of property across the whole
+                  nation.We offer property selection service for users who don't
+                  have as much time. We are not buyers agents but we can help
+                  you source the best properties given your budget and
+                  preference. Contact us now to discuss
+                </p>
+              </div>
+            </div>
+            <div class="col-lg-6  text-center">
               <div class="position-relative">
                 <div class="position-relative">
                   <img
@@ -108,7 +132,7 @@ const HomePage = () => {
                   class="d-inline-block position-absolute top-0 start-0 bg-white w-100 rounded-pill d-none d-lg-block shadow-sm p-2 mt-5 ms-n5"
                   style={{ maxWidth: "12rem" }}
                 >
-                  <div class="d-flex align-items-center ">
+                  <div class="d-flex align-items-center text-center ">
                     <div class="flex-shrink-0">
                       <span class="avatar avatar-sm avatar-circle">
                         <img
@@ -130,7 +154,7 @@ const HomePage = () => {
                   class="d-inline-block position-absolute bottom-0 start-0 bg-warning w-100 rounded-pill d-none d-lg-block shadow-sm p-2 mb-10 ms-n10"
                   style={{ maxWidth: " 16rem" }}
                 >
-                  <div class="d-flex align-items-center">
+                  <div class="d-flex align-items-center text-center">
                     <div class="flex-shrink-0">
                       <span class="avatar avatar-sm avatar-circle">
                         <img
@@ -147,30 +171,6 @@ const HomePage = () => {
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="container-fluid px-lg-8 p-3 content-space-t-2 content-space-t-lg-3 text-start ">
-          <div class="row justify-content-lg-between align-items-lg-center">
-            <div class="col-lg-6 mb-5 mb-lg-0">
-              <img
-                class="img-fluid rounded-3"
-                src=" https://media.istockphoto.com/id/1038186890/photo/different-size-houses-vith-different-value-on-stacks-of-coins-concept-for-property-mortgage.jpg?s=612x612&w=0&k=20&c=duYcfpy5QsvJZPuyvCSHQhaW-VVQJXZjoXCkvpGt0Ek="
-                alt="Description"
-              />
-            </div>
-            <div class="col-lg-5">
-              <div class="mb-5 text-lg-start text-center ">
-                <p className="fs-2">
-                  We have helped more than 50 investors use our platform, and
-                  who have amassed more than $25m of property across the whole
-                  nation.We offer property selection service for users who don't
-                  have as much time. We are not buyers agents but we can help
-                  you source the best properties given your budget and
-                  preference. Contact us now to discuss
-                </p>
               </div>
             </div>
           </div>
