@@ -1,7 +1,6 @@
 import React from "react";
 import NavBar from "../../components/nav-bar/nav-bar";
 
-import OpenInNewOutlinedIcon from "@mui/icons-material/OpenInNewOutlined";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
@@ -25,7 +24,7 @@ const HomePage = () => {
                   investing in the Australian property market over the last 10
                   years and have more than $4m worth of property portfolio.
                 </p>
-
+                {/* 
                 <p
                   class="fs-2 d-flex align-items-start gap-1 justify-content-center justify-content-lg-start"
                   style={{ color: "#0ABF53", cursor: "pointer" }}
@@ -41,16 +40,55 @@ const HomePage = () => {
                       marginTop: "10px",
                     }}
                   />
-                </p>
-                <div className="col-12 d-flex justify-content-center justify-content-lg-start">
+                </p> */}
+                <div className="col-12 d-lg-flex mt-2 justify-content-between">
                   <button
-                    className="btn w-50  btn-lg"
-                    style={{ background: "#F39568", cursor: "pointer" }}
+                    className="btn btn-lg mb-3 mb-lg-0"
+                    style={{
+                      background: "rgba(255,89,43,1.0)",
+                      cursor: "pointer",
+                      MinWidth: "200px",
+                    }}
                     onClick={() => {
                       navigate("/application");
                     }}
                   >
-                    Select suburb
+                    <p
+                      style={{
+                        color: "white",
+                        fontWeight: "normal",
+                        margin: "0",
+                        padding: "0",
+                        fontSize: "20px",
+                      }}
+                    >
+                      {" "}
+                      Try Suburb Selector for free
+                    </p>
+                  </button>
+                  <button
+                    className="btn  btn-lg"
+                    style={{
+                      background: "#0ABF53",
+                      cursor: "pointer",
+                      width: "200px",
+                    }}
+                    onClick={() => {
+                      navigate("/service");
+                    }}
+                  >
+                    <p
+                      style={{
+                        color: "white",
+                        fontWeight: "normal",
+                        margin: "0",
+                        padding: "0",
+                        fontSize: "20px",
+                      }}
+                    >
+                      {" "}
+                      Explore
+                    </p>
                   </button>
                 </div>
               </div>

@@ -47,7 +47,7 @@ export const HomePageStyled = styled.div`
   .currency-input {
     height: 38px;
     outline: none;
-
+    width: 200px;
     border-radius: 4px;
 
     padding: 0;
