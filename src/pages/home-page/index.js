@@ -12,7 +12,7 @@ const HomePage = () => {
       <main id="content" role="main">
         <div class="container-fluid px-lg-8 p-3  pt-3 pt-lg-10 ">
           <div class="row justify-content-lg-between align-items-lg-center">
-            <div class="col-lg-5 mb-5 mb-lg-0">
+            <div class="col-lg-6 mb-5 mb-lg-0">
               <div class="mb-5 text-lg-start text-center">
                 {/* <h1 class="display-4 text-dark mb-5">
                   Start your journey with
@@ -43,7 +43,7 @@ const HomePage = () => {
                 </p> */}
                 <div className="col-12 d-lg-flex mt-3 justify-content-start gap-3">
                   <button
-                    className="btn btn-lg mb-3 mb-lg-0"
+                    className="btn btn-lg mb-3 mb-md-0"
                     style={{
                       background: "rgba(255,89,43,1.0)",
                       cursor: "pointer",
@@ -71,7 +71,6 @@ const HomePage = () => {
                     style={{
                       background: "#0ABF53",
                       cursor: "pointer",
-                      width: "200px",
                     }}
                     onClick={() => {
                       navigate("/service");
@@ -87,7 +86,7 @@ const HomePage = () => {
                       }}
                     >
                       {" "}
-                      Explore
+                      Find out about our journey
                     </p>
                   </button>
                 </div>

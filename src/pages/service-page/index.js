@@ -64,7 +64,7 @@ const ServicePage = () => {
                 <td>15/04/2015</td>
                 <td>102</td>
                 <td>$289,000</td>
-                <td>$501,000</td>
+                <td>$575,000</td>
                 <td>$212,000</td>
                 <td>$2,078</td>
                 <td>0.7%</td>
@@ -160,7 +160,7 @@ const ServicePage = () => {
                 <td>15/07/2021</td>
                 <td>26</td>
                 <td>$310,000</td>
-                <td>$345,000</td>
+                <td>$375,000</td>
                 <td>$35,000</td>
                 <td>$1,346</td>
                 <td>0.4%</td>
@@ -176,7 +176,7 @@ const ServicePage = () => {
                 <td>15/01/2023</td>
                 <td>8</td>
                 <td>$295,000</td>
-                <td>$310,000</td>
+                <td>$350,000</td>
                 <td>$15,000</td>
                 <td>$1,875</td>
                 <td>0.6%</td>
@@ -194,7 +194,7 @@ const ServicePage = () => {
                 <td className="invisible">15/01/2023</td>
                 <td className="invisible">8</td>
                 <td>$2,692,000</td>
-                <td>$3,871,000</td>
+                <td>$4,015,000</td>
                 <td>$1,179,000</td>
                 <td>$24,110</td>
                 <td></td>
