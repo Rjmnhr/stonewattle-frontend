@@ -134,6 +134,104 @@ const ApplicationPage = () => {
     }
   };
 
+  // var count = 0;
+
+  // useEffect(() => {
+  //   if (filteredResults) {
+  //     console.log(
+  //       "🚀 ~ file: index.js:140 ~ ApplicationPage ~ count:",
+  //       count++
+  //     );
+
+  //     const formData = new FormData();
+
+  //     const type = dwellingType.value;
+  //     const bedrooms = minBedrooms.value;
+  //     const areaType = area.value;
+
+  //     for (let i = 0; i < selectedStates.length; i++) {
+  //       formData.append("states[]", selectedStates[i].value);
+  //     }
+
+  //     formData.append("type", type);
+  //     formData.append("bedrooms", bedrooms);
+  //     formData.append("area", areaType);
+  //     formData.append("budget", budget);
+  //     formData.append(
+  //       "Low_vacancy_rate",
+  //       sessionStorage.getItem("Low vacancy rate")
+  //     );
+  //     formData.append(
+  //       "Family_friendly",
+  //       sessionStorage.getItem("Family friendly")
+  //     );
+  //     formData.append(
+  //       "High_rental_yield",
+  //       sessionStorage.getItem("High rental yield")
+  //     );
+  //     formData.append(
+  //       "Average_days_on_market",
+  //       sessionStorage.getItem("Average days on market")
+  //     );
+  //     formData.append(
+  //       "High_rated_by_residents",
+  //       sessionStorage.getItem("High rated by residents")
+  //     );
+  //     formData.append("Low supply", sessionStorage.getItem("Low supply"));
+  //     formData.append(
+  //       "Population_growth",
+  //       sessionStorage.getItem("Population growth")
+  //     );
+  //     formData.append(
+  //       "Low_unemployment",
+  //       sessionStorage.getItem("Low unemployment")
+  //     );
+  //     formData.append(
+  //       "Australian_born",
+  //       sessionStorage.getItem("Australian born")
+  //     );
+  //     formData.append("Crime rate", sessionStorage.getItem("Crime rate"));
+  //     formData.append(
+  //       "Great_for_schools",
+  //       sessionStorage.getItem("Great for schools")
+  //     );
+  //     formData.append(
+  //       "Great_for_hospitals",
+  //       sessionStorage.getItem("Great for hospitals")
+  //     );
+  //     formData.append(
+  //       "Recent_growth_in_properties",
+  //       sessionStorage.getItem("Recent growth in properties")
+  //     );
+  //     formData.append(
+  //       "Higher_proportion_of_owners",
+  //       sessionStorage.getItem("Higher proportion of owners")
+  //     );
+  //     formData.append(
+  //       "Relative_income-of_residents",
+  //       sessionStorage.getItem("Relative income of residents")
+  //     );
+  //     formData.append(
+  //       "Public_transport",
+  //       sessionStorage.getItem("Public transport")
+  //     );
+
+  //     AxiosInstance.post("/api/track-data/store", formData, {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     })
+  //       .then(async (response) => {
+  //         const data = await response.data;
+
+  //         console.log(data);
+  //       })
+  //       .catch((err) => console.log(err));
+
+  //     // eslint-disable-next-line
+  //   }
+  // }, [filteredResults]);
+
   const handleSubmit = () => {
     sessionStorage.setItem("type", JSON.stringify(dwellingType));
     sessionStorage.setItem("bedrooms", JSON.stringify(minBedrooms));
@@ -151,7 +249,6 @@ const ApplicationPage = () => {
       formData.append("states[]", selectedStates[i].value);
     }
 
-    console.log(type);
     formData.append("type", type);
     formData.append("bedrooms", bedrooms);
     formData.append("area", areaType);
@@ -169,10 +266,6 @@ const ApplicationPage = () => {
     })
       .then(async (response) => {
         const data = await response.data;
-        // resultsContainerRef.current.scrollIntoView({ behavior: "smooth" });
-
-        console.log("results", JSON.stringify(data));
-        console.log(data.length);
 
         if (data.length < 1) {
           setIsDataNotFound(true);
@@ -186,7 +279,7 @@ const ApplicationPage = () => {
 
   useEffect(() => {
     const type = dwellingType.value;
-    // console.log("type", type);
+
     switch (type) {
       case "Unit":
         setRentalYield("median_yield_units");
@@ -210,8 +303,6 @@ const ApplicationPage = () => {
 
       default:
     }
-
-    console.log("useEffect ", rentalYield);
 
     if (budget) {
       if (
@@ -1000,18 +1091,24 @@ const ApplicationPage = () => {
                                 )}
                               </tbody>
                             </table>
-                            <div className="container p-5 mt-3">
-                              <h4>Top 3 suburbs are shown </h4>
-                              <h4 className="mt-2">
-                                Login to see all the suburbs
-                              </h4>
-                              <button
-                                onClick={handleNavigateLogin}
-                                className="btn btn-primary btn-lg w-50 p-2 mt-4"
-                              >
-                                Log in
-                              </button>
-                            </div>
+                            {isLoggedIn === "true" ? (
+                              ""
+                            ) : (
+                              <>
+                                <div className="container p-5 mt-3">
+                                  <h4>Top 3 suburbs are shown </h4>
+                                  <h4 className="mt-2">
+                                    Login to see all the suburbs
+                                  </h4>
+                                  <button
+                                    onClick={handleNavigateLogin}
+                                    className="btn btn-primary btn-lg w-50 p-2 mt-4"
+                                  >
+                                    Log in
+                                  </button>
+                                </div>
+                              </>
+                            )}
                           </div>
                         </>
                       ) : (

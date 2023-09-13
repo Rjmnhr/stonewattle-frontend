@@ -204,9 +204,6 @@ const FilterMobile = ({
     // Add your other filters here
   };
 
-  console.log("low vacancy", vacancyRateWeightage);
-  console.log("Family", familyWeightage);
-
   const handleFilterChange = (filter, option) => {
     const weightageMap = {
       "very important": 3,
@@ -263,66 +260,52 @@ const FilterMobile = ({
     let maxVacancyRate = Math.max(
       ...results.map((suburb) => suburb.current_vacancy_rate)
     );
-    console.log("max_vacancy", maxVacancyRate);
 
     let maxFamily = Math.max(...results.map((suburb) => suburb.family));
-    console.log("max_family", maxFamily);
 
     let maxRentalYield = Math.max(
       ...results.map((suburb) => suburb[rentalYield])
     );
-    console.log("max_yeild", maxRentalYield);
 
     let maxGrowthInProperty = Math.max(
       ...results.map((suburb) => suburb[growthInProperty])
     );
-    console.log("max_Growth", maxGrowthInProperty);
 
     let maxRentVsOwnerRatio = Math.max(
       ...results.map((suburb) => suburb.rental_population)
     );
-    console.log("max_rent_vs_owner", maxRentVsOwnerRatio);
 
     let maxAvailabilityOfSupply = Math.max(
       ...results.map((suburb) => suburb[availabilityOfSupply])
     );
-    console.log("max_availability_of_supply", maxAvailabilityOfSupply);
 
     let maxRatings = Math.max(...results.map((suburb) => suburb.ratings));
-    console.log("max_ratings", maxRatings);
 
     let maxDemandPrevMonth = Math.max(
       ...results.map((suburb) => suburb[demandPrevMonth])
     );
-    console.log("max_demand_prev_month", maxDemandPrevMonth);
 
     // let maxDemandLastYear = Math.max(
     //   ...results.map((suburb) => suburb[demandLastYear])
     // );
-    // console.log("max_demand_last_year", maxDemandLastYear);
 
     let maxPopulationGrowth = Math.max(
       ...results.map((suburb) => suburb.growth_population)
     );
-    console.log("max_population_growth", maxPopulationGrowth);
 
     let maxAustralianBorn = Math.max(
       ...results.map((suburb) => suburb.country_of_birth_australia)
     );
-    console.log("max_australian_born", maxAustralianBorn);
 
     let maxUnemployedPeople = Math.max(
       ...results.map((suburb) => suburb.employment_worked_unemployed)
     );
-    console.log("max_unemployed_people", maxUnemployedPeople);
 
     let maxWeeklyIncome = Math.max(
       ...results.map((suburb) => suburb.median_weekly_income_family)
     );
-    console.log("max_weekly_income", maxWeeklyIncome);
 
     let maxAllCrimes = Math.max(...results.map((suburb) => suburb.all_crimes));
-    console.log("max_weekly_income", maxAllCrimes);
 
     maxVacancyRate = maxVacancyRate === 0 ? 1 : maxVacancyRate;
     maxFamily = maxFamily === 0 ? 1 : maxFamily;
@@ -389,8 +372,6 @@ const FilterMobile = ({
     setIsResultsFiltered(true);
     sessionStorage.setItem("filteredResults", JSON.stringify(temp));
     setFilteredResults(temp);
-    // console.log("executing filter 2");
-    console.log("ranked", JSON.stringify(updatedRankedSuburbs));
   };
 
   useEffect(() => {
