@@ -141,8 +141,6 @@ const GoogleMapComponent = () => {
     googleMapsApiKey: "AIzaSyAmi5mJgION_Zh5w4HhNr3_0Sc0fANMIqg",
   });
 
-  console.log(isLoaded);
-
   if (!isLoaded) return <div>Loading....</div>;
   return <Map />;
 };

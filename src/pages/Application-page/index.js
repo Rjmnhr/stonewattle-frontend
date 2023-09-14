@@ -38,6 +38,33 @@ const ApplicationPage = () => {
   const navigate = useNavigate();
   const isAdmin = localStorage.getItem("isAdmin");
   const [messageApi, contextHolder] = message.useMessage();
+  // eslint-disable-next-line
+  const [startTime, setStartTime] = useState(new Date());
+
+  useEffect(() => {
+    console.log("1");
+    console.log(startTime);
+    const handleBeforeUnload = () => {
+      // Calculate time spent when the user navigates away or closes the tab
+      const endTime = new Date();
+      const timeSpentInSeconds = Math.floor((endTime - startTime) / 1000);
+
+      // Send the time spent data to your server or tracking service
+      if (filteredResults) {
+        saveUserInputData(timeSpentInSeconds);
+      }
+    };
+
+    // Attach the beforeunload event listener to track time when the user leaves
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      // Clean up by removing the event listener when the component unmounts
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+
+    // eslint-disable-next-line
+  }, [filteredResults, startTime]);
 
   useEffect(() => {
     const storedType = JSON.parse(sessionStorage.getItem("type")) || "";
@@ -134,103 +161,98 @@ const ApplicationPage = () => {
     }
   };
 
-  // var count = 0;
+  const saveUserInputData = (duration) => {
+    console.log("inside the function");
+    if (filteredResults) {
+      const formData = new FormData();
 
-  // useEffect(() => {
-  //   if (filteredResults) {
-  //     console.log(
-  //       "🚀 ~ file: index.js:140 ~ ApplicationPage ~ count:",
-  //       count++
-  //     );
+      const type = dwellingType.value;
+      const bedrooms = minBedrooms.value;
+      const areaType = area.value;
 
-  //     const formData = new FormData();
+      for (let i = 0; i < selectedStates.length; i++) {
+        formData.append("states[]", selectedStates[i].value);
+      }
 
-  //     const type = dwellingType.value;
-  //     const bedrooms = minBedrooms.value;
-  //     const areaType = area.value;
+      formData.append("type", type);
+      formData.append("bedrooms", bedrooms);
+      formData.append("area", areaType);
+      formData.append("budget", budget);
+      formData.append(
+        "Low_vacancy_rate",
+        sessionStorage.getItem("Low vacancy rate")
+      );
+      formData.append(
+        "Family_friendly",
+        sessionStorage.getItem("Family friendly")
+      );
+      formData.append(
+        "High_rental_yield",
+        sessionStorage.getItem("High rental yield")
+      );
+      formData.append(
+        "Average_days_on_market",
+        sessionStorage.getItem("Average days on market")
+      );
+      formData.append(
+        "High_rated_by_residents",
+        sessionStorage.getItem("High rated by residents")
+      );
+      formData.append("Low supply", sessionStorage.getItem("Low supply"));
+      formData.append(
+        "Population_growth",
+        sessionStorage.getItem("Population growth")
+      );
+      formData.append(
+        "Low_unemployment",
+        sessionStorage.getItem("Low unemployment")
+      );
+      formData.append(
+        "Australian_born",
+        sessionStorage.getItem("Australian born")
+      );
+      formData.append("Crime rate", sessionStorage.getItem("Crime rate"));
+      formData.append(
+        "Great_for_schools",
+        sessionStorage.getItem("Great for schools")
+      );
+      formData.append(
+        "Great_for_hospitals",
+        sessionStorage.getItem("Great for hospitals")
+      );
+      formData.append(
+        "Recent_growth_in_properties",
+        sessionStorage.getItem("Recent growth in properties")
+      );
+      formData.append(
+        "Higher_proportion_of_owners",
+        sessionStorage.getItem("Higher proportion of owners")
+      );
+      formData.append(
+        "Relative_income-of_residents",
+        sessionStorage.getItem("Relative income of residents")
+      );
+      formData.append(
+        "Public_transport",
+        sessionStorage.getItem("Public transport")
+      );
+      formData.append("duration", duration);
 
-  //     for (let i = 0; i < selectedStates.length; i++) {
-  //       formData.append("states[]", selectedStates[i].value);
-  //     }
+      AxiosInstance.post("/api/track-data/store", formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then(async (response) => {
+          const data = await response.data;
 
-  //     formData.append("type", type);
-  //     formData.append("bedrooms", bedrooms);
-  //     formData.append("area", areaType);
-  //     formData.append("budget", budget);
-  //     formData.append(
-  //       "Low_vacancy_rate",
-  //       sessionStorage.getItem("Low vacancy rate")
-  //     );
-  //     formData.append(
-  //       "Family_friendly",
-  //       sessionStorage.getItem("Family friendly")
-  //     );
-  //     formData.append(
-  //       "High_rental_yield",
-  //       sessionStorage.getItem("High rental yield")
-  //     );
-  //     formData.append(
-  //       "Average_days_on_market",
-  //       sessionStorage.getItem("Average days on market")
-  //     );
-  //     formData.append(
-  //       "High_rated_by_residents",
-  //       sessionStorage.getItem("High rated by residents")
-  //     );
-  //     formData.append("Low supply", sessionStorage.getItem("Low supply"));
-  //     formData.append(
-  //       "Population_growth",
-  //       sessionStorage.getItem("Population growth")
-  //     );
-  //     formData.append(
-  //       "Low_unemployment",
-  //       sessionStorage.getItem("Low unemployment")
-  //     );
-  //     formData.append(
-  //       "Australian_born",
-  //       sessionStorage.getItem("Australian born")
-  //     );
-  //     formData.append("Crime rate", sessionStorage.getItem("Crime rate"));
-  //     formData.append(
-  //       "Great_for_schools",
-  //       sessionStorage.getItem("Great for schools")
-  //     );
-  //     formData.append(
-  //       "Great_for_hospitals",
-  //       sessionStorage.getItem("Great for hospitals")
-  //     );
-  //     formData.append(
-  //       "Recent_growth_in_properties",
-  //       sessionStorage.getItem("Recent growth in properties")
-  //     );
-  //     formData.append(
-  //       "Higher_proportion_of_owners",
-  //       sessionStorage.getItem("Higher proportion of owners")
-  //     );
-  //     formData.append(
-  //       "Relative_income-of_residents",
-  //       sessionStorage.getItem("Relative income of residents")
-  //     );
-  //     formData.append(
-  //       "Public_transport",
-  //       sessionStorage.getItem("Public transport")
-  //     );
+          console.log(data);
+        })
+        .catch((err) => console.log(err));
 
-  //     AxiosInstance.post("/api/track-data/store", formData, {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     })
-  //       .then(async (response) => {
-  //         const data = await response.data;
-
-  //         console.log(data);
-  //       })
-  //       .catch((err) => console.log(err));
-
-  //     // eslint-disable-next-line
-  //   }
-  // }, [filteredResults]);
+      // eslint-disable-next-line
+    }
+  };
 
   const handleSubmit = () => {
     sessionStorage.setItem("type", JSON.stringify(dwellingType));
