@@ -4,6 +4,7 @@ import { useApplicationContext } from "../../context/app-context";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import { Collapse, Menu, Dropdown, message, FloatButton } from "antd";
+
 import { statesOfAus } from "../../components/states-in-aus/states";
 import Select, { components } from "react-select";
 import CurrencyInput from "react-currency-input-field";
@@ -166,9 +167,9 @@ const ApplicationPage = () => {
     if (filteredResults) {
       const formData = new FormData();
 
-      const type = dwellingType.value;
-      const bedrooms = minBedrooms.value;
-      const areaType = area.value;
+      const type = dwellingType ? dwellingType.value : "";
+      const bedrooms = minBedrooms ? minBedrooms.value : "";
+      const areaType = area ? area.value : "";
 
       for (let i = 0; i < selectedStates.length; i++) {
         formData.append("states[]", selectedStates[i].value);
@@ -489,6 +490,23 @@ const ApplicationPage = () => {
           what properties are available now or we can help you with your search.
           Contact us to find out how.
         </p>
+        <div
+          className={`${
+            filteredResults
+              ? `mobile-filter-button d-grid d-lg-none    ${
+                  filterCompressed ? "active" : ""
+                }
+                `
+              : `d-none`
+          }`}
+        >
+          <button
+            className="btn border"
+            onClick={() => setFilterCompressed(!filterCompressed)}
+          >
+            Filter
+          </button>
+        </div>
         <HomePageStyled>
           <div
             className={`${
@@ -506,6 +524,23 @@ const ApplicationPage = () => {
                   : "container"
               }`}
             >
+              <div
+                className={`${
+                  filteredResults
+                    ? `mobile-filter-button d-grid d-lg-none    ${
+                        filterCompressed ? "active" : ""
+                      }
+                `
+                    : `d-none`
+                }`}
+              >
+                <button
+                  className="btn border"
+                  onClick={() => setFilterCompressed(!filterCompressed)}
+                >
+                  Close
+                </button>
+              </div>
               <div className="container col-12 search-box">
                 <Collapse
                   defaultActiveKey={["1"]}
@@ -790,7 +825,6 @@ const ApplicationPage = () => {
                 }`}
               >
                 <FloatButton
-                  tooltip={<div>Filter</div>}
                   icon={<i className="bi bi-funnel funnel" />} // Replace with your custom icon component
                   onClick={() => setFilterCompressed(!filterCompressed)}
                   className={`${

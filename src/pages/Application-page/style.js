@@ -165,6 +165,9 @@ export const HomePageStyled = styled.div`
     display: none;
   }
 
+  .mobile-filter-button {
+    display: none;
+  }
   .ant-float-btn-default {
     display: none;
   }
@@ -235,6 +238,12 @@ export const HomePageStyled = styled.div`
       transition: transform 0.3s ease;
     }
 
+    .mobile-filter-button {
+      cursor: pointer;
+      z-index: 1000;
+      display: grid;
+      transition: transform 0.3s ease;
+    }
     /* Active state for mobile filter icon */
     .mobile-filter-icon.active {
       /* transform: translateY(-100%); */

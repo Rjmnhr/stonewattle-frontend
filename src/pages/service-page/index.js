@@ -33,7 +33,7 @@ const ServicePage = () => {
             this equates to a growth of approximately $25,000 in equity.
           </p>
 
-          <table className="table-bordered">
+          <table className="table-bordered" style={{ overflowX: "scroll" }}>
             <thead>
               <tr>
                 <th>Location</th>
