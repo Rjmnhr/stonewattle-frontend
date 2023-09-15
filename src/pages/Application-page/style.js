@@ -161,6 +161,14 @@ export const HomePageStyled = styled.div`
     display: none;
   }
 
+  .mobile-filter-icon {
+    display: none;
+  }
+
+  .ant-float-btn-default {
+    display: none;
+  }
+
   @media (max-width: 912px) {
     .filter-compressed .filter-container {
       width: 0;
@@ -211,21 +219,19 @@ export const HomePageStyled = styled.div`
       right: 0;
     }
 
+    .ant-float-btn-default {
+      display: block;
+    }
+
     /* Styling for the mobile filter icon */
     .mobile-filter-icon {
       position: fixed;
-      bottom: 20px;
+      bottom: 60px;
       left: 20px;
-      font-size: 24px;
+
       cursor: pointer;
       z-index: 1000;
-      background: green;
-      border-radius: 100%;
-      width: 50px;
-      height: 50px;
-      color: white;
       display: grid;
-      place-items: center;
       transition: transform 0.3s ease;
     }
 

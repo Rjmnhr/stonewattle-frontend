@@ -3,7 +3,7 @@ import NavBar from "../../components/nav-bar/nav-bar";
 import { useApplicationContext } from "../../context/app-context";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
-import { Collapse, Menu, Dropdown, message } from "antd";
+import { Collapse, Menu, Dropdown, message, FloatButton } from "antd";
 import { statesOfAus } from "../../components/states-in-aus/states";
 import Select, { components } from "react-select";
 import CurrencyInput from "react-currency-input-field";
@@ -471,6 +471,7 @@ const ApplicationPage = () => {
             ? "container-fluid px-lg-8 px-3"
             : "container  col-12  home-page-container"
         }`}
+        style={{ minHeight: "100vh" }}
       >
         <p
           style={
@@ -777,19 +778,30 @@ const ApplicationPage = () => {
                     },
                   ]}
                 />
-              </div>
+              </div>{" "}
               <div
                 className={`${
                   filteredResults
-                    ? `mobile-filter-icon d-grid    ${
+                    ? `mobile-filter-icon d-grid d-lg-none    ${
                         filterCompressed ? "active" : ""
                       }
-              `
+                `
                     : `d-none`
                 }`}
-                onClick={() => setFilterCompressed(!filterCompressed)}
               >
-                <i className="bi bi-funnel funnel"></i>
+                <FloatButton
+                  tooltip={<div>Filter</div>}
+                  icon={<i className="bi bi-funnel funnel" />} // Replace with your custom icon component
+                  onClick={() => setFilterCompressed(!filterCompressed)}
+                  className={`${
+                    filteredResults
+                      ? `mobile-filter-icon d-grid    ${
+                          filterCompressed ? "active" : ""
+                        }
+                `
+                      : `d-none`
+                  }`}
+                />
               </div>
             </div>
 

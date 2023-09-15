@@ -74,13 +74,20 @@ const NavBar = () => {
       >
         <div className="container-fluid px-3 px-lg-8">
           <nav className="js-mega-menu navbar-nav-wrap">
-            <a
-              style={{ fontSize: "25px" }}
-              className="navbar-brand fw-bold  "
-              href="/"
-            >
-              2nd Storey
-            </a>
+            <div className="d-flex justify-content-center align-items-center gap-1">
+              <img
+                src="https://res.cloudinary.com/dsw1ubwyh/image/upload/v1694782112/wtvxtlngwymogr2o15un.png"
+                alt="logo"
+                style={{ width: "30px", height: "30px" }}
+              />
+              <a
+                style={{ fontSize: "25px" }}
+                className="navbar-brand fw-bold"
+                href="/"
+              >
+                2nd Storey
+              </a>
+            </div>
 
             <button
               className="navbar-toggler"

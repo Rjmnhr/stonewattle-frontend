@@ -43,9 +43,8 @@ const HomePage = () => {
                 </p> */}
                 <div className="col-12 d-lg-flex mt-3 justify-content-start gap-3">
                   <button
-                    className="btn btn-lg mb-3 mb-md-0"
+                    className="btn btn-primary btn-lg mb-3 mb-md-0"
                     style={{
-                      background: "rgba(255,89,43,1.0)",
                       cursor: "pointer",
                       MinWidth: "200px",
                     }}
@@ -69,7 +68,7 @@ const HomePage = () => {
                   <button
                     className="btn  btn-lg"
                     style={{
-                      background: "#0ABF53",
+                      background: "#008080",
                       cursor: "pointer",
                     }}
                     onClick={() => {
@@ -337,97 +336,15 @@ const HomePage = () => {
       </main>
 
       <footer class="bg-dark">
-        <div class="container-fluid px-lg-8 p-3 ">
-          <div class="row align-items-center pt-8 pb-4">
+        <div class="container-fluid px-lg-8  ">
+          <div class="row align-items-center  pb-4">
             <div class="col-md mb-lg-5 mb-0 mb-md-0">
+              <img
+                src="https://res.cloudinary.com/dsw1ubwyh/image/upload/v1694796608/xns5lpa59nojnzkmavgp.svg"
+                alt="logo"
+                style={{ width: "160px", height: "160px" }}
+              />
               <h2 class="fw-medium text-white-70 mb-0">2nd Storey</h2>
-              <p></p>
-            </div>
-          </div>
-
-          <div class="row align-items-md-center col-12 justify-content-between py-6">
-            <div class="col-md mb-3 mb-md-0">
-              <ul class="d-lg-flex  text-center text-lg-start mb-0">
-                <li class="list-inline-item">
-                  <a class="link link-light link-light-75 " href="/">
-                    Privacy and Policy
-                  </a>
-                </li>
-                <li class="list-inline-item">
-                  <a class="link link-light link-light-75" href="/">
-                    Terms
-                  </a>
-                </li>
-                <li class="list-inline-item">
-                  <a class="link link-light link-light-75" href="/">
-                    Status
-                  </a>
-                </li>
-                <li class="list-inline-item">
-                  <div class="btn-group">
-                    <a
-                      class="link link-light link-light-75"
-                      href="/"
-                      id="selectLanguage"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      <span class="d-flex align-items-center">
-                        <img
-                          class="avatar avatar-xss avatar-circle me-2"
-                          src="./assets/vendor/flag-icon-css/flags/1x1/us.svg"
-                          alt="description"
-                          width="16"
-                        />
-                        <span>English</span>
-                      </span>
-                    </a>
-
-                    <div class="dropdown-menu">
-                      <a
-                        class="dropdown-item d-flex align-items-center active"
-                        href="/"
-                      >
-                        <img
-                          class="avatar avatar-xss avatar-circle me-2"
-                          src="./assets/vendor/flag-icon-css/flags/1x1/us.svg"
-                          alt=" description"
-                          width="16"
-                        />
-                        <span>English</span>
-                      </a>
-                      <a
-                        class="dropdown-item d-flex align-items-center"
-                        href="/"
-                      >
-                        <img
-                          class="avatar avatar-xss avatar-circle me-2"
-                          src="./assets/vendor/flag-icon-css/flags/1x1/de.svg"
-                          alt="description"
-                          width="16"
-                        />
-                        <span>Deutsch</span>
-                      </a>
-                      <a
-                        class="dropdown-item d-flex align-items-center"
-                        href="/"
-                      >
-                        <img
-                          class="avatar avatar-xss avatar-circle me-2"
-                          src="./assets/vendor/flag-icon-css/flags/1x1/es.svg"
-                          alt="description"
-                          width="16"
-                        />
-                        <span>Español</span>
-                      </a>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            <div class="col-md-auto">
-              <p class="fs-5 text-white-70 mb-0">© 2nd Storey. 2023</p>
             </div>
           </div>
         </div>
