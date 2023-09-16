@@ -501,10 +501,11 @@ const ApplicationPage = () => {
           }`}
         >
           <button
-            className="btn border"
+            className="btn "
             onClick={() => setFilterCompressed(!filterCompressed)}
+            style={{ background: "#008080", color: "white" }}
           >
-            Filter
+            Go back to selection
           </button>
         </div>
         <HomePageStyled>
