@@ -117,7 +117,7 @@ const FilterDropdown = ({ filter, handleFilterChange, selectedOption }) => {
           filteredResults
             ? "filter-dropdown  p-1 p-lg-2  text-start d-flex align-items-center border col-12  col-lg-12 m-1 justify-content-between"
             : "filter-dropdown  p-1 p-lg-2  text-start d-flex align-items-center border col-12  col-lg-3 m-1 justify-content-between "
-        }`}
+        }  ${filter === "invisible" ? "invisible" : "visible"}`}
         style={{ cursor: "pointer" }}
       >
         {filter}
@@ -162,13 +162,13 @@ const FilterMobile = ({
     availabilityOfSupplyWeightage,
     setAvailabilityOfSupplyWeightage,
     ratingsWeightage,
-    setRatingsWeightage,
+
     demandPrevMonthWeightage,
     setDemandPrevMonthWeightage,
     populationGrowthWeightage,
     setPopulationGrowthWeightage,
     australianBornWeightage,
-    setAustralianBornWeightage,
+
     unemployedPeopleWeightage,
     setUnemployedPeopleWeightage,
     weeklyIncomeWeightage,
@@ -188,18 +188,19 @@ const FilterMobile = ({
     "Family friendly": setFamilyWeightage,
     "High rental yield": setRentalYieldWeightage,
     "Average days on market": setAvailabilityOfSupplyWeightage,
-    "High rated by residents": setRatingsWeightage,
+    // "High rated by residents": setRatingsWeightage,
     "Low supply": setDemandPrevMonthWeightage,
     "Population growth": setPopulationGrowthWeightage,
     "Low unemployment": setUnemployedPeopleWeightage,
-    "Australian born": setAustralianBornWeightage,
+    // "Australian born": setAustralianBornWeightage,
     "Crime rate": setAllCrimesWeightage,
     "Great for schools": setGreatForSchoolsWeightage,
-    "Great for hospitals": setGreatForHospitalsWeightage,
+
     "Recent growth in properties": SetGrowthInPropertyWeightage,
     "Higher proportion of owners": setRentVsOwnerRatioWeightage,
     "Relative income of residents": setWeeklyIncomeWeightage,
     "Public transport": setGreatForTransportWeightage,
+    "Great for hospitals": setGreatForHospitalsWeightage,
 
     // Add your other filters here
   };
@@ -223,18 +224,20 @@ const FilterMobile = ({
     "Family friendly",
     "High rental yield",
     "Average days on market",
-    "High rated by residents",
+    // "High rated by residents",
     "Low supply",
     "Population growth",
     "Low unemployment",
-    "Australian born",
+    // "Australian born",
     "Crime rate",
     "Great for schools",
-    "Great for hospitals",
+
     "Recent growth in properties",
     "Higher proportion of owners",
     "Relative income of residents",
     "Public transport",
+    "Great for hospitals",
+    "invisible",
 
     // Add your other filters here
   ];

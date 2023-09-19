@@ -43,7 +43,6 @@ const ApplicationPage = () => {
   const [startTime, setStartTime] = useState(new Date());
 
   useEffect(() => {
-    console.log("1");
     console.log(startTime);
     const handleBeforeUnload = () => {
       // Calculate time spent when the user navigates away or closes the tab
@@ -486,9 +485,7 @@ const ApplicationPage = () => {
         >
           Welcome to the suburb selector based on your search. You will still
           need to go to domain/realestate to find what properties are available
-          now" and say "You will still need to go to domain/realestate to find
-          what properties are available now or we can help you with your search.
-          Contact us to find out how.
+          now or we can help you with your search. Contact us to find out how.
         </p>
         <div
           className={`${

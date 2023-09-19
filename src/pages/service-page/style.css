@@ -2,3 +2,15 @@
 padding:8px;
 
 }
+.table-container{
+    width:100% ;
+}
+
+@media (max-width: 912px) {
+
+    .table-container{
+        width:100% ;
+        overflow-x: scroll;
+    }
+    
+}
