@@ -369,7 +369,18 @@ const ApplicationPage = () => {
     const stateCodeSet = new Set();
     const postCodeSet = new Set();
 
-    filteredResults.forEach((item) => {
+    let filteringArr = [];
+
+    if (isLoggedIn === "true") {
+      filteringArr = [...filteredResults];
+    } else {
+      if (filteredResults) {
+        const firstThreeObjects = filteredResults.slice(0, 3);
+        filteringArr = [...firstThreeObjects];
+      }
+    }
+
+    filteringArr.forEach((item) => {
       stateCodeSet.add(item.state_code);
       postCodeSet.add(item.postcode);
     });
@@ -415,10 +426,32 @@ const ApplicationPage = () => {
     if (stateCode === "reset") {
       // If "reset" option is selected, show the original results
 
-      setDisplayResults(filteredResults);
+      let filteringArr = [];
+
+      if (isLoggedIn === "true") {
+        filteringArr = [...filteredResults];
+      } else {
+        if (filteredResults) {
+          const firstThreeObjects = filteredResults.slice(0, 3);
+          filteringArr = [...firstThreeObjects];
+        }
+      }
+
+      setDisplayResults(filteringArr);
     } else {
+      let filteringArr = [];
+
+      if (isLoggedIn === "true") {
+        filteringArr = [...filteredResults];
+      } else {
+        if (filteredResults) {
+          const firstThreeObjects = filteredResults.slice(0, 3);
+          filteringArr = [...firstThreeObjects];
+        }
+      }
+
       // Filter the items based on the selected state code
-      const filteredItems = filteredResults.filter(
+      const filteredItems = filteringArr.filter(
         (item) => item.state_code === stateCode
       );
       setDisplayResults(filteredItems);
@@ -428,11 +461,32 @@ const ApplicationPage = () => {
   const handlePostcodeChange = (postcode) => {
     if (postcode === "reset") {
       // If "reset" option is selected, show the original results
+      let filteringArr = [];
 
-      setDisplayResults(filteredResults);
+      if (isLoggedIn === "true") {
+        filteringArr = [...filteredResults];
+      } else {
+        if (filteredResults) {
+          const firstThreeObjects = filteredResults.slice(0, 3);
+          filteringArr = [...firstThreeObjects];
+        }
+      }
+
+      setDisplayResults(filteringArr);
     } else {
       // Filter the items based on the selected postcode
-      const filteredItems = filteredResults.filter(
+
+      let filteringArr = [];
+
+      if (isLoggedIn === "true") {
+        filteringArr = [...filteredResults];
+      } else {
+        if (filteredResults) {
+          const firstThreeObjects = filteredResults.slice(0, 3);
+          filteringArr = [...firstThreeObjects];
+        }
+      }
+      const filteredItems = filteringArr.filter(
         (item) => item.postcode === postcode
       );
       setDisplayResults(filteredItems);
