@@ -8,7 +8,7 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   const Location = useLocation();
-
+  console.log("rendering");
   useEffect(() => {
     console.log("entered ueEffect");
     AxiosInstance.post(
