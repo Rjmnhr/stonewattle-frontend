@@ -10,6 +10,7 @@ const HomePage = () => {
   const Location = useLocation();
 
   useEffect(() => {
+    console.log("entered ueEffect");
     AxiosInstance.post(
       `/api/track-data/store3`,
       { path: Location.pathname },
@@ -20,6 +21,7 @@ const HomePage = () => {
       }
     )
       .then(async (response) => {
+        console.log("entered API");
         const data = await response.data;
 
         console.log(data);
