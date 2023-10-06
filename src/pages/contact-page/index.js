@@ -3,9 +3,10 @@ import NavBar from "../../components/nav-bar/nav-bar";
 // import { useApplicationContext } from "../../context/app-context";
 import { Modal } from "antd";
 import { ArrowLeftOutlined, LoadingOutlined } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import AxiosInstance from "../../components/axios";
 import { CheckCircleOutlineRounded } from "@mui/icons-material";
+import { useEffect } from "react";
 
 const ContactPage = () => {
   // const { dropdownHeight } = useApplicationContext();
@@ -19,6 +20,28 @@ const ContactPage = () => {
   const [phone, setPhone] = useState("");
 
   const navigate = useNavigate();
+
+  const Location = useLocation();
+
+  useEffect(() => {
+    AxiosInstance.post(
+      `/api/track-data/store3`,
+      { path: Location.pathname },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then(async (response) => {
+        const data = await response.data;
+
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
+
+    //eslint-disable-next-line
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();

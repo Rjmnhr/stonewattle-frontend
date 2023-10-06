@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./style.css";
 import NavBar from "../../components/nav-bar/nav-bar";
+import { useLocation } from "react-router-dom";
+import AxiosInstance from "../../components/axios";
 
 const ServicePage = () => {
+  const Location = useLocation();
+
+  useEffect(() => {
+    AxiosInstance.post(
+      `/api/track-data/store3`,
+      { path: Location.pathname },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then(async (response) => {
+        const data = await response.data;
+
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
+
+    //eslint-disable-next-line
+  }, []);
   return (
     <div>
       <NavBar />

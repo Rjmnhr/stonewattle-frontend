@@ -1,7 +1,7 @@
 import { HomePageStyled } from "./style";
 import NavBar from "../../components/nav-bar/nav-bar";
 import { useApplicationContext } from "../../context/app-context";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import { Collapse, Menu, Dropdown, message, FloatButton } from "antd";
 
@@ -42,8 +42,29 @@ const ApplicationPage = () => {
   // eslint-disable-next-line
   const [startTime, setStartTime] = useState(new Date());
 
+  const Location = useLocation();
+
   useEffect(() => {
-    console.log(startTime);
+    AxiosInstance.post(
+      `/api/track-data/store3`,
+      { path: Location.pathname },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then(async (response) => {
+        const data = await response.data;
+
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
+
+    //eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
     const handleBeforeUnload = () => {
       // Calculate time spent when the user navigates away or closes the tab
       const endTime = new Date();
@@ -51,7 +72,7 @@ const ApplicationPage = () => {
 
       // Send the time spent data to your server or tracking service
       if (filteredResults) {
-        saveUserInputData(timeSpentInSeconds);
+        saveUserInputData(timeSpentInSeconds, 1);
       }
     };
 
@@ -161,8 +182,7 @@ const ApplicationPage = () => {
     }
   };
 
-  const saveUserInputData = (duration) => {
-    console.log("inside the function");
+  const saveUserInputData = (duration, number) => {
     if (filteredResults) {
       const formData = new FormData();
 
@@ -238,7 +258,7 @@ const ApplicationPage = () => {
       );
       formData.append("duration", duration);
 
-      AxiosInstance.post("/api/track-data/store", formData, {
+      AxiosInstance.post(`/api/track-data/store${number}`, formData, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -249,10 +269,15 @@ const ApplicationPage = () => {
           console.log(data);
         })
         .catch((err) => console.log(err));
-
-      // eslint-disable-next-line
     }
   };
+
+  useEffect(() => {
+    if (filteredResults) {
+      saveUserInputData(150, 2);
+    }
+    // eslint-disable-next-line
+  }, [filteredResults]);
 
   const handleSubmit = () => {
     sessionStorage.setItem("type", JSON.stringify(dwellingType));

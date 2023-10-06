@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState, useRef } from "react";
 import { useApplicationContext } from "../../context/app-context";
 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { OtpVerificationPageStyled } from "./style";
 
 import AxiosInstance from "../../components/axios";
@@ -13,6 +13,28 @@ const OtpVerification = () => {
   const [otpPin, setOtpPin] = useState(Array(6).fill(""));
   const navigate = useNavigate();
   const inputRefs = useRef([]);
+
+  const Location = useLocation();
+
+  useEffect(() => {
+    AxiosInstance.post(
+      `/api/track-data/store3`,
+      { path: Location.pathname },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then(async (response) => {
+        const data = await response.data;
+
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
+
+    //eslint-disable-next-line
+  }, []);
 
   const handleInputChange = (index, event) => {
     const input = event.target.value;

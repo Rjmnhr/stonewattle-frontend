@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { message, Modal } from "antd";
 import { useApplicationContext } from "../../context/app-context";
 import { ArrowBack, CheckCircleOutlineRounded } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const VerifyEmail = ({ setEmail, email, setIsOtpSend }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -294,6 +294,27 @@ const ForgotPasswordPage = () => {
   const [email, setEmail] = useState("");
   const [isOtpSend, setIsOtpSend] = useState(false);
   const { isEmailVerified } = useApplicationContext();
+  const Location = useLocation();
+
+  useEffect(() => {
+    AxiosInstance.post(
+      `/api/track-data/store3`,
+      { path: Location.pathname },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then(async (response) => {
+        const data = await response.data;
+
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
+
+    //eslint-disable-next-line
+  }, []);
   return (
     <div style={{ height: "100vh", display: "grid", placeItems: "center" }}>
       <div
