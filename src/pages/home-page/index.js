@@ -1,16 +1,35 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../../components/nav-bar/nav-bar";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import AxiosInstance from "../../components/axios";
+import { Modal } from "antd";
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const Location = useLocation();
-  console.log("rendering");
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
   useEffect(() => {
-    console.log("entered ueEffect");
+    // Delay the modal popup by a few seconds (e.g., 3 seconds)
+    const delay = setTimeout(() => {
+      showModal();
+    }, 3000); // 3000 milliseconds = 3 seconds
+
+    // Clear the timeout if the component unmounts before the modal appears
+    return () => clearTimeout(delay);
+  }, []);
+
+  useEffect(() => {
     AxiosInstance.post(
       `/api/track-data/store3`,
       { path: Location.pathname },
@@ -21,10 +40,8 @@ const HomePage = () => {
       }
     )
       .then(async (response) => {
-        console.log("entered API");
+        //eslint-disable-next-line
         const data = await response.data;
-
-        console.log(data);
       })
       .catch((err) => console.log(err));
 
@@ -357,6 +374,29 @@ const HomePage = () => {
           <div class="w-lg-65 text-center mx-lg-auto mb-5 mb-sm-7 mb-lg-10">
             <h2>Our data is refreshed each week.</h2>
           </div>
+        </div>
+        <div>
+          <Modal
+            visible={isModalVisible}
+            onCancel={handleCancel}
+            footer={null} // To remove footer buttons
+            centered
+          >
+            <div className="p-3">
+              <p className="fs-2">
+                Try our suburb selector tool to get the best property investment
+                insights for free!
+              </p>
+              <div style={{ display: "grid", placeItems: "center" }}>
+                <button
+                  onClick={() => navigate("/application")}
+                  className="btn btn-primary w-75"
+                >
+                  Try Now!
+                </button>
+              </div>
+            </div>
+          </Modal>
         </div>
       </main>
 
