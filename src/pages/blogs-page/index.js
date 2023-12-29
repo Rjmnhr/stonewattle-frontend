@@ -9,35 +9,45 @@ import {
   HomeOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import { Progress } from "antd";
 
 const BlogsPage = () => {
   const navigate = useNavigate();
   const infoArr = [
-    <li>
-      <HomeOutlined style={{ fontSize: "30px", marginBottom: "8px" }} />
-      <br />
-      <strong>Dwelling Type</strong>:<br />
-      <br />
-      House
+    <li className="text-center">
+      <div className="d-flex d-lg-block ">
+        <HomeOutlined className="mb-2 " style={{ fontSize: "24px" }} />
+        <p className="mx-2 my-0">
+          <strong>Dwelling Type</strong> :
+        </p>{" "}
+        <label> House</label>
+      </div>
     </li>,
-    <li>
-      <BankOutlined style={{ fontSize: "30px", marginBottom: "8px" }} />
-      <br />
-      <strong>Min Bedrooms</strong>:<br />
-      <br /> 3
+    <li className="text-center">
+      <div className="d-flex d-lg-block ">
+        <BankOutlined className="mb-2 " style={{ fontSize: "24px" }} />
+        <p className="mx-2 my-0">
+          <strong>Min Bedrooms</strong> :
+        </p>{" "}
+        <label> 3</label>
+      </div>
     </li>,
-    <li>
-      <FieldTimeOutlined style={{ fontSize: "30px", marginBottom: "8px" }} />
-      <br />
-      <strong>State</strong>:<br />
-      <br /> All States
+    <li className="text-center">
+      <div className="d-flex d-lg-block ">
+        <FieldTimeOutlined className="mb-2 " style={{ fontSize: "24px" }} />
+        <p className="mx-2 my-0">
+          <strong>State</strong> :
+        </p>{" "}
+        <label>All States</label>
+      </div>
     </li>,
-    <li>
-      <DollarOutlined style={{ fontSize: "30px", marginBottom: "8px" }} />
-      <br />
-      <strong>Budget</strong>:<br />
-      <br /> $500,000
+    <li className="text-center">
+      <div className="d-flex d-lg-block ">
+        <DollarOutlined className="mb-2 " style={{ fontSize: "24px" }} />
+        <p className="mx-2 my-0">
+          <strong>Budget</strong> :
+        </p>{" "}
+        <label> $500,000</label>
+      </div>
     </li>,
   ];
   return (
@@ -126,23 +136,14 @@ const BlogsPage = () => {
         </div>
 
         <div class="row mb-5">
-          <div class="col-6 col-lg-12 offset-2 offset-lg-0 ">
+          <div class="col-12  ">
             <div className="d-lg-flex justify-content-around">
               {infoArr.map((item) => {
                 return (
-                  <div className="mb-3 mb-lg-0">
-                    <Progress
-                      strokeColor="#1a6cb6"
-                      strokeWidth={5}
-                      size={180}
-                      type="circle"
-                      percent={100}
-                      format={() => (
-                        <div className="text-dark" style={{ fontSize: "16px" }}>
-                          {item}
-                        </div>
-                      )}
-                    />
+                  <div className="mb-3 mb-lg-0 border p-3 col-12 col-lg-2">
+                    <div className="text-dark" style={{ fontSize: "16px" }}>
+                      {item}
+                    </div>
                   </div>
                 );
               })}
