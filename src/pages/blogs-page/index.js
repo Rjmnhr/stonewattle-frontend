@@ -1,10 +1,7 @@
 import React from "react";
 import NavBar from "../../components/nav-bar/nav-bar";
 import blogImage1 from "../../images/2ndstorey-blog-1.jpg";
-import blogImage2 from "../../images/suburbs.jpg";
-import { Link as ScrollLink } from "react-scroll";
 
-import { Carousel, Progress } from "antd";
 import {
   BankOutlined,
   DollarOutlined,
@@ -12,6 +9,7 @@ import {
   HomeOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { Progress } from "antd";
 
 const BlogsPage = () => {
   const navigate = useNavigate();
@@ -46,75 +44,7 @@ const BlogsPage = () => {
     <>
       <NavBar />
 
-      <div className="position-relative ">
-        <Carousel autoplay>
-          <div className="swiper-slide">
-            <div
-              className="bg-img-start content-space-2 content-space-t-sm-3 content-space-b-sm-4"
-              style={{
-                backgroundImage: "url(./assets/img/1920x1080/img1.jpg)",
-              }}
-            >
-              <div className="container text-start content-space-b-sm-2">
-                <div className="row">
-                  <div className="col-md-6">
-                    <div className="d-flex align-items-center mb-3">
-                      <div className="flex-shrink-0"></div>
-                    </div>
-                    <div className="mb-5">
-                      <h2 className="h1 text-white">
-                        Investor's Oasis: Unveiling the Ideal Investment
-                        Scenario
-                      </h2>
-                      <p style={{ color: "white" }}>
-                        In the realm of investments, an oasis is characterized
-                        by conditions that promise abundant returns and growth
-                        potential. Imagine a fertile land with rich soil, ample
-                        sunlight, and a reliable water source—a haven for
-                        farmers seeking a bountiful harvest. Similarly, in the
-                        world of real estate, an investor's oasis encompasses
-                        specific conditions that create an ideal environment for
-                        maximizing returns and long-term prosperity.
-                      </p>
-                    </div>
-                    <ScrollLink
-                      style={{ padding: "0" }}
-                      to="article"
-                      spy={true}
-                      smooth={true}
-                      offset={-70}
-                      duration={1000} // Adjust this duration value
-                      // Use the easeInOutQuart easing function
-                      // For custom easing functions, you can use external libraries like bezier-easing
-                      // See: https://github.com/gre/bezier-easing
-                      // easing="cubicBezier(0.77, 0, 0.175, 1)"
-                      easing="easeInOutQuart"
-                    >
-                      <a className="btn btn-light btn-pointer" href="#article">
-                        Read article
-                      </a>
-                    </ScrollLink>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="position-sm-absolute bottom-0 start-0 end-0 zi-2 d-none d-sm-block mb-7">
-              <div class="container content-space-t-1">
-                <div class="js-swiper-blog-modern-hero-thumbs swiper swiper-step-pagination swiper-step-pagination-light">
-                  <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                      <span class="swiper-step-pagination-title">
-                        Investor's Oasis: Unveiling the Ideal Investment
-                        Scenario
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Carousel>
-      </div>
+      <div className="position-relative "></div>
       <div
         class="container content-space-2 content-space-lg-3 text-start "
         id="article"
@@ -122,60 +52,44 @@ const BlogsPage = () => {
         <div class="row mb-5">
           <div class="col-12 ">
             <figure class="blockquote-lg text-center mb-3">
-              <h2>
-                {" "}
-                In the context of real estate, an investor's oasis comprises key
-                factors
+              <h2 className="h1">
+                Investor's Oasis: Unveiling the Ideal Investment Scenario
               </h2>
             </figure>
           </div>
         </div>
-
-        <div class="row mb-3">
-          <div class="col-12 col-lg-10 offset-lg-1">
-            <ul style={{ fontSize: "18px" }}>
-              <li>
-                <strong>High Rental Yields</strong>: Comparable to a high-yield
-                crop in agriculture, high rental yields ensure a steady and
-                substantial income stream for property investors. It signifies
-                that the property is generating a significant return relative to
-                its cost.
-              </li>
-              <br />
-              <li>
-                <strong>Low Supply</strong>: Similar to a limited supply of a
-                sought-after commodity, a low supply of available properties can
-                drive up demand. This scarcity often results in increased
-                property values and enhanced opportunities for investors.
-              </li>
-              <br />
-              <li>
-                <strong>Rapid Population Growth</strong>: Just as a growing
-                population can stimulate economic activity in a region, rapid
-                population growth in a real estate context indicates increased
-                demand for housing. This surge in demand can positively impact
-                property values and rental prices.
-              </li>
-            </ul>
-          </div>
-        </div>
-
         <div class="row mb-5">
           <div class="col-md-10 col-lg-8 offset-md-1 offset-lg-2">
             <img class="img-fluid" src={blogImage1} alt="Description" />
           </div>
         </div>
-
         <div class="row mb-3">
-          <div class="col-12">
-            <figure class="blockquote-lg text-center mb-3">
-              <h2>
-                Why "High Rental Yields, Low Supply, and Rapid Population
-                Growth" as the Investor's Oasis:
-              </h2>
+          <div class="col-12  ">
+            <p style={{ fontSize: "18px" }}>
+              In the realm of investments, an oasis is characterized by
+              conditions that promise abundant returns and growth potential.
+              Imagine a fertile land with rich soil, ample sunlight, and a
+              reliable water source—a haven for farmers seeking a bountiful
+              harvest. Similarly, in the world of real estate, an investor's
+              oasis encompasses specific conditions that create an ideal
+              environment for maximizing returns and long-term prosperity.
+            </p>
+          </div>
+        </div>
+        <div class="row mb-5">
+          <div class="col-12 ">
+            <figure class="blockquote-lg text-right mb-3">
+              <h3>
+                {" "}
+                In the context of real estate, an investor's oasis comprises key
+                factors
+              </h3>
             </figure>
           </div>
-          <div class="col-12 col-lg-10 offset-lg-1">
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-12 ">
             <ul>
               <li>
                 <strong>Maximizing Returns</strong>:<br /> The combination of
@@ -202,18 +116,12 @@ const BlogsPage = () => {
           </div>
         </div>
 
-        <div class="row mb-5">
-          <div class="col-md-10 col-lg-8 offset-md-1 offset-lg-2">
-            <img class="img-fluid" src={blogImage2} alt="Description" />
-          </div>
-        </div>
-
-        <div class="col-12 ">
-          <figure class="blockquote-lg text-center mb-3">
-            <h2>
+        <div class="col-12 mb-5 ">
+          <figure class="blockquote-lg text-start mb-3">
+            <h3>
               With Following Criteria We Have Chosen Few Suburbs As The
               Investor's Oasis:
-            </h2>
+            </h3>
           </figure>
         </div>
 
@@ -226,7 +134,7 @@ const BlogsPage = () => {
                     <Progress
                       strokeColor="#1a6cb6"
                       strokeWidth={5}
-                      size={190}
+                      size={180}
                       type="circle"
                       percent={100}
                       format={() => (
@@ -241,28 +149,28 @@ const BlogsPage = () => {
             </div>
           </div>
         </div>
-        <div class="col-12 col-lg-10 offset-lg-1 mb-3">
-          <figure class="blockquote-lg text-center mb-5">
-            <h2>Selected Suburbs:</h2>
+        <div class="col-12  mb-3">
+          <figure class="blockquote-lg text-start mb-5">
+            <h3>Selected Suburbs:</h3>
           </figure>
         </div>
         <div class="row  mb-3">
-          <div class="col-12 col-lg-10 offset-lg-1">
-            <h4>Wollert, VIC (Postcode: 3750):</h4>
+          <div class="col-12 ">
+            <h5>Wollert, VIC (Postcode: 3750):</h5>
             <p>
               Highest Rental Demand. High rental yields, limited supply, and
               rapid population growth converge to offer an ideal investment
               landscape.
             </p>
 
-            <h4>Baldivis, WA (Postcode: 6171):</h4>
+            <h5>Baldivis, WA (Postcode: 6171):</h5>
             <p>
               Highest Rental Demand. A perfect blend of high rental yields, low
               supply, and a growing population, making it a promising investor's
               haven.
             </p>
 
-            <h4>Clyde, VIC (Postcode: 3978):</h4>
+            <h5>Clyde, VIC (Postcode: 3978):</h5>
             <p>
               Highest Rental Demand. High rental yields, low property supply,
               and rapid population growth position Clyde as a prime destination
