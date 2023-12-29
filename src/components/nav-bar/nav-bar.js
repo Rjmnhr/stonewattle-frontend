@@ -176,6 +176,24 @@ const NavBar = () => {
                       Contact us
                     </a>
                   </li>
+                  <li
+                    className="hs-has-mega-menu nav-item mb-3 mb-lg-0"
+                    data-hs-mega-menu-item-options='{
+                  "desktop": {
+                    "maxWidth": "20rem"
+                  }
+                }'
+                  >
+                    <a
+                      id="docsMegaMenu"
+                      className="hs-mega-menu-invoker nav-link  fs-3  "
+                      href="/blogs"
+                      role="button"
+                      aria-expanded="false"
+                    >
+                      Blogs
+                    </a>
+                  </li>
 
                   <li className="nav-item ms-lg-auto">
                     {isLoggedIn === "true" ? (
