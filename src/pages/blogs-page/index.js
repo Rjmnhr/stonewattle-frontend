@@ -63,7 +63,8 @@ const BlogsPage = () => {
           <div class="col-12 ">
             <figure class="blockquote-lg text-center mb-3">
               <h2 className="h1">
-                Investor's Oasis: Unveiling the Ideal Investment Scenario
+                Are you looking to invest? Let’s say you have $500,000 and open
+                to investing in any state.
               </h2>
             </figure>
           </div>
@@ -72,67 +73,6 @@ const BlogsPage = () => {
           <div class="col-md-10 col-lg-8 offset-md-1 offset-lg-2">
             <img class="img-fluid" src={blogImage1} alt="Description" />
           </div>
-        </div>
-        <div class="row mb-3">
-          <div class="col-12  ">
-            <p style={{ fontSize: "18px" }}>
-              In the realm of investments, an oasis is characterized by
-              conditions that promise abundant returns and growth potential.
-              Imagine a fertile land with rich soil, ample sunlight, and a
-              reliable water source—a haven for farmers seeking a bountiful
-              harvest. Similarly, in the world of real estate, an investor's
-              oasis encompasses specific conditions that create an ideal
-              environment for maximizing returns and long-term prosperity.
-            </p>
-          </div>
-        </div>
-        <div class="row mb-5">
-          <div class="col-12 ">
-            <figure class="blockquote-lg text-right mb-3">
-              <h3>
-                {" "}
-                In the context of real estate, an investor's oasis comprises key
-                factors
-              </h3>
-            </figure>
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <div class="col-12 ">
-            <ul>
-              <li>
-                <strong>Maximizing Returns</strong>:<br /> The combination of
-                high rental yields ensures a robust and consistent income
-                stream, offering investors the potential for significant returns
-                on their investment.
-              </li>
-              <br />
-              <li>
-                <strong> Scarcity and Demand</strong>: <br />
-                Low supply creates a sense of exclusivity and heightened demand,
-                leading to increased property values and enhanced prospects for
-                capital appreciation.
-              </li>
-              <br />
-              <li>
-                <strong>Population-Driven Demand</strong>:<br /> Rapid
-                population growth indicates a thriving community with a demand
-                for housing, presenting investors with the opportunity to
-                capitalize on a buoyant market.
-              </li>
-              <br />
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-12 mb-5 ">
-          <figure class="blockquote-lg text-start mb-3">
-            <h3>
-              With Following Criteria We Have Chosen Few Suburbs As The
-              Investor's Oasis:
-            </h3>
-          </figure>
         </div>
 
         <div class="row mb-5">
@@ -150,35 +90,20 @@ const BlogsPage = () => {
             </div>
           </div>
         </div>
-        <div class="col-12  mb-3">
-          <figure class="blockquote-lg text-start mb-5">
-            <h3>Selected Suburbs:</h3>
+        <div class="col-12 mb-5 ">
+          <figure class=" text-center mb-3">
+            <h4>The following 3 suburbs will be great for you:</h4>
           </figure>
         </div>
-        <div class="row  mb-3">
+        <div class="row  text-center mb-3">
           <div class="col-12 ">
-            <h5>Wollert, VIC (Postcode: 3750):</h5>
-            <p>
-              Highest Rental Demand. High rental yields, limited supply, and
-              rapid population growth converge to offer an ideal investment
-              landscape.
-            </p>
+            <p style={{fontSize:"18px"}}>Wollert, VIC (Postcode: 3750)</p>
 
-            <h5>Baldivis, WA (Postcode: 6171):</h5>
-            <p>
-              Highest Rental Demand. A perfect blend of high rental yields, low
-              supply, and a growing population, making it a promising investor's
-              haven.
-            </p>
+            <p style={{fontSize:"18px"}}>Baldivis, WA (Postcode: 6171)</p>
 
-            <h5>Clyde, VIC (Postcode: 3978):</h5>
-            <p>
-              Highest Rental Demand. High rental yields, low property supply,
-              and rapid population growth position Clyde as a prime destination
-              for astute investors.
-            </p>
-
-            <p>
+            <p style={{fontSize:"18px"}}>Clyde, VIC (Postcode: 3978)</p>
+            <br />
+            <p style={{fontSize:"18px"}}>
               In summary, Wollert, Baldivis, and Clyde epitomize the investor's
               oasis, where the alignment of high rental yields, low supply, and
               rapid population growth creates an optimal environment for
@@ -186,11 +111,13 @@ const BlogsPage = () => {
             </p>
           </div>
         </div>
+
         <div class="col-12 col-lg-10 offset-lg-1 mb-3">
           <figure class="blockquote-lg text-center mb-5">
             <h5>
-              To view such real time suburb profile, feel free to use our free
-              property tool. All you need to do is register and test it out at
+              To try out more suburbs for yourself, try the free Suburb Selector
+              tool. Simply register and get suburbs selected in less than 5-10
+              minutes.
             </h5>
           </figure>
         </div>
@@ -200,7 +127,7 @@ const BlogsPage = () => {
             onClick={() => navigate("/application")}
             className="btn btn-lg btn-primary"
           >
-            Suburb selector
+            Try Now!
           </button>
         </div>
 
