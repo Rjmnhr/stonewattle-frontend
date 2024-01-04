@@ -127,6 +127,27 @@ const AppRoute = () => {
             </>
           }
         />
+           <Route
+            path="*"
+            element={
+              <>
+                <div
+                  style={{
+                    height: "100vh",
+                    display: "grid",
+                    alignContent: "center",
+                    justifyItems: "center",
+                  }}
+                >
+                  <h1>404 Error</h1>
+                  <h1>Page not found</h1>
+                  <a href="https://www.2ndstorey.com/">
+                    <button className="btn border">Go Back</button>
+                  </a>
+                </div>
+              </>
+            }
+          />
       </Routes>
     </BrowserRouter>
   );

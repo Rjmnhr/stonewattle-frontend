@@ -12,6 +12,7 @@ import AxiosInstance from "../../components/axios";
 import FilterMobile from "../../components/filter-component-mobile/filter-mobile";
 import { MdArrowDropDown } from "react-icons/md";
 import GoogleMapComponent from "../../components/GIS-mapping/google-maps";
+import { Helmet } from "react-helmet";
 
 const ApplicationPage = () => {
   const {
@@ -541,6 +542,11 @@ const ApplicationPage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Suburb Selector | 2nd Storey</title>
+
+        {/* Add other meta tags, link tags, etc. as needed */}
+      </Helmet>
       <NavBar />
       {contextHolder}
 

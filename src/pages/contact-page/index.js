@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import AxiosInstance from "../../components/axios";
 import { CheckCircleOutlineRounded } from "@mui/icons-material";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet";
 
 const ContactPage = () => {
   // const { dropdownHeight } = useApplicationContext();
@@ -90,6 +91,11 @@ const ContactPage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Contact Us| 2nd Storey</title>
+
+        {/* Add other meta tags, link tags, etc. as needed */}
+      </Helmet>
       <NavBar />
 
       <div

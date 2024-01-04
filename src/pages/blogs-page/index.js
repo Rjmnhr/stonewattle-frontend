@@ -9,6 +9,7 @@ import {
   HomeOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const BlogsPage = () => {
   const navigate = useNavigate();
@@ -52,6 +53,11 @@ const BlogsPage = () => {
   ];
   return (
     <>
+    <Helmet>
+        <title>Blogs | 2nd Storey</title>
+
+        {/* Add other meta tags, link tags, etc. as needed */}
+      </Helmet>
       <NavBar />
 
       <div className="position-relative "></div>
