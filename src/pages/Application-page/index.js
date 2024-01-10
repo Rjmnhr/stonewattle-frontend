@@ -1089,7 +1089,7 @@ const ApplicationPage = () => {
                             paddingRight: "5px",
                           }}
                         >
-                          <label style={{ width: "110px", textAlign: "start" }}>
+                          <label style={{ width: "120px", textAlign: "start" }}>
                             Decent match :
                           </label>
                           <div className="blue-circle"></div>{" "}

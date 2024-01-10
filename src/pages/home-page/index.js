@@ -52,37 +52,48 @@ const HomePage = () => {
       <NavBar />
 
       <main id="content" role="main">
-        <div class="container-fluid px-lg-8 p-3  pt-3 pt-lg-10 ">
-          <div class="row justify-content-lg-between align-items-lg-center">
-            <div class="col-lg-6 mb-5 mb-lg-0">
-              <div class="mb-5 text-lg-start text-center">
-                {/* <h1 class="display-4 text-dark mb-5">
-                  Start your journey with
-                  <span class="text-primary"> 2nd Storey </span>
-                </h1> */}
-                <p class="fs-2">
-                  We are a technology AI company using property data to bring to
-                  you a one-stop platform for all your needs. We have been
-                  investing in the Australian property market over the last 10
-                  years and have more than $4m worth of property portfolio.
-                </p>
-                {/* 
-                <p
-                  class="fs-2 d-flex align-items-start gap-1 justify-content-center justify-content-lg-start"
-                  style={{ color: "#0ABF53", cursor: "pointer" }}
-                  onClick={() => {
-                    navigate("/service");
-                  }}
-                >
-                  Explore our property investments
-                  <OpenInNewOutlinedIcon
-                    style={{
-                      color: "black",
-                      fontSize: "14px",
-                      marginTop: "10px",
-                    }}
-                  />
-                </p> */}
+        <header className="text-white p-0">
+          <div
+            style={{
+              height: "100vh",
+              backgroundImage: "url(./assets/img/investment-strategy.jpg)",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              display: "grid",
+              justifyItems: "center",
+              alignContent: "start",
+              position: "relative",
+            }}
+            className="container-fluid text-start p-3"
+          >
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                background:
+                  "rgba(0, 0, 0, 0.5)" /* Adjust the opacity as needed */,
+              }}
+            ></div>
+            <div class="row mt-3 mt-lg-10 container" style={{ zIndex: "1" }}>
+              <div class="col-md-6">
+                <div class="mb-5">
+                  <h1
+                    style={{ zIndex: "1", fontSize: "55px" }}
+                    class="h1 text-white"
+                  >
+                    Elevate Your Investment Strategy with 2nd Storey
+                  </h1>
+                  <p class="fs-3 text-white">
+                    Explore the endless possibilities of{" "}
+                    <span>property investment</span> with 2nd Storey. Let's
+                    embark on a journey towards financial growth and success
+                    together.
+                  </p>
+                </div>
                 <div className="col-12 d-lg-flex mt-3 justify-content-start gap-3">
                   <button
                     className="btn btn-primary btn-lg mb-3 mb-md-0"
@@ -104,7 +115,7 @@ const HomePage = () => {
                       }}
                     >
                       {" "}
-                      Try Suburb Selector for free
+                      Suburb Selector 
                     </p>
                   </button>
                   <button
@@ -133,80 +144,123 @@ const HomePage = () => {
                 </div>
               </div>
             </div>
-
-            <div class="col-lg-6 mb-5 mb-lg-0">
-              <img
-                class="img-fluid rounded-3"
-                src=" https://media.istockphoto.com/id/1038186890/photo/different-size-houses-vith-different-value-on-stacks-of-coins-concept-for-property-mortgage.jpg?s=612x612&w=0&k=20&c=duYcfpy5QsvJZPuyvCSHQhaW-VVQJXZjoXCkvpGt0Ek="
-                alt="Description"
-              />
-            </div>
           </div>
-        </div>
 
-        <div class="container-fluid px-lg-8 p-3 content-space-t-2 content-space-t-lg-3 text-start ">
-          <div class="row justify-content-lg-between align-items-lg-center">
-            <div class="col-lg-5">
-              <div class="mb-5 text-lg-start text-center ">
-                <p className="fs-2">
-                  We have helped more than 50 investors use our platform, and
-                  who have amassed more than $25m of property across the whole
-                  nation.We offer property selection service for users who don't
-                  have as much time. We are not buyers agents but we can help
-                  you source the best properties given your budget and
-                  preference. Contact us now to discuss
-                </p>
-              </div>
+          {/* Add your header content here */}
+        </header>
+        <section className="about">
+          <div class="container-fluid px-lg-8 p-3  pt-3 pt-lg-10 ">
+            <div className="mb-3">
+              <h1>ABOUT US</h1>
             </div>
-            <div class="col-lg-6  text-center">
-              <div class="position-relative">
-                <div class="position-relative">
-                  <img
-                    class="img-fluid"
-                    src="https://media.istockphoto.com/id/1335050734/photo/businessman-using-a-computer-for-property-sales-listings-real-estate-agent-agency-contractor.jpg?s=612x612&w=0&k=20&c=-QsLOTTjONcvkhAJQWjsXHjeRXnInmclCZIjRt3wE20="
-                    alt=" Description"
+
+            <div class="row justify-content-lg-between align-items-lg-center">
+              <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="mb-5 text-lg-start text-center">
+                  {/* <h1 class="display-4 text-dark mb-5">
+                  Start your journey with
+                  <span class="text-primary"> 2nd Storey </span>
+                </h1> */}
+                  <p class="fs-2">
+                    We are a technology AI company using property data to bring
+                    to you a one-stop platform for all your needs. We have been
+                    investing in the Australian property market over the last 10
+                    years and have more than $4m worth of property portfolio.
+                  </p>
+                  {/* 
+                <p
+                  class="fs-2 d-flex align-items-start gap-1 justify-content-center justify-content-lg-start"
+                  style={{ color: "#0ABF53", cursor: "pointer" }}
+                  onClick={() => {
+                    navigate("/service");
+                  }}
+                >
+                  Explore our property investments
+                  <OpenInNewOutlinedIcon
+                    style={{
+                      color: "black",
+                      fontSize: "14px",
+                      marginTop: "10px",
+                    }}
                   />
+                </p> */}
                 </div>
+              </div>
 
-                <div
-                  class="d-inline-block position-absolute top-0 start-0 bg-white w-100 rounded-pill d-none d-lg-block shadow-sm p-2 mt-5 ms-n5"
-                  style={{ maxWidth: "12rem" }}
-                >
-                  <div class="d-flex align-items-center text-center ">
-                    <div class="flex-shrink-0">
-                      <span class="avatar avatar-sm avatar-circle">
-                        <img
-                          class="avatar-img"
-                          src="https://www.nibib.nih.gov/sites/default/files/inline-images/AI%20600%20x%20400.jpg"
-                          alt=" Description"
-                        />
-                      </span>
-                    </div>
-                    <div class="flex-grow-1 ms-2">
-                      <div class="fs-5 fw-bold text-dark mb-0">
-                        Investment strategy
+              <div class="col-lg-6 mb-5 mb-lg-0">
+                <img
+                  class="img-fluid rounded-3"
+                  src=" https://media.istockphoto.com/id/1038186890/photo/different-size-houses-vith-different-value-on-stacks-of-coins-concept-for-property-mortgage.jpg?s=612x612&w=0&k=20&c=duYcfpy5QsvJZPuyvCSHQhaW-VVQJXZjoXCkvpGt0Ek="
+                  alt="Description"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="container-fluid px-lg-8 p-3 content-space-t-2 content-space-t-lg-3 text-start ">
+            <div class="row justify-content-lg-between align-items-lg-center">
+              <div class="col-lg-5">
+                <div class="mb-5 text-lg-start text-center ">
+                  <p className="fs-2">
+                    We have helped more than 50 investors use our platform, and
+                    who have amassed more than $25m of property across the whole
+                    nation.We offer property selection service for users who
+                    don't have as much time. We are not buyers agents but we can
+                    help you source the best properties given your budget and
+                    preference. Contact us now to discuss
+                  </p>
+                </div>
+              </div>
+              <div class="col-lg-6  text-center">
+                <div class="position-relative">
+                  <div class="position-relative">
+                    <img
+                      class="img-fluid"
+                      src="https://media.istockphoto.com/id/1335050734/photo/businessman-using-a-computer-for-property-sales-listings-real-estate-agent-agency-contractor.jpg?s=612x612&w=0&k=20&c=-QsLOTTjONcvkhAJQWjsXHjeRXnInmclCZIjRt3wE20="
+                      alt=" Description"
+                    />
+                  </div>
+
+                  <div
+                    class="d-inline-block position-absolute top-0 start-0 bg-white w-100 rounded-pill d-none d-lg-block shadow-sm p-2 mt-5 ms-n5"
+                    style={{ maxWidth: "12rem" }}
+                  >
+                    <div class="d-flex align-items-center text-center ">
+                      <div class="flex-shrink-0">
+                        <span class="avatar avatar-sm avatar-circle">
+                          <img
+                            class="avatar-img"
+                            src="https://www.nibib.nih.gov/sites/default/files/inline-images/AI%20600%20x%20400.jpg"
+                            alt=" Description"
+                          />
+                        </span>
+                      </div>
+                      <div class="flex-grow-1 ms-2">
+                        <div class="fs-5 fw-bold text-dark mb-0">
+                          Investment strategy
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <div
-                  class="d-inline-block position-absolute bottom-0 start-0 bg-warning w-100 rounded-pill d-none d-lg-block shadow-sm p-2 mb-10 ms-n10"
-                  style={{ maxWidth: " 16rem" }}
-                >
-                  <div class="d-flex align-items-center text-center">
-                    <div class="flex-shrink-0">
-                      <span class="avatar avatar-sm avatar-circle">
-                        <img
-                          class="avatar-img"
-                          src="https://www.nobroker.in/blog/wp-content/uploads/2022/04/Property-disputes.jpg"
-                          alt="Description"
-                        />
-                      </span>
-                    </div>
-                    <div class="flex-grow-1 ms-2">
-                      <div class="fs-5 fw-bold text-dark mb-0">
-                        Property characteristics
+                  <div
+                    class="d-inline-block position-absolute bottom-0 start-0 bg-warning w-100 rounded-pill d-none d-lg-block shadow-sm p-2 mb-10 ms-n10"
+                    style={{ maxWidth: " 16rem" }}
+                  >
+                    <div class="d-flex align-items-center text-center">
+                      <div class="flex-shrink-0">
+                        <span class="avatar avatar-sm avatar-circle">
+                          <img
+                            class="avatar-img"
+                            src="https://www.nobroker.in/blog/wp-content/uploads/2022/04/Property-disputes.jpg"
+                            alt="Description"
+                          />
+                        </span>
+                      </div>
+                      <div class="flex-grow-1 ms-2">
+                        <div class="fs-5 fw-bold text-dark mb-0">
+                          Property characteristics
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -214,7 +268,103 @@ const HomePage = () => {
               </div>
             </div>
           </div>
-        </div>
+        </section>
+
+        <section id="services" class="services section-bg ">
+          <div
+            class="container-fluid px-lg-8 p-3 content-space-t-2 content-space-t-lg-3 "
+            data-aos="fade-up"
+          >
+            <div class="section-title mb-8">
+              <h2>SERVICES WE OFFER</h2>
+              <p>
+                We offer a range of comprehensive services designed to empower
+                your investment journey. Explore the key features of our
+                services below:
+              </p>
+            </div>
+
+            <div class="row ">
+              <div class="col-md-6">
+                <div
+                  class="icon-box border card p-3 m-2 text-start"
+                  data-aos="fade-up"
+                  data-aos-delay="100"
+                >
+                  <i class="icofont-computer"></i>
+                  <h3>
+                    <a href="/#">Suburb Selector Tool</a>
+                  </h3>
+                  {/* <p>
+                    Use our advanced{" "}
+                    <span class="highlight">Suburb Selector Tool</span> to find
+                    the perfect location for your investment. Customize your
+                    search based on budget, dwelling type, area classification,
+                    state, bedrooms, and sort by factors such as crime rate and
+                    rental yield.
+                  </p> */}
+                  <p className="fs-3">
+                    Make data-driven decisions by exploring a curated list of
+                    suburbs that match your criteria. Our tool simplifies the
+                    process of selecting suburbs that align with your investment
+                    goals.
+                  </p>
+                </div>
+                <div
+                  class="icon-box border card p-3 m-2 text-start"
+                  data-aos="fade-up"
+                  data-aos-delay="100"
+                >
+                  <i class="icofont-computer"></i>
+                  <h3>
+                    <a href="/#">Investment Strategy</a>
+                  </h3>
+                  <p className="fs-3">
+                    Maximize your returns with our accurate{" "}
+                    <span class="highlight">rental yield</span> data. We provide
+                    up-to-date information to help you make informed investment
+                    decisions.
+                  </p>
+                </div>
+              </div>
+
+              <div class="col-md-6 mt-4 mt-md-0">
+                <div
+                  class="icon-box border card p-3 m-2 text-start"
+                  data-aos="fade-up"
+                  data-aos-delay="200"
+                >
+                  <i class="icofont-chart-bar-graph"></i>
+                  <h3>
+                    <a href="/#">Weekly Data Updates</a>
+                  </h3>
+                  <p className="fs-3">
+                    Stay ahead of the curve with our{" "}
+                    <span class="highlight">weekly data updates</span>. Our
+                    information is regularly refreshed, ensuring you have the
+                    latest market intelligence at your fingertips.{" "}
+                  </p>
+                </div>
+                <div
+                  class="icon-box border card p-3 m-2 text-start"
+                  data-aos="fade-up"
+                  data-aos-delay="400"
+                >
+                  <i class="icofont-settings"></i>
+                  <h3>
+                    <a href="/#">Investment Ideas</a>
+                  </h3>
+                  <p className="fs-3">
+                    Discover innovative{" "}
+                    <span class="highlight">investment ideas</span> that align
+                    with your goals. We provide a diverse range of options to
+                    suit your risk appetite and preferences.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
         <div class="container-fluid px-lg-8 p-3 content-space-t-lg-3 ">
           <div class="row">
             <div class="col-sm-6 col-lg-4 mb-5">

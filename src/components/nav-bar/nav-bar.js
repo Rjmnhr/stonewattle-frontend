@@ -72,7 +72,7 @@ const NavBar = () => {
           "fixEffect": "slide"
         }'
       >
-        <div className="container-fluid px-3 px-lg-8">
+        <div className="container">
           <nav className="js-mega-menu navbar-nav-wrap">
             <div className="d-flex justify-content-center align-items-center gap-1">
               <img
