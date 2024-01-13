@@ -13,6 +13,8 @@ import HomePage from "./pages/home-page";
 import ForgotPasswordPage from "./pages/forgot-password-page";
 import ServicePage from "./pages/service-page";
 import BlogsPage from "./pages/blogs-page";
+import BlogsMainPage from "./pages/blogs-page/main";
+import BlogsPage1 from "./pages/blogs-page/index-1";
 
 // import GoogleMapComponent from "./components/GIS-mapping/google-map-container";
 
@@ -123,31 +125,47 @@ const AppRoute = () => {
           path="/blogs"
           element={
             <>
+              <BlogsMainPage />
+            </>
+          }
+        />
+        <Route
+          path="/post0"
+          element={
+            <>
               <BlogsPage />
             </>
           }
         />
-           <Route
-            path="*"
-            element={
-              <>
-                <div
-                  style={{
-                    height: "100vh",
-                    display: "grid",
-                    alignContent: "center",
-                    justifyItems: "center",
-                  }}
-                >
-                  <h1>404 Error</h1>
-                  <h1>Page not found</h1>
-                  <a href="https://www.2ndstorey.com/">
-                    <button className="btn border">Go Back</button>
-                  </a>
-                </div>
-              </>
-            }
-          />
+        <Route
+          path="/post1"
+          element={
+            <>
+              <BlogsPage1 />
+            </>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <>
+              <div
+                style={{
+                  height: "100vh",
+                  display: "grid",
+                  alignContent: "center",
+                  justifyItems: "center",
+                }}
+              >
+                <h1>404 Error</h1>
+                <h1>Page not found</h1>
+                <a href="https://www.2ndstorey.com/">
+                  <button className="btn border">Go Back</button>
+                </a>
+              </div>
+            </>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
