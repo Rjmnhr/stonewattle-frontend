@@ -15,6 +15,7 @@ import ServicePage from "./pages/service-page";
 import BlogsPage from "./pages/blogs-page";
 import BlogsMainPage from "./pages/blogs-page/main";
 import BlogsPage1 from "./pages/blogs-page/index-1";
+import BlogsPage2 from "./pages/blogs-page/index-2";
 
 // import GoogleMapComponent from "./components/GIS-mapping/google-map-container";
 
@@ -142,6 +143,14 @@ const AppRoute = () => {
           element={
             <>
               <BlogsPage1 />
+            </>
+          }
+        />
+         <Route
+          path="/post2"
+          element={
+            <>
+              <BlogsPage2 />
             </>
           }
         />

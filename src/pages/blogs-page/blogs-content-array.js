@@ -63,4 +63,33 @@ export const BlogContentArr = [
       </a>
     ),
   },
+  {
+    main: "Australia's Top Rental Yields Unveiled: You’re Ultimate Investment Guide",
+    subMain:
+      "Embarking on a quest to discover this week's highest rental yields in Australia? Look no further! We've streamlined the process for you",
+    mainImg:
+      "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1705578234/bspjgbcnhjvivjkknbzq.jpg",
+    imgPreview:
+      "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1705578234/bspjgbcnhjvivjkknbzq.jpg",
+    subContent: [
+      {
+        no: 1,
+        content: "",
+      },
+      {
+        no: 2,
+        content: "",
+      },
+      {
+        no: 3,
+        content: "",
+      },
+    ],
+    footer: "",
+    footerButton: (
+      <a href="/application">
+        <button className="btn btn-lg btn-primary">Click here</button>
+      </a>
+    ),
+  },
 ];
