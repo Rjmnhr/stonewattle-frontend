@@ -1,55 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../../components/nav-bar/nav-bar";
-import blogImage1 from "../../images/2ndstorey-blog-1.jpg";
-
-import {
-  BankOutlined,
-  DollarOutlined,
-  FieldTimeOutlined,
-  HomeOutlined,
-} from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
-export const infoArr = [
-  <li className="text-center">
-    <div className="d-flex d-lg-block ">
-      <HomeOutlined className="mb-2 " style={{ fontSize: "24px" }} />
-      <p className="mx-2 my-0">
-        <strong>Dwelling Type</strong> :
-      </p>{" "}
-      <label> House</label>
-    </div>
-  </li>,
-  <li className="text-center">
-    <div className="d-flex d-lg-block ">
-      <BankOutlined className="mb-2 " style={{ fontSize: "24px" }} />
-      <p className="mx-2 my-0">
-        <strong>Min Bedrooms</strong> :
-      </p>{" "}
-      <label> 3</label>
-    </div>
-  </li>,
-  <li className="text-center">
-    <div className="d-flex d-lg-block ">
-      <FieldTimeOutlined className="mb-2 " style={{ fontSize: "24px" }} />
-      <p className="mx-2 my-0">
-        <strong>State</strong> :
-      </p>{" "}
-      <label>All States</label>
-    </div>
-  </li>,
-  <li className="text-center">
-    <div className="d-flex d-lg-block ">
-      <DollarOutlined className="mb-2 " style={{ fontSize: "24px" }} />
-      <p className="mx-2 my-0">
-        <strong>Budget</strong> :
-      </p>{" "}
-      <label> $500,000</label>
-    </div>
-  </li>,
-];
+import { BlogContentArr } from "./blogs-content-array";
+
 const BlogsPage = () => {
-  const navigate = useNavigate();
+  const location = useLocation();
+  const [selectedBlog, setSelectedBlog] = useState(null);
+  useEffect(() => {
+    // Get the blog name from the query parameter
+    const blogName = location.search.replace("?blog=", "");
+
+    if (blogName) {
+      // Find the blog object in the array based on the blog name
+      const decodedBlogName = decodeURIComponent(blogName);
+      const blog = BlogContentArr.find((item) => item.main === decodedBlogName);
+
+      if (blog) {
+        setSelectedBlog(blog);
+      }
+    }
+    //eslint-disable-next-line
+  }, []);
+
+  if (!selectedBlog) {
+    // Handle case where the blog is not found
+    return <div>Blog not found!</div>;
+  }
 
   return (
     <>
@@ -61,80 +38,55 @@ const BlogsPage = () => {
       <NavBar />
 
       <div className="position-relative "></div>
-      <div
-        class="container content-space-2 content-space-lg-3 text-start "
-        id="article"
-      >
+      <div class="container content-space-1 text-start " id="article">
         <div class="row mb-5">
           <div class="col-12 ">
-            <figure class="blockquote-lg text-center mb-3">
-              <h2 className="h1">
-                Are you looking to invest? Let’s say you have $500,000 and open
-                to investing in any state.
-              </h2>
-            </figure>
+            <h1 className="h1 ">{selectedBlog.main}</h1>
           </div>
         </div>
-        <div class="row mb-5">
-          <div class="col-md-10 col-lg-8 offset-md-1 offset-lg-2">
-            <img class="img-fluid" src={blogImage1} alt="Description" />
-          </div>
-        </div>
-
-        <div class="row mb-5">
-          <div class="col-12  ">
-            <div className="d-lg-flex justify-content-around">
-              {infoArr.map((item) => {
-                return (
-                  <div className="mb-3 mb-lg-0 border p-3 col-12 col-lg-2">
-                    <div className="text-dark" style={{ fontSize: "16px" }}>
-                      {item}
-                    </div>
-                  </div>
-                );
-              })}
+        <div className="d-lg-flex justify-content-between align-items-start flex-row-reverse">
+          <div class="row mb-5 col-12 col-lg-6">
+            <div class="col-md-10 col-lg-12 ">
+              <img
+                class="img"
+                width={"100%"}
+                src={selectedBlog.mainImg}
+                alt="Description"
+              />
             </div>
           </div>
-        </div>
-        <div class="col-12 mb-5 ">
-          <figure class=" text-center mb-3">
-            <h4>The following 3 suburbs will be great for you:</h4>
-          </figure>
-        </div>
-        <div class="row  text-center mb-3">
-          <div class="col-12 ">
-            <p style={{ fontSize: "18px" }}>Wollert, VIC (Postcode: 3750)</p>
 
-            <p style={{ fontSize: "18px" }}>Baldivis, WA (Postcode: 6171)</p>
+          <div class="row mb-5 col-12 text-start col-lg-6">
+            <div class="col-12">
+              <div>
+                <h4>{selectedBlog.subMain}</h4>
+                <div class="row mb-5">
+                  {selectedBlog?.extraContent ? selectedBlog?.extraContent : ""}
+                </div>
 
-            <p style={{ fontSize: "18px" }}>Clyde, VIC (Postcode: 3978)</p>
-            <br />
-            <p style={{ fontSize: "18px" }}>
-              In summary, Wollert, Baldivis, and Clyde epitomize the investor's
-              oasis, where the alignment of high rental yields, low supply, and
-              rapid population growth creates an optimal environment for
-              investors seeking to flourish in the real estate market.
-            </p>
+                {selectedBlog.subContent.map((item) => {
+                  return (
+                    <section>
+                      <h4>{item.subHeading}</h4>
+                      {item.content.map((content) => (
+                        <p>{content}</p>
+                      ))}
+                    </section>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="col-12 col-lg-10 offset-lg-1 mb-3">
           <figure class="blockquote-lg text-center mb-5">
-            <h5>
-              To try out more suburbs for yourself, try the free Suburb Selector
-              tool. Simply register and get suburbs selected in less than 5-10
-              minutes.
-            </h5>
+            <h5>{selectedBlog.footer}</h5>
           </figure>
         </div>
 
         <div class="col-12 d-flex justify-content-center mb-3">
-          <button
-            onClick={() => navigate("/application")}
-            className="btn btn-lg btn-primary"
-          >
-            Try Now!
-          </button>
+          {selectedBlog.footerButton}
         </div>
 
         <div class="col-12 d-flex justify-content-center mt-8">

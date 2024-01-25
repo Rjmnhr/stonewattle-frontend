@@ -12,10 +12,8 @@ import ApplicationPage from "./pages/Application-page";
 import HomePage from "./pages/home-page";
 import ForgotPasswordPage from "./pages/forgot-password-page";
 import ServicePage from "./pages/service-page";
-import BlogsPage from "./pages/blogs-page";
 import BlogsMainPage from "./pages/blogs-page/main";
-import BlogsPage1 from "./pages/blogs-page/index-1";
-import BlogsPage2 from "./pages/blogs-page/index-2";
+import BlogsPage from "./pages/blogs-page";
 
 // import GoogleMapComponent from "./components/GIS-mapping/google-map-container";
 
@@ -131,29 +129,14 @@ const AppRoute = () => {
           }
         />
         <Route
-          path="/post0"
+          path="/post"
           element={
             <>
               <BlogsPage />
             </>
           }
         />
-        <Route
-          path="/post1"
-          element={
-            <>
-              <BlogsPage1 />
-            </>
-          }
-        />
-         <Route
-          path="/post2"
-          element={
-            <>
-              <BlogsPage2 />
-            </>
-          }
-        />
+
         <Route
           path="*"
           element={

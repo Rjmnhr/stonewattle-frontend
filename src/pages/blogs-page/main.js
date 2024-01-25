@@ -7,7 +7,6 @@ const BlogsMainPage = () => {
   return (
     <>
       <NavBar />
-
       <div class="container p-0  mt-3">
         <div class="row justify-content-lg-between">
           <div class="col-lg-12 mb-10 mb-lg-0">
@@ -30,15 +29,15 @@ const BlogsMainPage = () => {
                             <strong>
                               <a
                                 class="text-dark"
-                                href={`/post${index}?blog=${blog.main}`}
+                                href={`/post?blog=${blog.main}`}
                               >
                                 {blog.main}
                               </a>
                             </strong>
                           </h4>
 
-                          <p class="card-text">{blog.subMain}</p>
-                          <a href={`/post${index}?blog=${blog.main}`}>
+                          <p class="card-text">{blog.previewText}</p>
+                          <a href={`/post?blog=${blog.main}`}>
                             {" "}
                             <button className="btn  btn-primary">
                               Read More
