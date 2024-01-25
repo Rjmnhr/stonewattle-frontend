@@ -249,4 +249,46 @@ export const BlogContentArr = [
       </a>
     ),
   },
+  {
+    main: "Invest with Insight: Avoiding Blind Spots in Your Property Journey",
+    previewText:
+      "Investing in property demands attention to detail. The fear of missing out on critical aspects is real. Enter the practical solution: a straightforward, comprehensive approach",
+    subMain:
+      "Investing in property demands attention to detail. The fear of missing out on critical aspects is real. Enter the practical solution: a straightforward, comprehensive approach",
+    mainImg:
+      "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1706168248/plavbl5w0eisvfntifrx.jpg",
+    imgPreview:
+      "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1706168248/plavbl5w0eisvfntifrx.jpg",
+    extraContent: "",
+    subContent: [
+      {
+        no: 1,
+        subHeading: "",
+        content: [
+          "In the rush to make decisions, vital factors might slip through the cracks. This is where reliable tools and data-driven insights prove invaluable. A savvy investor recognizes the significance of understanding market trends, property values, and the neighbourhood dynamics",
+        ],
+      },
+      {
+        no: 2,
+        subHeading: "",
+        content: [
+          "What could be overlooked? It ranges from market shifts to untapped potential in a neighbourhood. A comprehensive strategy covers all bases, considering rental yields, growth potential, and the broader investment landscape",
+        ],
+      },
+      {
+        no: 3,
+        subHeading: "",
+        content: [
+          "By adopting a simple and comprehensive approach, you reduce the risk of missing crucial details. It's all about making well-informed decisions and confidently navigating the property market",
+        ],
+      },
+    ],
+    footer:
+      " To try out more suburbs for yourself, try the free Suburb Selector tool. Simply register and get suburbs selected in less than 5-10 minutes",
+    footerButton: (
+      <a href="/application">
+        <button className="btn btn-lg btn-primary">Try Now!</button>
+      </a>
+    ),
+  },
 ];
