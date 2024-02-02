@@ -81,6 +81,44 @@ export const infoArr2 = [
     </div>
   </li>,
 ];
+export const infoArr3 = [
+  <li className="text-center">
+    <div className="d-flex d-lg-block ">
+      <HomeOutlined className="mb-2 " style={{ fontSize: "24px" }} />
+      <p className="mx-2 my-0">
+        <strong>Dwelling Type</strong> :
+      </p>{" "}
+      <label> House</label>
+    </div>
+  </li>,
+  <li className="text-center">
+    <div className="d-flex d-lg-block ">
+      <BankOutlined className="mb-2 " style={{ fontSize: "24px" }} />
+      <p className="mx-2 my-0">
+        <strong>Min Bedrooms</strong> :
+      </p>{" "}
+      <label> 3</label>
+    </div>
+  </li>,
+  <li className="text-center">
+    <div className="d-flex d-lg-block ">
+      <FieldTimeOutlined className="mb-2 " style={{ fontSize: "24px" }} />
+      <p className="mx-2 my-0">
+        <strong>State</strong> :
+      </p>{" "}
+      <label>All States</label>
+    </div>
+  </li>,
+  <li className="text-center">
+    <div className="d-flex d-lg-block ">
+      <DollarOutlined className="mb-2 " style={{ fontSize: "24px" }} />
+      <p className="mx-2 my-0">
+        <strong>Budget</strong> :
+      </p>{" "}
+      <label> $300,000</label>
+    </div>
+  </li>,
+];
 export const BlogContentArr = [
   {
     main: "Are you looking to invest",
@@ -280,6 +318,54 @@ export const BlogContentArr = [
         subHeading: "",
         content: [
           "By adopting a simple and comprehensive approach, you reduce the risk of missing crucial details. It's all about making well-informed decisions and confidently navigating the property market",
+        ],
+      },
+    ],
+    footer:
+      " To try out more suburbs for yourself, try the free Suburb Selector tool. Simply register and get suburbs selected in less than 5-10 minutes",
+    footerButton: (
+      <a href="/application">
+        <button className="btn btn-lg btn-primary">Try Now!</button>
+      </a>
+    ),
+  },
+  {
+    main: "Are you looking to invest in any state",
+    previewText:
+      "Suburbs like Bordertown (SA), Balgal Beach (QLD), and Biloela (VIC) shine with houses featuring at least 3 bedrooms.",
+    subMain: "Let’s say you have $300,000 and open to investing in any state.",
+    mainImg:
+      "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1706900089/zv9owrrdwvvxl1obcv5o.jpg",
+    imgPreview:
+      "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1706900089/zv9owrrdwvvxl1obcv5o.jpg",
+    extraContent: (
+      <div className="d-lg-flex justify-content-around">
+        {infoArr3.map((item) => {
+          return (
+            <div className="mb-3 mb-lg-0 border p-2 m-1 col-12 col-lg-3">
+              <div className="text-dark" style={{ fontSize: "16px" }}>
+                {item}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    ),
+    subContent: [
+      {
+        no: 1,
+        subHeading: "The following 3 suburbs will be great for you",
+        content: [
+          "Bordertown, SA (Postcode: 5268)",
+          "Balgal Beach, QLD (Postcode: 4816)",
+          "Biloela, VIC (Postcode: 3978)",
+        ],
+      },
+      {
+        no: 2,
+        subHeading: "",
+        content: [
+          "In summary, Suburbs like Bordertown (SA), Balgal Beach (QLD), and Biloela (VIC) shine with houses featuring at least 3 bedrooms. Across all states, enjoy family-friendly environments within a $300,000 budget. Emphasizing high rental yields, these choices prioritize low vacancy rates. Your path to smart investing starts here!",
         ],
       },
     ],
