@@ -427,7 +427,7 @@ const HomePage = () => {
             </div>
             <div class="col-lg-5">
               <div class="mb-5 text-lg-start text-center ">
-                <h2>Investment Property Analytics Tools</h2>
+                <h1>Investment Property Analytics Tools</h1>
                 <p className="fs-3">
                   Over the last 5 years we have been capturing property data
                   from various sources and used all our investment strategies to
@@ -503,10 +503,10 @@ const HomePage = () => {
 
             <div class="col-lg-5">
               <div class="mb-5 text-lg-start text-center ">
-                <h2>
+                <h1>
                   Predicting growth with our exclusive machine learning
                   algorithm
-                </h2>
+                </h1>
                 <p className="fs-3">
                   Our proprietary Machine Learning algorithm can also help
                   predict suburbs which are more likely to grow. We don’t
