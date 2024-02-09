@@ -119,6 +119,7 @@ export const infoArr3 = [
     </div>
   </li>,
 ];
+
 export const infoArr4 = [
   <li className="text-center">
     <div className="d-flex d-lg-block ">
@@ -154,6 +155,44 @@ export const infoArr4 = [
         <strong>Budget</strong> :
       </p>{" "}
       <label> $3,50,000</label>
+    </div>
+  </li>,
+];
+export const infoArr5 = [
+  <li className="text-center">
+    <div className="d-flex d-lg-block ">
+      <HomeOutlined className="mb-2 " style={{ fontSize: "24px" }} />
+      <p className="mx-2 my-0">
+        <strong>Dwelling Type</strong> :
+      </p>{" "}
+      <label> House</label>
+    </div>
+  </li>,
+  <li className="text-center">
+    <div className="d-flex d-lg-block ">
+      <BankOutlined className="mb-2 " style={{ fontSize: "24px" }} />
+      <p className="mx-2 my-0">
+        <strong>Min Bedrooms</strong> :
+      </p>{" "}
+      <label> 3</label>
+    </div>
+  </li>,
+  <li className="text-center">
+    <div className="d-flex d-lg-block ">
+      <FieldTimeOutlined className="mb-2 " style={{ fontSize: "24px" }} />
+      <p className="mx-2 my-0">
+        <strong>State</strong> :
+      </p>{" "}
+      <label>All States</label>
+    </div>
+  </li>,
+  <li className="text-center">
+    <div className="d-flex d-lg-block ">
+      <DollarOutlined className="mb-2 " style={{ fontSize: "24px" }} />
+      <p className="mx-2 my-0">
+        <strong>Budget</strong> :
+      </p>{" "}
+      <label> $4,50,000</label>
     </div>
   </li>,
 ];
@@ -418,7 +457,7 @@ export const BlogContentArr = [
   {
     main: "Which Australian suburbs offer the best investment opportunities",
     previewText:
-      "suburbs like Roxby Downs, SA (Postcode: 5725), Moranbah, QLD (Postcode: 4744), and Wundowie, WA (Postcode: 6560) elevates your investment.",
+      "Suburbs like Roxby Downs, SA (Postcode: 5725), Moranbah, QLD (Postcode: 4744), and Wundowie, WA (Postcode: 6560) elevates your investment.",
     subMain: "Let’s say you have $3,50,000 and open to investing in any state.",
     mainImg:
       "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1707244264/ef0pcl62hwnufngyuwmp.jpg",
@@ -452,6 +491,54 @@ export const BlogContentArr = [
         subHeading: "",
         content: [
           "In summary, suburbs like Roxby Downs, SA (Postcode: 5725), Moranbah, QLD (Postcode: 4744), and Wundowie, WA (Postcode: 6560). These prime picks boast factors like low crime rates, excellent schools, recent property growth, a higher proportion of owners, and residents with a strong relative income. Elevate your investment journey with targeted insights!",
+        ],
+      },
+    ],
+    footer:
+      " To try out more suburbs for yourself, try the free Suburb Selector tool. Simply register and get suburbs selected in less than 5-10 minutes",
+    footerButton: (
+      <a href="/application">
+        <button className="btn btn-lg btn-primary">Try Now!</button>
+      </a>
+    ),
+  },
+  {
+    main: "$4.50k and open to investing in any state in AU",
+    previewText:
+      "Suburbs like Nickol, WA (Postcode: 6714), Moranbah, QLD (Postcode: 4744), Blackall, QLD (Postcode: 4472), and Walkerston, QLD (Postcode: 4751) elevates your investment.",
+    subMain: "Let’s say you have $4,50,000 and open to investing in any state.",
+    mainImg:
+      "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1707480136/fjq55yigygipmi4nevlu.jpg",
+    imgPreview:
+      "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1707480136/fjq55yigygipmi4nevlu.jpg",
+    extraContent: (
+      <div className="d-lg-flex justify-content-around">
+        {infoArr5.map((item) => {
+          return (
+            <div className="mb-3 mb-lg-0 border p-2 m-1 col-12 col-lg-3">
+              <div className="text-dark" style={{ fontSize: "16px" }}>
+                {item}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    ),
+    subContent: [
+      {
+        no: 1,
+        subHeading: "The following 3 suburbs will be great for you",
+        content: [
+          "Nickol, WA (Postcode: 6714)",
+          "Blackall, QLD (Postcode: 4472)",
+          "Walkerston, QLD (Postcode: 4751)",
+        ],
+      },
+      {
+        no: 2,
+        subHeading: "",
+        content: [
+          "In summary, suburbs like Nickol, WA (Postcode: 6714), Moranbah, QLD (Postcode: 4744), Blackall, QLD (Postcode: 4472), and Walkerston, QLD (Postcode: 4751). These prime picks boast factors like low crime rates, excellent schools, recent property growth, a higher proportion of owners, and residents with a strong relative income. Elevate your investment journey with targeted insights!",
         ],
       },
     ],
