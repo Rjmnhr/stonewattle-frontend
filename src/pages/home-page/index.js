@@ -191,7 +191,7 @@ const HomePage = () => {
                 <img
                   class="img-fluid rounded-3"
                   src=" https://media.istockphoto.com/id/1038186890/photo/different-size-houses-vith-different-value-on-stacks-of-coins-concept-for-property-mortgage.jpg?s=612x612&w=0&k=20&c=duYcfpy5QsvJZPuyvCSHQhaW-VVQJXZjoXCkvpGt0Ek="
-                  alt="Description"
+                  alt="Australian Suburbs"
                 />
               </div>
             </div>
@@ -217,7 +217,7 @@ const HomePage = () => {
                     <img
                       class="img-fluid"
                       src="https://media.istockphoto.com/id/1335050734/photo/businessman-using-a-computer-for-property-sales-listings-real-estate-agent-agency-contractor.jpg?s=612x612&w=0&k=20&c=-QsLOTTjONcvkhAJQWjsXHjeRXnInmclCZIjRt3wE20="
-                      alt=" Description"
+                      alt=" Investment Strategy"
                     />
                   </div>
 
@@ -231,7 +231,7 @@ const HomePage = () => {
                           <img
                             class="avatar-img"
                             src="https://www.nibib.nih.gov/sites/default/files/inline-images/AI%20600%20x%20400.jpg"
-                            alt=" Description"
+                            alt=" Investment Strategy"
                           />
                         </span>
                       </div>
@@ -253,7 +253,7 @@ const HomePage = () => {
                           <img
                             class="avatar-img"
                             src="https://www.nobroker.in/blog/wp-content/uploads/2022/04/Property-disputes.jpg"
-                            alt="Description"
+                            alt="Investment Strategy"
                           />
                         </span>
                       </div>
@@ -422,7 +422,7 @@ const HomePage = () => {
               <img
                 class="img-fluid rounded-3"
                 src="https://media.istockphoto.com/id/1181134074/photo/aerial-view-of-residential-houses-at-autumn-american-neighborhood-suburb-real-estate-drone.jpg?s=612x612&w=0&k=20&c=GmpNoWnRyiBJsabooqGv5k1dY0nNradFSm8LGIoiR18="
-                alt="Description"
+                alt="Investment Property Analytics"
               />
             </div>
             <div class="col-lg-5">
@@ -497,7 +497,7 @@ const HomePage = () => {
               <img
                 class="img-fluid rounded-3"
                 src="https://media.istockphoto.com/id/1186618062/photo/real-estate-investment-real-estate-value.jpg?s=612x612&w=0&k=20&c=X-o8bBZaW0uohle3OxUipQrqaxpDwereL969wJ2mQSI="
-                alt="Description"
+                alt="Investment Strategy"
               />
             </div>
 
@@ -556,7 +556,7 @@ const HomePage = () => {
             <div class="col-md mb-lg-5 mb-0 mb-md-0">
               <img
                 src="https://res.cloudinary.com/dsw1ubwyh/image/upload/v1694796608/xns5lpa59nojnzkmavgp.svg"
-                alt="logo"
+                alt="Investment Strategy"
                 style={{ width: "160px", height: "160px" }}
               />
               <h2 class="fw-medium text-white-70 mb-0">2nd Storey</h2>

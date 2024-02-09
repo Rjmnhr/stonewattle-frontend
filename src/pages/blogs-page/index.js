@@ -51,7 +51,7 @@ const BlogsPage = () => {
                 class="img"
                 width={"100%"}
                 src={selectedBlog.mainImg}
-                alt="Description"
+                alt={selectedBlog.main}
               />
             </div>
           </div>
