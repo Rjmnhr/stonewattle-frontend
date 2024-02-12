@@ -3,7 +3,7 @@ import NavBar from "../../components/nav-bar/nav-bar";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import AxiosInstance from "../../components/axios";
-import { Modal } from "antd";
+import { Collapse, Modal } from "antd";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -96,7 +96,7 @@ const HomePage = () => {
                 </div>
                 <div className="col-12 d-lg-flex mt-3 justify-content-start gap-3">
                   <button
-                    className="btn btn-primary btn-lg mb-3 mb-md-0"
+                    className="btn btn-primary btn-lg mb-3 mb-lg-0"
                     style={{
                       cursor: "pointer",
                       MinWidth: "200px",
@@ -119,7 +119,7 @@ const HomePage = () => {
                     </p>
                   </button>
                   <button
-                    className="btn  btn-lg"
+                    className="btn mb-3 mb-lg-0"
                     style={{
                       background: "#008080",
                       cursor: "pointer",
@@ -520,11 +520,13 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div class="container-fluid px-lg-8 p-3 content-space-2 content-space-lg-3">
+        {/* <div class="container-fluid mt-8">
           <div class="w-lg-65 text-center mx-lg-auto mb-5 mb-sm-7 mb-lg-10">
             <h2>Our data is refreshed each week.</h2>
           </div>
-        </div>
+        </div> */}
+
+        <FAQSection />
         <div>
           <Modal
             visible={isModalVisible}
@@ -569,3 +571,125 @@ const HomePage = () => {
 };
 
 export default HomePage;
+const { Panel } = Collapse;
+const FAQSection = () => {
+  return (
+    <section id="faq" className="faq mt-10 px-lg-8 mb-8">
+      <div className=" text-start" data-aos="fade-up">
+        <div className="section-title">
+          <h2>Frequently Asked Questions</h2>
+        </div>
+
+        <Collapse
+          accordion
+          ghost
+          bordered={false}
+          defaultActiveKey={["0"]} // Set the default active key (index starts from 0)
+          expandIconPosition="right"
+        >
+          <Panel
+            style={{ borderBottom: "1px solid  #eee" }}
+            header={
+              <h1 style={{ fontSize: "18px" }}>
+                What factors should I consider when choosing a suburb for
+                investment?
+              </h1>
+            }
+            key="0"
+          >
+            <p style={{ fontSize: "16px" }}>
+              Consider factors such as population growth, employment
+              opportunities, infrastructure development, proximity to amenities,
+              and historical property performance.
+            </p>
+          </Panel>
+
+          <Panel
+            style={{ borderBottom: "1px solid  #eee" }}
+            header={
+              <h1 style={{ fontSize: "18px" }}>
+                How frequently is the data in the tool updated?
+              </h1>
+            }
+            key="1"
+          >
+            <p style={{ fontSize: "16px" }}>
+              We update the data in our tool on a weekly basis. This regular
+              cadence ensures that the information provided is current and
+              reflects recent developments in the market. By updating the data
+              weekly, we aim to offer users the most up-to-date insights for
+              their investment decisions.
+            </p>
+          </Panel>
+
+          <Panel
+            style={{ borderBottom: "1px solid  #eee" }}
+            header={
+              <h1 style={{ fontSize: "18px" }}>
+                What are the key benefits of investing in Australian suburbs?
+              </h1>
+            }
+            key="2"
+          >
+            <p style={{ fontSize: "16px" }}>
+              Investing in Australian suburbs can offer potential capital
+              growth, rental income, and diversification of your investment
+              portfolio. The real estate market in Australia has historically
+              shown resilience and stability.
+            </p>
+          </Panel>
+
+          <Panel
+            style={{ borderBottom: "1px solid  #eee" }}
+            header={
+              <h1 style={{ fontSize: "18px" }}>
+                How do I start investing in Australian suburbs?
+              </h1>
+            }
+            key="3"
+          >
+            <p style={{ fontSize: "16px" }}>
+              To begin investing in Australian suburbs, start by defining your
+              investment goals, conducting thorough research on potential
+              suburbs, and seeking advice from financial experts or real estate
+              professionals.
+            </p>
+          </Panel>
+
+          <Panel
+            style={{ borderBottom: "1px solid  #eee" }}
+            header={
+              <h1 style={{ fontSize: "18px" }}>
+                What is the average return on investment for property in
+                Australian suburbs?
+              </h1>
+            }
+            key="5"
+          >
+            <p style={{ fontSize: "16px" }}>
+              Returns can vary, and it's essential to conduct thorough research.
+              The average return on investment may include rental income and
+              potential capital gains over time. Consider consulting with
+              financial professionals for a personalized assessment.
+            </p>
+          </Panel>
+          <Panel
+            style={{ borderBottom: "1px solid  #eee" }}
+            header={
+              <h1 style={{ fontSize: "18px" }}>
+                Can I trust the investment recommendations provided by the tool?
+              </h1>
+            }
+            key="6"
+          >
+            <p style={{ fontSize: "16px" }}>
+              While the tool can offer valuable insights, it is crucial to use
+              it as a starting point. It is recommended to seek advice from
+              financial professionals and conduct independent research.
+            </p>
+          </Panel>
+        </Collapse>
+      </div>
+    </section>
+  );
+};
