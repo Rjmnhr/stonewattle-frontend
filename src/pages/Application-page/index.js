@@ -13,12 +13,13 @@ import FilterMobile from "../../components/filter-component-mobile/filter-mobile
 import { MdArrowDropDown } from "react-icons/md";
 import GoogleMapComponent from "../../components/GIS-mapping/google-maps";
 import { Helmet } from "react-helmet";
+import FooterComponent from "../../components/footer";
 
 const ApplicationPage = () => {
   const {
     setResults,
     results,
-
+    setFilteredResults,
     filteredResults,
     isResultsFiltered,
     // dropdownHeight,
@@ -108,6 +109,44 @@ const ApplicationPage = () => {
       type: "warning",
       content: " Select at least 4 factors to view ranked suburbs",
     });
+  };
+
+  const handleResetInputs = () => {
+    sessionStorage.removeItem("filteredResults");
+    sessionStorage.removeItem("Family friendly");
+    sessionStorage.removeItem("Low vacancy rate");
+    sessionStorage.removeItem("High rental yield");
+    sessionStorage.removeItem("budget");
+    sessionStorage.removeItem("bedrooms");
+    sessionStorage.removeItem("High rental yield");
+    sessionStorage.removeItem("type");
+    sessionStorage.removeItem("states");
+    sessionStorage.removeItem("Average days on market");
+    sessionStorage.removeItem("Low supply");
+    sessionStorage.removeItem("area");
+    sessionStorage.removeItem("Population growth");
+    sessionStorage.removeItem("Low unemployment");
+    sessionStorage.removeItem("Crime rate");
+    sessionStorage.removeItem("Great for schools");
+    sessionStorage.removeItem("Higher proportion of owners");
+    sessionStorage.removeItem("Recent growth in properties");
+    sessionStorage.removeItem("Relative income of residents");
+    sessionStorage.removeItem("Public transport");
+    sessionStorage.removeItem("Great for hospitals");
+
+    setDwellingType("");
+    setMinBedrooms("");
+    setSelectedStates("");
+    setArea("");
+    setBudget("");
+    setRentalYield("");
+    SetGrowthInProperty("");
+    setAvailabilityOfSupply("");
+    setDemandPrevMonth("");
+    setIsDataNotFound(null);
+    setFilteredResults(null);
+    setDisplayResults(null);
+    setResults(null);
   };
 
   // useEffect(() => {
@@ -601,7 +640,7 @@ const ApplicationPage = () => {
                 filteredResults
                   ? `filter-container ${
                       filterCompressed ? "open" : ""
-                    } container-fluid mt-md-10 overflow-container  ${
+                    } container-fluid mt-md-5 overflow-container  ${
                       isLoggedIn === "true" ? "col-md-3" : "col-md-5"
                     }  `
                   : "container"
@@ -854,6 +893,18 @@ const ApplicationPage = () => {
                           ) : (
                             ""
                           )}
+                          <div className="mt-3">
+                            {filteredResults ? (
+                              <button
+                                onClick={handleResetInputs}
+                                className="btn btn-primary p-1"
+                              >
+                                Reset
+                              </button>
+                            ) : (
+                              ""
+                            )}
+                          </div>
                         </div>
                       ),
                     },
@@ -931,27 +982,30 @@ const ApplicationPage = () => {
                   : ""
               }`}
             >
-              {results ? (
-                results.length > 0 && !filteredResults ? (
-                  <p className="filter-info">
-                    {results.length} suburbs meet your criteria, try minimum
-                    four factors given in investment strategy to see the results
-                  </p>
-                ) : results.length === 0 ? (
-                  <p
-                    className="filter-info"
-                    style={{
-                      color: "red",
-                    }}
-                  >
-                    No data found try changing the filters
-                  </p>
+              <div className="mb-5">
+                {results ? (
+                  results.length > 0 && !filteredResults ? (
+                    <p className="filter-info">
+                      {results.length} suburbs meet your criteria, try minimum
+                      four factors given in investment strategy to see the
+                      results
+                    </p>
+                  ) : results.length === 0 ? (
+                    <p
+                      className="filter-info"
+                      style={{
+                        color: "red",
+                      }}
+                    >
+                      No data found try changing the filters
+                    </p>
+                  ) : (
+                    ""
+                  )
                 ) : (
                   ""
-                )
-              ) : (
-                ""
-              )}
+                )}
+              </div>
 
               <div
                 className={`${
@@ -1285,6 +1339,7 @@ const ApplicationPage = () => {
           </div>
         </HomePageStyled>
       </div>
+      {filteredResults ? "" : <FooterComponent />}
     </>
   );
 };

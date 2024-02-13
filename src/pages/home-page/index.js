@@ -4,6 +4,7 @@ import NavBar from "../../components/nav-bar/nav-bar";
 import { useLocation, useNavigate } from "react-router-dom";
 import AxiosInstance from "../../components/axios";
 import { Collapse, Modal } from "antd";
+import FooterComponent from "../../components/footer";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -551,21 +552,7 @@ const HomePage = () => {
           </Modal>
         </div>
       </main>
-
-      <footer class="bg-dark">
-        <div class="container-fluid px-lg-8  ">
-          <div class="row align-items-center  pb-4">
-            <div class="col-md mb-lg-5 mb-0 mb-md-0">
-              <img
-                src="https://res.cloudinary.com/dsw1ubwyh/image/upload/v1694796608/xns5lpa59nojnzkmavgp.svg"
-                alt="Investment Strategy"
-                style={{ width: "160px", height: "160px" }}
-              />
-              <h2 class="fw-medium text-white-70 mb-0">2nd Storey</h2>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <FooterComponent />
     </>
   );
 };

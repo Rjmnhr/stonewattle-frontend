@@ -21,7 +21,7 @@ export const HomePageStyled = styled.div`
 
   .overflow-container {
     overflow-y: scroll;
-    height: 70vh;
+    height: 75vh;
   }
   .overflow-container::-webkit-scrollbar {
     display: none;
