@@ -5,235 +5,50 @@ import {
   HomeOutlined,
 } from "@ant-design/icons";
 import blogImage1 from "../../images/2ndstorey-blog-1.jpg";
-export const infoArr1 = [
-  <li className="text-center">
-    <div className="d-flex d-lg-block ">
-      <HomeOutlined className="mb-2 " style={{ fontSize: "24px" }} />
-      <p className="mx-2 my-0">
-        <strong>Dwelling Type</strong> :
-      </p>{" "}
-      <label> House</label>
-    </div>
-  </li>,
-  <li className="text-center">
-    <div className="d-flex d-lg-block ">
-      <BankOutlined className="mb-2 " style={{ fontSize: "24px" }} />
-      <p className="mx-2 my-0">
-        <strong>Min Bedrooms</strong> :
-      </p>{" "}
-      <label> 3</label>
-    </div>
-  </li>,
-  <li className="text-center">
-    <div className="d-flex d-lg-block ">
-      <FieldTimeOutlined className="mb-2 " style={{ fontSize: "24px" }} />
-      <p className="mx-2 my-0">
-        <strong>State</strong> :
-      </p>{" "}
-      <label>All States</label>
-    </div>
-  </li>,
-  <li className="text-center">
-    <div className="d-flex d-lg-block ">
-      <DollarOutlined className="mb-2 " style={{ fontSize: "24px" }} />
-      <p className="mx-2 my-0">
-        <strong>Budget</strong> :
-      </p>{" "}
-      <label> $500,000</label>
-    </div>
-  </li>,
-];
-export const infoArr2 = [
-  <li className="text-center">
-    <div className="d-flex d-lg-block ">
-      <HomeOutlined className="mb-2 " style={{ fontSize: "24px" }} />
-      <p className="mx-2 my-0">
-        <strong>Dwelling Type</strong> :
-      </p>{" "}
-      <label> House</label>
-    </div>
-  </li>,
-  <li className="text-center">
-    <div className="d-flex d-lg-block ">
-      <BankOutlined className="mb-2 " style={{ fontSize: "24px" }} />
-      <p className="mx-2 my-0">
-        <strong>Min Bedrooms</strong> :
-      </p>{" "}
-      <label> 2</label>
-    </div>
-  </li>,
-  <li className="text-center">
-    <div className="d-flex d-lg-block ">
-      <FieldTimeOutlined className="mb-2 " style={{ fontSize: "24px" }} />
-      <p className="mx-2 my-0">
-        <strong>State</strong> :
-      </p>{" "}
-      <label>All States</label>
-    </div>
-  </li>,
-  <li className="text-center">
-    <div className="d-flex d-lg-block ">
-      <DollarOutlined className="mb-2 " style={{ fontSize: "24px" }} />
-      <p className="mx-2 my-0">
-        <strong>Budget</strong> :
-      </p>{" "}
-      <label> $200,000</label>
-    </div>
-  </li>,
-];
-export const infoArr3 = [
-  <li className="text-center">
-    <div className="d-flex d-lg-block ">
-      <HomeOutlined className="mb-2 " style={{ fontSize: "24px" }} />
-      <p className="mx-2 my-0">
-        <strong>Dwelling Type</strong> :
-      </p>{" "}
-      <label> House</label>
-    </div>
-  </li>,
-  <li className="text-center">
-    <div className="d-flex d-lg-block ">
-      <BankOutlined className="mb-2 " style={{ fontSize: "24px" }} />
-      <p className="mx-2 my-0">
-        <strong>Min Bedrooms</strong> :
-      </p>{" "}
-      <label> 3</label>
-    </div>
-  </li>,
-  <li className="text-center">
-    <div className="d-flex d-lg-block ">
-      <FieldTimeOutlined className="mb-2 " style={{ fontSize: "24px" }} />
-      <p className="mx-2 my-0">
-        <strong>State</strong> :
-      </p>{" "}
-      <label>All States</label>
-    </div>
-  </li>,
-  <li className="text-center">
-    <div className="d-flex d-lg-block ">
-      <DollarOutlined className="mb-2 " style={{ fontSize: "24px" }} />
-      <p className="mx-2 my-0">
-        <strong>Budget</strong> :
-      </p>{" "}
-      <label> $300,000</label>
-    </div>
-  </li>,
-];
 
-export const infoArr4 = [
-  <li className="text-center">
-    <div className="d-flex d-lg-block ">
-      <HomeOutlined className="mb-2 " style={{ fontSize: "24px" }} />
-      <p className="mx-2 my-0">
-        <strong>Dwelling Type</strong> :
-      </p>{" "}
-      <label> House</label>
-    </div>
-  </li>,
-  <li className="text-center">
-    <div className="d-flex d-lg-block ">
-      <BankOutlined className="mb-2 " style={{ fontSize: "24px" }} />
-      <p className="mx-2 my-0">
-        <strong>Min Bedrooms</strong> :
-      </p>{" "}
-      <label> 3</label>
-    </div>
-  </li>,
-  <li className="text-center">
-    <div className="d-flex d-lg-block ">
-      <FieldTimeOutlined className="mb-2 " style={{ fontSize: "24px" }} />
-      <p className="mx-2 my-0">
-        <strong>State</strong> :
-      </p>{" "}
-      <label>All States</label>
-    </div>
-  </li>,
-  <li className="text-center">
-    <div className="d-flex d-lg-block ">
-      <DollarOutlined className="mb-2 " style={{ fontSize: "24px" }} />
-      <p className="mx-2 my-0">
-        <strong>Budget</strong> :
-      </p>{" "}
-      <label> $3,50,000</label>
-    </div>
-  </li>,
-];
-export const infoArr5 = [
-  <li className="text-center">
-    <div className="d-flex d-lg-block ">
-      <HomeOutlined className="mb-2 " style={{ fontSize: "24px" }} />
-      <p className="mx-2 my-0">
-        <strong>Dwelling Type</strong> :
-      </p>{" "}
-      <label> House</label>
-    </div>
-  </li>,
-  <li className="text-center">
-    <div className="d-flex d-lg-block ">
-      <BankOutlined className="mb-2 " style={{ fontSize: "24px" }} />
-      <p className="mx-2 my-0">
-        <strong>Min Bedrooms</strong> :
-      </p>{" "}
-      <label> 3</label>
-    </div>
-  </li>,
-  <li className="text-center">
-    <div className="d-flex d-lg-block ">
-      <FieldTimeOutlined className="mb-2 " style={{ fontSize: "24px" }} />
-      <p className="mx-2 my-0">
-        <strong>State</strong> :
-      </p>{" "}
-      <label>All States</label>
-    </div>
-  </li>,
-  <li className="text-center">
-    <div className="d-flex d-lg-block ">
-      <DollarOutlined className="mb-2 " style={{ fontSize: "24px" }} />
-      <p className="mx-2 my-0">
-        <strong>Budget</strong> :
-      </p>{" "}
-      <label> $4,50,000</label>
-    </div>
-  </li>,
-];
-export const infoArr6 = [
-  <li className="text-center">
-    <div className="d-flex d-lg-block ">
-      <HomeOutlined className="mb-2 " style={{ fontSize: "24px" }} />
-      <p className="mx-2 my-0">
-        <strong>Dwelling Type</strong> :
-      </p>{" "}
-      <label> House</label>
-    </div>
-  </li>,
-  <li className="text-center">
-    <div className="d-flex d-lg-block ">
-      <BankOutlined className="mb-2 " style={{ fontSize: "24px" }} />
-      <p className="mx-2 my-0">
-        <strong>Min Bedrooms</strong> :
-      </p>{" "}
-      <label> 2</label>
-    </div>
-  </li>,
-  <li className="text-center">
-    <div className="d-flex d-lg-block ">
-      <FieldTimeOutlined className="mb-2 " style={{ fontSize: "24px" }} />
-      <p className="mx-2 my-0">
-        <strong>State</strong> :
-      </p>{" "}
-      <label>All States</label>
-    </div>
-  </li>,
-  <li className="text-center">
-    <div className="d-flex d-lg-block ">
-      <DollarOutlined className="mb-2 " style={{ fontSize: "24px" }} />
-      <p className="mx-2 my-0">
-        <strong>Budget</strong> :
-      </p>{" "}
-      <label> $2,50,000</label>
-    </div>
-  </li>,
-];
+const infoArrayFunction = (type, bedrooms, state, budget) => {
+  const infoArr = [
+    <li className="text-center">
+      <div className="d-flex d-lg-block ">
+        <HomeOutlined className="mb-2 " style={{ fontSize: "24px" }} />
+        <p className="mx-2 my-0">
+          <strong>Dwelling Type</strong> :
+        </p>{" "}
+        <label> {type}</label>
+      </div>
+    </li>,
+    <li className="text-center">
+      <div className="d-flex d-lg-block ">
+        <BankOutlined className="mb-2 " style={{ fontSize: "24px" }} />
+        <p className="mx-2 my-0">
+          <strong>Min Bedrooms</strong> :
+        </p>{" "}
+        <label> {bedrooms}</label>
+      </div>
+    </li>,
+    <li className="text-center">
+      <div className="d-flex d-lg-block ">
+        <FieldTimeOutlined className="mb-2 " style={{ fontSize: "24px" }} />
+        <p className="mx-2 my-0">
+          <strong>State</strong> :
+        </p>{" "}
+        <label>{state}</label>
+      </div>
+    </li>,
+    <li className="text-center">
+      <div className="d-flex d-lg-block ">
+        <DollarOutlined className="mb-2 " style={{ fontSize: "24px" }} />
+        <p className="mx-2 my-0">
+          <strong>Budget</strong> :
+        </p>{" "}
+        <label> {budget}</label>
+      </div>
+    </li>,
+  ];
+
+  return infoArr;
+};
+
 export const BlogContentArr = [
   {
     main: "Are you looking to invest",
@@ -244,7 +59,7 @@ export const BlogContentArr = [
     imgPreview: blogImage1,
     extraContent: (
       <div className="d-lg-flex justify-content-around">
-        {infoArr1.map((item) => {
+        {infoArrayFunction("House", 3, "All States", "$500,000").map((item) => {
           return (
             <div className="mb-3 mb-lg-0 border p-2 m-1 col-12 col-lg-3">
               <div className="text-dark" style={{ fontSize: "16px" }}>
@@ -342,7 +157,7 @@ export const BlogContentArr = [
       "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1705578234/bspjgbcnhjvivjkknbzq.jpg",
     extraContent: (
       <div className="d-lg-flex justify-content-around">
-        {infoArr2.map((item) => {
+        {infoArrayFunction("House", 2, "All States", "$200,000").map((item) => {
           return (
             <div className="mb-3 mb-lg-0 border p-2 m-1 col-12 col-lg-3">
               <div className="text-dark" style={{ fontSize: "16px" }}>
@@ -455,7 +270,7 @@ export const BlogContentArr = [
       "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1706900089/zv9owrrdwvvxl1obcv5o.jpg",
     extraContent: (
       <div className="d-lg-flex justify-content-around">
-        {infoArr3.map((item) => {
+        {infoArrayFunction("House", 3, "All States", "$300,000").map((item) => {
           return (
             <div className="mb-3 mb-lg-0 border p-2 m-1 col-12 col-lg-3">
               <div className="text-dark" style={{ fontSize: "16px" }}>
@@ -503,15 +318,17 @@ export const BlogContentArr = [
       "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1707244264/ef0pcl62hwnufngyuwmp.jpg",
     extraContent: (
       <div className="d-lg-flex justify-content-around">
-        {infoArr4.map((item) => {
-          return (
-            <div className="mb-3 mb-lg-0 border p-2 m-1 col-12 col-lg-3">
-              <div className="text-dark" style={{ fontSize: "16px" }}>
-                {item}
+        {infoArrayFunction("House", 3, "All States", "$3,50,000").map(
+          (item) => {
+            return (
+              <div className="mb-3 mb-lg-0 border p-2 m-1 col-12 col-lg-3">
+                <div className="text-dark" style={{ fontSize: "16px" }}>
+                  {item}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          }
+        )}
       </div>
     ),
     subContent: [
@@ -551,15 +368,17 @@ export const BlogContentArr = [
       "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1707480136/fjq55yigygipmi4nevlu.jpg",
     extraContent: (
       <div className="d-lg-flex justify-content-around">
-        {infoArr5.map((item) => {
-          return (
-            <div className="mb-3 mb-lg-0 border p-2 m-1 col-12 col-lg-3">
-              <div className="text-dark" style={{ fontSize: "16px" }}>
-                {item}
+        {infoArrayFunction("House", 3, "All States", "$4,50,000").map(
+          (item) => {
+            return (
+              <div className="mb-3 mb-lg-0 border p-2 m-1 col-12 col-lg-3">
+                <div className="text-dark" style={{ fontSize: "16px" }}>
+                  {item}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          }
+        )}
       </div>
     ),
     subContent: [
@@ -600,15 +419,17 @@ export const BlogContentArr = [
       "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1707720733/ymdwcbn8voauwr1fjqel.jpg",
     extraContent: (
       <div className="d-lg-flex justify-content-around">
-        {infoArr6.map((item) => {
-          return (
-            <div className="mb-3 mb-lg-0 border p-2 m-1 col-12 col-lg-3">
-              <div className="text-dark" style={{ fontSize: "16px" }}>
-                {item}
+        {infoArrayFunction("House", 2, "All States", "$2,50,000").map(
+          (item) => {
+            return (
+              <div className="mb-3 mb-lg-0 border p-2 m-1 col-12 col-lg-3">
+                <div className="text-dark" style={{ fontSize: "16px" }}>
+                  {item}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          }
+        )}
       </div>
     ),
     subContent: [
@@ -626,6 +447,57 @@ export const BlogContentArr = [
         subHeading: "",
         content: [
           " In summary, if you are looking for a 2-bedroom house under $250,000? Property characteristics and investment strategies matter. Look for low vacancy rates, high rental yields, and family-friendly neighborhoods. Check out our top 3 suburbs: Australind, Preston Beach, and Balgal Beach in WA and QLD. Login for more options!",
+        ],
+      },
+    ],
+    footer:
+      " To try out more suburbs for yourself, try the free Suburb Selector tool. Simply register and get suburbs selected in less than 5-10 minutes",
+    footerButton: (
+      <a href="/application">
+        <button className="btn btn-lg btn-primary">Try Now!</button>
+      </a>
+    ),
+  },
+  {
+    main: "Seeking Real Estate Investment Analysis: $250k Budget for 4 Bedroom House",
+    previewText:
+      "Discover top-rated suburbs like Wagin, Moura, and Merredin for high potential investments. With key property characteristics and investment strategies outlined, find family-friendly neighborhoods with high rental yields and low vacancy rates",
+    subMain:
+      "Let’s Say We're Making a Real Estate Investment Analysis for a $250k Budget on a 4 Bedroom House in Australia",
+    mainImg:
+      "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1707886244/spqpdwodqbvv9d9etcbb.jpg",
+    imgPreview:
+      "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1707886244/spqpdwodqbvv9d9etcbb.jpg",
+    extraContent: (
+      <div className="d-lg-flex justify-content-around">
+        {infoArrayFunction("House", 4, "All States", "$2,50,000").map(
+          (item) => {
+            return (
+              <div className="mb-3 mb-lg-0 border p-2 m-1 col-12 col-lg-3">
+                <div className="text-dark" style={{ fontSize: "16px" }}>
+                  {item}
+                </div>
+              </div>
+            );
+          }
+        )}
+      </div>
+    ),
+    subContent: [
+      {
+        no: 1,
+        subHeading: "The following 3 suburbs will be great for you",
+        content: [
+          "Wagin, WA (Postcode: 6315)",
+          "Moura , QLD (Postcode: 4718)",
+          "Merredin , WA (Postcode: 4816)",
+        ],
+      },
+      {
+        no: 2,
+        subHeading: "",
+        content: [
+          "In summary, Looking to invest $250k in a 4-bedroom property? Discover top-rated suburbs like Wagin, Moura, and Merredin for high potential investments. With key property characteristics and investment strategies outlined, find family-friendly neighborhoods with high rental yields and low vacancy rates. Contact us for personalized assistance and start your investment journey today!",
         ],
       },
     ],
