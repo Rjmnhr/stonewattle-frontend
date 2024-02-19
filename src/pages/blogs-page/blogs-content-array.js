@@ -509,4 +509,55 @@ export const BlogContentArr = [
       </a>
     ),
   },
+  {
+    main: "$550k and looking for 4 bedroom house, below are best suburbs in Australia",
+    previewText:
+      "if you are looking for a 4-bedroom house under $550,000? Explore top-rated areas like Nickol, Henley Brook, and Bennett Springs in WA. Discover key investment strategies emphasizing low vacancy rates, family-friendly environments, and high rental yields.",
+    subMain:
+      "Let’s say you have $5,50,000 and open to search for best suburbs in Australia, any state.",
+    mainImg:
+      "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1708349717/dom27w8bapqfyicdtf87.jpg",
+    imgPreview:
+      "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1708349717/dom27w8bapqfyicdtf87.jpg",
+    extraContent: (
+      <div className="d-lg-flex justify-content-around">
+        {infoArrayFunction("House", 4, "All States", "$5,50,000").map(
+          (item) => {
+            return (
+              <div className="mb-3 mb-lg-0 border p-2 m-1 col-12 col-lg-3">
+                <div className="text-dark" style={{ fontSize: "16px" }}>
+                  {item}
+                </div>
+              </div>
+            );
+          }
+        )}
+      </div>
+    ),
+    subContent: [
+      {
+        no: 1,
+        subHeading: "The following 3 suburbs will be great for you",
+        content: [
+          "Nickol: Postcode 6714, WA",
+          "Henley Brook: Postcode 6055, WA",
+          "Bennett Springs: Postcode 6063, WA",
+        ],
+      },
+      {
+        no: 2,
+        subHeading: "",
+        content: [
+          "In summary, if you are looking for a 4-bedroom house under $550,000? Explore top-rated areas like Nickol, Henley Brook, and Bennett Springs in WA. Discover key investment strategies emphasizing low vacancy rates, family-friendly environments, and high rental yields. Contact us today to kickstart your investment into best suburbs in Australia",
+        ],
+      },
+    ],
+    footer:
+      " To try out more suburbs for yourself, try the free Suburb Selector tool. Simply register and get suburbs selected in less than 5-10 minutes",
+    footerButton: (
+      <a href="/application">
+        <button className="btn btn-lg btn-primary">Try Now!</button>
+      </a>
+    ),
+  },
 ];
