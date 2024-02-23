@@ -561,18 +561,18 @@ export const BlogContentArr = [
     ),
   },
   {
-    main: "$350k and looking for 3 bedroom house, below are best suburbs in Australia",
+    main: "$500k and looking for 2 bedroom house, below are best suburbs in Australia",
     previewText:
-      "if you are looking for a Looking for the perfect investment? Consider prime picks like Bordertown, SA (Postcode: 5268), Monto, QLD (Postcode: 4630), and Preston Beach, WA (Postcode: 6215). These suburbs offer high rental yields, low vacancy rates, and are family-friendly.",
+      "if you are looking for a Looking for the perfect investment? Consider prime picks like Dawesville, WA (Postcode: 6211), Windang, NSW (Postcode: 2528), and Caversham, WA (Postcode: 6055).",
     subMain:
-      "Let’s say you have $3,50,000 and open to search for best suburbs in Australia, any state.",
+      "Let’s say you have $5,00,000 and open to search for best suburbs in Australia, any state",
     mainImg:
-      "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1708524675/ouk9uuxqva60aq2lukxk.jpg",
+      "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1708699419/ubevyxdfqpnlewtndit0.jpg",
     imgPreview:
-      "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1708524675/ouk9uuxqva60aq2lukxk.jpg",
+      "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1708699419/ubevyxdfqpnlewtndit0.jpg",
     extraContent: (
       <div className="d-lg-flex justify-content-around">
-        {infoArrayFunction("House", 3, "All States", "$3,50,000").map(
+        {infoArrayFunction("House", 2, "All States", "$5,00,000").map(
           (item) => {
             return (
               <div className="mb-3 mb-lg-0 border p-2 m-1 col-12 col-lg-3">
@@ -590,16 +590,16 @@ export const BlogContentArr = [
         no: 1,
         subHeading: "The following 3 suburbs will be great for you",
         content: [
-          "Bordertown, SA (Postcode: 5268)",
-          "Monto, QLD (Postcode: 4630)",
-          "Preston Beach, WA (Postcode: 6215)",
+          "Dawesville, WA (Postcode: 6211)",
+          "Windang, NSW (Postcode: 2528)",
+          "Caversham, WA (Postcode: 6055)",
         ],
       },
       {
         no: 2,
         subHeading: "",
         content: [
-          "In summary, if you are looking for a Looking for the perfect investment? Consider prime picks like Bordertown, SA (Postcode: 5268), Monto, QLD (Postcode: 4630), and Preston Beach, WA (Postcode: 6215). These suburbs offer high rental yields, low vacancy rates, and are family-friendly.",
+          " In summary, if you are looking for a Looking for the perfect investment? Consider prime picks like Dawesville, WA (Postcode: 6211), Windang, NSW (Postcode: 2528), and Caversham, WA (Postcode: 6055). These suburbs offer high rental yields, low vacancy rates, and are family-friendly.",
         ],
       },
     ],
