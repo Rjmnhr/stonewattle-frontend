@@ -611,4 +611,55 @@ export const BlogContentArr = [
       </a>
     ),
   },
+  {
+    main: "$600k and looking for 5 bedroom house, below are best suburbs in Australia",
+    previewText:
+      "if you're seeking the ideal investment opportunity, explore top choices such as Ballajura, WA (Postcode: 6066), Dawesville, WA (Postcode: 6211), and Byford, WA (Postcode: 6122).  .",
+    subMain:
+      "Let’s say you have $6,00,000 and open to search for best suburbs in Australia, any state.",
+    mainImg:
+      "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1709026451/gtmeiixkmu7pytni7lfg.jpg",
+    imgPreview:
+      "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1709026451/gtmeiixkmu7pytni7lfg.jpg",
+    extraContent: (
+      <div className="d-lg-flex justify-content-around">
+        {infoArrayFunction("House", 5, "All States", "$6,00,000").map(
+          (item) => {
+            return (
+              <div className="mb-3 mb-lg-0 border p-2 m-1 col-12 col-lg-3">
+                <div className="text-dark" style={{ fontSize: "16px" }}>
+                  {item}
+                </div>
+              </div>
+            );
+          }
+        )}
+      </div>
+    ),
+    subContent: [
+      {
+        no: 1,
+        subHeading: "The following 3 suburbs will be great for you",
+        content: [
+          "Ballajura, WA (Postcode: 6066)",
+          "Dawesville, WA (Postcode: 6211)",
+          "Byford, WA (Postcode: 6122)",
+        ],
+      },
+      {
+        no: 2,
+        subHeading: "",
+        content: [
+          " In summary, if you're seeking the ideal investment opportunity, explore top choices such as Ballajura, WA (Postcode: 6066), Dawesville, WA (Postcode: 6211), and Byford, WA (Postcode: 6122). These suburbs boast high rental yields, low vacancy rates, and are perfect for families.",
+        ],
+      },
+    ],
+    footer:
+      " To try out more suburbs for yourself, try the free Suburb Selector tool. Simply register and get suburbs selected in less than 5-10 minutes",
+    footerButton: (
+      <a href="/application">
+        <button className="btn btn-lg btn-primary">Try Now!</button>
+      </a>
+    ),
+  },
 ];
