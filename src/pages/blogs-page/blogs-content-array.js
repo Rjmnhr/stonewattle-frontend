@@ -663,7 +663,7 @@ export const BlogContentArr = [
     ),
   },
   {
-    main: "Searching for a $300k Rental Property? Check Out These Top 2-Bedroom House Suburbs in AustraliaBest Suburbs for a $500k in QLD, Check Out These Top 2-Bedroom House Suburbs in Australia",
+    main: "Best Suburbs for a $500k in QLD, Check Out These Top 2-Bedroom House Suburbs in Australia",
     previewText:
       "If you're on the hunt for a lucrative rental property investment, consider exploring prime locations such as Goodna, QLD (Postcode: 4300), Collingwood Park, QLD (Postcode: 4301) and Kallangur, QLD (Postcode: 4503).",
     subMain:
