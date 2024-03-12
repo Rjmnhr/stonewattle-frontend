@@ -663,28 +663,26 @@ export const BlogContentArr = [
     ),
   },
   {
-    main: "Searching for a $300k Rental Property? Check Out These Top 2-Bedroom House Suburbs in Australia",
+    main: "Searching for a $300k Rental Property? Check Out These Top 2-Bedroom House Suburbs in AustraliaBest Suburbs for a $500k in QLD, Check Out These Top 2-Bedroom House Suburbs in Australia",
     previewText:
-      "If you're on the hunt for a lucrative rental property investment, consider exploring prime locations such as Glendalough, WA (Postcode: 6016), Forrestfield, WA (Postcode: 6058), and Tuart Hill, WA (Postcode: 6060).",
+      "If you're on the hunt for a lucrative rental property investment, consider exploring prime locations such as Goodna, QLD (Postcode: 4300), Collingwood Park, QLD (Postcode: 4301) and Kallangur, QLD (Postcode: 4503).",
     subMain:
-      "Let’s say you have $3,00,000 and open to search for best suburbs in Australia, any state.",
+      "Let’s say you have $5,00,000 and open to search for best suburbs in Australia, any state.",
     mainImg:
-      "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1709525555/cksioxpw3uf5nuzm4k1b.jpg",
+      "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1710244714/crlbtl2cuy5obmkkkb4g.jpg",
     imgPreview:
-      "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1709525555/cksioxpw3uf5nuzm4k1b.jpg",
+      "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1710244714/crlbtl2cuy5obmkkkb4g.jpg",
     extraContent: (
       <div className="d-lg-flex justify-content-around">
-        {infoArrayFunction("House", 2, "All States", "$3,00,000").map(
-          (item) => {
-            return (
-              <div className="mb-3 mb-lg-0 border p-2 m-1 col-12 col-lg-3">
-                <div className="text-dark" style={{ fontSize: "16px" }}>
-                  {item}
-                </div>
+        {infoArrayFunction("House", 2, "QLD", "$5,00,000").map((item) => {
+          return (
+            <div className="mb-3 mb-lg-0 border p-2 m-1 col-12 col-lg-3">
+              <div className="text-dark" style={{ fontSize: "16px" }}>
+                {item}
               </div>
-            );
-          }
-        )}
+            </div>
+          );
+        })}
       </div>
     ),
     subContent: [
@@ -692,16 +690,16 @@ export const BlogContentArr = [
         no: 1,
         subHeading: "The following 3 suburbs will be great for you",
         content: [
-          "Glendalough, WA (Postcode: 6016)",
-          "Forrestfield, WA (Postcode: 6058)",
-          "Tuart Hill, WA (Postcode: 6060)",
+          "Goodna, QLD (Postcode: 4300)",
+          "Collingwood Park, QLD (Postcode: 4301)",
+          "Kallangur, QLD (Postcode: 4503)",
         ],
       },
       {
         no: 2,
         subHeading: "",
         content: [
-          "If you're on the hunt for a lucrative rental property investment, consider exploring prime locations such as Glendalough, WA (Postcode: 6016), Forrestfield, WA (Postcode: 6058), and Tuart Hill, WA (Postcode: 6060). These suburbs offer impressive rental yields, minimal vacancy rates, and are particularly attractive for families looking for a rental home.",
+          "If you're on the hunt for a lucrative rental property investment, consider exploring prime locations such as Goodna, QLD (Postcode: 4300), Collingwood Park, QLD (Postcode: 4301) and Kallangur, QLD (Postcode: 4503). These suburbs offer impressive rental yields, minimal vacancy rates, and are particularly attractive for families looking for a rental home and also good population growth",
         ],
       },
     ],
