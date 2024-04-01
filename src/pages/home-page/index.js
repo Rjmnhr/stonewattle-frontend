@@ -120,7 +120,7 @@ const HomePage = () => {
                     </p>
                   </button>
                   <button
-                    className="btn mb-3 mb-lg-0"
+                    className="btn mb-3 mb-lg-0 d-none"
                     style={{
                       background: "#008080",
                       cursor: "pointer",
@@ -203,12 +203,12 @@ const HomePage = () => {
               <div class="col-lg-5">
                 <div class="mb-5 text-lg-start text-center ">
                   <p className="fs-2">
-                    We have helped more than 50 investors use our platform, and
-                    who have amassed more than $25m of property across the whole
-                    nation.We offer property selection service for users who
-                    don't have as much time. We are not buyers agents but we can
-                    help you source the best properties given your budget and
-                    preference. Contact us now to discuss
+                    We've empowered over 50 investors through our platform,
+                    facilitating the acquisition of over $25 million worth of
+                    property nationwide. Our technology-driven approach supports
+                    by providing comprehensive suburb selection services
+                    tailored to preferences and budgets. Reach out to us today
+                    to explore how we can enhance your real estate strategy.
                   </p>
                 </div>
               </div>
@@ -278,11 +278,6 @@ const HomePage = () => {
           >
             <div class="section-title mb-8">
               <h2>SERVICES WE OFFER</h2>
-              <p>
-                We offer a range of comprehensive services designed to empower
-                your investment journey. Explore the key features of our
-                services below:
-              </p>
             </div>
 
             <div class="row ">
@@ -321,10 +316,11 @@ const HomePage = () => {
                     <a href="/#">Investment Strategy</a>
                   </h3>
                   <p className="fs-3">
-                    Maximize your returns with our accurate{" "}
-                    <span class="highlight">rental yield</span> data. We provide
-                    up-to-date information to help you make informed investment
-                    decisions.
+                    Accurate rental yield data is essential for real estate
+                    investors, enabling informed decisions by comparing
+                    potential rental income to property purchase prices. Our
+                    suburb selector tool aids in identifying high-yield suburbs,
+                    facilitating smarter investment choices.
                   </p>
                 </div>
               </div>
@@ -341,9 +337,10 @@ const HomePage = () => {
                   </h3>
                   <p className="fs-3">
                     Stay ahead of the curve with our{" "}
-                    <span class="highlight">weekly data updates</span>. Our
-                    information is regularly refreshed, ensuring you have the
-                    latest market intelligence at your fingertips.{" "}
+                    <span class="highlight">weekly data updates</span>. Our tool
+                    is updated weekly with the latest data, so you can stay
+                    informed about market trends and make smart investment
+                    decisions.
                   </p>
                 </div>
                 <div
@@ -356,10 +353,11 @@ const HomePage = () => {
                     <a href="/#">Investment Ideas</a>
                   </h3>
                   <p className="fs-3">
-                    Discover innovative{" "}
-                    <span class="highlight">investment ideas</span> that align
-                    with your goals. We provide a diverse range of options to
-                    suit your risk appetite and preferences.
+                    Based on your selected criteria, our platform identifies the
+                    most promising suburbs for investment. We conduct thorough
+                    analyses, considering factors like market performance,
+                    rental yield, population growth to pinpoint the top
+                    investment opportunities.
                   </p>
                 </div>
               </div>
@@ -578,16 +576,53 @@ const FAQSection = () => {
             style={{ borderBottom: "1px solid  #eee" }}
             header={
               <h1 style={{ fontSize: "18px" }}>
-                What factors should I consider when choosing a suburb for
-                investment?
+                What is the Suburb Selector tool?
               </h1>
             }
             key="0"
           >
             <p style={{ fontSize: "16px" }}>
-              Consider factors such as population growth, employment
-              opportunities, infrastructure development, proximity to amenities,
-              and historical property performance.
+              The Suburb Selector tool is a powerful feature on our website
+              designed to help buyers agents and property seekers find the most
+              suitable suburbs in Australia based on various criteria such as
+              budget, bedrooms, property type, and area classification.
+            </p>
+          </Panel>
+
+          <Panel
+            style={{ borderBottom: "1px solid  #eee" }}
+            header={
+              <h1 style={{ fontSize: "18px" }}>
+                How does the Suburb Selector tool work?
+              </h1>
+            }
+            key="2"
+          >
+            <p style={{ fontSize: "16px" }}>
+              Our Suburb Selector tool utilizes advanced algorithms to analyze
+              your input criteria and match them with the most relevant suburbs
+              in Australia. It takes into account factors such as budget
+              constraints, desired property features, and preferred location
+              characteristics.
+            </p>
+          </Panel>
+
+          <Panel
+            style={{ borderBottom: "1px solid  #eee" }}
+            header={
+              <h1 style={{ fontSize: "18px" }}>
+                What are the benefits of using the Suburb Selector tool for
+                buyers agents?
+              </h1>
+            }
+            key="3"
+          >
+            <p style={{ fontSize: "16px" }}>
+              By using the Suburb Selector tool, buyers agents can efficiently
+              narrow down their search to suburbs that align with their clients'
+              preferences and requirements. This saves time and effort in the
+              property search process and enables agents to provide personalized
+              recommendations to their clients.
             </p>
           </Panel>
 
@@ -598,7 +633,7 @@ const FAQSection = () => {
                 How frequently is the data in the tool updated?
               </h1>
             }
-            key="1"
+            key="5"
           >
             <p style={{ fontSize: "16px" }}>
               We update the data in our tool on a weekly basis. This regular
@@ -608,71 +643,41 @@ const FAQSection = () => {
               their investment decisions.
             </p>
           </Panel>
-
           <Panel
             style={{ borderBottom: "1px solid  #eee" }}
             header={
               <h1 style={{ fontSize: "18px" }}>
-                What are the key benefits of investing in Australian suburbs?
-              </h1>
-            }
-            key="2"
-          >
-            <p style={{ fontSize: "16px" }}>
-              Investing in Australian suburbs can offer potential capital
-              growth, rental income, and diversification of your investment
-              portfolio. The real estate market in Australia has historically
-              shown resilience and stability.
-            </p>
-          </Panel>
-
-          <Panel
-            style={{ borderBottom: "1px solid  #eee" }}
-            header={
-              <h1 style={{ fontSize: "18px" }}>
-                How do I start investing in Australian suburbs?
-              </h1>
-            }
-            key="3"
-          >
-            <p style={{ fontSize: "16px" }}>
-              To begin investing in Australian suburbs, start by defining your
-              investment goals, conducting thorough research on potential
-              suburbs, and seeking advice from financial experts or real estate
-              professionals.
-            </p>
-          </Panel>
-
-          <Panel
-            style={{ borderBottom: "1px solid  #eee" }}
-            header={
-              <h1 style={{ fontSize: "18px" }}>
-                What is the average return on investment for property in
-                Australian suburbs?
-              </h1>
-            }
-            key="5"
-          >
-            <p style={{ fontSize: "16px" }}>
-              Returns can vary, and it's essential to conduct thorough research.
-              The average return on investment may include rental income and
-              potential capital gains over time. Consider consulting with
-              financial professionals for a personalized assessment.
-            </p>
-          </Panel>
-          <Panel
-            style={{ borderBottom: "1px solid  #eee" }}
-            header={
-              <h1 style={{ fontSize: "18px" }}>
-                Can I trust the investment recommendations provided by the tool?
+                What criteria can I input into the Suburb Selector tool?
               </h1>
             }
             key="6"
           >
             <p style={{ fontSize: "16px" }}>
-              While the tool can offer valuable insights, it is crucial to use
-              it as a starting point. It is recommended to seek advice from
-              financial professionals and conduct independent research.
+              You can input various criteria such as budget range, number of
+              bedrooms, property type (e.g., house, apartment), and area
+              classification (e.g., urban, suburban, rural). Additionally, you
+              can further refine your search based on factors like rental yield,
+              population growth, and suitability for schools.
+            </p>
+          </Panel>
+          <Panel
+            style={{ borderBottom: "1px solid  #eee" }}
+            header={
+              <h1 style={{ fontSize: "18px" }}>
+                Can buyers agents customize the weighting of different criteria
+                in the Suburb Selector tool?
+              </h1>
+            }
+            key="7"
+          >
+            <p style={{ fontSize: "16px" }}>
+              Suburb Selector tool offers a feature that allows users to adjust
+              the importance weights of various criteria such as rental yield,
+              population growth, and other factors. Users can assign importance
+              levels ranging from "Very Important" to "Not Important" based on
+              their clients' priorities and preferences. By customizing the
+              weighting of criteria, buyers agents can tailor the search results
+              to better align with their clients' specific needs and objectives.
             </p>
           </Panel>
         </Collapse>
