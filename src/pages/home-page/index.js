@@ -490,7 +490,7 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div class="container-fluid px-lg-8 p-3 content-space-t-2 content-space-t-lg-3">
+        <div class="container-fluid px-lg-8 p-3 content-space-t-2 content-space-t-lg-3 mb-8">
           <div class="row justify-content-lg-between align-items-lg-center">
             <div class="col-lg-6 mb-5 mb-lg-0">
               <img
@@ -525,7 +525,6 @@ const HomePage = () => {
           </div>
         </div> */}
 
-        <FAQSection />
         <div>
           <Modal
             visible={isModalVisible}
@@ -557,7 +556,7 @@ const HomePage = () => {
 
 export default HomePage;
 const { Panel } = Collapse;
-const FAQSection = () => {
+export const FAQSection = () => {
   return (
     <section id="faq" className="faq mt-10 px-lg-8 mb-8">
       <div className=" text-start" data-aos="fade-up">
