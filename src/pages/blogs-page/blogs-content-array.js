@@ -711,4 +711,55 @@ export const BlogContentArr = [
       </a>
     ),
   },
+  {
+    main: "Best Suburbs for a $1000k, Check Out These Top 3-Bedroom House Suburbs in Australia",
+    previewText:
+      "If you're looking for property investment with schools and rental yield, consider exploring locations such as Ballajura, WA (Postcode: 6066), Byford, WA (Postcode: 6122) and Kingsley, WA (Postcode: 6026). These suburbs offer impressive rental yields, good population growth.",
+    subMain:
+      "Let’s say you have $10,00,000 and open to search for best suburbs in Australia, any state.",
+    mainImg:
+      "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1712046387/i3tdhieagaawvljcxvtu.jpg",
+    imgPreview:
+      "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1712046387/i3tdhieagaawvljcxvtu.jpg",
+    extraContent: (
+      <div className="d-lg-flex justify-content-around">
+        {infoArrayFunction("House", 3, "All States", "$10,00,000").map(
+          (item) => {
+            return (
+              <div className="mb-3 mb-lg-0 border p-2 m-1 col-12 col-lg-3">
+                <div className="text-dark" style={{ fontSize: "16px" }}>
+                  {item}
+                </div>
+              </div>
+            );
+          }
+        )}
+      </div>
+    ),
+    subContent: [
+      {
+        no: 1,
+        subHeading: "The following 3 suburbs will be great for you",
+        content: [
+          "Ballajura, WA (Postcode: 6066)",
+          "Byford, WA (Postcode: 6122)",
+          "Kingsley, WA (Postcode: 6026)  ",
+        ],
+      },
+      {
+        no: 2,
+        subHeading: "",
+        content: [
+          "If you're looking for property investment with schools and rental yield, consider exploring locations such as Ballajura, WA (Postcode: 6066), Byford, WA (Postcode: 6122) and Kingsley, WA (Postcode: 6026). These suburbs offer impressive rental yields, good population growth, minimal vacancy rates, and are particularly attractive for families looking for a rental home.",
+        ],
+      },
+    ],
+    footer:
+      " To try out more suburbs for yourself, try the free Suburb Selector tool. Simply register and get suburbs selected in less than 5-10 minutes",
+    footerButton: (
+      <a href="/application">
+        <button className="btn btn-lg btn-primary">Try Now!</button>
+      </a>
+    ),
+  },
 ];
