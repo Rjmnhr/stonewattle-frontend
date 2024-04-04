@@ -9,7 +9,7 @@ import FooterComponent from "../../components/footer";
 const HomePage = () => {
   const navigate = useNavigate();
   const [isModalVisible, setIsModalVisible] = useState(false);
-
+  const isShowModal = sessionStorage.getItem("isShowModal");
   const Location = useLocation();
 
   const showModal = () => {
@@ -22,12 +22,16 @@ const HomePage = () => {
 
   useEffect(() => {
     // Delay the modal popup by a few seconds (e.g., 3 seconds)
-    const delay = setTimeout(() => {
-      showModal();
-    }, 3000); // 3000 milliseconds = 3 seconds
+    if (isShowModal !== "false") {
+      const delay = setTimeout(() => {
+        showModal();
+        sessionStorage.setItem("isShowModal", false);
+      }, 3000); // 3000 milliseconds = 3 seconds
 
-    // Clear the timeout if the component unmounts before the modal appears
-    return () => clearTimeout(delay);
+      // Clear the timeout if the component unmounts before the modal appears
+      return () => clearTimeout(delay);
+    }
+    //eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -154,61 +158,15 @@ const HomePage = () => {
             <div className="mb-3">
               <h1>ABOUT US</h1>
             </div>
-
-            <div class="row justify-content-lg-between align-items-lg-center">
-              <div class="col-lg-6 mb-5 mb-lg-0">
-                <div class="mb-5 text-lg-start text-center">
-                  {/* <h1 class="display-4 text-dark mb-5">
-                  Start your journey with
-                  <span class="text-primary"> 2nd Storey </span>
-                </h1> */}
-                  <p class="fs-2">
-                    We are a technology AI company using property data to bring
-                    to you a one-stop platform for all your needs. We have been
-                    investing in the Australian property market over the last 10
-                    years and have more than $4m worth of property portfolio.
-                  </p>
-                  {/* 
-                <p
-                  class="fs-2 d-flex align-items-start gap-1 justify-content-center justify-content-lg-start"
-                  style={{ color: "#0ABF53", cursor: "pointer" }}
-                  onClick={() => {
-                    navigate("/service");
-                  }}
-                >
-                  Explore our property investments
-                  <OpenInNewOutlinedIcon
-                    style={{
-                      color: "black",
-                      fontSize: "14px",
-                      marginTop: "10px",
-                    }}
-                  />
-                </p> */}
-                </div>
-              </div>
-
-              <div class="col-lg-6 mb-5 mb-lg-0">
-                <img
-                  class="img-fluid rounded-3"
-                  src=" https://media.istockphoto.com/id/1038186890/photo/different-size-houses-vith-different-value-on-stacks-of-coins-concept-for-property-mortgage.jpg?s=612x612&w=0&k=20&c=duYcfpy5QsvJZPuyvCSHQhaW-VVQJXZjoXCkvpGt0Ek="
-                  alt="Australian Suburbs"
-                />
-              </div>
-            </div>
           </div>
 
           <div class="container-fluid px-lg-8 p-3 content-space-t-2 content-space-t-lg-3 text-start ">
             <div class="row justify-content-lg-between align-items-lg-center">
               <div class="col-lg-5">
-                <div class="mb-5 text-lg-start text-center ">
-                  <p className="fs-2">
-                    We've empowered over 50 investors through our platform,
-                    facilitating the acquisition of over $25 million worth of
-                    property nationwide. Our technology-driven approach supports
-                    by providing comprehensive suburb selection services
-                    tailored to preferences and budgets. Reach out to us today
-                    to explore how we can enhance your real estate strategy.
+                <div class="mb-5 text-lg-start text-center  ">
+                  <p className="" style={{ fontSize: "42px" }}>
+                    We are a technology AI company using property data to bring
+                    to you a one-stop platform for all your needs.
                   </p>
                 </div>
               </div>
