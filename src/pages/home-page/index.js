@@ -154,19 +154,22 @@ const HomePage = () => {
           {/* Add your header content here */}
         </header>
         <section className="about">
-          <div class="container-fluid px-lg-8 p-3  pt-3 pt-lg-10 ">
+          <div class="container-fluid px-lg-8 p-3   pt-5 pt-lg-10 ">
             <div className="mb-3">
               <h1>ABOUT US</h1>
             </div>
           </div>
 
-          <div class="container-fluid px-lg-8 p-3 content-space-t-2 content-space-t-lg-3 text-start ">
+          <div class="container-fluid px-lg-8 p-3 text-start ">
             <div class="row justify-content-lg-between align-items-lg-center">
               <div class="col-lg-5">
-                <div class="mb-5 text-lg-start text-center  ">
-                  <p className="" style={{ fontSize: "42px" }}>
+                <div class="mb-5 text-lg-start ">
+                  <p className="fs-1 ">
                     We are a technology AI company using property data to bring
-                    to you a one-stop platform for all your needs.
+                    to you a one-stop platform for all your needs. Our
+                    technology-driven approach supports by providing
+                    comprehensive suburb selection services tailored to
+                    preferences and budgets.
                   </p>
                 </div>
               </div>
