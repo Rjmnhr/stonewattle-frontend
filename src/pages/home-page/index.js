@@ -326,23 +326,33 @@ const HomePage = () => {
           </div>
         </section>
         <div class="container-fluid px-lg-8 p-3 content-space-t-lg-3 ">
-          <div class="row">
-            <div class="col-sm-6 col-lg-4 mb-5">
-              <div class="text-center px-md-5">
-                <div class="mb-3">
-                  <i
-                    class="bi-tablet-landscape  text-dark"
-                    style={{ fontSize: "80px" }}
-                  ></i>
-                </div>
+          <div class="row"></div>
+        </div>
+
+        <div class="container-fluid px-lg-8 p-3 content-space-t-2 content-space-t-lg-3 ">
+          <div class="row justify-content-lg-between align-items-lg-center">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+              <img
+                class="img-fluid rounded-3"
+                src="https://media.istockphoto.com/id/1181134074/photo/aerial-view-of-residential-houses-at-autumn-american-neighborhood-suburb-real-estate-drone.jpg?s=612x612&w=0&k=20&c=GmpNoWnRyiBJsabooqGv5k1dY0nNradFSm8LGIoiR18="
+                alt="Investment Property Analytics"
+              />
+            </div>
+            <div class="col-lg-5">
+              <div class="mb-5 text-lg-start text-center ">
+                <h1>Investment Property Analytics Tools</h1>
                 <p className="fs-3">
-                  2nd Storey embraces your{" "}
-                  <span class="fw-bold">marketing vision</span> and transforms
-                  it into a captivating masterpiece.
+                  Over the last 5 years we have been capturing property data
+                  from various sources and used all our investment strategies to
+                  provide all tools you need to make an investment.
                 </p>
               </div>
             </div>
+          </div>
+        </div>
 
+        <div class="container-fluid px-lg-8 p-3 content-space-t-lg-3 ">
+          <div class="d-lg-flex justify-content-center flex-wrap">
             <div class="col-sm-6 col-lg-4 mb-5">
               <div class="text-center px-md-5">
                 <div class="mb-3">
@@ -373,49 +383,22 @@ const HomePage = () => {
                 </p>
               </div>
             </div>
-          </div>
-        </div>
 
-        <div class="container-fluid px-lg-8 p-3 content-space-t-2 content-space-t-lg-3 ">
-          <div class="row justify-content-lg-between align-items-lg-center">
-            <div class="col-lg-6 mb-5 mb-lg-0">
-              <img
-                class="img-fluid rounded-3"
-                src="https://media.istockphoto.com/id/1181134074/photo/aerial-view-of-residential-houses-at-autumn-american-neighborhood-suburb-real-estate-drone.jpg?s=612x612&w=0&k=20&c=GmpNoWnRyiBJsabooqGv5k1dY0nNradFSm8LGIoiR18="
-                alt="Investment Property Analytics"
-              />
-            </div>
-            <div class="col-lg-5">
-              <div class="mb-5 text-lg-start text-center ">
-                <h1>Investment Property Analytics Tools</h1>
-                <p className="fs-3">
-                  Over the last 5 years we have been capturing property data
-                  from various sources and used all our investment strategies to
-                  provide all tools you need to make an investment.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="container-fluid px-lg-8 p-3 content-space-t-lg-3 ">
-          <div class="row">
-            <div class="col-sm-6 col-lg-4 mb-5 mb-lg-0">
-              <div class="text-center  px-md-5">
+            <div class="col-sm-6 col-lg-4">
+              <div class="text-center px-md-5">
                 <div class="mb-3">
                   <i
-                    class="bi-gear  text-dark"
+                    class="bi-journal-text  text-dark"
                     style={{ fontSize: "80px" }}
                   ></i>
                 </div>
                 <p className="fs-3">
-                  Stay ahead of the curve as 2nd Storey's{" "}
-                  <span class="fw-bold">predictive analytics</span> become your
-                  compass in the ever-evolving world of marketing.
+                  2nd Storey is your key to unlocking untapped potential and
+                  unleashing unparalleled{" "}
+                  <span class="fw-bold">marketing success</span>
                 </p>
               </div>
             </div>
-
             <div class="col-sm-6 col-lg-4 mb-5 mb-sm-0">
               <div class="text-center px-md-5">
                 <div class="mb-3">
@@ -432,19 +415,18 @@ const HomePage = () => {
                 </p>
               </div>
             </div>
-
-            <div class="col-sm-6 col-lg-4">
-              <div class="text-center px-md-5">
+            <div class="col-sm-6 col-lg-4 mb-5 mb-lg-0">
+              <div class="text-center  px-md-5">
                 <div class="mb-3">
                   <i
-                    class="bi-journal-text  text-dark"
+                    class="bi-gear  text-dark"
                     style={{ fontSize: "80px" }}
                   ></i>
                 </div>
                 <p className="fs-3">
-                  2nd Storey is your key to unlocking untapped potential and
-                  unleashing unparalleled{" "}
-                  <span class="fw-bold">marketing success</span>
+                  Stay ahead of the curve as 2nd Storey's{" "}
+                  <span class="fw-bold">predictive analytics</span> become your
+                  compass in the ever-evolving world of marketing.
                 </p>
               </div>
             </div>

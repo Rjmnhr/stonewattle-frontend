@@ -120,7 +120,7 @@ const ContactPage = () => {
 
                     <form onSubmit={handleSubmit}>
                       <div class="row">
-                        <div class="col-sm-6 mb-4 mb-sm-0">
+                        <div class="col-sm-6">
                           <div class="mb-4">
                             <input
                               type="text"
@@ -150,7 +150,7 @@ const ContactPage = () => {
                       </div>
 
                       <div class="row">
-                        <div class="col-sm-6 mb-4 mb-sm-0">
+                        <div class="col-sm-6 ">
                           <div class="mb-4">
                             <input
                               type="text"
