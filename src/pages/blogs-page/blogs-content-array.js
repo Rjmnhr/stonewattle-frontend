@@ -813,4 +813,53 @@ export const BlogContentArr = [
       </a>
     ),
   },
+  {
+    main: "Suburbs for $350k, Check Out These Top 3-Bedroom House Suburbs in Australia",
+    previewText:
+      "If you're looking for property investment with schools and low crimerate, consider exploring locations such as Bridgewater, TAS (Postcode: 7030) Miandetta, TAS (Postcode: 7310) and Smithton, TAS (Postcode: 7330). ",
+    subMain:
+      "Let’s say you have $3,50,000 and open to search for best suburbs in Australia, any state.",
+    mainImg:
+      "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1713875021/23rd_APR_Suburbs_for_350k_Check_Out_These_Top_3-Bedroom_House_Suburbs_in_Australia_acvibv.png",
+    imgPreview:
+      "https://res.cloudinary.com/dsw1ubwyh/image/upload/v1713875021/23rd_APR_Suburbs_for_350k_Check_Out_These_Top_3-Bedroom_House_Suburbs_in_Australia_acvibv.png",
+    extraContent: (
+      <div className="d-lg-flex justify-content-around">
+        {infoArrayFunction("House", 3, "TAS", "$3,50,000").map((item) => {
+          return (
+            <div className="mb-3 mb-lg-0 border p-2 m-1 col-12 col-lg-3">
+              <div className="text-dark" style={{ fontSize: "16px" }}>
+                {item}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    ),
+    subContent: [
+      {
+        no: 1,
+        subHeading: "The following 3 suburbs will be great for you",
+        content: [
+          "Bridgewater, TAS (Postcode: 7030)",
+          "Miandetta, TAS (Postcode: 7310)",
+          "Smithton, TAS (Postcode: 7330)",
+        ],
+      },
+      {
+        no: 2,
+        subHeading: "",
+        content: [
+          "If you're looking for property investment with schools and low crimerate, consider exploring locations such as Langford, WA (Postcode: 6147),Melton South, VIC (Postcode: 3338) and Munno Para, SA (Postcode: 5115). These suburbs offer impressive low crimerate, good for transport, and are particularly attractive for families looking for a rental home.",
+        ],
+      },
+    ],
+    footer:
+      " To try out more suburbs for yourself, try the free Suburb Selector tool. Simply register and get suburbs selected in less than 5-10 minutes",
+    footerButton: (
+      <a href="/application">
+        <button className="btn btn-lg btn-primary">Try Now!</button>
+      </a>
+    ),
+  },
 ];
