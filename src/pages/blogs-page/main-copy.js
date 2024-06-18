@@ -294,45 +294,6 @@ const BlogsMainPage = () => {
             Suburb selector
           </button>
         </div>
-
-        <div class="col-12 d-flex justify-content-center mt-8">
-          <ul class="list-inline mb-0">
-            <li class="list-inline-item">
-              <a
-                style={{ fontSize: "30px" }}
-                class="btn btn-ghost-secondary btn-icon btn-sm rounded-circle"
-                href="https://www.facebook.com/profile.php?id=61554994490511"
-              >
-                <i class="bi-facebook"></i>
-              </a>
-            </li>
-            {/* <li class="list-inline-item">
-                      <a
-                        class="btn btn-ghost-secondary btn-icon btn-sm rounded-circle"
-                        href="/#"
-                      >
-                        <i class="bi-twitter"></i>
-                      </a>
-                    </li> */}
-            {/* <li class="list-inline-item">
-                      <a
-                        class="btn btn-ghost-secondary btn-icon btn-sm rounded-circle"
-                        href="/#"
-                      >
-                        <i class="bi-instagram"></i>
-                      </a>
-                    </li> */}
-            <li class="list-inline-item">
-              <a
-                style={{ fontSize: "30px" }}
-                class="btn btn-ghost-secondary btn-icon btn-sm rounded-circle"
-                href="https://www.linkedin.com/company/2ndstorey"
-              >
-                <i class="bi-linkedin"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
       </div>
     </>
   );
